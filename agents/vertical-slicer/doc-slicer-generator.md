@@ -53,15 +53,15 @@ Generate TWO separate documents:
 ## Walking Skeleton
 **Purpose:** [One sentence]
 
-### [Feature Name]
-- **[Step#] [Step Name]:** [Increment#] [Increment Name] - [Description]
-- **[Step#] [Step Name]:** [Increment#] [Increment Name] - [Description]
-- **[Step#] [Step Name]:** [Increment#] [Increment Name] - [Description]
+### -[ ][Feature Name] - [action] the [result] [by|for|of|to] a(n) [object]
+-[ ] [Increment#] [Increment Name]:** - [Description]
+-[ ] [Increment#] [Increment Name]:** - [Description]
+-[ ] [Increment#] [Increment Name]:** - [Description]
 
-### [Feature Name]
-- **[Step#] [Step Name]:** [Increment#] [Increment Name] - [Description]
-- **[Step#] [Step Name]:** [Increment#] [Increment Name] - [Description]
-- **[Step#] [Step Name]:** [Increment#] [Increment Name] - [Description]
+### -[ ][Feature Name] - [action] the [result] [by|for|of|to] a(n) [object]
+-[ ] [Increment#] [Increment Name]:** - [Description]
+-[ ] [Increment#] [Increment Name]:** - [Description]
+-[ ] [Increment#] [Increment Name]:** - [Description]
 
 **Validation:** [How to verify it works]
 
@@ -69,15 +69,15 @@ Generate TWO separate documents:
 **Purpose:** [What this improves]
 
 (Only new increments)
-### [Feature Name]
-- **[Increment#]:** [Specific implementation]
-- **[Increment#]:** [Specific implementation]
-- **[Increment#]:** [Specific implementation]
+### -[ ][Feature Name] - [action] the [result] [by|for|of|to] a(n) [object]
+- **[Increment#] [Increment Name]:** - [Description]
+- **[Increment#] [Increment Name]:** - [Description]
+- **[Increment#] [Increment Name]:** - [Description]
 
-### [Feature Name]
-- **[Increment#]:** [Specific implementation]
-- **[Increment#]:** [Specific implementation]
-- **[Increment#]:** [Specific implementation]
+### -[ ][Feature Name] - [action] the [result] [by|for|of|to] a(n) [object]
+- **[Increment#] [Increment Name]:** - [Description]
+- **[Increment#] [Increment Name]:** - [Description]
+- **[Increment#] [Increment Name]:** - [Description]
 
 **Validation:** [Success criteria]
 
@@ -99,11 +99,11 @@ Generate TWO separate documents:
 
 #### Step 1: [Name] | Strategy: [Chosen Strategy]
 **Increments:**
-- **1.1:** [Specific implementation]
-- **1.2:** [Specific implementation]
-- **1.3:** [Specific implementation]
-- **1.4:** [Specific implementation]
-- **1.5:** [Specific implementation]
+- **[Increment#] [Increment Name]:** [Specific implementation]
+- **[Increment#] [Increment Name]:** [Specific implementation]
+- **[Increment#] [Increment Name]:** [Specific implementation]
+- **[Increment#] [Increment Name]:** [Specific implementation]
+- **[Increment#] [Increment Name]:** [Specific implementation]
 
 **Rationale:** [Why this strategy for this step]
 
