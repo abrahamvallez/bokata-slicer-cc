@@ -100,25 +100,7 @@ Please generate increments for these steps using the breakdown strategies toolki
 **Expected Output:** Increments Analysis Document with 5-10 increments per step, strategies applied, and rationale.
 **Store Result As:** `{{increments_analysis_result}}`
 
-## Phase 3: Slice Composition
-Execute vertical slice composition and iteration planning:
-```
-@slice-composer-specialist
-
-Please compose vertical slices from these increments:
-
-**Increments Analysis:** {{increments_analysis_result}}
-**Features and Steps Structure:** {{features_backbone_result}} + {{steps_analysis_result}}
-**Project Constraints:** {{project_constraints}}
-**Business Objectives:** {{business_objectives}}
-**Technical Constraints:** {{technical_constraints}}
-**Original Requirements:** {{user_requirements}}
-```
-
-**Expected Output:** Vertical Slices Plan with walking skeleton, iterations, and validation criteria.
-**Store Result As:** `{{vertical_slices_result}}`
-
-## Phase 4: Documentation Generation
+## Phase 3: Documentation Generation
 Execute final document generation:
 ```
 @doc-slicer-generator
@@ -128,13 +110,12 @@ Please generate the final development plan and slicing analysis documents:
 **Features Analysis:** {{features_backbone_result}}
 **Steps Analysis:** {{steps_analysis_result}}
 **Increments Analysis:** {{increments_analysis_result}}
-**Vertical Slices Plan:** {{vertical_slices_result}}
 **Original Requirements:** {{user_requirements}}
 **Project Context:** {{project_domain}}
 **Project Constraints:** {{project_constraints}}
 ```
 
-**Expected Output:** Development Plan (Checklist Format) + Slicing Analysis Document.
+**Expected Output:** Slicing Analysis Document.
 **Store Result As:** `{{final_documentation}}`
 
 # COORDINATION WORKFLOWS
@@ -155,9 +136,7 @@ When user requests full vertical slicing analysis:
    - Validate: All features have steps with quality attributes
    - Execute Phase 2b: Store `{{increments_analysis_result}}`
    - Validate: 5+ increments per step with clear strategies
-   - Execute Phase 3: Store `{{vertical_slices_result}}`
-   - Validate: Walking skeleton + iterations defined
-   - Execute Phase 4: Store `{{final_documentation}}`
+   - Execute Phase 3: Store `{{final_documentation}}`
    - Validate: Both required documents generated
 
 3. **Final Integration and Summary**
@@ -194,15 +173,6 @@ When user requests full vertical slicing analysis:
 **Quality Attributes:** {{step_quality_attributes}}
 **Preferred Strategies:** {{strategy_preferences}}
 **Constraints:** {{specific_constraints}}
-```
-
-### Slice Rebalancing
-```
-@slice-composer-specialist
-
-**Current Analysis:** {{existing_increments}}
-**Rebalancing Focus:** {{rebalancing_criteria}}
-**New Priorities:** {{updated_priorities}}
 ```
 
 ## Output Validation Rules
@@ -336,21 +306,6 @@ Ensure each feature includes steps that cover:
 
 Features requiring attention: {{target_features}}
 Context: {{domain_context}}
-```
-
-### Slices Don't Deliver User Value
-```
-@slice-composer-specialist
-
-Current slices fail user value test: {{problematic_slices}}
-
-Apply "Ship Tomorrow" test more strictly:
-- What would users actually see/experience?
-- What business value is delivered?
-- Can this be deployed and used independently?
-
-Re-compose focusing on immediate user value:
-{{increments_analysis_result}}
 ```
 
 ## Recovery Workflows
