@@ -1,6 +1,6 @@
-# Contributing to Increments Slicer
+# Contributing to Bokata Slicer CC
 
-Thank you for your interest in contributing to Increments Slicer! This guide will help you get started.
+Thank you for your interest in contributing to Bokata Slicer CC! This guide will help you get started.
 
 ## Table of Contents
 
@@ -41,13 +41,13 @@ This project follows the principles of respectful collaboration:
 1. Fork the repository on GitHub
 2. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/increments-slicer.git
-   cd increments-slicer
+   git clone https://github.com/YOUR-USERNAME/bokata-slicer-cc.git
+   cd bokata-slicer-cc
    ```
 
 3. Add upstream remote:
    ```bash
-   git remote add upstream https://github.com/abrahamvallez/increments-slicer.git
+   git remote add upstream https://github.com/abrahamvallez/bokata-slicer-cc.git
    ```
 
 ---
@@ -66,22 +66,22 @@ npm install
 npm link
 ```
 
-This makes the `increments-slicer` command available globally for testing.
+This makes the `bokata-slicer-cc` command available globally for testing.
 
 ### 3. Test Installation
 
 In a test project directory:
 ```bash
 cd /path/to/test-project
-npm link increments-slicer
-npx increments-slicer install
+npm link bokata-slicer-cc
+npx bokata-slicer-cc install
 ```
 
 ### 4. Verify Commands
 
 In Claude Code:
 ```
-/slice Feature: Test feature
+/bokata Feature: Test feature
 ```
 
 ---
@@ -89,7 +89,7 @@ In Claude Code:
 ## Project Structure
 
 ```
-increments-slicer/
+bokata-slicer-cc/
 ├── .claude-plugin/              # Plugin configuration
 │   ├── plugin.json             # Plugin manifest
 │   └── marketplace.json        # Marketplace config
@@ -97,7 +97,7 @@ increments-slicer/
 ├── commands/                    # Slash commands
 │   └── slice.md                # Main command
 │
-├── agents/vertical-slicer/      # Agent implementations
+├── agents/bokata-slicer/      # Agent implementations
 │   ├── project-analyzer.md          # Multi-feature coordinator
 │   ├── feature-analyzer.md          # Single feature coordinator
 │   ├── feature-backbone-specialist.md
@@ -124,7 +124,7 @@ increments-slicer/
 
 ### Key Files
 
-- **commands/slice.md** - Entry point, scope detection
+- **commands/bokata.md** - Entry point, scope detection
 - **agents/project-analyzer.md** - Multi-feature orchestration
 - **agents/feature-analyzer.md** - Single feature orchestration
 - **agents/*-specialist.md** - Specialized processing agents
@@ -151,14 +151,14 @@ Branch naming conventions:
 
 #### Modifying Commands
 
-Commands are in `commands/slice.md`. Key sections:
+Commands are in `commands/bokata.md`. Key sections:
 - **Scope Detection** - Logic for single vs multi-feature
 - **Agent Loading** - Coordination calls
 - **Output Generation** - Markdown creation
 
 #### Modifying Agents
 
-Agents are in `agents/vertical-slicer/`. Follow this structure:
+Agents are in `agents/bokata-slicer/`. Follow this structure:
 
 ```markdown
 ---
@@ -211,10 +211,10 @@ npm link
 
 # Test installation
 cd /path/to/test-project
-npx increments-slicer install
+npx bokata-slicer-cc install
 
 # Test in Claude Code
-/slice Feature: Your test case
+/bokata Feature: Your test case
 ```
 
 #### Test Multiple Scenarios
@@ -241,7 +241,7 @@ Update documentation:
 
 Before submitting:
 
-- [ ] Installation works (`npx increments-slicer install`)
+- [ ] Installation works (`npx bokata-slicer-cc install`)
 - [ ] Command appears in Claude Code
 - [ ] Single feature analysis works
 - [ ] Multi-feature analysis works
@@ -253,31 +253,31 @@ Before submitting:
 
 **Test Case 1: Simple Feature**
 ```
-/slice Feature: Export data to CSV
+/bokata Feature: Export data to CSV
 ```
 Expected: Quick analysis, ~3 steps, ~18 increments
 
 **Test Case 2: Complex Feature**
 ```
-/slice Feature: Real-time notifications with preferences
+/bokata Feature: Real-time notifications with preferences
 ```
 Expected: Detailed analysis, ~6 steps, ~40 increments
 
 **Test Case 3: Project**
 ```
-/slice Project: Task management with projects, tasks, and progress
+/bokata Project: Task management with projects, tasks, and progress
 ```
 Expected: Multi-feature, ~4 features, ~16 steps, ~90 increments
 
 **Test Case 4: Ambiguous Input**
 ```
-/slice Shopping cart
+/bokata Shopping cart
 ```
 Expected: Clarification requested
 
 **Test Case 5: Invalid Input**
 ```
-/slice
+/bokata
 ```
 Expected: Helpful error message
 
@@ -407,6 +407,124 @@ We use [Semantic Versioning](https://semver.org/):
 
 ---
 
+## Working with the Dependency System (NEW in v0.2.0)
+
+The core innovation in v0.2.0 is the **Dependency and Compatibility System**. This ensures every increment is:
+- ✅ Independently deployable
+- ✅ Provides clear feedback to users
+- ✅ Compatible with other selected increments
+
+### Understanding Dependencies
+
+Each increment specifies three key attributes:
+
+**REQUIRES**: External dependencies or preconditions
+```
+REQUIRES: None                    # Standalone, no dependencies
+REQUIRES: Supabase setup          # Needs external service
+REQUIRES: Authentication working  # Needs another step's increment
+```
+
+**PROVIDES**: Capabilities offered to other steps
+```
+PROVIDES: User session            # Other steps can depend on this
+PROVIDES: OAuth tokens            # What this increment enables
+PROVIDES: Basic sync mechanism    # Functionality provided
+```
+
+**COMPATIBLE WITH**: Which increments from other steps work together
+```
+COMPATIBLE WITH: 1.1, 2.1, 3.1   # These form a valid E2E flow
+COMPATIBLE WITH: 1.2, 2.2, 3.2   # These form another valid flow
+```
+
+### Maintaining Dependency Integrity
+
+When modifying agents that handle increments:
+
+1. **In `increment-generator-specialist.md`:**
+   - Every increment MUST specify REQUIRES and PROVIDES
+   - REQUIRES should be "None" or specific service/precondition
+   - PROVIDES should describe what downstream steps can use
+   - Mark simplest increment with ⭐ and REQUIRES: None when possible
+
+2. **In `path-composer-specialist.md`:**
+   - Validate that selected increments are compatible
+   - Check that each increment's REQUIRES are satisfied by other selected increments or marked as "None"
+   - Verify all COMPATIBLE WITH constraints are honored
+   - Flag incompatible combinations and suggest alternatives
+
+3. **In `doc-generator.md`:**
+   - Display REQUIRES | PROVIDES | COMPATIBLE WITH columns in tables
+   - Show "Dependency Analysis" section with validation details
+   - Create "Compatibility Maps" showing which paths are valid
+   - Ensure all suggested paths have validated dependencies
+
+### Example: Adding a Breakdown Strategy
+
+When adding a new breakdown strategy to `increment-generator-specialist.md`, ensure increments follow this pattern:
+
+```markdown
+**1.2: Real OAuth Flow**
+| # | Increment | Requires | Provides | Compatible With |
+|---|-----------|----------|----------|-----------------|
+| 1.2 | Real OAuth | LinkedIn app credentials | OAuth tokens | 2.2, 3.2 |
+
+- **REQUIRES:** LinkedIn developer app configured
+- **PROVIDES:** Valid OAuth tokens for authenticated users
+- **COMPATIBLE WITH:** 2.2 (Real API calls), 3.2 (Secure storage)
+- **Effort:** 3 (medium)
+- **Value:** 4 (high)
+```
+
+### Testing Dependency System
+
+When testing changes to dependency-related code:
+
+```bash
+# Test 1: Walking Skeleton validation
+/bokata Feature: Simple authentication
+# Verify: All selected increments are compatible
+# Verify: REQUIRES are satisfied or "None"
+
+# Test 2: Path composition
+/bokata --with-paths Feature: Complex real-time sync
+# Verify: Multiple valid E2E flows shown
+# Verify: All paths have validated dependencies
+
+# Test 3: Incompatible combinations
+/bokata Feature: Multi-step feature with complex requirements
+# Verify: Incompatible suggestions are flagged
+# Verify: User guidance includes alternatives
+```
+
+### Common Mistakes to Avoid
+
+❌ **Don't:** Create increments that don't specify REQUIRES/PROVIDES
+```
+❌ 2.1: Send email  # Missing REQUIRES/PROVIDES
+```
+
+✅ **Do:** Explicitly declare dependencies
+```
+✅ 2.1: Send email (mock)
+   REQUIRES: None
+   PROVIDES: Email sending capability
+```
+
+❌ **Don't:** Mark incompatible increments as COMPATIBLE WITH
+```
+❌ 1.1 (hardcoded) COMPATIBLE WITH 2.3 (real API) - These don't work together
+```
+
+✅ **Do:** Group compatible increments by tier
+```
+✅ 1.1 (hardcoded) COMPATIBLE WITH 2.1 (hardcoded) - Both are mocks
+✅ 1.2 (real) COMPATIBLE WITH 2.2 (real) - Both are production-ready
+```
+
+---
+
 ## Style Guidelines
 
 ### Markdown Files (Agents, Commands, Docs)
@@ -462,21 +580,21 @@ We use [Semantic Versioning](https://semver.org/):
 
 ### Adding a New Breakdown Strategy
 
-1. Edit `agents/vertical-slicer/increment-generator-specialist.md`
+1. Edit `agents/bokata-slicer/increment-generator-specialist.md`
 2. Add strategy to the toolkit section
 3. Include description, when to use, and example
 4. Update strategy count in documentation
 
 ### Improving Walking Skeleton Logic
 
-1. Edit `agents/vertical-slicer/path-composer-specialist.md`
+1. Edit `agents/bokata-slicer/path-composer-specialist.md`
 2. Update selection rules or validation
 3. Add examples of new behavior
 4. Test with various features
 
 ### Adding New Implementation Path
 
-1. Edit `agents/vertical-slicer/iteration-planner-specialist.md`
+1. Edit `agents/bokata-slicer/iteration-planner-specialist.md`
 2. Add new option with clear focus
 3. Document when to use
 4. Update decision guide
@@ -496,8 +614,8 @@ We use [Semantic Versioning](https://semver.org/):
 
 - **Documentation:** [README.md](README.md), [CLAUDE.md](CLAUDE.md)
 - **Examples:** Check `agents/` for existing patterns
-- **Issues:** Search [existing issues](https://github.com/abrahamvallez/increments-slicer/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/abrahamvallez/increments-slicer/discussions)
+- **Issues:** Search [existing issues](https://github.com/abrahamvallez/bokata-slicer-cc/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/abrahamvallez/bokata-slicer-cc/discussions)
 
 ### Ask Questions
 
@@ -516,7 +634,7 @@ Contributors are recognized in:
 - README (if significant contribution)
 - Git history
 
-Thank you for contributing to Increments Slicer!
+Thank you for contributing to Bokata Slicer CC!
 
 ---
 

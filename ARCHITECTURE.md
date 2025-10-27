@@ -17,16 +17,125 @@ This document explains the architecture of the vertical slicing system, how comm
 ### Consistent Output Format
 All major workflows generate a markdown document with:
 - Complete breakdown (features → steps → increments)
-- Suggested Walking Skeleton marked clearly as suggestion
-- Multiple implementation options
+- **Dependency visibility** - Each increment shows REQUIRES, PROVIDES, COMPATIBLE WITH
+- Suggested Walking Skeleton marked clearly as suggestion (with validated dependencies)
+- Multiple implementation options (with compatibility validation)
 - Decision guides based on different priorities
 - Selection matrices for choosing increments
+- **Dependency Analysis** section showing valid paths
 
 ### Modular & Composable
 - Use complete workflows OR individual pieces
 - Chain specialist agents together
 - Iterate on any phase independently
 - No forced dependencies
+
+---
+
+## Dependency and Compatibility System (NEW in v0.2.0)
+
+### Core Innovation
+
+Every increment in v0.2.0 declares three critical attributes:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Step 1: UI Layer              Step 2: Logic Layer           │
+├─────────────────────────────────────────────────────────────┤
+│ 1.1: Simple form              2.1: Hardcoded logic          │
+│ REQUIRES: None                REQUIRES: None                │
+│ PROVIDES: User input          PROVIDES: Basic processing    │
+│ COMPATIBLE WITH: 2.1, 3.1     COMPATIBLE WITH: 1.1, 3.1    │
+│ [⭐ Simplest]                                               │
+│                                                             │
+│ 1.2: Form + validation        2.2: Real API calls          │
+│ REQUIRES: Client logic        REQUIRES: API endpoint        │
+│ PROVIDES: Validated input     PROVIDES: Real data          │
+│ COMPATIBLE WITH: 2.2, 3.2     COMPATIBLE WITH: 1.2, 3.2    │
+│                                                             │
+│ 1.3: Advanced form            2.3: Optimized API           │
+│ REQUIRES: Advanced validation REQUIRES: Caching service     │
+│ PROVIDES: Rich input control  PROVIDES: Fast responses     │
+│ COMPATIBLE WITH: 2.3, 3.3     COMPATIBLE WITH: 1.3, 3.3    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Why This Matters
+
+**Before v0.2.0:** Increments were independent
+- No guarantee combinations work together
+- Walking Skeleton might require non-existent dependencies
+- Implementation paths could be incompatible
+
+**After v0.2.0:** Increments are coordinated
+- ✅ Every combination is validated before suggesting
+- ✅ Walking Skeleton guaranteed to have all dependencies satisfied
+- ✅ Multiple valid E2E flows (all tested for compatibility)
+- ✅ Clear visibility into what each path requires
+
+### Coordination Workflow
+
+```
+Step 1: Generate Increments (increment-generator-specialist)
+├─ Create 5-10 increments per step
+├─ Each declares REQUIRES, PROVIDES, COMPATIBLE WITH
+└─ Mark simplest with ⭐
+
+Step 2: Validate Compatibility (path-composer-specialist)
+├─ Verify Walking Skeleton increments are compatible
+├─ Check REQUIRES are satisfied
+├─ Validate COMPATIBLE WITH constraints honored
+└─ Flag any incompatible combinations
+
+Step 3: Compose Multiple Paths (iteration-planner-specialist)
+├─ Create Path A using 1.1 + 2.1 + 3.1 (all compatible)
+├─ Create Path B using 1.2 + 2.2 + 3.2 (all compatible)
+└─ Create Path C using 1.3 + 2.3 + 3.3 (all compatible)
+
+Step 4: Document with Dependencies (doc-generator)
+├─ Show REQUIRES | PROVIDES | COMPATIBLE WITH columns
+├─ Include Dependency Analysis section
+├─ Display Compatibility Maps for each path
+└─ Flag incompatible suggestions with alternatives
+```
+
+### Dependency Validation Rules
+
+**REQUIRES validation:**
+```
+✅ VALID: increment.REQUIRES satisfied by:
+   - Other selected increments' PROVIDES
+   - Marked as "None" (standalone)
+
+❌ INVALID: increment.REQUIRES not satisfied
+   - External service not available
+   - Another step's increment not selected
+   - Circular dependencies
+```
+
+**COMPATIBLE WITH validation:**
+```
+✅ VALID: All selected increments include each other
+   in COMPATIBLE WITH field
+
+❌ INVALID: Any increment missing another selected increment
+   - 1.1 selected but not in 2.1's COMPATIBLE WITH
+   - 2.1 selected but not in 1.1's COMPATIBLE WITH
+```
+
+**E2E validation:**
+```
+✅ VALID: Selecting 1.2 + 2.2 + 3.2 forms complete flow
+   - 1.2 PROVIDES output needed by 2.2
+   - 2.2 PROVIDES output needed by 3.2
+   - All dependencies satisfied
+   - Cuts through UI → Logic → Data
+
+❌ INVALID: Selecting 1.1 + 2.3 creates incomplete flow
+   - 2.3 REQUIRES advanced features from 1.3
+   - 1.1 doesn't PROVIDE what 2.3 needs
+   - Missing middle layer integration
+```
 
 ---
 
@@ -48,7 +157,7 @@ Location: `.claude/commands/`
 ```
 
 ### Layer 2: Coordinator Agents (Orchestration)
-Location: `agents/vertical-slicer/`
+Location: `agents/bokata-slicer/`
 
 **Purpose:** Coordinate workflows and manage context between specialists.
 
@@ -74,7 +183,7 @@ Location: `agents/vertical-slicer/`
 - 3 implementation paths + custom worksheet
 
 ### Layer 3: Specialist Agents (Building Blocks)
-Location: `agents/vertical-slicer/`
+Location: `agents/bokata-slicer/`
 
 **Purpose:** Execute specific phases of analysis independently.
 
@@ -88,7 +197,7 @@ Slice Composer Specialist → Suggests slice combinations
 **Key Feature:** Each can be used standalone or coordinated.
 
 ### Layer 4: Output Generation
-Location: `agents/vertical-slicer/doc-slicer-generator.md`
+Location: `agents/bokata-slicer/doc-slicer-generator.md`
 
 **Purpose:** Generate consistent, comprehensive markdown documents.
 
@@ -379,6 +488,105 @@ Ask yourself:
 
 ---
 
+## Understanding Dependency Tables
+
+Generated documents include increment tables with dependency information:
+
+### Table Format
+
+```markdown
+| # | Increment | Requires | Provides | Compatible With |
+|---|-----------|----------|----------|-----------------|
+| 1.1 | ⭐ Simple form | None | Email input | 2.1, 3.1 |
+| 1.2 | Form + validation | Client logic | Validated input | 2.2, 3.2 |
+| 1.3 | Advanced form | Form library | Rich controls | 2.3 |
+```
+
+### Reading the Table
+
+**Column 1: #**
+- Increment ID (1.1, 1.2, 1.3)
+- ⭐ marks simplest increment (REQUIRES: None when possible)
+
+**Column 2: Increment**
+- Brief description
+- What this increment delivers
+
+**Column 3: Requires**
+- External dependencies needed
+- "None" = standalone, no dependencies
+- Otherwise: service name, library, or precondition
+
+**Column 4: Provides**
+- Capabilities this increment offers
+- What downstream steps can depend on
+
+**Column 5: Compatible With**
+- Which increments from OTHER steps work with this
+- Lists increment IDs (e.g., "2.1, 3.1")
+- Use to form valid E2E combinations
+
+### Selecting Increments Using Tables
+
+**Valid Selection Pattern:**
+```
+Step 1: Pick 1.2
+Step 2: Look at 1.2's "Compatible With" → "2.1, 2.2"
+Step 3: Pick 2.2
+Step 3: Look at 2.2's "Compatible With" → "1.2, 3.2"
+Step 4: Pick 3.2
+Result: Valid combination [1.2 + 2.2 + 3.2]
+```
+
+**Invalid Selection Pattern (Avoid):**
+```
+Step 1: Pick 1.1 (COMPATIBLE WITH: 2.1, 3.1)
+Step 2: Pick 2.3 (NOT in 1.1's compatible list)
+Result: ❌ Invalid combination [1.1 + 2.3]
+```
+
+### Interpreting REQUIRES
+
+**REQUIRES: None**
+- Increment is standalone
+- No external setup needed
+- Safe to include in Walking Skeleton
+
+**REQUIRES: Service Name**
+- External service must be configured
+- Examples: "Supabase", "OpenAI API", "Redis"
+- Plan setup time if selecting this increment
+
+**REQUIRES: Another increment**
+- Depends on selection from different step
+- Example: "Authentication working" = need auth increment first
+- Automatically handled by compatibility validation
+
+### Dependency Analysis Section
+
+Generated documents include a dedicated section:
+
+```markdown
+## Dependency Analysis
+
+**Path A (Walking Skeleton):** 1.1 + 2.1 + 3.1
+├─ All REQUIRES satisfied
+├─ All increments mutually compatible
+└─ ✅ Ready to deploy
+
+**Path B (Advanced):** 1.2 + 2.2 + 3.2
+├─ Requires: API endpoint, Database schema
+├─ All REQUIRES can be satisfied
+└─ ✅ Valid progression
+
+**Incompatible Combinations:**
+├─ 1.1 + 2.3: 2.3 requires advanced auth from 1.3
+├─ 1.3 + 2.1: 2.1 too simple for 1.3's capabilities
+└─ Suggestions: Mix by tier level (all 1.x, all 2.x, all 3.x)
+```
+
+---
+
 ## Best Practices
 
 ### For Project Planning
@@ -423,7 +631,7 @@ Ask yourself:
 ## Extending the System
 
 ### Adding New Breakdown Strategies
-Location: `agents/vertical-slicer/increment-generator-specialist.md`
+Location: `agents/bokata-slicer/increment-generator-specialist.md`
 
 Add new strategy to the Breakdown Strategies Toolkit section.
 

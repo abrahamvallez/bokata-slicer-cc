@@ -1,7 +1,7 @@
-# Increments Slicer
+# Bokata Slicer CC
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![npm version](https://img.shields.io/npm/v/increments-slicer.svg)](https://www.npmjs.com/package/increments-slicer)
+[![npm version](https://img.shields.io/npm/v/bokata-slicer-cc.svg)](https://www.npmjs.com/package/bokata-slicer-cc)
 
 **Intelligent vertical slicing and feature decomposition for Claude Code** using the **Hamburger Method** and radical vertical slicing techniques.
 
@@ -11,53 +11,53 @@
 
 **Option 1: NPM (Node.js projects)**
 ```bash
-npm install -D increments-slicer
-npx increments-slicer install
+npm install -D bokata-slicer-cc
+npx bokata-slicer-cc install
 ```
 
 **Option 2: Claude Code Plugin (any project)**
 ```
-/plugin marketplace add abrahamvallez/increments-slicer
-/plugin install increments-slicer
+/plugin marketplace add abrahamvallez/bokata-slicer-cc
+/plugin install bokata-slicer-cc
 ```
 
 **Option 3: Global**
 ```bash
-npm install -g increments-slicer
+npm install -g bokata-slicer-cc
 cd your-project
-increments-slicer install
+bokata-slicer-cc install
 ```
 
 ### Usage
 
 **Analyze a single feature (default - core analysis):**
 ```
-/slice Feature: User can reset their password via email
+/bokata Feature: User can reset their password via email
 ```
 
 **With implementation paths:**
 ```
-/slice --with-paths Feature: Password reset
+/bokata --with-paths Feature: Password reset
 ```
 
 **Full analysis (all sections):**
 ```
-/slice --full Feature: Password reset
+/bokata --full Feature: Password reset
 ```
 
 **Analyze a full project:**
 ```
-/slice Project: E-commerce platform with catalog, cart, checkout, and orders
-/slice --full Project: E-commerce platform  # Complete analysis
+/bokata Project: E-commerce platform with catalog, cart, checkout, and orders
+/bokata --full Project: E-commerce platform  # Complete analysis
 ```
 
 **Output:** Markdown document in `./docs/slicing-analysis/`
 
 ---
 
-## 📖 What is Increments Slicer?
+## 📖 What is Bokata Slicer CC?
 
-Increments Slicer automatically analyzes features or projects and generates:
+Bokata Slicer CC automatically analyzes features or projects and generates:
 
 **Core Analysis (always included):**
 - ✅ **Executive Summary** - Quick stats and metrics
@@ -119,12 +119,15 @@ The `/slice` command automatically detects whether you're analyzing:
 [Quick stats and metrics]
 
 ## 2. Feature Breakdown
-[Complete steps and increments]
+[Complete steps and increments with dependencies]
 
 ## 3. Walking Skeleton
 [Minimum implementation with rationale]
 
-## 4. Selection Matrix
+## 4. Dependency Analysis
+[What each increment requires and provides]
+
+## 5. Selection Matrix
 [All increments with effort/value/risk scores]
 ```
 
@@ -132,16 +135,65 @@ The `/slice` command automatically detects whether you're analyzing:
 ```markdown
 [... same as above, plus:]
 
-## 5. Implementation Paths
+## 6. Implementation Paths
 - Speed to Market (2-4 days)
 - Balanced Approach (5-8 days)
 - Quality First (10-15 days)
 
-## 6. Decision Guide
+## 7. Decision Guide
 [How to choose based on priorities]
 
-## 7. Next Steps
+## 8. Next Steps
 [Actionable guidance]
+```
+
+---
+
+## 🔗 Dependency and Compatibility System (NEW in v0.2.0)
+
+Every increment now explicitly specifies its dependencies and compatibility:
+
+### How It Works
+
+**Each increment defines:**
+```
+REQUIRES:       What external dependencies it needs (or "None" for zero-dependency paths)
+PROVIDES:       Capabilities it offers to other steps
+COMPATIBLE WITH: Which increments from other steps it works with
+```
+
+### What This Enables
+
+✅ **Guaranteed Deployable Paths** - Walking Skeleton is always a valid, complete E2E flow
+✅ **Coordinated Increments** - All selected increments work together seamlessly
+✅ **Multiple Valid Options** - Several implementation paths automatically identified
+✅ **Transparent Dependencies** - Clear visibility of what each increment needs
+✅ **Automatic Validation** - Incompatible combinations are detected and flagged
+
+### Example
+
+```markdown
+Step 1: UI Form
+| Increment | Requires | Provides | Compatible With |
+|-----------|----------|----------|-----------------|
+| 1.1 Form (client) | None | User input | 2.1, 3.1 |
+| 1.2 Form (API) | POST /api/save | HTTP request | 2.2, 2.3 |
+
+Step 2: Backend
+| Increment | Requires | Provides | Compatible With |
+|-----------|----------|----------|-----------------|
+| 2.1 None | None | Nothing | 1.1, 3.1 |
+| 2.2 API endpoint | Database | POST /api/save | 1.2, 3.2 |
+
+Step 3: Storage
+| Increment | Requires | Provides | Compatible With |
+|-----------|----------|----------|-----------------|
+| 3.1 localStorage | None | Persistence | 1.1, 2.1 |
+| 3.2 Supabase | Backend ready | Database | 1.2, 2.2 |
+
+✅ Valid Paths:
+- 1.1 + 2.1 + 3.1 (all client-side, zero dependencies)
+- 1.2 + 2.2 + 3.2 (API + database, coordinated)
 ```
 
 ---
@@ -155,8 +207,15 @@ The `/slice` command automatically detects whether you're analyzing:
 
 ### Walking Skeleton Composition
 - Selects simplest increments across all steps
-- Guarantees end-to-end functionality
+- **Guarantees compatibility** - all selected increments work together
+- Validates that Walking Skeleton is deployable with zero external dependencies
 - Answers: "What would we ship if deadline was tomorrow?"
+
+### Dependency and Compatibility Validation
+- **Automatic detection** of incompatible increment combinations
+- **Clear mapping** of what each increment requires and provides
+- **Multiple valid paths** automatically identified and coordinated
+- **Transparent dependency analysis** in generated documents
 
 ### Multiple Implementation Paths
 - **Speed:** Fastest to next deployment
@@ -164,6 +223,7 @@ The `/slice` command automatically detects whether you're analyzing:
 - **Quality:** Polished experience
 - **Feature-by-Feature:** Complete one feature at a time (projects)
 - **Cross-Feature:** Improve one aspect across all features (projects)
+- **All paths use compatible increments** across features
 
 ### Decision Support
 - Priority-based recommendations
@@ -174,11 +234,13 @@ The `/slice` command automatically detects whether you're analyzing:
 ### Custom Path Building
 - Selection matrix with all increments
 - Effort/value/risk scoring
-- Visual indicators (⭐⚡🔥⚠️💎)
+- **Dependency information** for each increment
+- **Compatibility constraints** clearly shown
 - Sprint planning guidance
 
 ### Professional Documentation
-- Markdown format
+- Markdown format with dependency tables
+- **Includes dependency analysis section**
 - Shareable with team
 - Ready for implementation
 - Version controlled
@@ -190,7 +252,7 @@ The `/slice` command automatically detects whether you're analyzing:
 - **[INSTALL.md](INSTALL.md)** - Complete installation guide
 - **[CLAUDE.md](CLAUDE.md)** - Full usage guide and command reference
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Development and contribution guide
-- **[Agents Documentation](agents/vertical-slicer/)** - Technical details
+- **[Agents Documentation](agents/bokata-slicer/)** - Technical details
 
 ---
 
@@ -246,7 +308,7 @@ Every slice must:
 
 **Input:**
 ```
-/slice Feature: Export user data to CSV
+/bokata Feature: Export user data to CSV
 ```
 
 **Analysis:**
@@ -259,7 +321,7 @@ Every slice must:
 
 **Input:**
 ```
-/slice Feature: Real-time notifications with preferences and history
+/bokata Feature: Real-time notifications with preferences and history
 ```
 
 **Analysis:**
@@ -273,7 +335,7 @@ Every slice must:
 
 **Input:**
 ```
-/slice
+/bokata
 
 Project: Task management app for remote teams
 
@@ -335,20 +397,20 @@ the Free Software Foundation, either version 3 of the License, or
 - [Augmented Coding: Beyond the Vibes](https://tidyfirst.substack.com/p/augmented-coding-beyond-the-vibes) - Kent Beck
 - [INSTALL.md](INSTALL.md) - Installation guide
 - [CLAUDE.md](CLAUDE.md) - Full command reference
-- [Agents documentation](agents/vertical-slicer/) - Technical details
+- [Agents documentation](agents/bokata-slicer/) - Technical details
 
 ---
 
 ## 💬 Support
 
-- **Issues:** [Report bugs or request features](https://github.com/abrahamvallez/increments-slicer/issues)
-- **Discussions:** [Ask questions or share ideas](https://github.com/abrahamvallez/increments-slicer/discussions)
+- **Issues:** [Report bugs or request features](https://github.com/abrahamvallez/bokata-slicer-cc/issues)
+- **Discussions:** [Ask questions or share ideas](https://github.com/abrahamvallez/bokata-slicer-cc/discussions)
 
 ---
 
 ## 🌟 Show Your Support
 
-If Increments Slicer helps your team, consider:
+If Bokata Slicer CC helps your team, consider:
 - ⭐ Starring this repository
 - 🐛 Reporting issues
 - 🤝 Contributing improvements

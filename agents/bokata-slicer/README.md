@@ -43,29 +43,40 @@ These agents implement a systematic methodology to decompose complex features in
 - Identifies simpler forms that still deliver value
 - **Output**: Steps per feature with quality attributes and trade-offs
 
-#### 3. **[increment-generator-specialist.md](increment-generator-specialist.md)**
-**Purpose**: Increment generation using breakdown strategies
+#### 3. **[increment-generator-specialist.md](increment-generator-specialist.md)** (ENHANCED v0.2.0)
+**Purpose**: Increment generation using breakdown strategies with dependency specifications
 
-- Applies the **Breakdown Strategies Toolkit** (15+ strategies)
+- Applies the **Breakdown Strategies Toolkit** (20+ strategies)
 - Generates 5-10 increments per step (MANDATORY)
+- **NEW:** Each increment specifies:
+  - **REQUIRES**: External dependencies (or "None")
+  - **PROVIDES**: Capabilities offered to other steps
+  - **COMPATIBLE WITH**: Which increments from other steps work together
 - Filters increments by viability (fast, testable, reversible)
-- **Output**: Multiple incremental implementations per step
+- **Output**: Multiple incremental implementations per step with full dependency specs
 
-#### 4. **[slice-composer-specialist.md](slice-composer-specialist.md)**
-**Purpose**: Vertical slice composition
+#### 4. **[path-composer-specialist.md](path-composer-specialist.md)** (ENHANCED v0.2.0)
+**Purpose**: Vertical slice composition with automatic compatibility validation
 
+- **NEW:** Validates all dependencies and compatibility before suggesting paths
+- **NEW:** Checks that REQUIRES are satisfied by PROVIDES
+- **NEW:** Verifies all selected increments are mutually compatible
+- **NEW:** Flags incompatible combinations and suggests alternatives
 - Combines cross-feature and cross-step increments
 - Creates the **Walking Skeleton** (minimal viable combination)
 - Designs iterations that improve a single aspect
-- **Output**: Slice plan with validation criteria
+- **Output**: Slice plan with validated dependencies and compatibility analysis
 
-#### 5. **[doc-slicer-generator.md](doc-slicer-generator.md)**
-**Purpose**: Final documentation generation
+#### 5. **[doc-generator.md](doc-generator.md)** (ENHANCED v0.2.0)
+**Purpose**: Final documentation generation with dependency visibility
 
+- **NEW:** Increments tables show REQUIRES | PROVIDES | COMPATIBLE WITH
+- **NEW:** Includes "Dependency Analysis" section
+- **NEW:** Shows compatibility maps indicating valid paths
 - Generates **Development Plan** (checklist format)
-- Creates **Slicing Analysis** (detailed breakdown)
+- Creates **Slicing Analysis** (detailed breakdown with dependencies)
 - Validates consistency between phases
-- **Output**: Implementation-ready documents
+- **Output**: Implementation-ready documents with full dependency visibility
 
 ## 📋 Methodology: 4-Phase Process
 

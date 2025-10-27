@@ -1,6 +1,6 @@
-# Installation Guide - Increments Slicer
+# Installation Guide - Bokata Slicer CC
 
-Complete installation guide for Increments Slicer - Intelligent vertical slicing and feature decomposition for Claude Code.
+Complete installation guide for Bokata Slicer CC - Intelligent vertical slicing and feature decomposition for Claude Code.
 
 ## Prerequisites
 
@@ -26,22 +26,22 @@ Best for Node.js/JavaScript projects with `package.json`.
 
 ```bash
 # Install as dev dependency (recommended)
-npm install -D increments-slicer
+npm install -D bokata-slicer-cc
 
 # Or with yarn
-yarn add -D increments-slicer
+yarn add -D bokata-slicer-cc
 
 # Or with pnpm
-pnpm add -D increments-slicer
+pnpm add -D bokata-slicer-cc
 
 # Or with bun
-bun add -d increments-slicer
+bun add -d bokata-slicer-cc
 ```
 
 ### Step 2: Setup Commands
 
 ```bash
-npx increments-slicer install
+npx bokata-slicer-cc install
 ```
 
 **What this does:**
@@ -55,10 +55,16 @@ npx increments-slicer install
 
 In Claude Code, try:
 ```
-/slice Feature: Test feature
+/bokata Feature: Test feature
 ```
 
-You should see the command execute and analysis begin.
+You should see the command execute and analysis begin. When complete, check `docs/slicing-analysis/` for the generated markdown file.
+
+**What to verify in the output:**
+- ✅ **Dependency Tables** - Each step shows increments with REQUIRES, PROVIDES, and COMPATIBLE WITH columns
+- ✅ **Walking Skeleton** - Uses compatible increments from each step that work together
+- ✅ **Compatibility Maps** - Shows which increment combinations form valid end-to-end flows
+- ✅ **Path Validation** - Implementation paths show validated dependency chains
 
 ### Expected Directory Structure
 
@@ -71,7 +77,7 @@ your-project/
 │   └── slicing-analysis/     # ← Output directory
 │       └── README.md
 ├── node_modules/
-│   └── increments-slicer/    # ← Package files
+│   └── bokata-slicer-cc/    # ← Package files
 ├── package.json
 └── .gitignore                # ← Updated
 ```
@@ -86,13 +92,13 @@ Best for any project type (Python, Ruby, Go, etc.) or if you don't use npm.
 
 In Claude Code, run:
 ```
-/plugin marketplace add abrahamvallez/increments-slicer
+/plugin marketplace add abrahamvallez/bokata-slicer-cc
 ```
 
 ### Step 2: Install Plugin
 
 ```
-/plugin install increments-slicer
+/plugin install bokata-slicer-cc
 ```
 
 ### Step 3: Verify Installation
@@ -102,13 +108,19 @@ Check installed plugins:
 /plugin list
 ```
 
-You should see `increments-slicer` in the list.
+You should see `bokata-slicer-cc` in the list.
 
 ### Step 4: Test Command
 
 ```
-/slice Feature: Test feature
+/bokata Feature: Test feature
 ```
+
+**What to verify in the output:**
+- ✅ **Dependency Tables** - Each step shows increments with REQUIRES, PROVIDES, and COMPATIBLE WITH columns
+- ✅ **Walking Skeleton** - Uses compatible increments from each step that work together
+- ✅ **Compatibility Maps** - Shows which increment combinations form valid end-to-end flows
+- ✅ **Path Validation** - Implementation paths show validated dependency chains
 
 ### Plugin Location
 
@@ -123,7 +135,7 @@ Install once, use in any project.
 ### Step 1: Install Globally
 
 ```bash
-npm install -g increments-slicer
+npm install -g bokata-slicer-cc
 ```
 
 ### Step 2: Setup in Project
@@ -131,20 +143,26 @@ npm install -g increments-slicer
 Navigate to your project directory:
 ```bash
 cd your-project
-increments-slicer install
+bokata-slicer-cc install
 ```
 
 ### Step 3: Verify
 
 ```
-/slice Feature: Test feature
+/bokata Feature: Test feature
 ```
+
+**What to verify in the output:**
+- ✅ **Dependency Tables** - Each step shows increments with REQUIRES, PROVIDES, and COMPATIBLE WITH columns
+- ✅ **Walking Skeleton** - Uses compatible increments from each step that work together
+- ✅ **Compatibility Maps** - Shows which increment combinations form valid end-to-end flows
+- ✅ **Path Validation** - Implementation paths show validated dependency chains
 
 ### Benefits
 
 - No need to install per-project
 - One command to setup in any project
-- Easy to update: `npm update -g increments-slicer`
+- Easy to update: `npm update -g bokata-slicer-cc`
 
 ---
 
@@ -152,7 +170,7 @@ increments-slicer install
 
 After installation, verify:
 
-- [ ] `.claude/commands/slice.md` exists
+- [ ] `.claude/commands/bokata.md` exists
 - [ ] `docs/slicing-analysis/` directory exists
 - [ ] `/slice` command works in Claude Code
 - [ ] `.gitignore` includes `docs/slicing-analysis/`
@@ -165,12 +183,12 @@ After installation, verify:
 
 **Single feature:**
 ```
-/slice Feature: User authentication
+/bokata Feature: User authentication
 ```
 
 **Full project:**
 ```
-/slice Project: E-commerce with catalog, cart, and checkout
+/bokata Project: E-commerce with catalog, cart, and checkout
 ```
 
 ### Output
@@ -193,7 +211,7 @@ Every analysis generates a markdown document:
 
 Currently, output is always in `./docs/slicing-analysis/`.
 
-To change this, modify `.claude/commands/slice.md` and update the output location section.
+To change this, modify `.claude/commands/bokata.md` and update the output location section.
 
 **Future:** `--output` flag support coming in v0.2.0
 
@@ -216,21 +234,21 @@ By default, analysis documents are **gitignored**.
 
 ```bash
 # Local installation
-npm update increments-slicer
+npm update bokata-slicer-cc
 
 # Global installation
-npm update -g increments-slicer
+npm update -g bokata-slicer-cc
 ```
 
 After update, re-run setup:
 ```bash
-npx increments-slicer install  # or just `increments-slicer install` if global
+npx bokata-slicer-cc install  # or just `bokata-slicer-cc install` if global
 ```
 
 ### Claude Code Plugin
 
 ```
-/plugin update increments-slicer
+/plugin update bokata-slicer-cc
 ```
 
 ---
@@ -241,10 +259,10 @@ npx increments-slicer install  # or just `increments-slicer install` if global
 
 ```bash
 # Remove package
-npm uninstall increments-slicer
+npm uninstall bokata-slicer-cc
 
 # Manually remove (if desired):
-rm -rf .claude/commands/slice.md
+rm -rf .claude/commands/bokata.md
 rm -rf docs/slicing-analysis/
 # Remove entry from .gitignore
 ```
@@ -252,16 +270,16 @@ rm -rf docs/slicing-analysis/
 ### Claude Code Plugin
 
 ```
-/plugin uninstall increments-slicer
+/plugin uninstall bokata-slicer-cc
 ```
 
 ### Global Installation
 
 ```bash
-npm uninstall -g increments-slicer
+npm uninstall -g bokata-slicer-cc
 
 # Manually remove from projects:
-rm -rf .claude/commands/slice.md
+rm -rf .claude/commands/bokata.md
 rm -rf docs/slicing-analysis/
 ```
 
@@ -284,7 +302,7 @@ rm -rf docs/slicing-analysis/
 
 3. Re-run setup:
    ```bash
-   npx increments-slicer install
+   npx bokata-slicer-cc install
    ```
 
 ---
@@ -301,17 +319,17 @@ rm -rf docs/slicing-analysis/
 
 ### Module Not Found
 
-**Problem:** `Cannot find module 'increments-slicer'`
+**Problem:** `Cannot find module 'bokata-slicer-cc'`
 
 **Solutions:**
 1. Verify installation:
    ```bash
-   npm list increments-slicer
+   npm list bokata-slicer-cc
    ```
 
 2. Reinstall:
    ```bash
-   npm install increments-slicer
+   npm install bokata-slicer-cc
    ```
 
 3. Check node_modules:
@@ -332,7 +350,7 @@ mkdir -p docs/slicing-analysis
 
 Or re-run setup:
 ```bash
-npx increments-slicer install
+npx bokata-slicer-cc install
 ```
 
 ---
@@ -389,13 +407,13 @@ npx increments-slicer install
 
 ## Development Installation
 
-For contributing to Increments Slicer:
+For contributing to Bokata Slicer CC:
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/abrahamvallez/increments-slicer.git
-cd increments-slicer
+git clone https://github.com/abrahamvallez/bokata-slicer-cc.git
+cd bokata-slicer-cc
 ```
 
 ### Link Locally
@@ -408,21 +426,21 @@ npm link
 
 ```bash
 cd your-test-project
-npm link increments-slicer
-npx increments-slicer install
+npm link bokata-slicer-cc
+npx bokata-slicer-cc install
 ```
 
 ### Make Changes
 
-Edit files in `increments-slicer/` directory. Changes reflect immediately (due to symlink).
+Edit files in `bokata-slicer-cc/` directory. Changes reflect immediately (due to symlink).
 
 ### Unlink
 
 ```bash
 cd your-test-project
-npm unlink increments-slicer
+npm unlink bokata-slicer-cc
 
-cd increments-slicer
+cd bokata-slicer-cc
 npm unlink
 ```
 
@@ -438,8 +456,8 @@ npm unlink
 
 ### Support
 
-- **Issues:** https://github.com/abrahamvallez/increments-slicer/issues
-- **Discussions:** https://github.com/abrahamvallez/increments-slicer/discussions
+- **Issues:** https://github.com/abrahamvallez/bokata-slicer-cc/issues
+- **Discussions:** https://github.com/abrahamvallez/bokata-slicer-cc/discussions
 
 ### Reporting Bugs
 
@@ -454,7 +472,7 @@ Include:
 
 ## FAQ
 
-**Q: Do I need npm to use Increments Slicer?**
+**Q: Do I need npm to use Bokata Slicer CC?**
 A: No, you can use Claude Code Plugin installation (Method 2).
 
 **Q: Can I use this in non-JavaScript projects?**
@@ -470,7 +488,7 @@ A: No by default (gitignored). You can change this in `.gitignore`.
 A: The `/slice` command uses the agents as-is. For custom analysis, you can modify the agent files after installation.
 
 **Q: How do I update to latest version?**
-A: `npm update increments-slicer` or `/plugin update increments-slicer`
+A: `npm update bokata-slicer-cc` or `/plugin update bokata-slicer-cc`
 
 **Q: Can I install in multiple projects?**
 A: Yes, each project can have its own installation.
@@ -490,7 +508,7 @@ After installation:
 
 2. **Try it out:**
    ```
-   /slice Feature: Simple test feature
+   /bokata Feature: Simple test feature
    ```
 
 3. **Review output:**
@@ -500,7 +518,7 @@ After installation:
 
 4. **Use in real project:**
    ```
-   /slice Feature: [Your actual feature]
+   /bokata Feature: [Your actual feature]
    ```
 
 Happy slicing! 🍔⚡

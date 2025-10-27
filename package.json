@@ -1,6 +1,6 @@
 {
-  "name": "increments-slicer",
-  "version": "0.1.0",
+  "name": "bokata-slicer-cc",
+  "version": "0.2.0",
   "description": "Intelligent vertical slicing and feature decomposition for Claude Code using the Hamburger Method",
   "keywords": [
     "claude-code",
@@ -14,17 +14,17 @@
   ],
   "author": "Abraham Vallez",
   "license": "GPL-3.0",
-  "homepage": "https://github.com/abrahamvallez/increments-slicer",
+  "homepage": "https://github.com/abrahamvallez/bokata-slicer-cc",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abrahamvallez/increments-slicer.git"
+    "url": "https://github.com/abrahamvallez/bokata-slicer-cc.git"
   },
   "bugs": {
-    "url": "https://github.com/abrahamvallez/increments-slicer/issues"
+    "url": "https://github.com/abrahamvallez/bokata-slicer-cc/issues"
   },
   "main": "lib/index.js",
   "bin": {
-    "increments-slicer": "./bin/install.js"
+    "bokata-slicer-cc": "./bin/install.js"
   },
   "files": [
     "commands/",
@@ -38,7 +38,7 @@
     "CLAUDE.md"
   ],
   "scripts": {
-    "postinstall": "echo '\n✨ Increments Slicer installed!\n\nTo setup commands in your project, run:\n  npx increments-slicer install\n'",
+    "postinstall": "echo '\n✨ Bokata Slicer CC installed!\n\nTo setup commands in your project, run:\n  npx bokata-slicer-cc install\n'",
     "test": "echo 'No tests yet'",
     "prepublishOnly": "echo 'Validating package before publish...'"
   },
