@@ -1,0 +1,49 @@
+{
+  "name": "increments-slicer",
+  "version": "0.1.0",
+  "description": "Intelligent vertical slicing and feature decomposition for Claude Code using the Hamburger Method",
+  "keywords": [
+    "claude-code",
+    "vertical-slicing",
+    "feature-decomposition",
+    "incremental-development",
+    "agile",
+    "hamburger-method",
+    "walking-skeleton",
+    "radical-increments"
+  ],
+  "author": "Abraham Vallez",
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/abrahamvallez/increments-slicer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abrahamvallez/increments-slicer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abrahamvallez/increments-slicer/issues"
+  },
+  "main": "lib/index.js",
+  "bin": {
+    "increments-slicer": "./bin/install.js"
+  },
+  "files": [
+    "commands/",
+    "agents/",
+    "lib/",
+    "bin/",
+    ".claude-plugin/",
+    "LICENSE",
+    "README.md",
+    "INSTALL.md",
+    "CLAUDE.md"
+  ],
+  "scripts": {
+    "postinstall": "echo '\n✨ Increments Slicer installed!\n\nTo setup commands in your project, run:\n  npx increments-slicer install\n'",
+    "test": "echo 'No tests yet'",
+    "prepublishOnly": "echo 'Validating package before publish...'"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {}
+}
