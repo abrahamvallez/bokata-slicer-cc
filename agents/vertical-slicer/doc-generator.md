@@ -124,175 +124,97 @@ The generator will:
 
 # OUTPUT REQUIREMENTS
 
-Generate a markdown document with **core sections** (always included) and **optional sections** (based on flags).
+Generate a markdown document with **FIXED STRUCTURE** (always identical format).
 
-## Core Document Structure (Always Included)
+## Fixed Document Structure (ALWAYS THE SAME)
 
 ```markdown
 # Vertical Slicing Analysis: [Project/Feature Name]
 
 ## 1. Executive Summary
-**Project:** [Name]
-**Domain:** [Context]
-**Total Features:** [Number]
-**Total Steps:** [Number across all features]
-**Total Increments Generated:** [Number]
-**Analysis Date:** [Date]
 
-**Quick Stats:**
-- ⭐ Walking Skeleton: [N] increments (~[X] hours/days)
-- ⚡ Quick Wins: [M] increments available
-- 🔥 High Value: [P] increments identified
-- ⚠️ High Risk: [Q] increments flagged
+| Metric | Value |
+|--------|-------|
+| **Project Type** | [e.g., Single-feature / Multi-feature SaaS] |
+| **Total Features** | [Number] |
+| **Total Steps** | [Number across all features] |
+| **Total Increments Generated** | [Number] |
+| **Analysis Date** | [Date] |
 
 ---
 
-## 2. Features Backbone
+## 2. Feature Backbone Overview
 
-### User Journey Overview
-[Brief narrative of the complete user journey]
-
-### Features Identified
-1. **[Feature Name]** - [User capability and value]
-2. **[Feature Name]** - [User capability and value]
-3. **[Feature Name]** - [User capability and value]
-[Continue for all features...]
-
-### Feature Dependencies
-[Any critical relationships between features]
+| Feature | User Value | Dependencies |
+|---------|------------|--------------|
+| **[Feature Name]** | [User capability] | [Depends on] |
+| **[Feature Name]** | [User capability] | [Depends on] |
+| **[Feature Name]** | [User capability] | [Depends on] |
 
 ---
 
-## 3. Detailed Feature Breakdown
+## 3. Feature Breakdown - Complete Analysis
 
 ### Feature 1: [Name]
-**User Story:** As a [user] I need [capability] so that [benefit]
-**Core Value:** [Business value delivered]
 
-#### Step 1: [Name] | Strategy: [Chosen Strategy]
+**User Value:** [What value this delivers to users]
+
+#### Step 1.1: [Name]
+
 **Purpose:** [What this step accomplishes]
-**Tech Layers:** [UI/Logic/Data coverage]
 
-**Increments Available:**
-- **1.1 [Increment Name]** - [Specific implementation] ⭐ *Simplest*
-- **1.2 [Increment Name]** - [Specific implementation]
-- **1.3 [Increment Name]** - [Specific implementation]
-- **1.4 [Increment Name]** - [Specific implementation]
-- **1.5 [Increment Name]** - [Specific implementation]
-- **1.6 [Increment Name]** - [Specific implementation]
-[Continue for 5-10 increments...]
+**Increments:**
 
-**Strategy Rationale:** [Why this strategy for this step]
+| # | Name | Requires | Provides | Compatible With | Notes |
+|---|------|----------|----------|-----------------|-------|
+| 1.1.1 | [Increment Name] | [Deps or None] | [What it offers] | [Compatible IDs] | [Description] ⭐ |
+| 1.1.2 | [Increment Name] | [Deps or None] | [What it offers] | [Compatible IDs] | [Description] |
+| 1.1.3 | [Increment Name] | [Deps or None] | [What it offers] | [Compatible IDs] | [Description] |
+[Continue for all increments...]
 
-#### Step 2: [Name] | Strategy: [Chosen Strategy]
+#### Step 1.2: [Name]
+
 **Purpose:** [What this step accomplishes]
-**Tech Layers:** [UI/Logic/Data coverage]
 
-**Increments Available:**
-- **2.1 [Increment Name]** - [Specific implementation] ⭐ *Simplest*
-- **2.2 [Increment Name]** - [Specific implementation]
-[Continue for 5-10 increments...]
+**Increments:**
 
-**Strategy Rationale:** [Why this strategy for this step]
+| # | Name | Requires | Provides | Compatible With | Notes |
+|---|------|----------|----------|-----------------|-------|
+| 1.2.1 | [Increment Name] | [Deps or None] | [What it offers] | [Compatible IDs] | [Description] ⭐ |
+| 1.2.2 | [Increment Name] | [Deps or None] | [What it offers] | [Compatible IDs] | [Description] |
+[Continue for all increments...]
 
-**Dependencies:** [List any dependencies that must be met before a increment from this step can be implemented]
-
-[Continue for all steps in this feature...]
+[Continue for all steps in Feature 1...]
 
 ---
 
 ### Feature 2: [Name]
-[Repeat same structure...]
+
+**User Value:** [What value this delivers to users]
+
+#### Step 2.1: [Name]
+
+[Same format as Feature 1...]
+
+[Continue for all features...]
 
 ---
 
-## 4. 🎯 Walking Skeleton
+## 4. Walking Skeleton
 
-**Purpose:** Minimum viable implementation that demonstrates end-to-end functionality
-**Ship Tomorrow Answer:** [What you'd build with 24-hour deadline]
+**Purpose:** Minimum viable implementation that demonstrates end-to-end functionality.
 
-### Composition
+**Composition:**
 
 #### Feature: [Feature Name]
-- **Step 1 - [Name]:** ✓ Increment 1.1 - [Name and description]
-- **Step 2 - [Name]:** ✓ Increment 2.1 - [Name and description]
-- **Step 3 - [Name]:** ✓ Increment 3.1 - [Name and description]
+- **Step 1.1** → Increment 1.1.1 - [Name and description]
+- **Step 1.2** → Increment 1.2.1 - [Name and description]
 
 #### Feature: [Feature Name]
-- **Step 1 - [Name]:** ✓ Increment 1.1 - [Name and description]
-- **Step 2 - [Name]:** ✓ Increment 2.1 - [Name and description]
-
-**Validation Criteria:**
-- [ ] [How to verify this works]
-- [ ] [Key functionality to test]
-- [ ] [User value to validate]
-
-**Why This Combination:**
-[Rationale for selecting these specific increments]
-
-**Estimated Effort:** [X hours/days]
+- **Step 2.1** → Increment 2.1.1 - [Name and description]
+- **Step 2.2** → Increment 2.2.1 - [Name and description]
 
 ---
-
-## 5. 📊 Complete Selection Matrix
-
-[Include complete matrix from Selection Matrix Specialist]
-[Must include: all increments, scores, visual indicators, priority groups, selection strategies]
-
----
-```
-
-## Optional Sections (Conditionally Included)
-
-### If `--with-paths` or `--full` flag:
-```markdown
-## 6. 🚀 Implementation Paths
-
-[Include complete Iteration Options from Iteration Planner Specialist]
-[Must include: 3-5 paths with increments, timelines, rationales, best-for contexts]
-
----
-```
-
-### If `--with-guide` or `--full` flag:
-```markdown
-## 7. 🧭 Decision Guide
-
-[Include complete Decision Guide from Decision Guide Specialist]
-[Must include: quick decision table, detailed criteria, scenarios, red flags]
-
----
-```
-
-### If `--full` flag only:
-```markdown
-## 8. 📋 Next Steps
-
-**Recommended Actions:**
-1. Review Walking Skeleton - ensure it matches your context
-2. Deploy Walking Skeleton first for validation
-3. Gather user feedback
-4. Choose next increments based on learnings:
-   - Users confused? → Add quality/UX increments (💎)
-   - Users want more? → Add quick wins (⚡)
-   - Technical issues? → Address high-risk items (⚠️)
-5. Use Selection Matrix to build custom sprint plans
-6. Iterate based on real feedback
-
-**Quick Start Commands:**
-```bash
-# To generate missing sections later:
-/slice-paths [analysis-file]    # Add iteration paths
-/slice-guide [analysis-file]    # Add decision guide
-```
-
----
-
-## 🔄 Revision History
-- [Date]: Initial analysis generated
-- [Space for future revisions]
-
-```
 ```
 
 # INPUT REQUIREMENTS
@@ -303,68 +225,103 @@ Generate a markdown document with **core sections** (always included) and **opti
 
 # DOCUMENT QUALITY CRITERIA
 
-## Slicing Analysis Validation
-- Complete breakdown rationale provided
-- Strategy selection is explained for each step
-- Increments are clearly numbered and described
-- Evolution path shows learning progression
-- Alternative approaches are acknowledged where relevant
+## Format Consistency Rules (MUST BE ENFORCED)
+
+The markdown document MUST ALWAYS follow this exact structure:
+
+1. **Section Order (never changes):**
+   - Section 1: Executive Summary
+   - Section 2: Feature Backbone Overview
+   - Section 3: Feature Breakdown - Complete Analysis
+   - Section 4: Walking Skeleton
+
+2. **Heading Levels (never changes):**
+   - `#` for title only
+   - `##` for numbered sections (1, 2, 3, 4)
+   - `###` for features (Feature 1, Feature 2, etc.)
+   - `####` for steps (Step 1.1, Step 1.2, etc.)
+
+3. **Table Formats (never changes):**
+   - Executive Summary: Metric | Value
+   - Feature Backbone: Feature | User Value | Dependencies
+   - **Increments: # | Name | Requires | Provides | Compatible With | Notes (UPDATED)**
+   - Walking Skeleton: Feature/Step/Increment list format
+
+4. **Separators (never changes):**
+   - Use `---` between major sections
+   - Always present
+
+5. **Increment Marking (never changes):**
+   - ⭐ marks the simplest increment in each step
+   - Always exactly one ⭐ per step
 
 ## Cross-Document Consistency
-- Same increment numbering used in both documents
-- Feature names consistent across documents
-- Increments breakdown consistent across documents
-- All referenced increments are defined in analysis
+- Same increment numbering used throughout (Format: Step.Increment, e.g., 1.1.1)
+- Feature names consistent across all sections
+- Increments breakdown consistent with strategy selection
+- All referenced increments defined in analysis
 
-## Formatting Standards
-- Consistent markdown formatting
-- Clear hierarchical structure
-- Proper numbering and referencing
-- Readable layout with appropriate whitespace
-- Professional presentation suitable for stakeholders
+## Content Standards
+- Each increment has clear description
+- Strategy rationale provided
+- Dependencies explicitly stated
+- Walking Skeleton only includes ⭐ increments from each step
+
+# VALIDATION RULES
+
+Before generating document, verify:
+1. **Section Completeness:**
+   - Executive Summary table is filled
+   - Feature Backbone has all features
+   - Feature Breakdown has all steps and increments
+   - Walking Skeleton uses only ⭐ increments
+
+2. **Format Consistency:**
+   - All section numbers are present (1, 2, 3, 4)
+   - Heading levels are correct (##/###/####)
+   - All tables use correct column format
+   - No optional sections added
+
+3. **Increment Numbering:**
+   - Format is always [Feature].[Step].[Increment] (e.g., 1.1.1, 1.1.2, 2.1.1)
+   - Each step has at least one ⭐ marked
+   - Walking Skeleton references only ⭐ increments
+
+4. **Content Quality:**
+   - Each increment has clear description
+   - Dependencies are explicitly stated
+   - Strategy names are from standard list
+   - Walking Skeleton timeline is provided
 
 # ERROR HANDLING
-- Flag incomplete analysis sections
-- Identify inconsistencies between phases
-- Highlight missing validation criteria
-- Report formatting issues
-- Request clarification for ambiguous content
 
-# TROUBLESHOOTING
+**If validation fails:**
 
-## Common Issues and Solutions
+1. **Missing sections:** Do NOT generate document
+   - Request missing analysis phase
+   - Specify exactly what's missing
 
-### Issue: "Missing analysis from one phase"
-**Solution:**
-- Identify which phase is missing (Features/Steps/Increments)
-- Request user to run specific command: `/analyze-features`, `/analyze-steps`, or `/generate-increments`
-- DO NOT generate placeholder content - wait for complete analysis
+2. **Inconsistent numbering:** Auto-fix
+   - Renumber to standard format
+   - Verify consistency across document
 
-### Issue: "Increment numbering inconsistent"
-**Solution:**
-- Validate format: `[Step#].[Increment#]` (e.g., 1.1, 1.2, 2.1)
-- Auto-renumber if needed to maintain consistency
-- Ensure each step's increments start from .1
+3. **Format violations:** Do NOT generate
+   - Flag which format rules are violated
+   - Request correction before proceeding
 
-### Issue: "Walking Skeleton selection unclear"
-**Solution:**
-- Always select ⭐ simplest increment from each step
-- Verify combination cuts through UI → Logic → Data
-- Include explicit "Why This Combination" rationale
-
-### Issue: "Document too long/overwhelming"
-**Solution:**
-- Use collapsible sections in markdown (if supported)
-- Prioritize executive summary and quick reference sections
-- Put detailed breakdowns after decision guides
-- Consider generating separate "Quick Reference" document
+4. **Quality issues:** Flag for review
+   - Missing strategy rationale
+   - Unclear dependencies
+   - Invalid increment descriptions
 
 # CORE PRINCIPLES
 
 Every generated document must:
-- Empower user choice (suggestions, not mandates)
-- Provide multiple implementation options
-- Include clear decision guides based on priorities
-- Mark simplest paths clearly with ⭐
-- Be actionable and specific (no generic placeholders)
-- Maintain consistency across all sections
+- **Follow the fixed template exactly** - never deviate in format or structure
+- **Use the same section order** - always 4 sections in same sequence
+- **Use consistent heading levels** - ##/###/#### always
+- **Use fixed table formats** - same columns, same order
+- **Mark simplest increments clearly** - exactly one ⭐ per step
+- **Provide clear dependencies** - all increment dependencies explicit
+- **Include walking skeleton** - show minimum viable path
+- **Be version-consistent** - generate identical format every time

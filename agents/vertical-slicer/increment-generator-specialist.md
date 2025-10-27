@@ -210,12 +210,19 @@ Instead of splitting work based on technical inputs or workflows, focus on **del
 
 ### Step 1: [Step Name] | Strategy: [Primary Strategy Used]
 **Increments:**
-- **1.1:** [Increment Name] - [Specific implementation description]
-- **1.2:** [Increment Name] - [Specific implementation description]
-- **1.3:** [Increment Name] - [Specific implementation description]
-- **1.4:** [Increment Name] - [Specific implementation description]
-- **1.5:** [Increment Name] - [Specific implementation description]
-- **1.6:** [Increment Name] - [Specific implementation description]
+
+**Increment 1.1: [Increment Name]** ⭐
+- **Description:** [Specific implementation description]
+- **REQUIRES:** [Dependencies from other steps, or "None"]
+- **PROVIDES:** [What this increment offers to other steps]
+- **COMPATIBLE WITH:** [Which increments from other steps work with this]
+
+**Increment 1.2: [Increment Name]**
+- **Description:** [Specific implementation description]
+- **REQUIRES:** [Dependencies from other steps, or "None"]
+- **PROVIDES:** [What this increment offers to other steps]
+- **COMPATIBLE WITH:** [Which increments from other steps work with this]
+
 [Continue for 5-10 increments...]
 
 **Applied Strategies:** [List of strategies used]
@@ -231,6 +238,76 @@ Instead of splitting work based on technical inputs or workflows, focus on **del
 [Continue for all features...]
 ```
 
+## Specification Details
+
+Each increment MUST specify:
+
+1. **REQUIRES** - What this increment needs from other steps
+   - Backend endpoints (e.g., "POST /api/save")
+   - Data availability (e.g., "User session exists")
+   - External services (e.g., "Supabase configured")
+   - Previous state (e.g., "Form validated")
+   - Use "None" if no dependencies
+
+2. **PROVIDES** - What this increment offers to other steps
+   - UI components (e.g., "Submit button")
+   - Data (e.g., "User input captured")
+   - State (e.g., "Session token stored")
+   - API endpoints (e.g., "POST /api/save endpoint")
+   - Use concrete, specific descriptions
+
+3. **COMPATIBLE WITH** - Which increments from other steps work with this
+   - List specific increment IDs (e.g., "2.2, 2.3")
+   - Can use patterns (e.g., "any backend with POST endpoint")
+   - Should reference increments from OTHER steps
+   - Compatibility should be mutual (if 1.1 lists 2.1, then 2.1 should list 1.1)
+
+## Examples
+
+**Step 1: UI Form Layer**
+**Increment 1.1: Textarea → localStorage** ⭐
+- **Description:** Simple textarea that saves directly to browser localStorage on form submission
+- **REQUIRES:** None (fully client-side)
+- **PROVIDES:** User text input UI, Save trigger, localStorage write
+- **COMPATIBLE WITH:** 2.1, 3.1 (client-side only increments)
+
+**Increment 1.2: Textarea → POST API**
+- **Description:** Textarea that sends data via HTTP POST to backend endpoint
+- **REQUIRES:** Backend endpoint POST /api/experiences accepting JSON
+- **PROVIDES:** User text input UI, HTTP POST request with structured data
+- **COMPATIBLE WITH:** 2.2, 2.3 (any backend with POST handler)
+
+---
+
+**Step 2: Backend API Layer**
+**Increment 2.1: No backend** ⭐
+- **Description:** No backend required, client handles all processing
+- **REQUIRES:** None
+- **PROVIDES:** Nothing (client-side only)
+- **COMPATIBLE WITH:** 1.1, 3.1 (client-side storage increments)
+
+**Increment 2.2: Simple POST endpoint**
+- **Description:** Basic POST /api/experiences endpoint that accepts and stores data
+- **REQUIRES:** Database connection configured
+- **PROVIDES:** POST /api/experiences endpoint
+- **COMPATIBLE WITH:** 1.2, 1.3 (any UI that calls API), 3.2, 3.3 (database storage)
+
+---
+
+**Step 3: Data Storage Layer**
+**Increment 3.1: localStorage** ⭐
+- **Description:** Browser localStorage for client-side persistence
+- **REQUIRES:** None (browser API)
+- **PROVIDES:** Key-value persistent storage
+- **COMPATIBLE WITH:** 1.1, 2.1 (client-side only increments)
+
+**Increment 3.3: Supabase server-side with RLS**
+- **Description:** PostgreSQL storage via Supabase with row-level security
+- **REQUIRES:** Backend with Supabase client configured, Service key for server operations
+- **PROVIDES:** PostgreSQL database storage, Row-level security enforcement
+- **COMPATIBLE WITH:** 1.2, 1.3 (API-driven UI), 2.2, 2.3 (server-side backend)
+```
+
 # QUALITY CRITERIA
 - Each increment is deployable and provides value
 - Increments are clearly named and described
@@ -240,6 +317,10 @@ Instead of splitting work based on technical inputs or workflows, focus on **del
 - Appropriate filtering of non-viable increments
 - Increments progress from simple to complex
 - Each increment builds on previous learning
+- **EACH INCREMENT SPECIFIES REQUIRES/PROVIDES/COMPATIBLE WITH** (NEW)
+- **Dependencies are concrete and verifiable** (NEW)
+- **Compatibility is mutual and bidirectional** (NEW)
+- **At least one ⭐ increment per step has REQUIRES: None** (NEW - enables Walking Skeleton)
 
 # CORE PRINCIPLES
 
@@ -278,3 +359,20 @@ Every increment must:
 - Use filtering phase aggressively
 - Focus on distinct value progression
 - Eliminate redundant variations
+
+### Issue: "Increments don't have clear dependencies and compatibility" (NEW)
+**Solution:**
+- Think about what each increment NEEDS from other steps
+- Think about what each increment PROVIDES to other steps
+- Map compatibility paths: which increments from different steps can work together
+- Create "compatibility chains" that represent valid Walking Skeleton paths
+- Example: If 1.1 saves to localStorage, it needs 3.1 (localStorage step). Spec: COMPATIBLE WITH 3.1
+
+### Issue: "Can't coordinate increments across steps" (NEW)
+**Solution:**
+- Group increments by COMPATIBILITY LEVEL (even if not exact "tiers")
+- Increment group A: All client-side (1.1, 2.1, 3.1)
+- Increment group B: API + storage (1.2, 2.2, 3.2)
+- Increment group C: Full backend (1.3, 2.3, 3.3)
+- Each group should form a complete, deployable path
+- Specify COMPATIBLE WITH for each group membership

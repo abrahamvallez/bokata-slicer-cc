@@ -86,7 +86,7 @@ For each feature, select ⭐ increments across all its steps.
 - ✅ **If no ⭐:** Choose the simplest based on description
 - ⚠️ **Never skip a step** - every step must be represented
 
-## Step 3: Validate Composition (~2 minutes)
+## Step 3: Validate Composition (~3 minutes)
 
 ### Check 1: End-to-End Functionality
 ```
@@ -101,15 +101,45 @@ Logic Layer:  ✓ Processing happens
 Data Layer:   ✓ State is managed (even if in-memory)
 ```
 
-### Check 3: Dependencies
+### Check 3: Dependency Validation (NEW)
+```
+Verify REQUIRES are satisfied:
+For each selected increment:
+- What does it REQUIRE from other steps?
+- Is that requirement PROVIDED by other selected increments?
+- Flag conflicts where REQUIRES can't be satisfied
+
+Example:
+- If 1.2 REQUIRES "Backend endpoint POST /api/save"
+- Check that selected backend increment PROVIDES "POST /api/save endpoint"
+```
+
+### Check 4: Compatibility Validation (NEW)
+```
+Verify mutual compatibility:
+- For each selected increment, check its COMPATIBLE WITH list
+- Does it list all other selected increments (or compatible patterns)?
+- Is compatibility mutual (if A lists B, B should list A)?
+- Flag incompatibilities and suggest alternatives
+
+Example:
+- 1.1 says COMPATIBLE WITH: 2.1, 3.1
+- If you selected 1.1 + 2.2 + 3.1
+- CONFLICT: 1.1 isn't compatible with 2.2
+- SUGGESTION: Use 1.2 instead (compatible with 2.2)
+```
+
+### Check 5: Dependencies and Conflicts
 ```
 Can these increments work together?
 - No circular dependencies
 - No missing prerequisites
 - No conflicting assumptions
+- All REQUIRES satisfied
+- All COMPATIBLE WITH constraints met
 ```
 
-### Check 4: Deployability
+### Check 6: Deployability
 ```
 Can this be deployed to production?
 - No mock data (unless clearly marked as temporary)
@@ -140,11 +170,24 @@ This is your "ship tomorrow" version - the smallest implementation that provides
 
 ### Selected Increments
 
-| Feature | Step | Selected Increment | Rationale |
-|---------|------|-------------------|-----------|
-| [Feature 1] | [Step 1] | ⭐ [Increment description] | [Why chosen] |
-| [Feature 1] | [Step 2] | ⭐ [Increment description] | [Why chosen] |
-| ... | ... | ... | ... |
+| Feature | Step | Increment | Requires | Provides | Status |
+|---------|------|-----------|----------|----------|--------|
+| [Feature 1] | [Step 1] | ⭐ [Increment name] | [Deps or None] | [What it offers] | ✅ |
+| [Feature 1] | [Step 2] | ⭐ [Increment name] | [Deps or None] | [What it offers] | ✅ |
+| ... | ... | ... | ... | ... | ... |
+
+---
+
+### Dependency Analysis
+
+**Validation Results:**
+- ✅ All REQUIRES are satisfied
+- ✅ All COMPATIBLE WITH constraints met
+- ✅ No circular dependencies
+- ✅ All necessary capabilities provided
+
+**Compatibility Map:**
+[Show which increments work together and why]
 
 ---
 
@@ -234,12 +277,19 @@ Feature: User Login
 
 **Output:**
 ```markdown
-| Feature | Step | Selected Increment | Rationale |
-|---------|------|-------------------|-----------|
-| Login | Capture Credentials | ⭐ Single text input | Proves input flow works |
-| Login | Validate Input | ⭐ Not empty check | Validates interaction |
-| Login | Authenticate | ⭐ Hardcoded user | Tests auth flow without DB |
-| Login | Create Session | ⭐ Boolean in memory | Enables session logic |
+| Feature | Step | Increment | Requires | Provides | Status |
+|---------|------|-----------|----------|----------|--------|
+| Login | Capture Credentials | ⭐ Single text input | None | Username input | ✅ |
+| Login | Validate Input | ⭐ Not empty check | Username input | Validated signal | ✅ |
+| Login | Authenticate | ⭐ Hardcoded user | None | User ID if valid | ✅ |
+| Login | Create Session | ⭐ Boolean in memory | None | Session flag | ✅ |
+
+**Dependency Analysis:**
+- ✅ All REQUIRES satisfied
+- ✅ Step 1 provides input for Step 2
+- ✅ Step 3 hardcoded (no backend needed)
+- ✅ Step 4 creates session state
+- ✅ Complete end-to-end flow works
 
 **What You Get:**
 1. User can enter username
@@ -277,11 +327,23 @@ Feature: Checkout
 
 **Output:**
 ```markdown
-| Feature | Step | Selected Increment | Rationale |
-|---------|------|-------------------|-----------|
-| Catalog | Display Products | ⭐ Hardcoded 3 products | No backend needed yet |
-| Cart | Add to Cart | ⭐ In-memory array | Proves cart logic |
-| Checkout | Review Order | ⭐ Simple list | Shows cart contents |
+| Feature | Step | Increment | Requires | Provides | Status |
+|---------|------|-----------|----------|----------|--------|
+| Catalog | Display Products | ⭐ Hardcoded 3 products | None | Product list UI | ✅ |
+| Cart | Add to Cart | ⭐ In-memory array | Product selection | Cart state object | ✅ |
+| Checkout | Review Order | ⭐ Simple list | Cart state object | Order review UI | ✅ |
+
+**Dependency Analysis:**
+- ✅ Catalog provides products (Step 1.1)
+- ✅ Cart adds to in-memory array (Step 2.1)
+- ✅ Checkout reads array from cart (Step 3.1)
+- ✅ All increments compatible: 1.1 + 2.1 + 3.1
+- ✅ Complete end-to-end flow works
+
+**Compatibility Map:**
+- 1.1 (Hardcoded products) → compatible with 2.1 (In-memory cart)
+- 2.1 (In-memory cart) → compatible with 3.1 (Simple list review)
+- No backend needed, all client-side
 
 **What You Get:**
 Cross-feature user flow:
@@ -300,6 +362,10 @@ Before finalizing Walking Skeleton, verify:
 - [ ] Only ⭐ increments selected (or justified exception)
 - [ ] End-to-end user flow is complete
 - [ ] All technical layers covered (UI, Logic, Data)
+- [ ] **All REQUIRES are satisfied by selected increments** (NEW)
+- [ ] **All increments are mutually compatible** (NEW)
+- [ ] **Compatibility is bidirectional** (NEW)
+- [ ] No circular dependencies
 - [ ] No dependencies are missing
 - [ ] Can be deployed to production
 - [ ] Delivers observable user value

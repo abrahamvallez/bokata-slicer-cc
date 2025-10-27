@@ -154,102 +154,32 @@ Every increment must:
 
 ---
 
-### Phase 3.2: Selection Matrix (ALWAYS REQUIRED)
-**Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/selection-matrix-specialist.md`
-
-**Task:** Generate increment selection matrix
-
-**Pass context:**
-- All increments from Phase 2
-- Walking Skeleton selections
-- Feature context for scoring
-
-**Expected output:**
-- Complete matrix with effort/value/risk scores
-- Visual indicators (⭐⚡🔥⚠️💎🔧)
-- Priority groups
-- Selection strategies
-
-**Store as:** `{{selection_matrix}}`
-
----
-
-### Phase 3.3: Iteration Options (OPTIONAL - only if `--with-paths` or `--full` flag)
-**Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/iteration-planner-specialist.md`
-
-**Condition:** Only execute if user provided `--with-paths` or `--full` flag
-
-**Task:** Generate 3 iteration paths (single feature context)
-
-**Pass context:**
-- Walking Skeleton
-- Available increments not in Walking Skeleton
-- Feature context
-
-**Expected output:**
-- Option 1: Speed to Market
-- Option 2: Balanced Approach
-- Option 3: Quality First
-Each with timeline, increments to add, rationale
-
-**Store as:** `{{iteration_options}}`
-
-**If skipped:** Set `{{iteration_options}} = null`
-
----
-
-### Phase 3.4: Decision Guide (OPTIONAL - only if `--with-guide` or `--full` flag)
-**Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/decision-guide-specialist.md`
-
-**Condition:** Only execute if user provided `--with-guide` or `--full` flag
-
-**Task:** Create decision framework for choosing path
-
-**Pass context:**
-- Iteration options (if available from Phase 3.3)
-- Feature context
-- Constraints (if any)
-
-**Expected output:**
-- Quick decision table
-- Detailed criteria per option
-- Scenarios and recommendations
-- Red flags
-
-**Store as:** `{{decision_guide}}`
-
-**If skipped:** Set `{{decision_guide}} = null`
-
----
 
 ## Phase 4: Documentation Generation
 
 **Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/doc-generator.md`
 
-**Task:** Generate final feature analysis document
+**Task:** Generate final feature analysis document with fixed format
 
 **Pass context:**
 - Feature description
 - `{{steps_analysis}}`
 - `{{increments_analysis}}`
 - `{{walking_skeleton}}`
-- `{{selection_matrix}}`
-- `{{iteration_options}}` (may be null if optional phases skipped)
-- `{{decision_guide}}` (may be null if optional phases skipped)
-- Flags used (--with-paths, --with-guide, --full, or none)
 
-**Expected output:** Markdown document with structure:
+**Expected output:** Markdown document with FIXED STRUCTURE (always identical):
 
-**Core sections (always included):**
-1. Executive Summary
-2. Feature Breakdown (with all steps and increments)
-3. Walking Skeleton
-4. Selection Matrix
+**ALWAYS included (4 sections, same order, same format):**
+1. Executive Summary (metrics table)
+2. Feature Backbone Overview (single feature and context)
+3. Feature Breakdown - Complete Analysis (all steps and increments)
+4. Walking Skeleton (minimum viable composition)
 
-**Optional sections (based on flags):**
-5. Implementation Paths (if --with-paths or --full)
-6. Decision Guide (if --with-guide or --full)
-7. Next Steps (if --full)
+**Document format is ALWAYS the same:**
+- Section order: 1 → 2 → 3 → 4 (never changes)
+- Heading levels: ## for sections, ### for feature, #### for steps
+- Table format: Fixed columns (# | Name | Depends | Strategy | Notes)
+- Separators: --- between sections
 
 **Output location:** `./docs/slicing-analysis/{feature-name}-{date}.md`
 
@@ -273,9 +203,7 @@ Each with timeline, increments to add, rationale
 ## After Phase 3:
 - [ ] Walking Skeleton uses only ⭐ increments
 - [ ] Walking Skeleton delivers end-to-end value
-- [ ] Selection matrix includes all increments with scores
-- [ ] (Optional) If --with-paths: 3 iteration options provided
-- [ ] (Optional) If --with-guide: Decision guide maps priorities to options
+- [ ] Walking Skeleton has estimated timeline
 
 ## After Phase 4:
 - [ ] Document is well-structured
@@ -333,22 +261,15 @@ At completion, provide summary:
 **Documentation Generated:**
 📄 `./docs/slicing-analysis/{feature-name}-{date}.md`
 
-**Quick Stats:**
-- ⭐ Walking Skeleton: [N] increments (~[X] hours/days)
-- ⚡ Quick Wins: [M] increments available
-- 🔥 High Value: [P] increments identified
-- ⚠️ High Risk: [Q] increments flagged
+**Document Contents:**
+1. Executive Summary - Feature metrics
+2. Feature Breakdown - All steps and increments
+3. Walking Skeleton - Minimum viable composition
 
-**Recommended Path:**
-Based on [context clues from input], recommend starting with:
-[Option 1/2/3] because [rationale]
-
-**Next Steps:**
-1. Review Walking Skeleton in the document
-2. Choose implementation path (or customize using matrix)
-3. Create tasks/stories from selected increments
-4. Deploy Walking Skeleton first
-5. Iterate based on feedback
+**Format is ALWAYS the same:**
+- Fixed 4-section structure
+- Consistent heading levels
+- Standard increment table format
 ```
 
 # EXAMPLE USAGE
