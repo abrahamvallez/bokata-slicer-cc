@@ -30,17 +30,28 @@ increments-slicer install
 
 ### Usage
 
-**Analyze a single feature:**
+**Analyze a single feature (default - core analysis):**
 ```
 /slice Feature: User can reset their password via email
+```
+
+**With implementation paths:**
+```
+/slice --with-paths Feature: Password reset
+```
+
+**Full analysis (all sections):**
+```
+/slice --full Feature: Password reset
 ```
 
 **Analyze a full project:**
 ```
 /slice Project: E-commerce platform with catalog, cart, checkout, and orders
+/slice --full Project: E-commerce platform  # Complete analysis
 ```
 
-**Output:** Comprehensive markdown document in `./docs/slicing-analysis/`
+**Output:** Markdown document in `./docs/slicing-analysis/`
 
 ---
 
@@ -48,11 +59,16 @@ increments-slicer install
 
 Increments Slicer automatically analyzes features or projects and generates:
 
+**Core Analysis (always included):**
+- ✅ **Executive Summary** - Quick stats and metrics
+- ✅ **Feature Breakdown** - Complete steps and increments
 - ✅ **Walking Skeleton** - The absolute minimum implementation
-- ✅ **Multiple Implementation Paths** - Choose based on your priorities
-- ✅ **Decision Guide** - Clear framework for choosing the right path
 - ✅ **Selection Matrix** - Complete increment catalog with scoring
-- ✅ **Professional Documentation** - Ready to share with your team
+
+**Optional Sections (with flags):**
+- ✅ **Implementation Paths** (--with-paths) - 3-5 options based on priorities
+- ✅ **Decision Guide** (--with-guide) - Framework for choosing paths
+- ✅ **Next Steps** (--full) - Actionable guidance
 
 ### Based on Augmented Coding Principles
 
@@ -71,43 +87,61 @@ As Kent Beck explains in ["Augmented Coding: Beyond the Vibes"](https://tidyfirs
 ### Single Command, Intelligent Detection
 
 The `/slice` command automatically detects whether you're analyzing:
-- **One feature** → Focused analysis (~10-20 min)
-- **Multiple features** → Complete project analysis (~30-60 min)
+- **One feature** → Focused analysis (~10-12 min default, ~15-20 min --full)
+- **Multiple features** → Project analysis (~30-40 min default, ~45-60 min --full)
 
-### Complete Analysis Workflow
+**Flags:**
+- No flags: Core analysis only (faster, focused)
+- `--with-paths`: Adds implementation path options
+- `--with-guide`: Adds decision framework
+- `--full`: Complete analysis with all sections
 
+### Analysis Workflow
+
+**Core Analysis (always performed):**
 1. **Feature Breakdown** - Identifies all features in user journey
 2. **Steps Analysis** - Decomposes into UI → Logic → Data steps
 3. **Increments Generation** - Creates 5-10 deployable increments per step
 4. **Walking Skeleton** - Suggests absolute minimum implementation
-5. **Implementation Paths** - Provides 3-5 options (Speed, Quality, Features)
-6. **Decision Framework** - Maps priorities to recommendations
-7. **Selection Matrix** - Complete catalog for custom paths
+5. **Selection Matrix** - Complete catalog for custom paths
+
+**Optional Analysis (with flags):**
+6. **Implementation Paths** (--with-paths or --full) - 3-5 options
+7. **Decision Framework** (--with-guide or --full) - Priority recommendations
 
 ### Example Output Structure
 
+**Default output:**
 ```markdown
 # Your Feature - Vertical Slicing Analysis
 
-## Executive Summary
+## 1. Executive Summary
 [Quick stats and metrics]
 
-## Feature Breakdown
+## 2. Feature Breakdown
 [Complete steps and increments]
 
-## Walking Skeleton (Suggested)
+## 3. Walking Skeleton
 [Minimum implementation with rationale]
 
-## Implementation Paths
+## 4. Selection Matrix
+[All increments with effort/value/risk scores]
+```
+
+**With --full flag:**
+```markdown
+[... same as above, plus:]
+
+## 5. Implementation Paths
 - Speed to Market (2-4 days)
 - Balanced Approach (5-8 days)
 - Quality First (10-15 days)
 
-## Decision Guide
+## 6. Decision Guide
 [How to choose based on priorities]
 
-## Selection Matrix
-[All increments with effort/value/risk scores]
+## 7. Next Steps
+[Actionable guidance]
 ```
 
 ---

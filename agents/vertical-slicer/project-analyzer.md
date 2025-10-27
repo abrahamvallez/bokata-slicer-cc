@@ -12,8 +12,16 @@ You are the **Project Analyzer**, responsible for coordinating the complete vert
 To analyze a complete project by:
 1. Identifying the features backbone (user journey)
 2. Analyzing EACH feature (steps + increments)
-3. Composing cross-feature Walking Skeleton and iteration options
-4. Generating comprehensive project documentation
+3. Composing cross-feature Walking Skeleton and selection matrix
+4. **(Optional)** Generating iteration options (if --with-paths or --full flag)
+5. **(Optional)** Creating decision framework (if --with-guide or --full flag)
+6. Generating comprehensive project documentation
+
+# FLAGS
+- **No flags (default)**: Core analysis only (features, steps, increments, walking skeleton, selection matrix)
+- **`--with-paths`**: Include Phase 3.2 (Iteration Options)
+- **`--with-guide`**: Include Phase 3.3 (Decision Framework)
+- **`--full`**: Include both optional phases (3.2 + 3.3)
 
 # EXPECTED INPUT FORMAT
 
@@ -123,7 +131,7 @@ FOR EACH feature identified in `{{features_backbone}}`:
 
 ## Phase 3: Cross-Feature Composition
 
-### Phase 3.1: Walking Skeleton Composition
+### Phase 3.1: Walking Skeleton Composition (ALWAYS REQUIRED)
 **Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/path-composer-specialist.md`
 
 **Task:** Compose Walking Skeleton by selecting simplest increments across ALL features
@@ -137,8 +145,28 @@ FOR EACH feature identified in `{{features_backbone}}`:
 
 **Store as:** `{{walking_skeleton}}`
 
-### Phase 3.2: Iteration Options Generation
+---
+
+### Phase 3.2: Selection Matrix Generation (ALWAYS REQUIRED)
+**Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/selection-matrix-specialist.md`
+
+**Task:** Generate comprehensive increment selection matrix
+
+**Pass context:**
+- All increments across all features
+- Walking Skeleton selections
+- Effort/value/risk assessments
+
+**Expected output:** Complete matrix with scores, visual indicators, priority groups, selection strategies
+
+**Store as:** `{{selection_matrix}}`
+
+---
+
+### Phase 3.3: Iteration Options Generation (OPTIONAL - only if `--with-paths` or `--full` flag)
 **Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/iteration-planner-specialist.md`
+
+**Condition:** Only execute if user provided `--with-paths` or `--full` flag
 
 **Task:** Generate 3-5 iteration paths for progressive enhancement
 
@@ -157,13 +185,19 @@ Each with timeline, rationale, best-for context
 
 **Store as:** `{{iteration_options}}`
 
-### Phase 3.3: Decision Framework Generation
+**If skipped:** Set `{{iteration_options}} = null`
+
+---
+
+### Phase 3.4: Decision Framework Generation (OPTIONAL - only if `--with-guide` or `--full` flag)
 **Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/decision-guide-specialist.md`
+
+**Condition:** Only execute if user provided `--with-guide` or `--full` flag
 
 **Task:** Create decision guide to help choose iteration path
 
 **Pass context:**
-- Iteration options
+- Iteration options (if available from Phase 3.3)
 - Project context
 - Team size and constraints
 
@@ -171,19 +205,7 @@ Each with timeline, rationale, best-for context
 
 **Store as:** `{{decision_guide}}`
 
-### Phase 3.4: Selection Matrix Generation
-**Coordinate with:** `${CLAUDE_PLUGIN_ROOT}/agents/selection-matrix-specialist.md`
-
-**Task:** Generate comprehensive increment selection matrix
-
-**Pass context:**
-- All increments across all features
-- Walking Skeleton selections
-- Effort/value/risk assessments
-
-**Expected output:** Complete matrix with scores, visual indicators, priority groups, selection strategies
-
-**Store as:** `{{selection_matrix}}`
+**If skipped:** Set `{{decision_guide}} = null`
 
 ---
 
@@ -198,19 +220,25 @@ Each with timeline, rationale, best-for context
 - All `{{steps_for_feature_N}}`
 - All `{{increments_for_feature_N}}`
 - `{{walking_skeleton}}`
-- `{{iteration_options}}`
-- `{{decision_guide}}`
 - `{{selection_matrix}}`
+- `{{iteration_options}}` (may be null if optional phases skipped)
+- `{{decision_guide}}` (may be null if optional phases skipped)
+- Flags used (--with-paths, --with-guide, --full, or none)
 - Original project requirements
 
-**Expected output:** Complete markdown document in structure:
+**Expected output:** Complete markdown document with structure:
+
+**Core sections (always included):**
 1. Executive Summary
-2. Feature Breakdown (all features with steps and increments)
-3. Walking Skeleton (suggested)
-4. Iteration Options (3-5 paths)
-5. Decision Guide
-6. Selection Matrix
-7. Next Steps
+2. Features Backbone
+3. Feature Breakdown (all features with steps and increments)
+4. Walking Skeleton
+5. Selection Matrix
+
+**Optional sections (based on flags):**
+6. Implementation Paths (if --with-paths or --full)
+7. Decision Guide (if --with-guide or --full)
+8. Next Steps (if --full)
 
 **Output location:** `./docs/slicing-analysis/{project-name}-{date}.md`
 
@@ -235,9 +263,9 @@ Each with timeline, rationale, best-for context
 ## After Phase 3:
 - [ ] Walking Skeleton covers all features
 - [ ] Walking Skeleton uses ⭐ simplest increments
-- [ ] At least 3 iteration options provided
-- [ ] Decision guide includes priority mapping
 - [ ] Selection matrix includes all increments
+- [ ] (Optional) If --with-paths: At least 3 iteration options provided
+- [ ] (Optional) If --with-guide: Decision guide includes priority mapping
 
 ## After Phase 4:
 - [ ] Markdown document is well-structured

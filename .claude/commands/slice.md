@@ -6,6 +6,22 @@ description: Intelligent vertical slicing - automatically adapts to single featu
 
 You are the **Increments Slicer**, an intelligent coordinator that automatically detects the scope of analysis needed and executes the appropriate workflow.
 
+# PARAMETERS
+
+The `/slice` command accepts optional flags to control output:
+
+- **No flags (default)**: Generates core analysis only (Executive Summary, Feature Breakdown, Walking Skeleton, Selection Matrix)
+- **`--with-paths`**: Includes Iteration Options (3-5 implementation paths)
+- **`--with-guide`**: Includes Decision Guide (how to choose paths based on priorities)
+- **`--full`**: Includes all sections (Iteration Options + Decision Guide + Next Steps)
+
+**Examples:**
+```
+/slice Feature: User authentication
+/slice --with-paths Feature: User authentication
+/slice --full Project: E-commerce platform
+```
+
 # STEP 1: DETECT SCOPE
 
 Analyze the user's input to determine if this is a SINGLE FEATURE or MULTIPLE FEATURES (project).
@@ -37,13 +53,15 @@ Analyze the user's input to determine if this is a SINGLE FEATURE or MULTIPLE FE
 
 **IF Single Feature detected:**
 - Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/feature-analyzer.md`
-- Expected time: ~10-20 minutes
+- Expected time: ~10-12 minutes (default) | ~15-20 minutes (--full)
 - Output: Feature analysis document
 
 **IF Multiple Features detected:**
 - Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/project-analyzer.md`
-- Expected time: ~30-60 minutes (depends on number of features)
+- Expected time: ~30-40 minutes (default) | ~45-60 minutes (--full)
 - Output: Project analysis document
+
+**IMPORTANT**: Pass the detected flags (`--with-paths`, `--with-guide`, `--full`) to the analyzer so it knows which sections to generate.
 
 ## Edge Cases:
 
@@ -100,11 +118,10 @@ This will:
 1. Identify steps (UI → Logic → Data)
 2. Generate increments per step (5-10 each)
 3. Suggest Walking Skeleton
-4. Provide 3 implementation paths
-5. Generate decision guide and selection matrix
-6. Create markdown document
+4. Generate selection matrix
+5. Create markdown document
 
-Estimated time: 10-20 minutes
+Estimated time: 10-12 minutes (default) | 15-20 minutes (--full)
 ```
 
 Then execute: `${CLAUDE_PLUGIN_ROOT}/agents/feature-analyzer.md`
@@ -117,11 +134,10 @@ This will:
 1. Identify features backbone
 2. Analyze each feature (steps + increments)
 3. Compose cross-feature Walking Skeleton
-4. Provide 5 iteration paths
-5. Generate decision guide and selection matrix
-6. Create comprehensive markdown document
+4. Generate selection matrix
+5. Create comprehensive markdown document
 
-Estimated time: 30-60 minutes (N × feature time + composition)
+Estimated time: 30-40 minutes (default) | 45-60 minutes (--full)
 ```
 
 Then execute: `${CLAUDE_PLUGIN_ROOT}/agents/project-analyzer.md`
@@ -154,14 +170,16 @@ Examples:
 
 ## Output Structure:
 
-All outputs include:
+### Default output includes:
 1. **Executive Summary** - Overview with key metrics
-2. **Feature/Project Breakdown** - Complete analysis
+2. **Feature/Project Breakdown** - Complete analysis with all steps and increments
 3. **Walking Skeleton** - Suggested minimum implementation
-4. **Iteration Options** - 3-5 implementation paths
-5. **Decision Guide** - How to choose based on priorities
-6. **Selection Matrix** - Complete increment catalog
-7. **Next Steps** - Actionable guidance
+4. **Selection Matrix** - Complete increment catalog with scoring
+
+### Optional sections (with flags):
+- **Iteration Options** (--with-paths or --full) - 3-5 implementation paths
+- **Decision Guide** (--with-guide or --full) - How to choose based on priorities
+- **Next Steps** (--full only) - Actionable guidance
 
 ---
 
@@ -304,12 +322,16 @@ Every increment must:
 
 # OUTPUT GUARANTEES
 
-Every analysis will include:
-1. ✅ **Walking Skeleton** - Suggested minimum viable implementation
-2. ✅ **Multiple Paths** - Options for different priorities (speed, quality, features)
-3. ✅ **Decision Guide** - Clear framework for choosing
+Every analysis will include (by default):
+1. ✅ **Executive Summary** - Key metrics and overview
+2. ✅ **Feature Breakdown** - Complete steps and increments analysis
+3. ✅ **Walking Skeleton** - Suggested minimum viable implementation
 4. ✅ **Selection Matrix** - Complete increment catalog with scores
 5. ✅ **Markdown Document** - Professional, shareable documentation
+
+Optional sections (with flags):
+- ✅ **Multiple Paths** - Options for different priorities (--with-paths or --full)
+- ✅ **Decision Guide** - Clear framework for choosing (--with-guide or --full)
 
 Remember: **All suggestions are recommendations.** Teams decide what to implement.
 
