@@ -151,7 +151,7 @@ Can this be deployed to production?
 
 For each selected increment, document WHY it was chosen:
 - **What it enables**: Observable outcome
-- **Why this increment**: Simplicity, speed, risk reduction
+- **Why this increment**: Simplicity, minimal dependencies, clear path to deployment
 - **What it doesn't include**: Features deferred for later
 - **Validation opportunity**: What we can learn from this
 
@@ -202,6 +202,11 @@ This is your "ship tomorrow" version - the smallest implementation that provides
 - ✅ UI Layer: [What's implemented]
 - ✅ Logic Layer: [What's implemented]
 - ✅ Data Layer: [What's implemented]
+
+**Capabilities Enabled:**
+- Can build upon: [Foundation capability 1]
+- Can enhance with: [Possible enhancement 1]
+- Can extend to: [Future capability 1]
 
 **Learning Opportunities:**
 - Can validate: [Assumption 1]

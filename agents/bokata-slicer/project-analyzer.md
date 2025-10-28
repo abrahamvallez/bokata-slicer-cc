@@ -141,7 +141,7 @@ FOR EACH feature identified in `{{features_backbone}}`:
 - Project priorities
 - Dependencies between features
 
-**Expected output:** Walking Skeleton with selected increments table, rationale, estimated effort
+**Expected output:** Walking Skeleton with selected increments table, rationale, dependency validation
 
 **Store as:** `{{walking_skeleton}}`
 
@@ -183,6 +183,7 @@ FOR EACH feature identified in `{{features_backbone}}`:
 
 ## After Phase 1:
 - [ ] At least 2 features identified
+- [ ] Features follow Actor+Action naming convention
 - [ ] Features represent distinct user capabilities
 - [ ] User journey is coherent
 - [ ] Dependencies are noted
@@ -198,7 +199,8 @@ FOR EACH feature identified in `{{features_backbone}}`:
 ## After Phase 3:
 - [ ] Walking Skeleton covers all features
 - [ ] Walking Skeleton uses ⭐ simplest increments
-- [ ] Walking Skeleton has estimated timeline
+- [ ] Walking Skeleton dependencies are validated
+- [ ] All selected increments are mutually compatible
 
 ## After Phase 4:
 - [ ] Markdown document is well-structured
@@ -245,7 +247,7 @@ At completion, provide executive summary:
 **Features Analyzed:** [N]
 **Total Steps:** [X]
 **Total Increments:** [Y]
-**Walking Skeleton Effort:** [Z hours/days]
+**Walking Skeleton:** [Z] increments selected
 
 **Documentation Generated:**
 📄 `./docs/slicing-analysis/{project-name}-{date}.md`
@@ -257,9 +259,9 @@ At completion, provide executive summary:
 4. Walking Skeleton - Minimum viable composition
 
 **Format is ALWAYS the same:**
-- Fixed 4-section structure
+- Fixed section structure
 - Consistent heading levels
-- Standard increment table format
+- Standard increment table format with dependencies
 ```
 
 # EXAMPLE USAGE
@@ -287,14 +289,11 @@ Priority: Speed to market, need validation
    - Checkout: 5 steps, 32 increments
    - Orders: 3 steps, 15 increments
 3. **Phase 3:** Composes:
-   - Walking Skeleton: 4 increments (1 per feature, ~2 days)
-   - Iteration Options: 5 paths generated
-   - Decision Guide: Recommends "Speed" path based on priorities
-   - Selection Matrix: 93 increments scored
+   - Walking Skeleton: 4 increments (1 per feature)
 4. **Phase 4:** Generates `ecommerce-crafts-2025-10-26.md`
 
 ## Output:
-Complete 50-page markdown document with all analysis, ready for implementation.
+Complete markdown document with all analysis, ready for implementation.
 
 ---
 

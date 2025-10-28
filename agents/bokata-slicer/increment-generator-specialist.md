@@ -317,10 +317,11 @@ Each increment MUST specify:
 - Appropriate filtering of non-viable increments
 - Increments progress from simple to complex
 - Each increment builds on previous learning
-- **EACH INCREMENT SPECIFIES REQUIRES/PROVIDES/COMPATIBLE WITH** (NEW)
-- **Dependencies are concrete and verifiable** (NEW)
-- **Compatibility is mutual and bidirectional** (NEW)
-- **At least one ⭐ increment per step has REQUIRES: None** (NEW - enables Walking Skeleton)
+- **EACH INCREMENT SPECIFIES REQUIRES/PROVIDES/COMPATIBLE WITH**
+- **Dependencies are concrete and verifiable**
+- **Compatibility is mutual and bidirectional**
+- **At least one ⭐ increment per step has REQUIRES: None** (enables Walking Skeleton)
+- **NO effort, value, or risk scoring** - Only descriptions and dependencies
 
 # CORE PRINCIPLES
 

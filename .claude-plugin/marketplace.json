@@ -1,26 +1,29 @@
 {
-  "name": "increments-slicer-marketplace",
+  "name": "bokata-slicer-marketplace",
   "version": "1.0.0",
-  "description": "Official marketplace for Increments Slicer plugin - Intelligent vertical slicing and feature decomposition",
+  "description": "Official marketplace entry for Bokata Slicer CC - Intelligent vertical slicing and feature decomposition",
   "owner": {
     "name": "Abraham Vallez",
     "email": "abrahamvallez@example.com"
   },
   "plugins": [
     {
-      "name": "increments-slicer",
-      "description": "Intelligent vertical slicing and feature decomposition using the Hamburger Method. Automatically analyzes features or projects, generates Walking Skeletons, provides implementation paths, and creates comprehensive documentation.",
-      "version": "0.1.0",
+      "name": "bokata-slicer-cc",
+      "description": "Intelligent vertical slicing and feature decomposition using the Hamburger Method. Automatically detects scope, generates Walking Skeletons, provides 3-5 implementation paths, and creates comprehensive documentation with selection matrices.",
+      "version": "0.2.0",
       "source": "github",
       "owner": "abrahamvallez",
-      "repo": "increments-slicer",
+      "repo": "bokata-slicer-cc",
+      "npm": "bokata-slicer-cc",
       "keywords": [
         "vertical-slicing",
         "feature-decomposition",
         "incremental-development",
         "walking-skeleton",
         "agile",
-        "hamburger-method"
+        "hamburger-method",
+        "radical-increments",
+        "feature-breakdown"
       ]
     }
   ]

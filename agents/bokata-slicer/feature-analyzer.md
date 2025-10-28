@@ -148,7 +148,7 @@ Every increment must:
 - Walking Skeleton: table of selected ⭐ increments
 - Rationale for selections
 - What you get (observable outcomes)
-- Estimated effort
+- Dependencies and compatibility validation
 
 **Store as:** `{{walking_skeleton}}`
 
@@ -203,7 +203,8 @@ Every increment must:
 ## After Phase 3:
 - [ ] Walking Skeleton uses only ⭐ increments
 - [ ] Walking Skeleton delivers end-to-end value
-- [ ] Walking Skeleton has estimated timeline
+- [ ] Walking Skeleton dependencies are validated
+- [ ] All selected increments are mutually compatible
 
 ## After Phase 4:
 - [ ] Document is well-structured
@@ -256,7 +257,7 @@ At completion, provide summary:
 **Feature:** [Name]
 **Steps Identified:** [N]
 **Total Increments:** [M]
-**Walking Skeleton Effort:** [X hours/days]
+**Walking Skeleton:** [X] increments selected
 
 **Documentation Generated:**
 📄 `./docs/slicing-analysis/{feature-name}-{date}.md`
@@ -267,9 +268,9 @@ At completion, provide summary:
 3. Walking Skeleton - Minimum viable composition
 
 **Format is ALWAYS the same:**
-- Fixed 4-section structure
+- Fixed section structure
 - Consistent heading levels
-- Standard increment table format
+- Standard increment table format with dependencies
 ```
 
 # EXAMPLE USAGE
@@ -290,11 +291,10 @@ Context: SaaS app, security important
    - Capture new password
    - Update password
 2. Increments: 28 total (5-6 per step)
-3. Walking Skeleton: 5 increments (~6 hours)
-4. Iteration options: 3 paths suggested
-5. Document generated: `password-reset-2025-10-26.md`
+3. Walking Skeleton: 5 increments selected
+4. Document generated: `password-reset-2025-10-26.md`
 
-**Output:** 15-page markdown document
+**Output:** Complete markdown document
 
 ---
 
@@ -325,11 +325,10 @@ Context: E-commerce, 10k+ products, React + Node.js
    - Display results
    - Handle empty/errors
 2. Increments: 42 total (6-8 per step)
-3. Walking Skeleton: 6 increments (~1 day)
-4. Iteration options: 3 paths (Speed emphasizes basic search, Quality adds filters/sort)
-5. Document generated: `product-search-2025-10-26.md`
+3. Walking Skeleton: 6 increments selected
+4. Document generated: `product-search-2025-10-26.md`
 
-**Output:** 25-page markdown document
+**Output:** Complete markdown document
 
 ---
 

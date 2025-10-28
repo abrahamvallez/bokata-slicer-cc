@@ -67,10 +67,12 @@ The specialist will extract features from any of these formats.
 Every feature must:
 - Represent a distinct user capability or goal
 - Provide observable value to the user
-- Be expressed as specific, actionable phrases (not generic like "manage")
+- Be expressed as **Actor + Action Verb** format (e.g., "Coach Records Audio", "Player Plays Audio")
 - Follow the user journey narrative flow
 - Be neither too broad (unsliceable) nor too narrow (no standalone value)
 - Support the "ship tomorrow" test - can be implemented incrementally
+- **Use concrete actors:** User, Player, Coach, Admin, System, Customer, etc.
+- **Use action verbs:** Records, Creates, Manages, Plays, Views, Tracks, Updates, Deletes, Syncs, etc.
 
 # WORKFLOW
 Create a backbone of features representing the user's journey:
@@ -88,23 +90,23 @@ Create a backbone of features representing the user's journey:
 
 ### Examples of Good Features
 
-**Email Application:**
-- ✅ Search Email (specific, actionable)
-- ✅ Compose Email (clear user capability)
-- ✅ Archive Email (distinct from Delete)
-- ✅ Send Email (observable outcome)
+**Audio System (Actor + Action format):**
+- ✅ Coach Records Audio (actor: Coach, action: Records)
+- ✅ Player Plays Audio (actor: Player, action: Plays)
+- ✅ System Syncs Audio-Video (actor: System, action: Syncs)
+- ✅ Coach Manages Audio Files (actor: Coach, action: Manages)
 
-**E-commerce System:**
-- ✅ Browse Products (discovery phase)
-- ✅ Search Products (different from browse)
-- ✅ View Product Details (selection phase)
-- ✅ Add to Cart (action)
-- ✅ Update Cart Quantity (different from Add)
-- ✅ Remove from Cart (different from Update)
-- ✅ Checkout (purchase phase)
-- ✅ Process Payment (transaction)
-- ✅ Confirm Order (confirmation)
-- ✅ Track Order (post-purchase)
+**E-commerce System (Actor + Action format):**
+- ✅ User Browses Products (discovery phase)
+- ✅ User Searches Products (different from browse)
+- ✅ User Views Product Details (selection phase)
+- ✅ User Adds Items to Cart (action)
+- ✅ User Updates Cart Quantity (different from Add)
+- ✅ User Removes Items from Cart (different from Update)
+- ✅ User Completes Checkout (purchase phase)
+- ✅ System Processes Payment (transaction)
+- ✅ System Confirms Order (confirmation)
+- ✅ User Tracks Order Status (post-purchase)
 
 **Anti-Examples (Too Broad/Generic):**
 - ❌ "Manage Emails" → Split into: Compose, Send, Archive, Delete, Search
@@ -127,9 +129,9 @@ Create a backbone of features representing the user's journey:
 [Brief description of the complete user journey]
 
 ## Features List
-1. **[Feature Name]** - [Brief description of user capability]
-2. **[Feature Name]** - [Brief description of user capability]
-3. **[Feature Name]** - [Brief description of user capability]
+1. **[Actor] [Action]** - [Brief description of user capability]
+2. **[Actor] [Action]** - [Brief description of user capability]
+3. **[Actor] [Action]** - [Brief description of user capability]
 [Continue for all identified features...]
 
 ## Feature Flow Narrative
@@ -140,6 +142,7 @@ Create a backbone of features representing the user's journey:
 ```
 
 ## Example Output (Task Management App)
+
 ```markdown
 # Feature Backbone: Team Task Manager
 
@@ -149,34 +152,36 @@ They assign tasks to team members and track progress through completion.
 The journey supports both individual task management and team collaboration.
 
 ## Features List
-1. **Create Project** - Users can create a new project workspace
-2. **Add Task** - Users can add tasks to a project
-3. **View Tasks** - Users can see list of tasks in a project
-4. **Assign Task** - Users can assign tasks to team members
-5. **Update Task Status** - Users can mark tasks as in-progress or complete
-6. **Filter Tasks** - Users can filter tasks by status, assignee, or date
-7. **Delete Task** - Users can remove tasks from the project
+1. **User Creates Project** - Users can create a new project workspace
+2. **User Adds Task** - Users can add tasks to a project
+3. **User Views Tasks** - Users can see list of tasks in a project
+4. **User Assigns Task** - Users can assign tasks to team members
+5. **User Updates Task Status** - Users can mark tasks as in-progress or complete
+6. **User Filters Tasks** - Users can filter tasks by status, assignee, or date
+7. **User Deletes Task** - Users can remove tasks from the project
 
 ## Feature Flow Narrative
-The journey begins with **Create Project** to establish a workspace. Once created,
-users **Add Task** to populate the project. **View Tasks** allows browsing the task list.
-Tasks can be organized through **Assign Task** and tracked via **Update Task Status**.
-**Filter Tasks** helps manage larger projects. **Delete Task** provides cleanup capability.
+The journey begins with **User Creates Project** to establish a workspace. Once created,
+users **User Adds Task** to populate the project. **User Views Tasks** allows browsing the task list.
+Tasks can be organized through **User Assigns Task** and tracked via **User Updates Task Status**.
+**User Filters Tasks** helps manage larger projects. **User Deletes Task** provides cleanup capability.
 
 ## Dependencies and Relationships
-- **Critical**: "Create Project" must exist before any task operations
-- **Recommended**: "View Tasks" before "Filter Tasks" (filtering requires display)
-- **Independent**: "Assign Task" and "Update Task Status" can be implemented in any order
+- **Critical**: "User Creates Project" must exist before any task operations
+- **Recommended**: "User Views Tasks" before "User Filters Tasks" (filtering requires display)
+- **Independent**: "User Assigns Task" and "User Updates Task Status" can be implemented in any order
 ```
 
 # QUALITY CRITERIA
 - Each feature represents a distinct user capability
-- Features are expressed as specific, actionable phrases (use verbs: Create, Read, Update, Delete, Search, etc.)
+- Features MUST follow **Actor + Action** format (e.g., "Coach Records Audio", "User Adds Items")
+- Features are expressed as specific, actionable phrases (use verbs: Create, Read, Update, Delete, Search, Records, Plays, Syncs, etc.)
 - Complete user journey is represented
 - Features are arranged in logical narrative sequence
 - No feature is too broad (should be sliceable further into steps)
 - No feature is too narrow (should provide standalone user value)
 - 3-15 features for most projects (if < 3, may be too broad; if > 15, may be too granular)
+- Actor names are concrete: User, Player, Coach, Admin, System, Customer, etc. (NOT "they", "stakeholders", "people")
 
 # TROUBLESHOOTING
 

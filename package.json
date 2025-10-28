@@ -1,7 +1,7 @@
 {
   "name": "bokata-slicer-cc",
-  "version": "0.2.0",
-  "description": "Intelligent vertical slicing and feature decomposition for Claude Code using the Hamburger Method",
+  "version": "0.3.0",
+  "description": "Intelligent vertical slicing and feature decomposition for Claude Code - separates core analysis from strategic planning",
   "keywords": [
     "claude-code",
     "vertical-slicing",

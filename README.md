@@ -30,28 +30,43 @@ bokata-slicer-cc install
 
 ### Usage
 
-**Analyze a single feature (default - core analysis):**
-```
-/bokata Feature: User can reset their password via email
-```
+Bokata v0.3.0 provides **three complementary commands** for different analysis needs:
 
-**With implementation paths:**
-```
-/bokata --with-paths Feature: Password reset
-```
-
-**Full analysis (all sections):**
-```
-/bokata --full Feature: Password reset
-```
-
-**Analyze a full project:**
+**1. Project Analysis (multiple features):**
 ```
 /bokata Project: E-commerce platform with catalog, cart, checkout, and orders
-/bokata --full Project: E-commerce platform  # Complete analysis
+/bokata ./docs/project-requirements.md  # Can also read from file
 ```
 
-**Output:** Markdown document in `./docs/slicing-analysis/`
+**2. Single Feature Analysis:**
+```
+/bokata-feature Feature: Coach Records Audio
+/bokata-feature ./docs/feature-spec.md  # Can also read from file
+```
+
+**3. Implementation Strategies (optional, after running /bokata or /bokata-feature):**
+```
+/bokata-iterations-paths  # Generates 3-5 implementation path options
+```
+
+**4. Selection Matrix (optional, after running /bokata or /bokata-feature):**
+```
+/bokata-matrix  # Generates complete increment matrix with dependencies
+```
+
+**Output:** Markdown documents in `./docs/slicing-analysis/`
+
+### Recommended Workflow
+
+1. **Start with project or feature analysis:**
+   - Use `/bokata` for projects with multiple features
+   - Use `/bokata-feature` for a single feature
+
+2. **Optionally generate implementation strategies:**
+   - Run `/bokata-iterations-paths` to see 3-5 different implementation approaches
+
+3. **Optionally generate selection matrix:**
+   - Run `/bokata-matrix` for complete dependency reference and custom path building
 
 ---
 
@@ -59,16 +74,43 @@ bokata-slicer-cc install
 
 Bokata Slicer CC automatically analyzes features or projects and generates:
 
-**Core Analysis (always included):**
+**Core Analysis (/bokata or /bokata-feature):**
 - ✅ **Executive Summary** - Quick stats and metrics
-- ✅ **Feature Breakdown** - Complete steps and increments
+- ✅ **Feature Breakdown** - Complete steps and increments with dependencies
 - ✅ **Walking Skeleton** - The absolute minimum implementation
-- ✅ **Selection Matrix** - Complete increment catalog with scoring
+- ✅ **Dependency Analysis** - What each increment requires and provides
 
-**Optional Sections (with flags):**
-- ✅ **Implementation Paths** (--with-paths) - 3-5 options based on priorities
-- ✅ **Decision Guide** (--with-guide) - Framework for choosing paths
-- ✅ **Next Steps** (--full) - Actionable guidance
+**Optional Analysis (separate commands):**
+- ✅ **Implementation Paths** (/bokata-iterations-paths) - 3-5 strategic options
+- ✅ **Selection Matrix** (/bokata-matrix) - Complete increment catalog with dependencies
+
+### No Estimations in Core Documents
+
+**Important:** Core analysis documents (from `/bokata` and `/bokata-feature`) contain **NO effort/value/risk scores**. This is intentional:
+
+- **Core documents focus on dependencies and compatibility** - What each increment needs and provides
+- **Use `/bokata-iterations-paths`** for estimated timelines and implementation strategies
+- **Use `/bokata-matrix`** for complete dependency reference and custom path building
+
+This separation ensures core analysis remains clean and focused on deliverables, while strategic planning happens in dedicated commands.
+
+### Feature Naming Convention
+
+All features must follow the **Actor + Action** format for clarity and consistency:
+
+**Format:** `[Actor] [Action]`
+
+**Valid Actors:** User, Player, Coach, Admin, System, Customer, Manager, etc.
+
+**Examples:**
+- ✅ Good: "Coach Records Audio"
+- ✅ Good: "User Resets Password"
+- ✅ Good: "Admin Manages Users"
+- ❌ Bad: "Audio Recording" (missing actor)
+- ❌ Bad: "Password Reset Feature" (not actor-focused)
+- ❌ Bad: "System for User Authentication" (too verbose)
+
+This convention is **enforced by all commands** to maintain clarity throughout the analysis.
 
 ### Based on Augmented Coding Principles
 
@@ -84,67 +126,101 @@ As Kent Beck explains in ["Augmented Coding: Beyond the Vibes"](https://tidyfirs
 
 ## 🎯 How It Works
 
-### Single Command, Intelligent Detection
+### Three Complementary Commands
 
-The `/slice` command automatically detects whether you're analyzing:
-- **One feature** → Focused analysis (~10-12 min default, ~15-20 min --full)
-- **Multiple features** → Project analysis (~30-40 min default, ~45-60 min --full)
+Bokata v0.3.0 provides specialized commands for different analysis needs:
 
-**Flags:**
-- No flags: Core analysis only (faster, focused)
-- `--with-paths`: Adds implementation path options
-- `--with-guide`: Adds decision framework
-- `--full`: Complete analysis with all sections
+**1. `/bokata` - Project Analysis**
+- Analyzes projects with multiple features
+- Generates cross-feature Walking Skeleton
+- Provides feature breakdown and dependencies
+- No effort/value/risk scoring (dependencies only)
+
+**2. `/bokata-feature` - Single Feature Analysis**
+- Focused analysis of a single feature
+- Generates feature-specific Walking Skeleton
+- Detailed step and increment breakdown
+- No effort/value/risk scoring (dependencies only)
+
+**3. `/bokata-iterations-paths` - Implementation Strategies**
+- Generates 3-5 implementation path options
+- Includes estimated timelines
+- Strategic recommendations based on priorities
+- Run after `/bokata` or `/bokata-feature`
+
+**4. `/bokata-matrix` - Selection Matrix**
+- Complete increment catalog with dependencies
+- Enables custom path building
+- Detailed dependency reference
+- Run after `/bokata` or `/bokata-feature`
 
 ### Analysis Workflow
 
-**Core Analysis (always performed):**
+**Step 1: Core Analysis (/bokata or /bokata-feature)**
 1. **Feature Breakdown** - Identifies all features in user journey
 2. **Steps Analysis** - Decomposes into UI → Logic → Data steps
 3. **Increments Generation** - Creates 5-10 deployable increments per step
 4. **Walking Skeleton** - Suggests absolute minimum implementation
-5. **Selection Matrix** - Complete catalog for custom paths
+5. **Dependency Analysis** - What each increment requires and provides
 
-**Optional Analysis (with flags):**
-6. **Implementation Paths** (--with-paths or --full) - 3-5 options
-7. **Decision Framework** (--with-guide or --full) - Priority recommendations
+**Step 2: Optional Strategies (/bokata-iterations-paths)**
+6. **Implementation Paths** - 3-5 options based on priorities
+7. **Decision Framework** - How to choose the right path
+8. **Timeline Estimates** - Realistic delivery expectations
+
+**Step 3: Optional Matrix (/bokata-matrix)**
+9. **Selection Matrix** - Complete increment catalog
+10. **Dependency Reference** - Detailed compatibility information
+11. **Custom Path Building** - Mix and match increments
 
 ### Example Output Structure
 
-**Default output:**
+**Core Analysis Output (/bokata or /bokata-feature):**
 ```markdown
-# Your Feature - Vertical Slicing Analysis
+# Feature Name - Vertical Slicing Analysis
 
 ## 1. Executive Summary
-[Quick stats and metrics]
+[Quick stats and metrics - NO ESTIMATES]
 
 ## 2. Feature Breakdown
 [Complete steps and increments with dependencies]
 
 ## 3. Walking Skeleton
-[Minimum implementation with rationale]
+[Minimum implementation with dependency rationale]
 
 ## 4. Dependency Analysis
-[What each increment requires and provides]
-
-## 5. Selection Matrix
-[All increments with effort/value/risk scores]
+[What each increment REQUIRES and PROVIDES]
 ```
 
-**With --full flag:**
+**Implementation Paths Output (/bokata-iterations-paths):**
 ```markdown
-[... same as above, plus:]
+# Feature Name - Implementation Paths
 
-## 6. Implementation Paths
-- Speed to Market (2-4 days)
-- Balanced Approach (5-8 days)
-- Quality First (10-15 days)
+## 1. Speed to Market (2-4 days)
+[Fast path with timeline]
 
-## 7. Decision Guide
+## 2. Balanced Approach (5-8 days)
+[Balanced path with timeline]
+
+## 3. Quality First (10-15 days)
+[Quality path with timeline]
+
+## 4. Decision Guide
 [How to choose based on priorities]
+```
 
-## 8. Next Steps
-[Actionable guidance]
+**Selection Matrix Output (/bokata-matrix):**
+```markdown
+# Feature Name - Selection Matrix
+
+## Complete Increment Catalog
+[All increments with dependency details]
+
+## Compatibility Maps
+[Which increments work together]
+
+## Custom Path Building Guide
+[How to build your own path]
 ```
 
 ---
@@ -200,10 +276,12 @@ Step 3: Storage
 
 ## 💡 Key Features
 
-### Intelligent Scope Detection
-- Automatically identifies single feature vs project
-- No need to choose between different commands
-- Adapts analysis depth to your needs
+### Specialized Commands for Different Needs
+- **`/bokata`** for multi-feature projects
+- **`/bokata-feature`** for single feature analysis
+- **`/bokata-iterations-paths`** for strategic planning
+- **`/bokata-matrix`** for custom path building
+- Each command focused on specific analysis type
 
 ### Walking Skeleton Composition
 - Selects simplest increments across all steps
@@ -216,27 +294,30 @@ Step 3: Storage
 - **Clear mapping** of what each increment requires and provides
 - **Multiple valid paths** automatically identified and coordinated
 - **Transparent dependency analysis** in generated documents
+- **Central to core analysis** - no effort/value/risk distractions
 
-### Multiple Implementation Paths
+### Multiple Implementation Paths (Optional)
 - **Speed:** Fastest to next deployment
 - **Balanced:** Speed + quality mix
 - **Quality:** Polished experience
 - **Feature-by-Feature:** Complete one feature at a time (projects)
 - **Cross-Feature:** Improve one aspect across all features (projects)
 - **All paths use compatible increments** across features
+- **Generated by `/bokata-iterations-paths`** command
 
-### Decision Support
+### Decision Support (Optional)
 - Priority-based recommendations
 - Pros/cons for each path
 - Real-world scenarios
 - Red flags and anti-patterns
+- **Generated by `/bokata-iterations-paths`** command
 
-### Custom Path Building
+### Custom Path Building (Optional)
 - Selection matrix with all increments
-- Effort/value/risk scoring
 - **Dependency information** for each increment
 - **Compatibility constraints** clearly shown
 - Sprint planning guidance
+- **Generated by `/bokata-matrix`** command
 
 ### Professional Documentation
 - Markdown format with dependency tables
@@ -244,6 +325,7 @@ Step 3: Storage
 - Shareable with team
 - Ready for implementation
 - Version controlled
+- Clean separation between core analysis and strategic planning
 
 ---
 
@@ -258,21 +340,23 @@ Step 3: Storage
 
 ## 🏗️ Architecture
 
-### Single Command
-- `/slice` - Intelligent vertical slicing (auto-detects scope)
+### Commands
+- **`/bokata`** - Project analysis (multiple features)
+- **`/bokata-feature`** - Single feature analysis
+- **`/bokata-iterations-paths`** - Implementation strategies
+- **`/bokata-matrix`** - Selection matrix and dependencies
 
 ### Coordinator Agents
 - **project-analyzer** - Multi-feature projects
 - **feature-analyzer** - Single feature analysis
+- **iteration-planner** - Implementation paths
+- **matrix-generator** - Selection matrix
 
 ### Specialist Agents
 - **feature-backbone-specialist** - Feature identification
 - **step-analyzer-specialist** - Steps decomposition
 - **increment-generator-specialist** - Increments generation
 - **path-composer-specialist** - Walking Skeleton composition
-- **iteration-planner-specialist** - Implementation paths
-- **decision-guide-specialist** - Decision framework
-- **selection-matrix-specialist** - Increment matrix
 - **doc-generator** - Documentation generation
 
 ---
@@ -292,70 +376,107 @@ Every slice must:
 ### Breakdown Strategies
 
 20+ strategies including:
-- Start with outputs
-- Zero/One/Many progression
-- Dummy to dynamic
-- Workflow simplification
-- User segment narrowing
-- Capacity-based splitting
+- Start with outputs - Begin with visible results
+- Zero/One/Many progression - Hardcode → single → multiple
+- Dummy to dynamic - Static → configurable → dynamic
+- Workflow simplification - Skip optional steps
+- User segment narrowing - Target specific user type
+- Capacity-based splitting - Limit initial capacity
+- Extract basic utility - Core functionality only
+- Defer edge cases - Handle happy path first
+- Manual before automated - Automation comes later
 - And more...
+
+**Note:** These strategies are applied during increment generation in core analysis. Timeline estimates are only provided in the `/bokata-iterations-paths` output.
 
 ---
 
 ## 📊 Example Usage
 
-### Example 1: Simple Feature
+### Example 1: Simple Feature Analysis
 
 **Input:**
 ```
-/bokata Feature: Export user data to CSV
+/bokata-feature Feature: User Exports Data to CSV
 ```
 
-**Analysis:**
+**Core Analysis Output:**
 - 3 steps identified
 - 18 increments generated
-- Walking Skeleton: 3 increments (~4 hours)
-- Output: `export-user-data-2025-10-26.md`
+- Walking Skeleton: 3 increments (dependencies specified)
+- Output: `user-exports-data-2025-10-28.md`
+- No timeline estimates (dependencies only)
 
-### Example 2: Complex Feature
+**Optional Follow-up:**
+```
+/bokata-iterations-paths  # Get 3 implementation paths with timelines
+/bokata-matrix           # Get complete selection matrix
+```
+
+### Example 2: Complex Feature Analysis
 
 **Input:**
 ```
-/bokata Feature: Real-time notifications with preferences and history
+/bokata-feature Feature: Coach Records Audio
+
+Context: Mobile app, first time using audio APIs
+Priorities: Speed to market, need validation
 ```
 
-**Analysis:**
+**Core Analysis Output:**
 - 6 steps identified
 - 42 increments generated
-- Walking Skeleton: 6 increments (~2 days)
-- 3 implementation paths (emphasizing risk reduction for WebSocket tech)
-- Output: `real-time-notifications-2025-10-26.md`
+- Walking Skeleton: 6 increments (all compatible, zero external dependencies)
+- Output: `coach-records-audio-2025-10-28.md`
+- Dependency analysis included
 
-### Example 3: Full Project
+**Optional Follow-up:**
+```
+/bokata-iterations-paths  # Get 3 paths: Speed, Balanced, Quality (with timelines)
+/bokata-matrix           # Get full increment catalog with dependencies
+```
+
+### Example 3: Full Project Analysis
 
 **Input:**
 ```
-/bokata
+/bokata Project: Task management app for remote teams
 
-Project: Task management app for remote teams
-
-Features needed:
-- Create and organize projects
-- Add tasks with assignments
-- Track progress
-- Team collaboration
+Features:
+- User Creates Projects
+- User Adds Tasks
+- User Tracks Progress
+- Team Collaborates
 
 Tech: React + Node.js
-Timeline: 3 months MVP
 ```
 
-**Analysis:**
-- 4 features identified
+**Core Analysis Output:**
+- 4 features identified (using Actor+Action format)
 - 16 steps across features
 - 96 total increments
-- Walking Skeleton: 4 increments (~3 days)
-- 5 implementation paths
-- Output: `task-management-app-2025-10-26.md`
+- Walking Skeleton: 4 increments (cross-feature compatible)
+- Output: `task-management-app-2025-10-28.md`
+- Complete dependency analysis
+
+**Optional Follow-up:**
+```
+/bokata-iterations-paths  # Get 5 paths including Feature-by-Feature and Cross-Feature
+/bokata-matrix           # Get complete project matrix
+```
+
+### Example 4: File Input
+
+**Input:**
+```
+/bokata ./docs/project-requirements.md
+/bokata-feature ./docs/feature-spec.md
+```
+
+**Benefits:**
+- Parse existing PRDs and specifications
+- Maintain documentation in version control
+- Consistent analysis from documented requirements
 
 ---
 

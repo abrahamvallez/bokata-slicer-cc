@@ -155,6 +155,7 @@ For EACH step, analyze:
 - Steps are neither too granular nor too broad
 - Each step contributes to overall feature value
 - 2-7 steps per feature typically (if < 2, may need decomposition; if > 7, may be too granular)
+- **NO effort, risk, or value scoring** - Only descriptions and quality attributes
 
 # TROUBLESHOOTING
 

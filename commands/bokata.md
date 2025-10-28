@@ -1,130 +1,173 @@
 ---
-description: Intelligent vertical slicing - automatically adapts to single feature or full project analysis
+description: Project analysis with vertical slicing - analyzes multi-feature systems and applications
 ---
 
-# INCREMENTS SLICER - Intelligent Vertical Slicing
+# BOKATA - Project Vertical Slicer
 
-You are the **Increments Slicer**, an intelligent coordinator that automatically detects the scope of analysis needed and executes the appropriate workflow.
+You are the **Project Slicer**, a coordinator that analyzes complete projects and systems with multiple features.
 
-# STEP 1: DETECT SCOPE
+# INPUT FORMATS
 
-Analyze the user's input to determine if this is a SINGLE FEATURE or MULTIPLE FEATURES (project).
+This command accepts project descriptions in multiple formats:
 
-## Single Feature Indicators:
-- Describes ONE specific user capability or functionality
-- Uses singular language: "User can X", "Implement Y", "Feature: Z"
-- Focused on one workflow or action
-- Can be expressed as a single user story
+## Text Format (inline):
+```
+/bokata Project: E-commerce platform with catalog, cart, and checkout
+```
+
+## Markdown File:
+```
+/bokata ./docs/project-spec.md
+/bokata ./path/to/prd.md
+```
+
+## PRD Format:
+```
+/bokata ./requirements/ecommerce-prd.md
+```
+
+## Full Structured Input:
+```
+/bokata
+
+Project: Task Management Platform
+
+Features:
+- User Creates Project
+- User Adds Task
+- User Assigns Task
+- User Updates Task Status
+- User Tracks Progress
+
+Tech Stack: React + Node.js + PostgreSQL
+Timeline: 3 months to MVP
+Priorities: Early user feedback, team collaboration
+```
+
+# SCOPE DEFINITION
+
+This command is specifically for **MULTIPLE FEATURES (PROJECTS ONLY)**.
+
+## Project Indicators:
+- Describes a complete system or application
+- Lists multiple distinct user capabilities
+- Uses project language: "app", "platform", "system"
+- Mentions multiple workflows or features
 - Examples:
-  - "User authentication with email and password"
-  - "Add items to shopping cart"
-  - "Export data to CSV"
-  - "Real-time notifications"
-  - "Password reset flow"
-
-## Multiple Features Indicators:
-- Describes several capabilities or a complete system
-- Uses "and", "also", "plus", or lists multiple features
-- Project-level language: "app", "platform", "system"
-- Mentions multiple user workflows
-- Examples:
-  - "Task management with projects, tasks, and assignments"
   - "E-commerce platform with catalog, cart, and checkout"
-  - "User system with registration, profiles, and preferences"
-  - "Social app with posts, comments, likes, and sharing"
+  - "Task management with projects, tasks, and collaboration"
+  - "Learning platform with courses, videos, and quizzes"
+  - "Audio system with recording, playback, and synchronization"
 
-## Decision Logic:
+## Not a Project? Use These Commands:
 
-**IF Single Feature detected:**
-- Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/feature-analyzer.md`
-- Expected time: ~10-20 minutes
-- Output: Feature analysis document
+**For Single Features:** Use `/bokata-feature`
+- "User Records Audio"
+- "Player Plays Audio Video"
+- "User Adds Items to Cart"
 
-**IF Multiple Features detected:**
-- Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/project-analyzer.md`
-- Expected time: ~30-60 minutes (depends on number of features)
-- Output: Project analysis document
+## Input Validation:
 
-## Edge Cases:
+Before processing, verify:
+- [ ] Input describes a PROJECT with multiple features
+- [ ] Project name is clear
+- [ ] Multiple distinct features are mentioned or implied
+- [ ] If ambiguous, ask for clarification
 
-**Ambiguous input (unclear if 1 or N features):**
-Ask user for clarification:
+## If Input is Too Vague:
 ```
-Your input could be interpreted as either:
-A) Single feature: [interpretation]
-B) Multiple features: [interpretation]
-
-Which analysis would you prefer?
-1. Single feature analysis (~15 min)
-2. Full project analysis (~45 min)
-```
-
-**Feature too large (appears to bundle multiple features):**
-```
-This appears to describe multiple features bundled together:
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-
-Recommend:
-A) Analyze as separate features (more granular)
-B) Proceed with project analysis (comprehensive)
-
-Which would you prefer?
-```
-
-**Too vague to analyze:**
-```
-Could you provide more details:
-- What specific user capability or problem does this solve?
-- What platforms/technologies are involved (if relevant)?
-- Any constraints or priorities? (optional)
+Could you provide more project details:
+- What are the main capabilities or features?
+- Who are the users?
+- What platforms/technologies are involved? (optional)
+- Any constraints or timeline? (optional)
 
 Example format:
-"Feature: [name]
-Description: Users can [action] so that [benefit]
-Context: [tech, constraints]"
+"Project: [name]
+
+Features:
+- [User/Actor] [Action]
+- [User/Actor] [Action]
+- [User/Actor] [Action]
+
+Tech: [if relevant]
+Timeline: [if relevant]"
 ```
 
 ---
 
-# STEP 2: EXECUTE ANALYSIS
+# FILE PARSING
 
-Based on scope detection, load the appropriate analyzer:
+If input is a file path (.md or .txt):
 
-## For Single Feature:
+**Steps:**
+1. Detect file path (ends with .md or similar)
+2. Read the file
+3. Extract project name (from filename or H1 title)
+4. Extract features (from feature list or description)
+5. Pass to project-analyzer
+
+**Supported formats:**
+- Markdown (.md) - Most flexible
+- Text files (.txt) with structured content
+- PRD files (Product Requirements Documents)
+- Specification documents
+
+**File structure example:**
+```markdown
+# Project: Audio System
+
+## Features
+- Coach Records Audio
+- Player Plays Audio
+- System Syncs Audio-Video
+- Coach Manages Audio Files
+
+## Tech Stack
+React + Node.js + WebAudio API
+
+## Timeline
+3 months to MVP
 ```
-Loading feature-analyzer for: "[feature description]"
 
-This will:
-1. Identify steps (UI → Logic → Data)
-2. Generate increments per step (5-10 each)
-3. Suggest Walking Skeleton
-4. Provide 3 implementation paths
-5. Generate decision guide and selection matrix
-6. Create markdown document
+---
 
-Estimated time: 10-20 minutes
-```
+# EXECUTION
 
-Then execute: `${CLAUDE_PLUGIN_ROOT}/agents/feature-analyzer.md`
+Load the project analyzer:
 
-## For Multiple Features (Project):
 ```
 Loading project-analyzer for: "[project description]"
 
 This will:
-1. Identify features backbone
+1. Identify features backbone with Actor+Action naming
 2. Analyze each feature (steps + increments)
 3. Compose cross-feature Walking Skeleton
-4. Provide 5 iteration paths
-5. Generate decision guide and selection matrix
-6. Create comprehensive markdown document
+4. Generate comprehensive analysis
 
-Estimated time: 30-60 minutes (N × feature time + composition)
+Output includes:
+- Executive Summary
+- Feature Backbone Overview
+- Feature Breakdown - Complete Analysis
+- Cross-Feature Walking Skeleton
 ```
 
 Then execute: `${CLAUDE_PLUGIN_ROOT}/agents/project-analyzer.md`
+
+**Note:** After generating the analysis, use these follow-up commands with the analysis file:
+```
+# Full path
+/bokata-iterations-paths ./docs/slicing-analysis/{filename}.md
+/bokata-matrix ./docs/slicing-analysis/{filename}.md
+
+# Or just the filename
+/bokata-iterations-paths {filename}.md
+/bokata-matrix {filename}.md
+
+# Or just the project name (finds latest)
+/bokata-iterations-paths {project-name}
+/bokata-matrix {project-name}
+```
 
 ---
 
@@ -154,74 +197,21 @@ Examples:
 
 ## Output Structure:
 
-All outputs include:
+Core analysis includes:
 1. **Executive Summary** - Overview with key metrics
-2. **Feature/Project Breakdown** - Complete analysis
-3. **Walking Skeleton** - Suggested minimum implementation
-4. **Iteration Options** - 3-5 implementation paths
-5. **Decision Guide** - How to choose based on priorities
-6. **Selection Matrix** - Complete increment catalog
-7. **Next Steps** - Actionable guidance
+2. **Feature Backbone Overview** - Feature list and dependencies
+3. **Feature Breakdown - Complete Analysis** - Steps and increments for each feature
+4. **Cross-Feature Walking Skeleton** - Suggested minimum implementation
+
+**Additional analysis (via separate commands):**
+- Use `/bokata-iterations-paths` for implementation strategies
+- Use `/bokata-matrix` for complete increment reference
 
 ---
 
 # USAGE EXAMPLES
 
-## Example 1: Single Simple Feature
-
-**User input:**
-```
-/slice Feature: Export user data to CSV
-```
-
-**Detection:** Single feature (clear, focused)
-
-**Execution:**
-- Load feature-analyzer
-- 3-4 steps identified
-- ~20 increments generated
-- Walking Skeleton: 3 increments (~4 hours)
-- 3 implementation paths
-- Output: `export-user-data-2025-10-26.md`
-
-**Time:** ~10 minutes
-
----
-
-## Example 2: Single Complex Feature
-
-**User input:**
-```
-/slice
-
-Feature: Real-time notifications
-
-User Story: As a user, I need to receive instant notifications when events happen
-
-Acceptance Criteria:
-- Support multiple notification types
-- Web and mobile delivery
-- User preferences for notification settings
-- Delivery via push, email, SMS
-
-Context: SaaS app, React + Node.js, first time using WebSockets
-```
-
-**Detection:** Single feature (one capability, even though complex)
-
-**Execution:**
-- Load feature-analyzer
-- 6-7 steps identified
-- ~45 increments generated
-- Walking Skeleton: 6 increments (~2 days)
-- 3 implementation paths emphasizing risk reduction (new tech)
-- Output: `real-time-notifications-2025-10-26.md`
-
-**Time:** ~18 minutes
-
----
-
-## Example 3: Multiple Features (Project)
+## Example 1: Text Input (Project)
 
 **User input:**
 ```
@@ -240,52 +230,63 @@ Timeline: 3 months to MVP
 Priority: Early user feedback
 ```
 
-**Detection:** Multiple features (4 distinct capabilities)
+**Features identified:**
+- User Creates Project
+- User Adds Task
+- User Assigns Task
+- User Updates Task Status
+- User Tracks Progress
 
 **Execution:**
 - Load project-analyzer
-- Phase 1: 4 features identified (Projects, Tasks, Progress, Collaboration)
-- Phase 2: Each feature analyzed
-  - Projects: 4 steps, 24 increments
-  - Tasks: 5 steps, 32 increments
-  - Progress: 3 steps, 18 increments
-  - Collaboration: 4 steps, 28 increments
-- Phase 3: Cross-feature composition
-  - Walking Skeleton: 4 increments across features (~3 days)
-  - 5 iteration options (including Feature-by-Feature)
-  - Decision guide recommends "Speed" based on priority
-  - Selection matrix: 102 increments
+- Identify feature backbone with Actor+Action naming
+- Analyze each feature (steps + increments)
+- Compose cross-feature Walking Skeleton
+- Generate: Feature Breakdown, Walking Skeleton, dependencies
+
 - Output: `task-management-app-2025-10-26.md`
 
-**Time:** ~45 minutes
+**Time:** ~30-40 minutes
+
+**Next steps:**
+- Run `/bokata-iterations-paths task-management` for implementation strategies (finds latest)
+- Run `/bokata-matrix task-management-2025-10-28.md` for complete increment catalog (or just name)
 
 ---
 
-## Example 4: Ambiguous Input (Clarification Needed)
+## Example 2: File Input (Project PRD)
 
 **User input:**
 ```
-/slice Shopping cart functionality
+/bokata ./docs/ecommerce-prd.md
 ```
 
-**Detection:** Ambiguous (could be 1 feature or multiple)
+**File parsing:**
+- Detect file path
+- Read project-spec.md
+- Extract project name: "E-commerce Platform"
+- Extract features from file content
+- Pass to project-analyzer
+
+**Output:** `ecommerce-platform-2025-10-26.md`
+
+**Time:** ~30-40 minutes
+
+---
+
+## Example 3: Not a Project? Use the Right Command
+
+**User input:**
+```
+/bokata Feature: User Records Audio
+```
 
 **Response:**
 ```
-"Shopping cart functionality" could mean:
+That looks like a single feature, not a full project.
+For single features, use: /bokata-feature
 
-A) Single feature: "Add to cart"
-   - Just the add/remove items functionality
-   - Analysis time: ~12 minutes
-
-B) Multiple features: "Complete cart system"
-   - Add to cart
-   - View/edit cart
-   - Cart persistence
-   - Cart checkout
-   - Analysis time: ~35 minutes
-
-Which analysis would you prefer? Or provide more details about the scope.
+/bokata-feature User Records Audio
 ```
 
 ---
@@ -304,12 +305,16 @@ Every increment must:
 
 # OUTPUT GUARANTEES
 
-Every analysis will include:
-1. ✅ **Walking Skeleton** - Suggested minimum viable implementation
-2. ✅ **Multiple Paths** - Options for different priorities (speed, quality, features)
-3. ✅ **Decision Guide** - Clear framework for choosing
-4. ✅ **Selection Matrix** - Complete increment catalog with scores
-5. ✅ **Markdown Document** - Professional, shareable documentation
+Every project analysis will include:
+1. ✅ **Executive Summary** - Project overview and metrics
+2. ✅ **Feature Backbone Overview** - Feature list with Actor+Action naming
+3. ✅ **Feature Breakdown** - Complete step and increment analysis
+4. ✅ **Walking Skeleton** - Suggested minimum viable implementation
+5. ✅ **Markdown Document** - Professional, shareable analysis
+
+**For additional analysis, run follow-up commands:**
+- `/bokata-iterations-paths` → 5 implementation strategies with estimated timelines
+- `/bokata-matrix` → Complete increment reference with dependencies
 
 Remember: **All suggestions are recommendations.** Teams decide what to implement.
 
@@ -367,39 +372,82 @@ If document generation fails:
 After successful completion:
 
 ```markdown
-## ✅ Analysis Complete
+## ✅ Project Analysis Complete
 
-**Type:** [Single Feature | Multi-Feature Project]
-**Analyzed:** [Feature name or Project name]
+**Project:** [Project Name]
 **Document:** 📄 `./docs/slicing-analysis/{filename}.md`
 
-**Summary:**
+**Analysis Summary:**
 - Features: [N]
-- Steps: [X]
-- Increments: [Y]
-- Walking Skeleton: [Z] increments (~[T] hours/days)
+- Total Steps: [X]
+- Total Increments: [Y]
+- Walking Skeleton: [Z] increments
 
-**Recommended Next Steps:**
-1. Open and review the generated document
-2. Review the Walking Skeleton suggestion
-3. Choose implementation path using Decision Guide
-4. Or customize using Selection Matrix
-5. Create backlog/tasks from selected increments
-6. Deploy Walking Skeleton first for validation
+**Core Document Contents:**
+- Executive Summary with project metrics
+- Feature Backbone Overview with Actor+Action naming
+- Feature Breakdown - Complete Analysis (steps + increments)
+- Cross-Feature Walking Skeleton suggestion
 
-**Quick Insight:**
-[1-2 sentences about the analysis - key finding, recommendation, or consideration]
+**Next Steps - Choose What You Need:**
+
+1. **For implementation strategies:**
+   ```
+   /bokata-iterations-paths {filename}.md
+   /bokata-iterations-paths {project-name}
+   ```
+   Generates 5 implementation paths with estimated timelines
+
+2. **For complete increment reference:**
+   ```
+   /bokata-matrix {filename}.md
+   /bokata-matrix {project-name}
+   ```
+   Shows all increments with dependencies (REQUIRES, PROVIDES, COMPATIBLE WITH)
+
+3. **To start building:**
+   - Review Walking Skeleton in the analysis document
+   - Deploy Walking Skeleton first for validation
+   - Use /bokata-matrix to select additional increments
+   - Create backlog/tasks from selected increments
+
+**Key Insight:**
+[1-2 sentences about the analysis - key observation, architecture pattern, or complexity consideration]
 ```
 
 ---
 
 # NOTES
 
-- **Detection is automatic** - Users don't choose single vs project
-- **Same depth regardless** - Feature analyzer provides same quality as project analyzer, just for fewer features
+- **Project-only scope** - This command is for multi-feature projects only
+- **Use /bokata-feature for single features** - Don't force single features into project analysis
+- **File parsing included** - Accept .md files, PRDs, specifications, etc.
+- **No estimations in core output** - Focus on what can be built, not how long it takes
+- **Actor+Action naming enforced** - Features must follow "Coach Records Audio" pattern
+- **Walking Skeleton as baseline** - Always the starting point for implementation
+- **Dependencies are explicit** - REQUIRES, PROVIDES, COMPATIBLE WITH fields clarify coordination
 - **Output always generated** - Every successful analysis creates markdown document
 - **User controls implementation** - Walking Skeleton and paths are suggestions
-- **Flexible input** - Accept structured PRDs or casual descriptions
+- **Flexible input** - Accept text, structured PRDs, or casual descriptions
 - **Fail fast** - Request clarification early if input is unclear
 
-The goal is to make vertical slicing analysis as effortless as possible while maintaining high quality and actionable output.
+The goal is to make vertical slicing analysis as effortless as possible while maintaining high quality and actionable output. Use the three-command system for modularity:
+
+**Basic Workflow:**
+```
+Step 1: /bokata [project description]
+        ↓ generates: ./docs/slicing-analysis/project-name-2025-10-28.md
+
+Step 2 (optional): /bokata-iterations-paths project-name-2025-10-28.md
+                   ↓ OR: /bokata-iterations-paths project-name
+                   ↓ generates: project-name-paths-2025-10-28.md
+
+Step 3 (optional): /bokata-matrix project-name-2025-10-28.md
+                   ↓ OR: /bokata-matrix project-name
+                   ↓ generates: project-name-matrix-2025-10-28.md
+```
+
+**What each command accepts:**
+- `/bokata` → Text description, .md file, or PRD
+- `/bokata-iterations-paths` → Full path, filename only, or project name (auto-finds latest)
+- `/bokata-matrix` → Full path, filename only, or project name (auto-finds latest)
