@@ -1,7 +1,7 @@
 {
   "name": "bokata-slicer-marketplace",
   "version": "1.0.0",
-  "description": "Official marketplace entry for Bokata Slicer CC - Intelligent vertical slicing and feature decomposition",
+  "description": "Official marketplace entry for Bokata Slicer CC - Intelligent vertical slicing and feature decomposition.",
   "owner": {
     "name": "Abraham Vallez",
     "email": "abrahamvallez@example.com"
@@ -10,11 +10,12 @@
     {
       "name": "bokata-slicer-cc",
       "description": "Intelligent vertical slicing and feature decomposition using the Hamburger Method. Automatically detects scope, generates Walking Skeletons, provides 3-5 implementation paths, and creates comprehensive documentation with selection matrices.",
-      "version": "0.2.0",
-      "source": "github",
-      "owner": "abrahamvallez",
-      "repo": "bokata-slicer-cc",
-      "npm": "bokata-slicer-cc",
+      "version": "0.6.0",
+      "source": "./",
+      "author": {
+        "name": "Abraham Vallez",
+        "email": "abrahamvallez@example.com"
+      },
       "keywords": [
         "vertical-slicing",
         "feature-decomposition",
