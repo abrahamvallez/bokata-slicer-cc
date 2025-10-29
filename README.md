@@ -35,11 +35,11 @@ bokata-slicer-cc install
 Bokata provides **four specialized commands** for different analysis needs:
 
 ```bash
-# 1. Analyze a single feature
-/bokata-feature Feature: Coach Records Audio
+# 1. Analyze a full project (multiple features)
+/bokata E-commerce platform with catalog, cart, checkout
 
-# 2. Analyze a full project (multiple features)
-/bokata Project: E-commerce platform with catalog, cart, checkout
+# 2. Analyze a single feature
+/bokata-feature Feature: Coach Records Audio
 
 # 3. Generate implementation strategies (after step 1 or 2)
 /bokata-iterations-paths
