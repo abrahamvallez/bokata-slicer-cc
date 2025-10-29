@@ -46,7 +46,8 @@ npx bokata-slicer-cc install
 
 **What this does:**
 - Creates `.claude/commands/` directory
-- Installs `/slice` command
+- Installs all Bokata commands (`/bokata`, `/bokata-feature`, `/bokata-iterations-paths`, `/bokata-matrix`)
+- Creates `.claude/agents/` directory with specialized agents
 - Creates `docs/slicing-analysis/` directory for outputs
 - Updates `.gitignore` (adds slicing analysis docs)
 - Creates README in docs directory
@@ -55,7 +56,7 @@ npx bokata-slicer-cc install
 
 In Claude Code, try:
 ```
-/bokata Feature: Test feature
+/bokata-feature Feature: User Completes Purchase
 ```
 
 You should see the command execute and analysis begin. When complete, check `docs/slicing-analysis/` for the generated markdown file.
@@ -113,14 +114,14 @@ You should see `bokata-slicer-cc` in the list.
 ### Step 4: Test Command
 
 ```
-/bokata Feature: Test feature
+/bokata-feature Feature: User Completes Purchase
 ```
 
 **What to verify in the output:**
 - ✅ **Dependency Tables** - Each step shows increments with REQUIRES, PROVIDES, and COMPATIBLE WITH columns
-- ✅ **Walking Skeleton** - Uses compatible increments from each step that work together
-- ✅ **Compatibility Maps** - Shows which increment combinations form valid end-to-end flows
-- ✅ **Path Validation** - Implementation paths show validated dependency chains
+- ✅ **Walking Skeleton** - Recommended minimum implementation using compatible increments
+- ✅ **Dependency Analysis** - Clear visibility of what each increment requires and provides
+- ✅ **Deployment Ready** - All selected increments work together end-to-end
 
 ### Plugin Location
 
@@ -149,14 +150,14 @@ bokata-slicer-cc install
 ### Step 3: Verify
 
 ```
-/bokata Feature: Test feature
+/bokata-feature Feature: User Completes Purchase
 ```
 
 **What to verify in the output:**
 - ✅ **Dependency Tables** - Each step shows increments with REQUIRES, PROVIDES, and COMPATIBLE WITH columns
-- ✅ **Walking Skeleton** - Uses compatible increments from each step that work together
-- ✅ **Compatibility Maps** - Shows which increment combinations form valid end-to-end flows
-- ✅ **Path Validation** - Implementation paths show validated dependency chains
+- ✅ **Walking Skeleton** - Recommended minimum implementation using compatible increments
+- ✅ **Dependency Analysis** - Clear visibility of what each increment requires and provides
+- ✅ **Deployment Ready** - All selected increments work together end-to-end
 
 ### Benefits
 
@@ -170,9 +171,10 @@ bokata-slicer-cc install
 
 After installation, verify:
 
-- [ ] `.claude/commands/bokata.md` exists
+- [ ] `.claude/commands/bokata.md` and other command files exist
+- [ ] `.claude/agents/bokata-slicer/` directory exists
 - [ ] `docs/slicing-analysis/` directory exists
-- [ ] `/slice` command works in Claude Code
+- [ ] `/bokata` or `/bokata-feature` commands work in Claude Code
 - [ ] `.gitignore` includes `docs/slicing-analysis/`
 
 ---
@@ -289,14 +291,14 @@ rm -rf docs/slicing-analysis/
 
 ### Command Not Found
 
-**Problem:** `/slice` command doesn't work in Claude Code
+**Problem:** Commands like `/bokata` or `/bokata-feature` don't work in Claude Code
 
 **Solutions:**
 1. Verify installation:
    ```bash
    ls .claude/commands/
    ```
-   Should show `slice.md`
+   Should show `bokata.md`, `bokata-feature.md`, `bokata-iterations-paths.md`, `bokata-matrix.md`
 
 2. Restart Claude Code
 
@@ -304,16 +306,6 @@ rm -rf docs/slicing-analysis/
    ```bash
    npx bokata-slicer-cc install
    ```
-
----
-
-### Permission Errors (Symlink)
-
-**Problem:** Error creating symlink during installation
-
-**Solution:** Installation automatically falls back to file copy. No action needed.
-
-**For developers:** If you want symlinks (for development), ensure you have permission to create symlinks on your OS.
 
 ---
 
@@ -485,7 +477,7 @@ A: `./docs/slicing-analysis/` by default.
 A: No by default (gitignored). You can change this in `.gitignore`.
 
 **Q: Can I customize the analysis?**
-A: The `/slice` command uses the agents as-is. For custom analysis, you can modify the agent files after installation.
+A: The commands use the agents as-is. For custom analysis, you can modify the agent files after installation in `.claude/agents/`.
 
 **Q: How do I update to latest version?**
 A: `npm update bokata-slicer-cc` or `/plugin update bokata-slicer-cc`

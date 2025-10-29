@@ -72,15 +72,9 @@ function main() {
       }
 
       try {
-        try {
-          // Try symlink first for easier dev iteration
-          fs.symlinkSync(src, dest);
-          log(`✅ Installed /${path.basename(file, '.md')} command (symlink)`, 'green');
-        } catch (symlinkErr) {
-          // Fallback to copying the file
-          fs.copyFileSync(src, dest);
-          log(`✅ Installed /${path.basename(file, '.md')} command (copy)`, 'green');
-        }
+        // Copy file directly (reliable across all platforms)
+        fs.copyFileSync(src, dest);
+        log(`✅ Installed /${path.basename(file, '.md')} command`, 'green');
         installedCommands.push(path.basename(file, '.md'));
       } catch (err) {
         log(`❌ Failed to install /${path.basename(file, '.md')} command: ${err.message}`, 'red');
@@ -114,41 +108,24 @@ function main() {
       try {
         const stat = fs.statSync(srcPath);
         if (stat.isDirectory()) {
-          try {
-            // Prefer creating a symlink for directories
-            fs.symlinkSync(srcPath, destPath, 'dir');
-            log(`✅ Installed agent ${entry} (symlink)`, 'green');
-          } catch (symlinkErr) {
-            // Fallback: copy directory recursively (Node 16.7+)
-            if (fs.cpSync) {
-              fs.cpSync(srcPath, destPath, { recursive: true });
-              log(`✅ Installed agent ${entry} (copied)`, 'green');
-            } else {
-              // Minimal recursive copy for older Node versions
-              const copyRecursive = (src, dst) => {
-                if (!fs.existsSync(dst)) fs.mkdirSync(dst);
-                const items = fs.readdirSync(src);
-                items.forEach(i => {
-                  const s = path.join(src, i);
-                  const d = path.join(dst, i);
-                  const sStat = fs.statSync(s);
-                  if (sStat.isDirectory()) copyRecursive(s, d);
-                  else fs.copyFileSync(s, d);
-                });
-              };
-              copyRecursive(srcPath, destPath);
-              log(`✅ Installed agent ${entry} (copied recursive)`, 'green');
-            }
-          }
+          // Copy directory recursively (reliable across all platforms)
+          const copyRecursive = (src, dst) => {
+            if (!fs.existsSync(dst)) fs.mkdirSync(dst);
+            const items = fs.readdirSync(src);
+            items.forEach(i => {
+              const s = path.join(src, i);
+              const d = path.join(dst, i);
+              const sStat = fs.statSync(s);
+              if (sStat.isDirectory()) copyRecursive(s, d);
+              else fs.copyFileSync(s, d);
+            });
+          };
+          copyRecursive(srcPath, destPath);
+          log(`✅ Installed agent ${entry}`, 'green');
         } else if (stat.isFile()) {
-          // Single file agent (rare) - symlink or copy
-          try {
-            fs.symlinkSync(srcPath, destPath);
-            log(`✅ Installed agent file ${entry} (symlink)`, 'green');
-          } catch (symlinkErr) {
-            fs.copyFileSync(srcPath, destPath);
-            log(`✅ Installed agent file ${entry} (copy)`, 'green');
-          }
+          // Single file agent - copy directly
+          fs.copyFileSync(srcPath, destPath);
+          log(`✅ Installed agent file ${entry}`, 'green');
         }
 
         installedAgents.push(entry);
