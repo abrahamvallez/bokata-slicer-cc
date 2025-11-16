@@ -7,6 +7,32 @@
 
 > **Version:** v0.6.0 (Latest improvements to installation and command workflow)
 
+## 🎯 New: JSON Output by Default
+
+**Bokata Slicer now outputs structured JSON for seamless integration with your tools and workflows!**
+
+- ✅ **JSON by default** - Machine-readable, API-ready output
+- ✅ **Markdown on demand** - Use `--verbose` flag for human-readable docs
+- ✅ **Schema-validated** - All outputs follow strict JSON schemas
+- ✅ **Integration-ready** - Works with CI/CD, project management tools, scripts
+
+```bash
+# Default: JSON output
+/bokata-feature "User authentication"
+# Output: user-authentication-2025-11-16.json
+
+# With markdown docs
+/bokata-feature --verbose "User authentication"
+# Output: user-authentication-2025-11-16.json + .md
+
+# Query JSON
+cat user-authentication-*.json | jq '.walkingSkeleton'
+```
+
+📚 **[Read the JSON Output Guide](./docs/JSON_OUTPUT.md)** for integration examples and best practices.
+
+---
+
 ## 🚀 Quick Start
 
 ### Installation
@@ -50,9 +76,14 @@ Bokata provides **four specialized commands** for different analysis needs:
 # Can also read from files
 /bokata ./docs/project-requirements.md
 /bokata-feature ./docs/feature-spec.md
+
+# Add --verbose for markdown documentation
+/bokata-feature --verbose "Feature description"
 ```
 
-**Output:** Markdown analysis documents in `./docs/slicing-analysis/`
+**Output:**
+- **Default:** JSON files in `./docs/slicing-analysis/*.json`
+- **With --verbose:** JSON + Markdown in `./docs/slicing-analysis/*`
 
 ### Recommended Workflow
 

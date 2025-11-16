@@ -157,96 +157,79 @@ For each selected increment, document WHY it was chosen:
 
 # OUTPUT FORMAT
 
-```markdown
-## Suggested Walking Skeleton
+**PRIMARY OUTPUT FORMAT: JSON**
 
-**What is this?**
-The absolute minimum combination of increments that delivers end-to-end functionality.
+Generate a WalkingSkeleton object following the schema in `/schemas/bokata-schemas.json`.
 
-**Philosophy:**
-This is your "ship tomorrow" version - the smallest implementation that provides real user value and enables immediate feedback.
+The WalkingSkeleton object must have:
+- `name`: Descriptive name for this walking skeleton
+- `description`: Brief explanation of what this delivers
+- `selectedIncrements`: Array of increment IDs in execution order
+- `totalIncrements`: Total number of available increments
+- `coverage`: Object with:
+  - `features`: Array of feature IDs covered
+  - `percentage`: Percentage of total functionality (0-100)
+- `rationale`: Why these specific increments were selected
+- `estimatedDuration`: Estimated time to implement (optional)
 
----
+## Example Output (Task Management App)
 
-### Selected Increments
+```json
+{
+  "walkingSkeleton": {
+    "name": "Basic Project Creation Flow",
+    "description": "Minimal end-to-end flow allowing users to create a project with localStorage persistence",
+    "selectedIncrements": ["I1", "I3"],
+    "totalIncrements": 15,
+    "coverage": {
+      "features": ["F1"],
+      "percentage": 15
+    },
+    "rationale": "Selected the simplest increments that deliver end-to-end value: basic form (I1) for user input and localStorage (I3) for persistence. No backend required, can be deployed immediately. Validates core user flow and enables rapid feedback.",
+    "estimatedDuration": "3-5 hours"
+  },
+  "validation": {
+    "dependenciesSatisfied": true,
+    "compatibilityChecked": true,
+    "endToEndComplete": true,
+    "deployable": true,
+    "issues": []
+  },
+  "metadata": {
+    "observableOutcomes": [
+      "User can create a new project via web form",
+      "Project name is saved and persists across browser sessions",
+      "User sees confirmation of successful creation"
+    ],
+    "technicalLayers": {
+      "ui": "Basic HTML form with project name input",
+      "logic": "Form validation and localStorage operations",
+      "data": "Browser localStorage for persistence"
+    },
+    "deferredCapabilities": [
+      "Server-side persistence",
+      "Advanced validation",
+      "Multi-user collaboration",
+      "Project templates"
+    ],
+    "learningOpportunities": [
+      "Validate that users understand project creation flow",
+      "Test if localStorage is sufficient for MVP",
+      "Verify form UX is intuitive"
+    ]
+  }
+}
+```
 
-| Feature | Step | Increment | Requires | Provides | Status |
-|---------|------|-----------|----------|----------|--------|
-| [Feature 1] | [Step 1] | ⭐ [Increment name] | [Deps or None] | [What it offers] | ✅ |
-| [Feature 1] | [Step 2] | ⭐ [Increment name] | [Deps or None] | [What it offers] | ✅ |
-| ... | ... | ... | ... | ... | ... |
-
----
-
-### Dependency Analysis
-
-**Validation Results:**
-- ✅ All REQUIRES are satisfied
-- ✅ All COMPATIBLE WITH constraints met
-- ✅ No circular dependencies
-- ✅ All necessary capabilities provided
-
-**Compatibility Map:**
-[Show which increments work together and why]
-
----
-
-### What You Get
-
-**Observable Outcomes:**
-1. [Specific user-visible result 1]
-2. [Specific user-visible result 2]
-3. [Specific user-visible result 3]
-
-**Technical Validation:**
-- ✅ UI Layer: [What's implemented]
-- ✅ Logic Layer: [What's implemented]
-- ✅ Data Layer: [What's implemented]
-
-**Capabilities Enabled:**
-- Can build upon: [Foundation capability 1]
-- Can enhance with: [Possible enhancement 1]
-- Can extend to: [Future capability 1]
-
-**Learning Opportunities:**
-- Can validate: [Assumption 1]
-- Can test: [User behavior 1]
-- Can verify: [Technical approach 1]
-
----
-
-### What's NOT Included (Deferred)
-
-**Intentionally Excluded:**
-- ❌ [Feature aspect] - Add in next iteration
-- ❌ [Quality improvement] - Not critical for validation
-- ❌ [Edge case handling] - Address after core works
-- ❌ [Optimization] - Optimize when needed
-
-**Why Defer:**
-These aspects are valuable but not essential for initial validation. Build them iteratively based on real feedback.
-
----
-
-### Success Criteria
-
-**You'll know the Walking Skeleton works when:**
-- [ ] User can complete [specific action] end-to-end
-- [ ] System responds with [observable result]
-- [ ] Data is [stored/processed/displayed] correctly
-- [ ] No errors block the main flow
-- [ ] Can be demonstrated to stakeholders
-
-**Validation Questions:**
-- Does this solve the core user need?
-- Can we get feedback from this?
-- Is there a simpler version? (If yes, use that!)
-
----
-
-### Next Steps After Walking Skeleton
-
-**Once deployed, you can:**
+**IMPORTANT:**
+- Output ONLY valid JSON
+- No markdown formatting around the JSON
+- No explanatory text before or after the JSON
+- Ensure proper JSON syntax (quotes, commas, brackets)
+- selectedIncrements must reference valid increment IDs from previous phase
+- selectedIncrements should be in execution order
+- coverage.percentage should reflect realistic scope
+- Validate all dependencies before outputting
 1. **Gather feedback** - Real users, real data
 2. **Validate assumptions** - Does this solve the problem?
 3. **Identify gaps** - What's missing that matters?

@@ -1,0 +1,342 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bokata Slicer Schemas",
+  "description": "JSON schemas for Bokata Slicer vertical slicing analysis",
+
+  "definitions": {
+    "Feature": {
+      "type": "object",
+      "required": ["id", "name", "description", "value", "complexity", "dependencies"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^F\\d+$",
+          "description": "Feature identifier (e.g., F1, F2)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Feature name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed feature description"
+        },
+        "value": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low"],
+          "description": "Business value"
+        },
+        "complexity": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low"],
+          "description": "Technical complexity"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of feature IDs this depends on"
+        }
+      }
+    },
+
+    "Step": {
+      "type": "object",
+      "required": ["id", "featureId", "name", "description", "qualityAttributes", "incrementCount"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^S\\d+$",
+          "description": "Step identifier (e.g., S1, S2)"
+        },
+        "featureId": {
+          "type": "string",
+          "description": "Parent feature ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Step name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Step description"
+        },
+        "qualityAttributes": {
+          "type": "object",
+          "required": ["testability", "security", "performance", "usability"],
+          "properties": {
+            "testability": {
+              "type": "string",
+              "description": "Testability considerations"
+            },
+            "security": {
+              "type": "string",
+              "description": "Security considerations"
+            },
+            "performance": {
+              "type": "string",
+              "description": "Performance considerations"
+            },
+            "usability": {
+              "type": "string",
+              "description": "Usability considerations"
+            }
+          }
+        },
+        "incrementCount": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 10,
+          "description": "Number of increments for this step"
+        }
+      }
+    },
+
+    "Increment": {
+      "type": "object",
+      "required": ["id", "stepId", "featureId", "name", "description", "type", "changes", "dependencies"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^I\\d+$",
+          "description": "Increment identifier (e.g., I1, I2)"
+        },
+        "stepId": {
+          "type": "string",
+          "description": "Parent step ID"
+        },
+        "featureId": {
+          "type": "string",
+          "description": "Parent feature ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Increment name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed increment description"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Backend", "Frontend", "Integration", "Infrastructure", "Testing", "Full-Stack"],
+          "description": "Increment type"
+        },
+        "changes": {
+          "type": "object",
+          "required": ["backend", "frontend", "database", "tests"],
+          "properties": {
+            "backend": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Backend changes"
+            },
+            "frontend": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Frontend changes"
+            },
+            "database": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Database changes"
+            },
+            "tests": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Test changes"
+            }
+          }
+        },
+        "dependencies": {
+          "type": "object",
+          "required": ["requires", "provides", "compatibleWith"],
+          "properties": {
+            "requires": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Required increment IDs or capabilities"
+            },
+            "provides": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Capabilities provided by this increment"
+            },
+            "compatibleWith": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Compatible increment IDs"
+            }
+          }
+        },
+        "estimatedEffort": {
+          "type": "string",
+          "description": "Estimated effort (e.g., '2-4 hours', '1 day')"
+        },
+        "risks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Potential risks"
+        }
+      }
+    },
+
+    "WalkingSkeleton": {
+      "type": "object",
+      "required": ["name", "description", "selectedIncrements", "totalIncrements", "coverage"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Walking skeleton name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Walking skeleton description"
+        },
+        "selectedIncrements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Selected increment IDs in execution order"
+        },
+        "totalIncrements": {
+          "type": "integer",
+          "description": "Total number of increments available"
+        },
+        "coverage": {
+          "type": "object",
+          "required": ["features", "percentage"],
+          "properties": {
+            "features": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Feature IDs covered"
+            },
+            "percentage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Percentage of total functionality"
+            }
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Why these increments were selected"
+        },
+        "estimatedDuration": {
+          "type": "string",
+          "description": "Estimated total duration"
+        }
+      }
+    },
+
+    "Context": {
+      "type": "object",
+      "required": ["projectName", "timestamp", "phase", "data"],
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "Project or feature name"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Analysis timestamp"
+        },
+        "phase": {
+          "type": "string",
+          "enum": ["features", "steps", "increments", "skeleton", "complete"],
+          "description": "Current analysis phase"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "projectDescription": {
+              "type": "string",
+              "description": "Original project description"
+            },
+            "domainContext": {
+              "type": "string",
+              "description": "Domain and business context"
+            },
+            "features": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Feature" },
+              "description": "Identified features"
+            },
+            "steps": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Step" },
+              "description": "Decomposed steps"
+            },
+            "increments": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Increment" },
+              "description": "Generated increments"
+            },
+            "walkingSkeleton": {
+              "$ref": "#/definitions/WalkingSkeleton",
+              "description": "Walking skeleton path"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "totalFeatures": { "type": "integer" },
+            "totalSteps": { "type": "integer" },
+            "totalIncrements": { "type": "integer" },
+            "averageIncrementsPerStep": { "type": "number" }
+          }
+        }
+      }
+    },
+
+    "AnalysisOutput": {
+      "type": "object",
+      "required": ["version", "projectName", "timestamp", "summary", "features", "steps", "increments"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Bokata Slicer version"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Project or feature name"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Analysis timestamp"
+        },
+        "summary": {
+          "type": "object",
+          "required": ["totalFeatures", "totalSteps", "totalIncrements"],
+          "properties": {
+            "totalFeatures": { "type": "integer" },
+            "totalSteps": { "type": "integer" },
+            "totalIncrements": { "type": "integer" },
+            "averageIncrementsPerStep": { "type": "number" },
+            "estimatedTotalEffort": { "type": "string" }
+          }
+        },
+        "features": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Feature" }
+        },
+        "steps": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Step" }
+        },
+        "increments": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Increment" }
+        },
+        "walkingSkeleton": {
+          "$ref": "#/definitions/WalkingSkeleton"
+        }
+      }
+    }
+  }
+}

@@ -202,41 +202,124 @@ Instead of splitting work based on technical inputs or workflows, focus on **del
 
 # OUTPUT REQUIREMENTS
 
-## Increments Analysis Document
-```markdown
-# Increments Analysis: [Project Name]
+**PRIMARY OUTPUT FORMAT: JSON**
 
-## Feature: [Feature Name]
+Generate a JSON array of Increment objects following the schema in `/schemas/bokata-schemas.json`.
 
-### Step 1: [Step Name] | Strategy: [Primary Strategy Used]
-**Increments:**
+Each Increment must have:
+- `id`: String pattern I1, I2, I3, etc. (sequential across all steps)
+- `stepId`: Parent step ID (e.g., "S1", "S2")
+- `featureId`: Parent feature ID (e.g., "F1", "F2")
+- `name`: Short descriptive name of the increment
+- `description`: Specific implementation description
+- `type`: One of: "Backend", "Frontend", "Integration", "Infrastructure", "Testing", "Full-Stack"
+- `changes`: Object with four required arrays:
+  - `backend`: List of backend changes (files, endpoints, services)
+  - `frontend`: List of frontend changes (components, pages, UI elements)
+  - `database`: List of database changes (tables, schemas, migrations)
+  - `tests`: List of test changes (test files, test cases)
+- `dependencies`: Object with three required arrays:
+  - `requires`: What this increment needs (can be empty array)
+  - `provides`: What this increment offers (should have at least one item)
+  - `compatibleWith`: Increment IDs this works with (can be empty array)
+- `estimatedEffort` (optional): Effort estimate (e.g., "2-4 hours")
+- `risks` (optional): Array of potential risks
 
-**Increment 1.1: [Increment Name]** ⭐
-- **Description:** [Specific implementation description]
-- **REQUIRES:** [Dependencies from other steps, or "None"]
-- **PROVIDES:** [What this increment offers to other steps]
-- **COMPATIBLE WITH:** [Which increments from other steps work with this]
+## Example Output (Task Management App)
 
-**Increment 1.2: [Increment Name]**
-- **Description:** [Specific implementation description]
-- **REQUIRES:** [Dependencies from other steps, or "None"]
-- **PROVIDES:** [What this increment offers to other steps]
-- **COMPATIBLE WITH:** [Which increments from other steps work with this]
-
-[Continue for 5-10 increments...]
-
-**Applied Strategies:** [List of strategies used]
-**Rationale:** [Why these strategies for this step]
-**Filtered Out:** [Increments eliminated and why]
-
-### Step 2: [Step Name] | Strategy: [Primary Strategy Used]
-[Repeat increment analysis...]
-
----
-
-## Feature: [Next Feature Name]
-[Continue for all features...]
+```json
+{
+  "increments": [
+    {
+      "id": "I1",
+      "stepId": "S1",
+      "featureId": "F1",
+      "name": "Basic Project Form",
+      "description": "Simple HTML form with project name field and submit button, no validation",
+      "type": "Frontend",
+      "changes": {
+        "backend": [],
+        "frontend": ["src/components/ProjectForm.tsx - basic form component", "src/pages/NewProject.tsx - page wrapper"],
+        "database": [],
+        "tests": ["ProjectForm.test.tsx - render and basic interaction tests"]
+      },
+      "dependencies": {
+        "requires": [],
+        "provides": ["Project name input UI", "Submit trigger"],
+        "compatibleWith": ["I6", "I11"]
+      },
+      "estimatedEffort": "1-2 hours",
+      "risks": ["No validation could allow invalid data"]
+    },
+    {
+      "id": "I2",
+      "stepId": "S1",
+      "featureId": "F1",
+      "name": "Validated Project Form",
+      "description": "Form with client-side validation (name length, special characters, uniqueness check)",
+      "type": "Frontend",
+      "changes": {
+        "backend": [],
+        "frontend": ["src/components/ProjectForm.tsx - form with validation logic", "src/utils/validators.ts - validation functions", "src/pages/NewProject.tsx - page wrapper"],
+        "database": [],
+        "tests": ["ProjectForm.test.tsx - validation tests", "validators.test.ts - unit tests"]
+      },
+      "dependencies": {
+        "requires": [],
+        "provides": ["Project name input UI", "Client-side validation", "Submit trigger"],
+        "compatibleWith": ["I6", "I7", "I11", "I12"]
+      },
+      "estimatedEffort": "3-4 hours",
+      "risks": []
+    },
+    {
+      "id": "I3",
+      "stepId": "S2",
+      "featureId": "F1",
+      "name": "localStorage Persistence",
+      "description": "Save project data to browser localStorage, no server required",
+      "type": "Frontend",
+      "changes": {
+        "backend": [],
+        "frontend": ["src/services/storage.ts - localStorage wrapper", "src/hooks/useLocalStorage.ts - React hook"],
+        "database": [],
+        "tests": ["storage.test.ts - localStorage operations", "useLocalStorage.test.ts - hook tests"]
+      },
+      "dependencies": {
+        "requires": ["Project name input UI", "Submit trigger"],
+        "provides": ["Client-side persistence", "Data retrieval API"],
+        "compatibleWith": ["I1", "I2"]
+      },
+      "estimatedEffort": "2-3 hours",
+      "risks": ["Data lost on browser clear", "No cross-device sync"]
+    }
+  ],
+  "metadata": {
+    "totalIncrements": 3,
+    "stepsCovered": ["S1", "S2"],
+    "featuresCovered": ["F1"],
+    "incrementsByType": {
+      "Frontend": 3,
+      "Backend": 0,
+      "Integration": 0,
+      "Infrastructure": 0,
+      "Testing": 0,
+      "Full-Stack": 0
+    }
+  }
+}
 ```
+
+**IMPORTANT:**
+- Output ONLY valid JSON
+- No markdown formatting around the JSON
+- No explanatory text before or after the JSON
+- Ensure proper JSON syntax (quotes, commas, brackets)
+- stepId and featureId must reference valid IDs from previous phases
+- All four changes arrays (backend, frontend, database, tests) are REQUIRED (use empty array [] if none)
+- All three dependencies arrays (requires, provides, compatibleWith) are REQUIRED
+- type must be one of the six valid types
+- `provides` array should have at least one item
 
 ## Specification Details
 

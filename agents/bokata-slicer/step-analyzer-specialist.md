@@ -118,33 +118,83 @@ For EACH step, analyze:
 
 # OUTPUT REQUIREMENTS
 
-## Steps Analysis Document
-```markdown
-# Steps Analysis: [Project Name]
+**PRIMARY OUTPUT FORMAT: JSON**
 
-## Feature: [Feature Name]
+Generate a JSON array of Step objects following the schema in `/schemas/bokata-schemas.json`.
 
-### Step 1: [Step Name]
-**Description:** [What this step accomplishes]
-**Quality Attributes:**
-- **Quality factors:** [What makes it "good"]
-- **Tradeoffs:** [Manual vs automated, performance vs simplicity, etc.]
-- **Implementation options:** [Different approaches available]
+Each Step must have:
+- `id`: String pattern S1, S2, S3, etc. (sequential across all features)
+- `featureId`: Parent feature ID (e.g., "F1", "F2")
+- `name`: Short descriptive name of the step
+- `description`: What this step accomplishes
+- `qualityAttributes`: Object with four required keys:
+  - `testability`: How to test this step, test strategies
+  - `security`: Security considerations and requirements
+  - `performance`: Performance expectations and constraints
+  - `usability`: UX and usability considerations
+- `incrementCount`: Number of increments this step will be broken into (5-10)
 
-### Step 2: [Step Name]
-**Description:** [What this step accomplishes]
-**Quality Attributes:**
-- **Quality factors:** [What makes it "good"]
-- **Tradeoffs:** [Manual vs automated, performance vs simplicity, etc.]
-- **Implementation options:** [Different approaches available]
+## Example Output (Task Management App)
 
-[Continue for all steps...]
-
----
-
-## Feature: [Next Feature Name]
-[Repeat step analysis...]
+```json
+{
+  "steps": [
+    {
+      "id": "S1",
+      "featureId": "F1",
+      "name": "Initialize Project Workspace",
+      "description": "Set up the basic project structure and metadata storage",
+      "qualityAttributes": {
+        "testability": "Unit tests for data validation, integration tests for storage persistence",
+        "security": "Validate project name for injection attacks, ensure user owns created project",
+        "performance": "Project creation should complete in < 500ms",
+        "usability": "Simple form with minimal required fields, instant feedback on success"
+      },
+      "incrementCount": 6
+    },
+    {
+      "id": "S2",
+      "featureId": "F1",
+      "name": "Persist Project Data",
+      "description": "Save project information to database with proper relationships",
+      "qualityAttributes": {
+        "testability": "Database integration tests, rollback tests for failures",
+        "security": "Parameterized queries to prevent SQL injection, validate user permissions",
+        "performance": "Database writes should complete in < 200ms",
+        "usability": "Transparent to user, automatic retry on transient failures"
+      },
+      "incrementCount": 5
+    },
+    {
+      "id": "S3",
+      "featureId": "F2",
+      "name": "Capture Task Information",
+      "description": "Collect task details from user input (title, description, metadata)",
+      "qualityAttributes": {
+        "testability": "Form validation tests, input sanitization tests",
+        "security": "Sanitize all text inputs, validate against XSS attacks",
+        "performance": "Form should be responsive, validate on blur with < 100ms delay",
+        "usability": "Clear labels, helpful placeholders, real-time validation feedback"
+      },
+      "incrementCount": 7
+    }
+  ],
+  "metadata": {
+    "totalSteps": 3,
+    "featuresAnalyzed": ["F1", "F2"],
+    "averageIncrementsPerStep": 6.0
+  }
+}
 ```
+
+**IMPORTANT:**
+- Output ONLY valid JSON
+- No markdown formatting around the JSON
+- No explanatory text before or after the JSON
+- Ensure proper JSON syntax (quotes, commas, brackets)
+- featureId must reference valid feature IDs from previous phase
+- All four quality attributes (testability, security, performance, usability) are REQUIRED
+- incrementCount must be between 5-10
 
 # QUALITY CRITERIA
 - Steps represent distinct layers or phases of functionality

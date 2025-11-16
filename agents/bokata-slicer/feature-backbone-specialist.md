@@ -121,56 +121,95 @@ Create a backbone of features representing the user's journey:
 
 # OUTPUT REQUIREMENTS
 
-## Feature Backbone Document Template
-```markdown
-# Feature Backbone: [Project Name]
+**PRIMARY OUTPUT FORMAT: JSON**
 
-## User Journey Overview
-[Brief description of the complete user journey]
+Generate a JSON array of Feature objects following the schema in `/schemas/bokata-schemas.json`.
 
-## Features List
-1. **[Actor] [Action]** - [Brief description of user capability]
-2. **[Actor] [Action]** - [Brief description of user capability]
-3. **[Actor] [Action]** - [Brief description of user capability]
-[Continue for all identified features...]
-
-## Feature Flow Narrative
-[Description of how features connect in the user journey]
-
-## Dependencies and Relationships
-[Any critical relationships between features that affect sequencing]
-```
+Each Feature must have:
+- `id`: String pattern F1, F2, F3, etc.
+- `name`: Actor + Action format (e.g., "User Creates Project")
+- `description`: Brief description of the user capability
+- `value`: "High" | "Medium" | "Low" (business value assessment)
+- `complexity`: "High" | "Medium" | "Low" (technical complexity estimate)
+- `dependencies`: Array of feature IDs this feature depends on (empty array if none)
 
 ## Example Output (Task Management App)
 
-```markdown
-# Feature Backbone: Team Task Manager
-
-## User Journey Overview
-Users start by creating a project workspace, then add tasks to organize work.
-They assign tasks to team members and track progress through completion.
-The journey supports both individual task management and team collaboration.
-
-## Features List
-1. **User Creates Project** - Users can create a new project workspace
-2. **User Adds Task** - Users can add tasks to a project
-3. **User Views Tasks** - Users can see list of tasks in a project
-4. **User Assigns Task** - Users can assign tasks to team members
-5. **User Updates Task Status** - Users can mark tasks as in-progress or complete
-6. **User Filters Tasks** - Users can filter tasks by status, assignee, or date
-7. **User Deletes Task** - Users can remove tasks from the project
-
-## Feature Flow Narrative
-The journey begins with **User Creates Project** to establish a workspace. Once created,
-users **User Adds Task** to populate the project. **User Views Tasks** allows browsing the task list.
-Tasks can be organized through **User Assigns Task** and tracked via **User Updates Task Status**.
-**User Filters Tasks** helps manage larger projects. **User Deletes Task** provides cleanup capability.
-
-## Dependencies and Relationships
-- **Critical**: "User Creates Project" must exist before any task operations
-- **Recommended**: "User Views Tasks" before "User Filters Tasks" (filtering requires display)
-- **Independent**: "User Assigns Task" and "User Updates Task Status" can be implemented in any order
+```json
+{
+  "features": [
+    {
+      "id": "F1",
+      "name": "User Creates Project",
+      "description": "Users can create a new project workspace to organize their work",
+      "value": "High",
+      "complexity": "Low",
+      "dependencies": []
+    },
+    {
+      "id": "F2",
+      "name": "User Adds Task",
+      "description": "Users can add tasks to a project for tracking work items",
+      "value": "High",
+      "complexity": "Low",
+      "dependencies": ["F1"]
+    },
+    {
+      "id": "F3",
+      "name": "User Views Tasks",
+      "description": "Users can see a list of all tasks in a project",
+      "value": "High",
+      "complexity": "Low",
+      "dependencies": ["F1", "F2"]
+    },
+    {
+      "id": "F4",
+      "name": "User Assigns Task",
+      "description": "Users can assign tasks to team members for collaboration",
+      "value": "Medium",
+      "complexity": "Medium",
+      "dependencies": ["F2"]
+    },
+    {
+      "id": "F5",
+      "name": "User Updates Task Status",
+      "description": "Users can mark tasks as in-progress or complete to track progress",
+      "value": "High",
+      "complexity": "Low",
+      "dependencies": ["F2"]
+    },
+    {
+      "id": "F6",
+      "name": "User Filters Tasks",
+      "description": "Users can filter tasks by status, assignee, or date for better organization",
+      "value": "Medium",
+      "complexity": "Medium",
+      "dependencies": ["F3"]
+    },
+    {
+      "id": "F7",
+      "name": "User Deletes Task",
+      "description": "Users can remove tasks from the project to maintain clean workspace",
+      "value": "Low",
+      "complexity": "Low",
+      "dependencies": ["F2"]
+    }
+  ],
+  "metadata": {
+    "projectName": "Team Task Manager",
+    "userJourneyOverview": "Users start by creating a project workspace, then add tasks to organize work. They assign tasks to team members and track progress through completion. The journey supports both individual task management and team collaboration.",
+    "featureFlowNarrative": "The journey begins with User Creates Project (F1) to establish a workspace. Once created, users add tasks (F2) to populate the project. Viewing tasks (F3) allows browsing the task list. Tasks can be organized through assignment (F4) and tracked via status updates (F5). Filtering (F6) helps manage larger projects. Deletion (F7) provides cleanup capability.",
+    "totalFeatures": 7
+  }
+}
 ```
+
+**IMPORTANT:**
+- Output ONLY valid JSON
+- No markdown formatting around the JSON
+- No explanatory text before or after the JSON
+- Ensure proper JSON syntax (quotes, commas, brackets)
+- Dependencies must reference valid feature IDs
 
 # QUALITY CRITERIA
 - Each feature represents a distinct user capability

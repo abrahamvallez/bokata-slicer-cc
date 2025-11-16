@@ -151,7 +151,12 @@ If the user input ends with `.md`:
 
 # STEP 3: EXECUTE ANALYSIS
 
-Load and execute the Feature Analyzer agent:
+## Parse Flags
+
+Check for output format flags:
+- **No flags (default)**: JSON output
+- **`--verbose`**: JSON output + Markdown document
+- **`--markdown-only`**: Markdown only (legacy mode)
 
 ```
 Analyzing single feature: "[feature name]"
@@ -160,13 +165,16 @@ This will:
 1. Identify steps (UI → Logic → Data)
 2. Generate increments per step (5-10 each)
 3. Compose Walking Skeleton
-4. Generate core analysis document
+4. Generate structured JSON analysis
 
-Output: Core analysis only (no paths or matrix)
+Output format: [JSON / JSON + Markdown / Markdown only]
 Estimated time: 8-15 minutes
 ```
 
-**Execute:** `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/feature-analyzer.md`
+## Execute Analysis
+
+**Default (JSON):** `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/feature-analyzer-json.md`
+**Legacy (Markdown):** `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/feature-analyzer.md`
 
 **Pass context:**
 - Feature description (full text)
@@ -175,19 +183,14 @@ Estimated time: 8-15 minutes
 - Technical context (if provided)
 - Domain constraints (if provided)
 
-**Flags:** Run with NO FLAGS (core analysis only)
-
 ---
 
 # STEP 4: GENERATE OUTPUT
 
-The feature-analyzer will generate a markdown document.
+## Primary Output: JSON
 
-## Output Location
-**Default:** `./docs/slicing-analysis/`
-
-## Filename Convention
-`{feature-name}-{YYYY-MM-DD}.md`
+**Location:** `./docs/slicing-analysis/`
+**Filename:** `{feature-name}-{YYYY-MM-DD}.json`
 
 **Sanitization:**
 - Lowercase
@@ -233,11 +236,13 @@ The generated document includes:
 
 After successful analysis:
 
+## Default (JSON Output)
+
 ```markdown
 ## ✅ Feature Analysis Complete
 
 **Feature:** [Feature name]
-**Document:** 📄 `./docs/slicing-analysis/{filename}.md`
+**JSON Output:** 📄 `./docs/slicing-analysis/{filename}.json`
 
 **Analysis Summary:**
 - Steps: [N]
@@ -245,16 +250,63 @@ After successful analysis:
 - Walking Skeleton: [Y] increments (~[T] hours/days)
 
 **What's Included:**
-✅ Executive Summary
-✅ Feature Breakdown (Steps + Increments)
-✅ Walking Skeleton (Minimum viable implementation)
+✅ Structured JSON with complete analysis
+✅ Features, Steps, Increments data
+✅ Walking Skeleton selection
+✅ Machine-readable format for integrations
+
+**Usage:**
+```bash
+# View JSON
+cat ./docs/slicing-analysis/{filename}.json | jq .
+
+# Get walking skeleton
+cat ./docs/slicing-analysis/{filename}.json | jq '.walkingSkeleton'
+
+# List all increments
+cat ./docs/slicing-analysis/{filename}.json | jq '.increments'
+```
+
+**Generate human-readable docs:**
+Add `--verbose` flag to also generate markdown:
+```
+/bokata-feature --verbose [feature description]
+```
 
 **Next Steps:**
-1. Review the generated document
+1. Review the JSON output
 2. Examine the Walking Skeleton suggestion
-3. Run `/bokata-iterations-paths` to generate implementation paths and decision guide
-4. Run `/bokata-matrix` to see complete increment matrix for custom path building
-5. Start implementation with Walking Skeleton
+3. Integrate JSON with your tools/scripts
+4. Use JSON as input for other applications
+
+**Quick Insight:**
+[1-2 sentences highlighting the most important finding or recommendation]
+```
+
+## With --verbose Flag
+
+```markdown
+## ✅ Feature Analysis Complete
+
+**Feature:** [Feature name]
+**JSON Output:** 📄 `./docs/slicing-analysis/{filename}.json`
+**Markdown Docs:** 📄 `./docs/slicing-analysis/{filename}.md`
+
+**Analysis Summary:**
+- Steps: [N]
+- Increments: [X] total
+- Walking Skeleton: [Y] increments (~[T] hours/days)
+
+**What's Included:**
+✅ Structured JSON (machine-readable)
+✅ Detailed Markdown (human-readable)
+✅ Complete analysis in both formats
+
+**Next Steps:**
+1. Review the JSON for integrations
+2. Read the markdown for details
+3. Share the markdown with team
+4. Use JSON for automation
 
 **Quick Insight:**
 [1-2 sentences highlighting the most important finding or recommendation]
@@ -451,10 +503,21 @@ Before executing analysis:
 # NOTES
 
 - **Focus on one feature only** - This is the key differentiator from /bokata
+- **JSON by default** - Structured, machine-readable output for integrations
+- **Markdown on demand** - Use `--verbose` for human-readable documentation
 - **Core analysis only** - No paths or matrix (use dedicated commands)
 - **Fast and focused** - 8-15 minutes typically
 - **File support** - Can read from .md files
 - **Part of ecosystem** - Designed to work with /bokata-iterations-paths and /bokata-matrix
 - **User controls everything** - Walking Skeleton is a suggestion, not mandatory
+- **API-ready** - JSON output can be consumed by other applications, scripts, CI/CD pipelines
 
-The goal is focused, detailed analysis of ONE feature with clear, actionable decomposition.
+## Output Format Summary
+
+| Flag | JSON Output | Markdown Output | Use Case |
+|------|-------------|-----------------|----------|
+| None (default) | ✅ Yes | ❌ No | Integrations, automation, APIs |
+| `--verbose` | ✅ Yes | ✅ Yes | Team docs + automation |
+| `--markdown-only` | ❌ No | ✅ Yes | Legacy mode, human-only |
+
+The goal is focused, detailed analysis of ONE feature with clear, actionable decomposition in a format that works for both humans and machines.
