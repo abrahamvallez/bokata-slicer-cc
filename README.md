@@ -17,13 +17,7 @@ npm install -D bokata-slicer-cc
 npx bokata-slicer-cc install
 ```
 
-**Option 2: Claude Code Plugin (any project)**
-```
-/plugin marketplace add abrahamvallez/bokata-slicer-cc
-/plugin install bokata-slicer-cc
-```
-
-**Option 3: Global**
+**Option 2: Global**
 ```bash
 npm install -g bokata-slicer-cc
 cd your-project

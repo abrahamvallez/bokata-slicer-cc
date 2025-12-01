@@ -67,6 +67,7 @@ Every step must:
 - Include quality attributes defining "good" vs "acceptable"
 - Support multiple implementation approaches (tradeoffs)
 - Enable incremental implementation (not all-or-nothing)
+- **Be functional/business-focused, NOT code implementation details** (avoid: class creation, method names, OOP patterns, testing tasks)
 
 # WORKFLOW
 
@@ -101,6 +102,10 @@ For EACH feature:
 - Handle gateway response
 - Update order status
 - Send confirmation
+
+> **Note:** These steps describe FUNCTIONAL goals, not implementation details.
+> ❌ Avoid: "Create EmailService class", "Write validator tests", "Implement Repository pattern"
+> ✅ Focus on: "What needs to happen?" (not "How do I code it?")
 
 ### 2. Define Quality Attributes
 For EACH step, analyze:
@@ -170,8 +175,18 @@ For EACH step, analyze:
 ### Issue: "Too many steps (> 10 per feature)"
 **Solution:**
 - Combine related operations (e.g., "Validate email format" + "Check email exists" → "Validate email")
-- Focus on major phases, not implementation details
+- Focus on major functional phases, not implementation details or code tasks
 - Steps should be at hamburger layer level, not line-by-line code
+
+### Issue: "Steps sound like code implementation tasks"
+**Solution:**
+- If step sounds like "Create X class", "Write Y method", or "Implement Z pattern" → it's TOO DETAILED
+- Reframe: Ask "What is the FUNCTIONAL goal?" and describe that instead
+- Examples:
+  - ❌ "Create UserRepository class" → ✅ "Persist user data to database"
+  - ❌ "Write validation logic for email" → ✅ "Validate email format"
+  - ❌ "Implement authentication middleware" → ✅ "Verify credentials before granting access"
+- Remember: Implementation details (classes, methods, patterns, tests) belong to TDD phase
 
 ### Issue: "Steps don't have clear quality attributes"
 **Solution:**
