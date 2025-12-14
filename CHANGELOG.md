@@ -211,7 +211,7 @@ For issues, questions, or suggestions:
 
 ## License
 
-This project is licensed under GPL-3.0. See LICENSE file for details.
+This project is licensed under MIT. See LICENSE file for details.
 
 ## Contributors
 

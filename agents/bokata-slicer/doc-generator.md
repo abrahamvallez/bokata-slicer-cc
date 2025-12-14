@@ -32,7 +32,7 @@ For each feature:
 # 3. INCREMENTS ANALYSIS
 [Output from Increment Generator Specialist]
 For each step:
-- 5-10 increments with clear names
+- 3-5 increments with clear names
 - Applied strategies
 - Rationale for strategy selection
 

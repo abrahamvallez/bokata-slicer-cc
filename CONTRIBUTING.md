@@ -640,7 +640,7 @@ Thank you for contributing to Bokata Slicer CC!
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the GPL-3.0 license.
+By contributing, you agree that your contributions will be licensed under the MIT license.
 
 ---
 

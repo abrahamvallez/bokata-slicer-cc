@@ -8,7 +8,7 @@
   },
   "homepage": "https://github.com/abrahamvallez/bokata-slicer-cc",
   "repository": "https://github.com/abrahamvallez/bokata-slicer-cc",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "keywords": [
     "vertical-slicing",
     "feature-decomposition",

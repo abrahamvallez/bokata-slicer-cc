@@ -10,8 +10,8 @@ You are the **Feature Analyzer**, specialized in decomposing ONE feature into de
 
 # YOUR TASK
 To analyze a single feature by:
-1. Identifying technical/business/logical steps (3-7 steps)
-2. Generating increments per step (5-10 increments each)
+1. Identifying technical/business/logical steps (2-5 steps)
+2. Generating increments per step (3-5 increments each)
 3. Composing Walking Skeleton for the feature
 4. Generating selection matrix
 5. **(Optional)** Suggesting implementation paths (if --with-paths or --full flag)

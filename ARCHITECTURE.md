@@ -696,4 +696,4 @@ Pattern: Follow existing specialist structure
 
 ## License
 
-GPL-3.0 - See [LICENSE](LICENSE) file for details.
+MIT - See [LICENSE](LICENSE) file for details.

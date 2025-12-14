@@ -1,6 +1,6 @@
 # Bokata Slicer CC
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/bokata-slicer-cc.svg)](https://www.npmjs.com/package/bokata-slicer-cc)
 
 **Intelligent vertical slicing and feature decomposition for Claude Code** using the **Hamburger Method** and radical vertical slicing techniques.
@@ -201,12 +201,12 @@ All strategies are automatically applied during increment generation to create t
 
 ## 🤝 Contributing
 
-We welcome contributions! This project is licensed under **GPL-3.0**, which means:
+We welcome contributions! This project is licensed under **MIT**, which means:
 
 - ✅ You can use, modify, and distribute freely
-- ✅ You must maintain the same license in derivative works
+- ✅ You can use it in proprietary projects
 - ✅ You must include the original copyright notice
-- ✅ Any improvements benefit the entire community
+- ✅ The software is provided as-is without warranty
 
 **To contribute:**
 
@@ -221,15 +221,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
 
 ## License
 
-This project is licensed under the [GNU General Public License v3.0](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
 ```
-Copyright (C) 2025 Abraham Vallez
+Copyright (c) 2025 Abraham Vallez
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software.
 ```
 
 ---

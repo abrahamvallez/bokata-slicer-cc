@@ -13,7 +13,7 @@
     "radical-increments"
   ],
   "author": "Abraham Vallez",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "homepage": "https://github.com/abrahamvallez/bokata-slicer-cc",
   "repository": {
     "type": "git",
