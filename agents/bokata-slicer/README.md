@@ -133,12 +133,20 @@ Key strategies include:
 
 ## 🎯 Fundamental Principles
 
-Every slice must:
+Every vertical slice must:
 - **Cut through all technical layers** (UI → Logic → Data)
 - **Deliver real and observable value** to the user
 - **Be independently deployable**
 - **Enable early feedback**
 - **Answer**: "What would you ship if the deadline was tomorrow?"
+
+### What is Walking Skeleton?
+
+**Walking Skeleton** is ONE specific vertical slice—the simplest one:
+- Uses the simplest (⭐ marked) increment from each step
+- Combines increments across all steps to form complete E2E functionality
+- The recommended starting implementation path
+- Proves the full architecture works with minimum complexity
 
 ## 🚀 Use Cases
 

@@ -134,6 +134,8 @@ This ensures the Walking Skeleton always delivers end-to-end functionality with 
 
 Every vertical slice must answer: **"What would we ship if the deadline was tomorrow?"**
 
+**Walking Skeleton** is ONE specific vertical slice—the simplest one using the most straightforward increment from each step. It's your minimum viable implementation that proves the architecture works end-to-end.
+
 Each slice must:
 - ✅ Cut through all technical layers (UI → Logic → Data)
 - ✅ Deliver real, observable value to the user
