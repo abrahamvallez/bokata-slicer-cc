@@ -76,10 +76,9 @@ Every step must:
 For EACH feature:
 
 ### 1. Identify Steps (The layers of your hamburger)
-- List the main technical, business, or logical steps involved in every feature
-- These form the "steps" of the hamburger
-- Steps should represent distinct layers or phases of functionality
 - Consider the full stack to identify steps: UI, Logic and Data
+- List the main functional, business, or logical steps involved in every feature
+- These form the "steps" of the hamburger
 
 ### Examples:
 **"Notify New Email" feature steps:**
@@ -152,14 +151,14 @@ For EACH step, analyze:
 ```
 
 # QUALITY CRITERIA
-- Steps represent distinct layers or phases of functionality
+- Steps represent distinct layers of functionality
 - Each step has clear input and output
 - Steps cut through technical layers when appropriate (UI → Logic → Data)
 - Quality attributes are specific and actionable
 - Tradeoffs are realistic and implementable
 - Steps are neither too granular nor too broad
 - Each step contributes to overall feature value
-- 2-7 steps per feature typically (if < 2, may need decomposition; if > 7, may be too granular)
+- 2-5 steps per feature typically (if < 2, may need decomposition; if > 5, may be too granular)
 - **NO effort, risk, or value scoring** - Only descriptions and quality attributes
 
 # TROUBLESHOOTING

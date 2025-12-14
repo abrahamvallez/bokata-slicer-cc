@@ -72,7 +72,7 @@ The generator will apply the Breakdown Strategies Toolkit to create 5-10 increme
 FOR EACH step:
 
 ### 1. Apply Breakdown Strategies Toolkit
-- Generate multiple increments (MANDATORY 5-10 increments)
+- Generate multiple increments (MANDATORY 3-5 increments)
 - Name increments clearly - Not "increment 1" but "Manual CSV Export"
 - Every increment must be deployable - No "setup only" work
 - Format: `[Step#].[Increment#]` (e.g., 1.1, 1.2, 1.3...)
