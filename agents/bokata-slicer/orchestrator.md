@@ -91,7 +91,7 @@ Status: In Progress
 ---
 
 ## Feature Sections
-[To be filled by step-analyzer and increment-generator - one per feature]
+[To be filled by step-analyzer and incremental-options-generator - one per feature]
 
 ---
 
@@ -255,14 +255,14 @@ FOR EACH step:
   ✓ NOT implementation-focused
 ```
 
-### 3.2 Increment Generation Loop
+### 3.2 Incremental Options Generation Loop
 
 FOR EACH feature in the feature list:
 
 ```
-3.2.1 Invoke increment-generator-specialist
+3.2.1 Invoke incremental-options-generator-specialist
 
-Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/increment-generator-specialist.md
+Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/incremental-options-generator-specialist.md
 
 Pass context:
 - working_file_path: [.working.md path]
@@ -270,28 +270,28 @@ Pass context:
 - scope: "project" | "feature"
 
 Expected output:
-- ## Feature N: Increments section in .working.md
+- ## Feature N: Incremental Options section in .working.md
 ```
 
-### 3.2.2 Wait for Increments Completion
+### 3.2.2 Wait for Incremental Options Completion
 
 Monitor `.working.md` for:
 ```
-✓ ## Feature N: Increments section exists
+✓ ## Feature N: Incremental Options section exists
 ✓ For EACH step:
-  ✓ 5-10 increments generated
+  ✓ 3-5 incremental options generated
   ✓ Simplest marked with ⭐
-  ✓ Each increment has:
+  ✓ Each incremental option has:
     - Description
     - REQUIRES specification
     - PROVIDES specification
     - COMPATIBLE WITH list
 ```
 
-### 3.2.3 Validate Increments
+### 3.2.3 Validate Incremental Options
 
 ```
-FOR EACH increment:
+FOR EACH incremental option:
   ✓ Specific, not generic
   ✓ Deployable independently
   ✓ Dependencies explicit
@@ -303,7 +303,7 @@ FOR EACH increment:
 
 ## Phase 4: Vertical Slice Composition (Walking Skeleton)
 
-**Compose vertical slices by selecting increments from each step.** Walking Skeleton is ONE specific vertical slice (the simplest one using ⭐ increments).
+**Compose vertical slices by selecting incremental options from each step.** Walking Skeleton is ONE specific vertical slice (the simplest one using ⭐ incremental options).
 
 ### 4.1 Invoke path-composer-specialist
 
@@ -324,9 +324,9 @@ Expected output:
 Monitor `.working.md` for:
 ```
 ✓ ## Walking Skeleton section exists
-✓ ### Selected Increments list
-  ✓ One increment per step (⭐ preferred)
-  ✓ All selected increments listed
+✓ ### Selected Incremental Options list
+  ✓ One incremental option per step (⭐ preferred)
+  ✓ All selected incremental options listed
 ✓ ### Rationale explaining choices
 ✓ ### Dependencies Analysis verifying compatibility
 ✓ ### Deployment Order sequential and validated
@@ -335,9 +335,9 @@ Monitor `.working.md` for:
 ### 4.3 Validate Walking Skeleton
 
 ```
-✓ Uses only ⭐ increments (or justified alternatives)
+✓ Uses only ⭐ incremental options (or justified alternatives)
 ✓ All dependencies satisfied
-✓ All selected increments compatible
+✓ All selected incremental options compatible
 ✓ Covers all steps/features
 ✓ End-to-end functionality demonstrated
 ✓ Deployment order is logical
@@ -355,7 +355,7 @@ Read the entire `.working.md` file to verify all phases completed:
 ✓ ## Context Analysis - PRESENT
 ✓ ## Features Backbone - PRESENT (if project scope)
 ✓ ## Feature N: Steps - PRESENT (for each feature)
-✓ ## Feature N: Increments - PRESENT (for each feature)
+✓ ## Feature N: Incremental Options - PRESENT (for each feature)
 ✓ ## Walking Skeleton - PRESENT
 ```
 
@@ -387,8 +387,8 @@ Executive Summary:
 #### Steps
 [From ## Feature 1: Steps section]
 
-#### Increments
-[From ## Feature 1: Increments section]
+#### Incremental Options
+[From ## Feature 1: Incremental Options section]
 
 ### Feature 2: {Name}
 [Repeat...]
@@ -408,7 +408,7 @@ Executive Summary:
 
 1. Review the Walking Skeleton
 2. For implementation strategies: `/bokata-iterations-paths {name}`
-3. For complete increment reference: `/bokata-matrix {name}`
+3. For complete incremental options reference: `/bokata-matrix {name}`
 
 ---
 
@@ -416,8 +416,8 @@ Generated: {date}
 Scope: {scope}
 Features: {count}
 Total Steps: {count}
-Total Increments: {count}
-Walking Skeleton: {count} increments
+Total Incremental Options: {count}
+Walking Skeleton: {count} incremental options
 ```
 
 ### 5.3 Write Final Output
@@ -451,15 +451,15 @@ Summary:
 - Scope: {scope}
 - Features: {count}
 - Total Steps: {total_steps}
-- Total Increments: {total_increments}
-- Walking Skeleton: {skeleton_count} increments
+- Total Incremental Options: {total_incremental_options}
+- Walking Skeleton: {skeleton_count} incremental options
 
 Status: READY FOR IMPLEMENTATION
 
 Next Steps:
 1. Review the generated document
 2. For strategies: /bokata-iterations-paths {name}
-3. For increment matrix: /bokata-matrix {name}
+3. For incremental options matrix: /bokata-matrix {name}
 ```
 
 ---
@@ -598,12 +598,12 @@ Status: In Progress
   - Tradeoffs:
   - Options:
 
-### Increments
-[From increment-generator]
+### Incremental Options
+[From incremental-options-generator]
 
 #### Step 1: [Name]
 
-**Increment 1.1: [Name]** ⭐
+**Incremental Option 1.1: [Name]** ⭐
 - Description:
 - REQUIRES:
 - PROVIDES:
@@ -619,18 +619,18 @@ Status: In Progress
 ## Walking Skeleton
 [From path-composer]
 
-### Selected Increments
-- List of selected increments
+### Selected Incremental Options
+- List of selected incremental options
 
 ### Rationale
-[Why these increments]
+[Why these incremental options]
 
 ### Dependencies Analysis
 [Verification]
 
 ### Deployment Order
-1. Increment
-2. Increment
+1. Incremental Option
+2. Incremental Option
 
 ---
 
@@ -640,8 +640,8 @@ Status: In Progress
 - Scope: project|feature
 - Features Count: N
 - Total Steps: X
-- Total Increments: Y
-- Walking Skeleton: Z increments
+- Total Incremental Options: Y
+- Walking Skeleton: Z incremental options
 ```
 
 ---

@@ -16,11 +16,11 @@ Every vertical slice must answer this question:
 > **"What would we ship if the deadline was tomorrow?"**
 
 ### Terminology Clarification
-- **Increment**: A small, specific implementation unit within ONE step
-- **Vertical Slice**: A collection of increments (typically one per step) that forms a complete end-to-end feature
-- **Walking Skeleton**: ONE specific vertical slice (the simplest one, using ⭐ increments)
+- **Incremental Option**: A small, specific implementation unit within ONE step (one of several viable alternatives)
+- **Vertical Slice**: A selection of incremental options (typically one per step) that forms a complete end-to-end feature
+- **Walking Skeleton**: ONE specific vertical slice (the simplest one, using ⭐ incremental options)
 
-The fundamental question applies to the **vertical slice** (the complete composition), not to individual increments. A vertical slice is what gets shipped.
+The fundamental question applies to the **vertical slice** (the complete composition), not to individual incremental options. A vertical slice is what gets shipped.
 
 ### What This Ensures
 - ✅ Vertical slices deliver real, observable user value
@@ -33,7 +33,7 @@ The fundamental question applies to the **vertical slice** (the complete composi
 
 ## Slice Requirements
 
-Every analyzed increment must satisfy these requirements:
+Every analyzed incremental option must satisfy these requirements:
 
 ### 1. Cut Through All Technical Layers
 - ✅ UI/Presentation layer (what users see)
@@ -41,20 +41,20 @@ Every analyzed increment must satisfy these requirements:
 - ✅ Data layer (what's stored/accessed)
 - ✅ NOT: Just database schema, just UI mockups, just API specs
 
-Each increment must be a thin, complete vertical slice touching all layers.
+Each incremental option must be a thin, complete vertical slice touching all layers.
 
 ### 2. Deliver Observable Value to Users
 - ✅ User can see/experience the result
 - ✅ Feature has measurable impact
 - ✅ NOT: Infrastructure only, setup only, preparation only
 
-If users can't see or use it, it's not a complete increment.
+If users can't see or use it, it's not a complete incremental option.
 
 ### 3. Can Be Deployed Independently
 - ✅ Feature works standalone
-- ✅ Doesn't require other increments
-- ✅ Previous increments are its "zero" state
-- ✅ NOT: Depends on 5 other increments to work
+- ✅ Doesn't require other incremental options
+- ✅ Previous incremental options are its "zero" state
+- ✅ NOT: Depends on 5 other incremental options to work
 
 Deployability proves architecture is sound.
 
@@ -75,9 +75,9 @@ Early feedback beats late surprises.
 "Good enough" beats "perfect never."
 
 ### 6. Explicit Dependencies
-- ✅ Every increment declares what it REQUIRES
-- ✅ Every increment declares what it PROVIDES
-- ✅ Compatibility between increments is explicit
+- ✅ Every incremental option declares what it REQUIRES
+- ✅ Every incremental option declares what it PROVIDES
+- ✅ Compatibility between incremental options is explicit
 - ✅ NOT: Hidden dependencies, unclear constraints
 
 Transparency prevents integration surprises.
@@ -165,11 +165,12 @@ When analyzing a feature, it's decomposed into **steps**. Steps represent the fu
 - Step OUTPUT: What it produces
 - Sequence is obvious (Step 1 → Step 2 → Step 3)
 
-#### 3. Layers and Phases
-- UI layer: What users see and interact with
-- Logic layer: What computations/decisions happen
-- Data layer: What's stored and accessed
-- NOT: Implementation details (classes, methods, patterns)
+#### 3. Layers and Phases (Functional, Not Technical)
+- **UI layer:** What users see and interact with (functional perspective)
+- **Logic layer:** What computations/decisions happen (functional perspective)
+- **Data layer:** What's stored and accessed (functional perspective)
+- **NOT:** Implementation details (classes, methods, databases, frameworks, code patterns)
+- **Always:** Focus on the functional responsibility of each layer, never on technical implementation
 
 #### 4. Quality Attributes
 Each step must define its quality:
@@ -178,7 +179,7 @@ Each step must define its quality:
 - **Implementation options:** Different technical approaches
 
 #### 5. Supporting Incremental Implementation
-Steps enable breaking down into 5-10 increments each.
+Steps enable breaking down into 3-5 incremental options each.
 NOT all-or-nothing phases.
 
 ### Example: "Coach Records Audio"
@@ -214,11 +215,11 @@ NOT:
 
 ---
 
-## Increment Generation Principles
+## Incremental Option Generation Principles
 
-Increments are specific implementations of a step, applying breakdown strategies.
+Incremental Options are specific implementations of a step, applying breakdown strategies.
 
-### Increment Characteristics
+### Incremental Option Characteristics
 
 #### 1. Self-Contained Delivery
 - Can be implemented in isolation
@@ -233,14 +234,14 @@ Increments are specific implementations of a step, applying breakdown strategies
 - Examples: "Manual CSV Export", "API-driven List", "Fixed Pricing Tier"
 
 #### 3. Rationale and Strategy
-- Every increment comes from a breakdown strategy
+- Every incremental option comes from a breakdown strategy
 - Strategies include: Zero/One/Many, dummy-to-dynamic, capacity limits, workflow simplification, etc.
-- Rationale explains WHY this increment exists
+- Rationale explains WHY this incremental option exists
 
 #### 4. Dependency Specification
-Each increment explicitly states:
+Each incremental option explicitly states:
 
-**REQUIRES** - What this increment depends on
+**REQUIRES** - What this incremental option depends on
 ```
 REQUIRES: Backend endpoint POST /api/save
 REQUIRES: User session authenticated
@@ -248,7 +249,7 @@ REQUIRES: Database table users exists
 REQUIRES: None (if independent)
 ```
 
-**PROVIDES** - What this increment offers to others
+**PROVIDES** - What this incremental option offers to others
 ```
 PROVIDES: Ability to save form data
 PROVIDES: Persistent user state
@@ -264,9 +265,9 @@ COMPATIBLE WITH: None (if incompatible with all others)
 ```
 
 #### 5. Marked Simplicity
-The simplest increment in each step is marked with ⭐:
+The simplest incremental option in each step is marked with ⭐:
 ```
-⭐ Increment 1.1: Manual CSV Export
+⭐ Incremental Option 1.1: Manual CSV Export
   - REQUIRES: None
   - PROVIDES: CSV file download
   - COMPATIBLE WITH: All other storage options
@@ -274,37 +275,45 @@ The simplest increment in each step is marked with ⭐:
 
 Simplest ≠ Least useful. It means "most direct path to working functionality."
 
-### Example Increments for "Coach Records Audio" Step 1
+### Example Incremental Options for "Coach Records Audio" Step 1
+
+**Applied Strategies:** Technology Options, Manual Before Automated, Workflow Simplification
 
 ```
-Increment 1.1: Browser Microphone Input ⭐
+Incremental Option 1.1: Browser Microphone Input ⭐
+- Strategy: Technology Options (simplest, no external dependencies)
 - Record using browser's Web Audio API
 - Real-time playback preview
 - REQUIRES: Browser with Microphone permission
 - PROVIDES: Raw audio stream
 - COMPATIBLE WITH: 2.1, 2.2
 
-Increment 1.2: Native Mobile Microphone
+Incremental Option 1.2: Native Mobile Microphone
+- Strategy: Technology Options (native SDK approach)
 - Use native iOS/Android microphone
 - Platform-specific optimization
 - REQUIRES: Native app, platform SDKs
 - PROVIDES: High-quality audio stream
 - COMPATIBLE WITH: 2.3
 
-Increment 1.3: Audio Preprocessing
+Incremental Option 1.3: Audio Preprocessing
+- Strategy: Workflow Simplification (enhanced quality)
 - Apply noise reduction before recording
 - Real-time filtering
 - REQUIRES: Audio processing library
 - PROVIDES: Cleaned audio stream
 - COMPATIBLE WITH: 2.2, 2.3
 
-Increment 1.4: Volume Monitoring
+Incremental Option 1.4: Volume Monitoring
+- Strategy: Manual Before Automated (user feedback)
 - Display real-time volume levels
 - Peak detection, visual feedback
 - REQUIRES: Web Audio API access
 - PROVIDES: User feedback on recording levels
 - COMPATIBLE WITH: All others
 ```
+
+**Note:** This step demonstrates how 4 incremental options cover different technology choices (1.1, 1.2), quality enhancements (1.3), and user feedback (1.4)—all derived from specific breakdown strategies.
 
 ---
 
@@ -314,14 +323,14 @@ Walking Skeleton = the minimum viable implementation of a feature/project.
 
 ### Characteristics
 
-#### 1. Selects Simplest Increments (⭐)
-- One ⭐ increment from each step
+#### 1. Selects Simplest Incremental Options (⭐)
+- One ⭐ incremental option from each step
 - Creates complete, working feature
 - Proves architecture end-to-end
 - Minimum viable, not minimum feature
 
 #### 2. Validates Compatibility
-- All selected increments are compatible
+- All selected incremental options are compatible
 - Dependencies are satisfied
 - No missing prerequisites
 - Deployment order is clear
@@ -339,7 +348,7 @@ Walking Skeleton = the minimum viable implementation of a feature/project.
 - Risk is de-risked early
 
 #### 5. Foundation for Growth
-- Additional increments build on Walking Skeleton
+- Additional incremental options build on Walking Skeleton
 - Quality improves iteratively
 - Features expand systematically
 - NOT: Requires complete rewrite
@@ -349,7 +358,7 @@ Walking Skeleton = the minimum viable implementation of a feature/project.
 ```
 Feature: Coach Records Audio
 
-Selected Increments:
+Selected Incremental Options:
 1. Step 1 (Capture): Browser Microphone Input (1.1 ⭐)
    - Uses Web Audio API
    - Real-time capture
@@ -394,17 +403,20 @@ Risk: LOW (no external dependencies, offline-first)
 - ✅ Steps are sequential and coherent
 - ✅ Each step has clear input/output
 
-#### 3. Increment Level
-- ✅ 5-10 increments per step (typical range)
-- ✅ Each increment is deployable independently
-- ✅ Simplest increment marked with ⭐
-- ✅ Multiple strategies applied
-- ✅ Dependencies explicitly stated
-- ✅ Clear rationale provided
+#### 3. Incremental Option Level
+- ✅ **Exactly 3-5 incremental options per step** (NOT more, NOT less)
+  - 3-5 provides diversity without overwhelming complexity
+  - Fewer than 3: Too abstract, doesn't show real alternatives
+  - More than 5: Analysis paralysis, over-specification
+- ✅ Each incremental option is deployable independently
+- ✅ Simplest incremental option marked with ⭐
+- ✅ **Each incremental option clearly states which breakdown strategy was applied**
+- ✅ Dependencies explicitly stated (REQUIRES, PROVIDES, COMPATIBLE WITH)
+- ✅ Clear rationale provided for each option
 - ✅ NOT: Too large to build in one sprint
 
 #### 4. Composition Level
-- ✅ Walking Skeleton uses only ⭐ increments
+- ✅ Walking Skeleton uses only ⭐ incremental options
 - ✅ Delivers end-to-end functionality
 - ✅ Can be deployed independently
 - ✅ Multiple iteration options provided
@@ -468,7 +480,7 @@ Risk: LOW (no external dependencies, offline-first)
 
 ## Breakdown Strategies Reference
 
-All increment generators apply strategies from this toolkit:
+All incremental option generators apply strategies from this toolkit:
 
 ### Data Variation Strategies
 - **Zero/One/Many** - Handle zero cases → one case → multiple cases

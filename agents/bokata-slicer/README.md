@@ -4,7 +4,7 @@ Collection of specialized agents for radical feature decomposition using the **H
 
 ## 🎯 Objective
 
-These agents implement a systematic methodology to decompose complex features into the **smallest possible increments** that deliver immediate value, following the fundamental principle:
+These agents implement a systematic methodology to decompose complex features into the **smallest possible incremental options** that deliver immediate value, following the fundamental principle:
 
 > **"What would we ship if the deadline was tomorrow?"**
 
@@ -44,15 +44,15 @@ These agents implement a systematic methodology to decompose complex features in
 - **Output**: Steps per feature with quality attributes and trade-offs
 
 #### 3. **[increment-generator-specialist.md](increment-generator-specialist.md)** (ENHANCED v0.2.0)
-**Purpose**: Increment generation using breakdown strategies with dependency specifications
+**Purpose**: Incremental option generation using breakdown strategies with dependency specifications
 
 - Applies the **Breakdown Strategies Toolkit** (20+ strategies)
-- Generates 5-10 increments per step (MANDATORY)
-- **NEW:** Each increment specifies:
+- Generates 3-5 incremental options per step (MANDATORY)
+- **NEW:** Each incremental option specifies:
   - **REQUIRES**: External dependencies (or "None")
   - **PROVIDES**: Capabilities offered to other steps
-  - **COMPATIBLE WITH**: Which increments from other steps work together
-- Filters increments by viability (fast, testable, reversible)
+  - **COMPATIBLE WITH**: Which incremental options from other steps work together
+- Filters incremental options by viability (fast, testable, reversible)
 - **Output**: Multiple incremental implementations per step with full dependency specs
 
 #### 4. **[path-composer-specialist.md](path-composer-specialist.md)** (ENHANCED v0.2.0)
@@ -60,9 +60,9 @@ These agents implement a systematic methodology to decompose complex features in
 
 - **NEW:** Validates all dependencies and compatibility before suggesting paths
 - **NEW:** Checks that REQUIRES are satisfied by PROVIDES
-- **NEW:** Verifies all selected increments are mutually compatible
+- **NEW:** Verifies all selected incremental options are mutually compatible
 - **NEW:** Flags incompatible combinations and suggests alternatives
-- Combines cross-feature and cross-step increments
+- Combines cross-feature and cross-step incremental options
 - Creates the **Walking Skeleton** (minimal viable combination)
 - Designs iterations that improve a single aspect
 - **Output**: Slice plan with validated dependencies and compatibility analysis
@@ -70,7 +70,7 @@ These agents implement a systematic methodology to decompose complex features in
 #### 5. **[doc-generator.md](doc-generator.md)** (ENHANCED v0.2.0)
 **Purpose**: Final documentation generation with dependency visibility
 
-- **NEW:** Increments tables show REQUIRES | PROVIDES | COMPATIBLE WITH
+- **NEW:** Incremental Options tables show REQUIRES | PROVIDES | COMPATIBLE WITH
 - **NEW:** Includes "Dependency Analysis" section
 - **NEW:** Shows compatibility maps indicating valid paths
 - Generates **Development Plan** (checklist format)
