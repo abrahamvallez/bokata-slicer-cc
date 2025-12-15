@@ -48,6 +48,7 @@ Write to `.working.md` under the feature/step section:
 #### Step N: [Step Name]
 
 **Incremental Option N.1: [Name]** ⭐
+- **Strategy:** [Breakdown strategy used - e.g., "Zero/One/Many", "Dummy to Dynamic"]
 - **Description:** [Specific implementation]
 - **REQUIRES:** [Dependencies - "None" if independent]
 - **PROVIDES:** [What this incremental option offers]
@@ -205,6 +206,18 @@ Create 3-5 incremental options by:
 3. **Progressive complexity**
 4. **Clear naming** - NOT generic ("incremental option 1") but specific ("Manual CSV Export")
 
+### Validate Count:
+- **If <3 options:** Ask yourself: "Are there really no other viable alternatives?"
+  - If truly no more alternatives: Document why in rationale
+  - Otherwise: Apply more breakdown strategies
+
+- **If >5 options:** Ask yourself: "Are some options too similar or redundant?"
+  - Consolidate similar approaches
+  - Keep only distinctly different alternatives
+  - Aim for diversity, not quantity
+
+**Target:** Exactly 3-5 options per step. No exceptions without justification.
+
 Example incremental options for "Store Audio":
 ```
 ⭐ 1.1: Save to Browser LocalStorage
@@ -289,8 +302,9 @@ Format all incremental options under feature/step section:
 For completed Incremental Options section:
 
 ✅ **Incremental Option Definition**
-- [ ] 3-5 incremental options per step
+- [ ] EXACTLY 3-5 incremental options per step (NOT <3, NOT >5)
 - [ ] Each has specific, descriptive name (not "incremental option 1")
+- [ ] Each declares STRATEGY used to derive it
 - [ ] Each is deployable independently
 - [ ] ONE marked with ⭐ (simplest)
 
@@ -301,10 +315,11 @@ For completed Incremental Options section:
 - [ ] Dependencies are realistic
 
 ✅ **Strategies**
-- [ ] Multiple strategies applied (not all same approach)
+- [ ] EACH incremental option declares its strategy explicitly
+- [ ] Multiple strategies applied across options (not all same approach)
 - [ ] Strategies reflect step quality attributes
-- [ ] Progression from simple to complex
-- [ ] Rationale explains approach
+- [ ] Progression from simple to complex (strategy diversity)
+- [ ] Rationale explains overall approach
 
 ✅ **Documentation**
 - [ ] Descriptions are specific and clear
@@ -353,30 +368,35 @@ For completed Incremental Options section:
 ### Incremental Options:
 
 **Incremental Option 1.1: Browser Microphone (Web Audio API)** ⭐
+- **Strategy:** Technology Options (simplest approach)
 - Description: Capture using browser's built-in Web Audio API
 - REQUIRES: Browser with microphone permissions
 - PROVIDES: Raw audio stream
 - COMPATIBLE WITH: 2.1, 2.2, 3.1
 
 **Incremental Option 1.2: Native Mobile Microphone (iOS/Android)**
+- **Strategy:** Technology Options (native platform)
 - Description: Use platform-specific microphone APIs
 - REQUIRES: iOS SDK or Android SDK
 - PROVIDES: High-quality platform audio
 - COMPATIBLE WITH: 2.1, 2.3
 
 **Incremental Option 1.3: Permissions Handling**
+- **Strategy:** Workflow Simplification (graceful degradation)
 - Description: Gracefully handle denied microphone access
 - REQUIRES: Permission system
 - PROVIDES: User feedback on permission denied
 - COMPATIBLE WITH: 1.1, 1.2
 
 **Incremental Option 1.4: Audio Level Monitoring**
+- **Strategy:** Manual Before Automated (user feedback)
 - Description: Real-time volume level visualization
 - REQUIRES: Web Audio API or equivalent
 - PROVIDES: Visual feedback during recording
 - COMPATIBLE WITH: 1.1, 1.2, 1.3
 
 **Incremental Option 1.5: Noise Detection**
+- **Strategy:** Extract Basic Utility (quality assurance)
 - Description: Detect and warn about excessive background noise
 - REQUIRES: Audio analysis capability
 - PROVIDES: Quality warning to user
@@ -387,8 +407,9 @@ For completed Incremental Options section:
 # COMPLETION CHECKLIST
 
 - [ ] Incremental Options section exists in `.working.md`
-- [ ] 3-5 incremental options per step
+- [ ] 3-5 incremental options per step (EXACTLY, not more/less)
 - [ ] Each incremental option has specific name
+- [ ] Each incremental option declares STRATEGY used
 - [ ] ONE marked with ⭐ per step
 - [ ] All REQUIRES, PROVIDES, COMPATIBLE WITH documented
 - [ ] Incremental Options follow strategy rationale

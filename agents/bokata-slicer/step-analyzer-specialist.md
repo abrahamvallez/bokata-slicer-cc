@@ -49,6 +49,7 @@ Write to `.working.md` under the feature section:
 ### Steps
 
 #### Step 1: [Step Name]
+**Layer:** [UI | Logic | Data | Integration]
 **Description:** [What this step accomplishes]
 
 **Quality Attributes:**
@@ -106,13 +107,20 @@ Examples:
 - Display results (UI)
 ```
 
-## Step 3: Define Steps
+## Step 3: Define Steps and Assign Layers
 
 For each phase, create a step that:
 - Has **one clear purpose**
+- **MUST declare its functional layer:** UI | Logic | Data | Integration
 - Has **clear input and output**
 - Covers **relevant technical layers**
 - **NOT** implementation details (no "create class", "write method")
+
+### Layer Assignment Guide:
+- **UI:** User-facing interactions (forms, buttons, displays, inputs)
+- **Logic:** Processing, calculations, decisions, transformations
+- **Data:** Persistence, retrieval, storage operations
+- **Integration:** External systems, APIs, synchronization
 
 ### Good Steps ✅
 ```
@@ -201,6 +209,7 @@ For completed Steps section:
 ✅ **Step Definition**
 - [ ] 3-7 steps per feature
 - [ ] Each step has distinct responsibility
+- [ ] Each step has LAYER specified (UI/Logic/Data/Integration)
 - [ ] Clear input/output for each step
 - [ ] Steps flow logically (1 → 2 → 3...)
 
@@ -233,24 +242,28 @@ For completed Steps section:
 **Steps Identified:**
 
 #### Step 1: Capture Audio Input
+**Layer:** UI
 Description: Coach presses record and audio flows from microphone
 Quality: Real-time, low latency, mobile-friendly
 Tradeoffs: Compressed vs uncompressed, browser vs native
 Options: Web Audio API, native iOS SDK, native Android SDK
 
 #### Step 2: Process Audio
+**Layer:** Logic
 Description: Audio signal is cleaned, normalized, and optionally compressed
 Quality: Clean output, minimal delay, optimal file size
 Tradeoffs: Noise reduction intensity, compression level
 Options: Client-side processing, server-side, hybrid
 
 #### Step 3: Store Locally
+**Layer:** Data
 Description: Audio saved to device for offline access
 Quality: Reliable, fast access, persistent
 Tradeoffs: Storage space vs quality, sync strategy
 Options: File system, SQLite, IndexedDB, localStorage
 
 #### Step 4: Sync with Backend
+**Layer:** Integration
 Description: Audio uploaded to server when connection available
 Quality: Reliable transfer, resume capability, background
 Tradeoffs: Immediate vs batch, encrypted vs plain
@@ -268,24 +281,28 @@ Options: Upload on wifi, background service, manual trigger
 **Steps Identified:**
 
 #### Step 1: Capture Search Input
+**Layer:** UI
 Description: User enters search terms, optional filters
 Quality: Responsive, accessible, mobile-friendly
 Tradeoffs: Autocomplete vs manual, instant vs on-submit
 Options: Input field, voice search, filters sidebar
 
 #### Step 2: Execute Search
+**Layer:** Logic
 Description: Query processed against product catalog
 Quality: Fast (<500ms), accurate, relevant results
 Tradeoffs: Full-text vs indexed, fuzzy vs exact, relevance algorithm
 Options: Database query, search service, Elasticsearch
 
 #### Step 3: Rank and Filter
+**Layer:** Logic
 Description: Results ranked by relevance, filtered by criteria
 Quality: Most relevant first, clean filters
 Tradeoffs: Simple ranking vs ML-based, client-side vs server-side
 Options: Relevance scoring, machine learning, popularity-based
 
 #### Step 4: Display Results
+**Layer:** UI
 Description: Results shown with product info, pagination
 Quality: Fast render, clear information, easy navigation
 Tradeoffs: List vs grid, pagination vs infinite scroll
@@ -314,6 +331,7 @@ Solution: Be specific. Not "good performance" but "< 500ms response time". Not "
 - [ ] Steps section exists in `.working.md`
 - [ ] 3-7 steps identified for feature
 - [ ] Each step has clear name (verb-focused)
+- [ ] Each step has LAYER assigned (UI/Logic/Data/Integration)
 - [ ] Each step has description (1-2 sentences)
 - [ ] Quality factors defined for each step
 - [ ] Tradeoffs documented (alternatives)
