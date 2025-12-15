@@ -4,9 +4,9 @@ description: Generate complete increment selection matrix from project analysis
 
 # SELECTION MATRIX GENERATOR - Complete Increment Catalog
 
-You are the **Matrix Generator**, specialized in creating comprehensive increment reference catalogs from completed vertical slicing analysis.
+Generates comprehensive increment reference catalogs from completed vertical slicing analysis.
 
-# YOUR ROLE
+# ROLE
 
 Take a completed feature or project analysis and generate a complete selection matrix that enables teams to:
 1. See all available increments in one view
@@ -16,45 +16,43 @@ Take a completed feature or project analysis and generate a complete selection m
 
 **FOCUS:** Dependencies and compatibility, NOT effort/value/risk scoring.
 
-# YOUR TASK
+# EXECUTION MODE
 
-Generate complete increment catalog from a provided analysis by:
-1. Accepting the analysis file path as parameter
-2. Validating it's a complete /bokata or /bokata-feature analysis
-3. Extracting all steps and increments
-4. Organizing increments by dependencies
-5. Creating compatibility maps
-6. Producing selection matrix document
+**Single mode: File-based processing**
+- Always receives analysis file as input
+- Always modifies file by appending results
+- No dual modes, no orchestration
+- Simple, direct: File → Specialist → Modified File
 
 ---
 
 # STEP 1: ACCEPT ANALYSIS PARAMETER
 
-This command **REQUIRES** an analysis file from `/bokata` or `/bokata-feature`.
+This command **REQUIRES** an analysis file from `/bokata` or `/bokata:feature`.
 
 ## Input Format
 
 **Required parameter - Analysis file (one of these formats):**
 ```
-/bokata-matrix [analysis-file.md]
+/bokata:matrix [analysis-file.md]
 ```
 
 **Option A: Full path:**
 ```
-/bokata-matrix ./docs/slicing-analysis/task-management-2025-10-28.md
-/bokata-matrix ./docs/slicing-analysis/user-authentication-2025-10-28.md
+/bokata:matrix ./docs/slicing-analysis/task-management-2025-10-28.md
+/bokata:matrix ./docs/slicing-analysis/user-authentication-2025-10-28.md
 ```
 
 **Option B: Filename only (auto-detected in docs/slicing-analysis/):**
 ```
-/bokata-matrix task-management-2025-10-28.md
-/bokata-matrix user-authentication-2025-10-28.md
+/bokata:matrix task-management-2025-10-28.md
+/bokata:matrix user-authentication-2025-10-28.md
 ```
 
 **Option C: Project name (finds latest analysis):**
 ```
-/bokata-matrix task-management
-/bokata-matrix user-authentication
+/bokata:matrix task-management
+/bokata:matrix user-authentication
 ```
 
 ## File Resolution Logic
@@ -62,19 +60,19 @@ This command **REQUIRES** an analysis file from `/bokata` or `/bokata-feature`.
 The command resolves the file parameter in this order:
 
 1. **If ends with `.md`:** Treat as filename or full path
-   - `/bokata-matrix task-management-2025-10-28.md` → Search in `./docs/slicing-analysis/`
-   - `/bokata-matrix ./docs/slicing-analysis/task-management-2025-10-28.md` → Use exact path
+   - `/bokata:matrix task-management-2025-10-28.md` → Search in `./docs/slicing-analysis/`
+   - `/bokata:matrix ./docs/slicing-analysis/task-management-2025-10-28.md` → Use exact path
 
 2. **If no `.md` extension:** Treat as project name, find latest analysis
-   - `/bokata-matrix task-management` → Find latest `task-management-*.md` file
-   - `/bokata-matrix user-authentication` → Find latest `user-authentication-*.md` file
+   - `/bokata:matrix task-management` → Find latest `task-management-*.md` file
+   - `/bokata:matrix user-authentication` → Find latest `user-authentication-*.md` file
 
 3. **Search location:** Always `./docs/slicing-analysis/` (or custom output path if specified)
 
 ## Validate Analysis File
 
 **The file MUST be:**
-- ✅ Output from `/bokata` (project analysis) OR `/bokata-feature` (single feature)
+- ✅ Output from `/bokata` (project analysis) OR `/bokata:feature` (single feature)
 - ✅ Markdown format (.md)
 - ✅ Contains at least: Executive Summary, Feature Breakdown, Walking Skeleton, Increments with REQUIRES/PROVIDES/COMPATIBLE WITH
 - ✅ Valid file that exists in `./docs/slicing-analysis/` or custom location
@@ -84,12 +82,12 @@ The command resolves the file parameter in this order:
 ```
 ❌ Invalid analysis file
 
-This command requires an analysis file from /bokata or /bokata-feature
+This command requires an analysis file from /bokata or /bokata:feature
 
 Examples:
-  /bokata-matrix task-management-2025-10-28.md
-  /bokata-matrix ./docs/slicing-analysis/task-management-2025-10-28.md
-  /bokata-matrix task-management
+  /bokata:matrix task-management-2025-10-28.md
+  /bokata:matrix ./docs/slicing-analysis/task-management-2025-10-28.md
+  /bokata:matrix task-management
 
 The file must contain:
   ✓ Executive Summary
@@ -99,12 +97,12 @@ The file must contain:
 
 First run:
   /bokata [project description]
-  /bokata-feature [feature description]
+  /bokata:feature [feature description]
 
 Then use any of these formats:
-  /bokata-matrix {filename}.md
-  /bokata-matrix ./docs/slicing-analysis/{filename}.md
-  /bokata-matrix {project-name}
+  /bokata:matrix {filename}.md
+  /bokata:matrix ./docs/slicing-analysis/{filename}.md
+  /bokata:matrix {project-name}
 ```
 
 ---
@@ -155,10 +153,10 @@ The analysis document appears incomplete.
 Missing: [list missing sections]
 
 Please re-run the analysis:
-- /bokata-feature [feature]  OR
+- /bokata:feature [feature]  OR
 - /bokata [project]
 
-Then try /bokata-matrix again.
+Then try /bokata:matrix again.
 ```
 
 ---
@@ -630,7 +628,7 @@ After successful generation:
 ✅ Increment organization by category
 
 **NOT Included:**
-❌ Effort/value/risk scoring (see /bokata-iterations-paths for that)
+❌ Effort/value/risk scoring (see /bokata:paths for that)
 ❌ Timeline estimates
 ❌ Implementation guidance
 
@@ -686,12 +684,12 @@ After successful generation:
 
 **Previous command:**
 ```
-/bokata-feature User records audio with microphone
+/bokata:feature User records audio with microphone
 ```
 
 **Now run:**
 ```
-/bokata-matrix
+/bokata:matrix
 ```
 
 **Process:**
@@ -720,7 +718,7 @@ After successful generation:
 
 **Now run:**
 ```
-/bokata-matrix
+/bokata:matrix
 ```
 
 **Process:**
@@ -744,7 +742,7 @@ After successful generation:
 
 **Command:**
 ```
-/bokata-matrix --file real-time-notifications-2025-10-25.md
+/bokata:matrix --file real-time-notifications-2025-10-25.md
 ```
 
 **Process:**
@@ -762,10 +760,10 @@ After successful generation:
 No analysis found in ./docs/slicing-analysis/
 
 Please run analysis first:
-1. /bokata-feature [feature]  (for single feature)
+1. /bokata:feature [feature]  (for single feature)
 2. /bokata [project]          (for multiple features)
 
-Then run: /bokata-matrix
+Then run: /bokata:matrix
 ```
 
 ## File Not Found
@@ -776,7 +774,7 @@ Available analyses:
 - [file1] - [date]
 - [file2] - [date]
 
-Use: /bokata-matrix --file [filename]
+Use: /bokata:matrix --file [filename]
 Or omit --file to use most recent.
 ```
 
@@ -792,7 +790,7 @@ This might be an older analysis format.
 Please re-run the analysis:
 /bokata [feature/project]
 
-Then try /bokata-matrix again.
+Then try /bokata:matrix again.
 ```
 
 ## Generation Failure
@@ -815,19 +813,19 @@ Please:
 # COMMAND RELATIONSHIPS
 
 **Before this command:**
-1. `/bokata-feature` - Single feature analysis
+1. `/bokata:feature` - Single feature analysis
 2. `/bokata` - Project analysis
 
 **Parallel with:**
-1. `/bokata-iterations-paths` - Implementation paths (can run in any order)
+1. `/bokata:paths` - Implementation paths (can run in any order)
 
 **Command flow:**
 ```
-/bokata-feature or /bokata    → Core analysis
+/bokata:feature or /bokata    → Core analysis
            ↓
     ┌──────┴──────┐
     ↓             ↓
-/bokata-iterations-paths    /bokata-matrix
+/bokata:paths    /bokata:matrix
 (timeline focus)            (structure focus)
 ```
 
@@ -863,7 +861,7 @@ Before generating matrix:
 - **Structure not estimation** - No effort/time/value scoring
 - **Dependency focus** - REQUIRES, PROVIDES, COMPATIBLE WITH
 - **Custom path enablement** - Helps teams build own implementation strategies
-- **Complement to paths** - Use together with /bokata-iterations-paths
+- **Complement to paths** - Use together with /bokata:paths
 - **Living reference** - Useful throughout implementation
 
 The goal is to provide a comprehensive reference that enables informed, flexible implementation path building while ensuring technical coherence through dependency management.

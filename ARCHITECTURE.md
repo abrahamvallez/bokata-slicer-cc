@@ -77,7 +77,7 @@ Every increment in v0.2.0 declares three critical attributes:
 
 ```
 Step 1: Generate Increments (increment-generator-specialist)
-├─ Create 5-10 increments per step
+├─ Create 3-5 increments per step
 ├─ Each declares REQUIRES, PROVIDES, COMPATIBLE WITH
 └─ Mark simplest with ⭐
 
@@ -190,7 +190,7 @@ Location: `agents/bokata-slicer/`
 ```
 Feature Backbone Specialist → Identifies features
 Step Analyzer Specialist → Decomposes into steps
-Increment Generator Specialist → Creates 5-10 increments per step
+Increment Generator Specialist → Creates 3-5 increments per step
 Slice Composer Specialist → Suggests slice combinations
 ```
 
@@ -277,7 +277,7 @@ Location: `agents/bokata-slicer/doc-slicer-generator.md`
 **Output:** Complete Vertical Slicing Analysis with:
 1. Features backbone
 2. Steps breakdown per feature
-3. 5-10 increments per step
+3. 3-5 increments per step
 4. Suggested Walking Skeleton
 5. Multiple iteration options
 6. Implementation decision guide
@@ -304,7 +304,7 @@ Context: E-commerce, React + Node.js, mobile-first
 
 **Output:** Quick Slice Analysis with:
 1. 3-7 steps identified
-2. 5-10 increments per step
+2. 3-5 increments per step
 3. 3 implementation path options:
    - Option 1: Absolute minimum (ship tomorrow)
    - Option 2: Balanced approach
@@ -337,7 +337,7 @@ Context: E-commerce, React + Node.js, mobile-first
 # Phase 3: Generate Increments
 /generate-increments
 [Steps from phase 2]
-→ Get: 5-10 increments per step
+→ Get: 3-5 increments per step
 
 # Phase 4: Compose Slices
 /compose-slices

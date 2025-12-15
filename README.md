@@ -193,6 +193,37 @@ All strategies are automatically applied during increment generation to create t
 
 ---
 
+## 🔧 Advanced Usage: Independent Agent Execution
+
+For fine-grained control, three core agents can run independently without the full orchestrator:
+
+| Subcommand | Purpose | Input | Output |
+|---|---|---|---|
+| `/bokata:backbone` | Identify features | Context Analysis | Features Backbone |
+| `/bokata:steps` | Decompose features | Context + Features | Steps breakdown |
+| `/bokata:increments` | Generate options | Context + Steps | Implementation options |
+
+**Example workflow:**
+```bash
+/bokata:backbone ./context.md    # Generate features
+/bokata:steps ./context.md       # Generate steps
+/bokata:increments ./context.md  # Generate options
+```
+
+**When to use:**
+- ✅ Iterating on specific sections
+- ✅ Extending existing analysis
+- ✅ Fine-grained control
+
+**When NOT to use:**
+- ❌ Need Walking Skeleton (use `/bokata` instead)
+- ❌ Need cross-feature validation
+- ❌ Starting from scratch
+
+See [CLAUDE.md](CLAUDE.md#independent-agent-execution-advanced) for full documentation.
+
+---
+
 ## 📚 Documentation
 
 - **[INSTALL.md](INSTALL.md)** - Complete installation guide

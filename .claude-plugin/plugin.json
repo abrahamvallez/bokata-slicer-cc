@@ -21,7 +21,37 @@
     {
       "name": "bokata",
       "path": "./commands/bokata.md",
-      "description": "Intelligent vertical slicing - automatically adapts to single feature or full project"
+      "description": "Intelligent vertical slicing - project analysis with multiple features"
+    },
+    {
+      "name": "bokata:backbone",
+      "path": "./commands/bokata/backbone.md",
+      "description": "Extract features backbone from project context"
+    },
+    {
+      "name": "bokata:steps",
+      "path": "./commands/bokata/steps.md",
+      "description": "Decompose features into actionable steps with quality attributes"
+    },
+    {
+      "name": "bokata:increments",
+      "path": "./commands/bokata/increments.md",
+      "description": "Generate incremental implementation options for each step"
+    },
+    {
+      "name": "bokata:feature",
+      "path": "./commands/bokata/feature.md",
+      "description": "Single feature vertical slicing analysis - analyze one capability in detail"
+    },
+    {
+      "name": "bokata:paths",
+      "path": "./commands/bokata/paths.md",
+      "description": "Generate implementation paths and decision guide from project analysis"
+    },
+    {
+      "name": "bokata:matrix",
+      "path": "./commands/bokata/matrix.md",
+      "description": "Generate complete increment selection matrix from project analysis"
     }
   ],
   "agents": [
@@ -48,7 +78,7 @@
     {
       "name": "increment-generator-specialist",
       "path": "./agents/bokata-slicer/increment-generator-specialist.md",
-      "description": "Generates 5-10 increments per step using breakdown strategies"
+      "description": "Generates 3-5 increments per step using breakdown strategies"
     },
     {
       "name": "path-composer-specialist",
