@@ -1,6 +1,7 @@
 ---
 name: orchestrator
 description: Universal coordinator for Bokata analysis workflows - manages shared markdown context
+tools: Task, Read, Write
 model: opus
 color: purple
 ---

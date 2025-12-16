@@ -1,6 +1,7 @@
 ---
 name: project-explorer
 description: Investigates codebase and analyzes functional/technical requirements
+tools: Glob, Grep, Read, Write, Bash
 model: sonnet
 color: blue
 ---

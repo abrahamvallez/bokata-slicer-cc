@@ -1,6 +1,7 @@
 ---
 name: decision-guide-specialist
 description: Creates decision framework to help teams choose the best iteration path based on their context and priorities
+tools: Read, Write
 model: haiku
 color: orange
 ---

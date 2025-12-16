@@ -5,7 +5,8 @@
 
 **Intelligent vertical slicing and feature decomposition for Claude Code** using the **Hamburger Method** and radical vertical slicing techniques.
 
-> **Version:** v0.6.0 (Latest improvements to installation and command workflow)
+> **Version:** v0.4.0 (Command-based orchestration & implementation checklists)
+> **Latest:** Command-based analysis (`/bokata:bokata`) - 9% faster, more transparent
 
 ## 🚀 Quick Start
 
@@ -26,35 +27,54 @@ bokata-slicer-cc install
 
 ### Basic Usage
 
-Bokata provides **four specialized commands** for different analysis needs:
+Bokata provides **specialized commands** for different analysis needs:
 
 ```bash
-# 1. Analyze a full project (multiple features)
-/bokata E-commerce platform with catalog, cart, checkout
+# 1. Analyze a full project (multiple features) - RECOMMENDED
+/bokata:bokata E-commerce platform with catalog, cart, checkout
 
 # 2. Analyze a single feature
-/bokata-feature Feature: Coach Records Audio
+/bokata:feature Feature: Coach Records Audio
 
 # 3. Generate implementation strategies (after step 1 or 2)
-/bokata-iterations-paths
+/bokata:paths
 
 # 4. Build custom implementation paths (after step 1 or 2)
-/bokata-matrix
+/bokata:matrix
 
 # Can also read from files
-/bokata ./docs/project-requirements.md
-/bokata-feature ./docs/feature-spec.md
+/bokata:bokata ./docs/project-requirements.md
+/bokata:feature ./docs/feature-spec.md
+
+# Legacy option (agent-based - still supported)
+/bokata:bokata-legacy E-commerce platform...
 ```
 
-**Output:** Markdown analysis documents in `./docs/slicing-analysis/`
+**Output:** Markdown analysis documents in `./docs/slicing-analysis/` with **implementation checklists**
+
+### Implementation Checklists
+
+All outputs now include progress tracking:
+
+```markdown
+| Status | # | Incremental Option | Requires | Provides |
+|--------|---|---------|----------|----------|
+| [ ] | 1.1 | Manual Export ⭐ | None | CSV |
+| [ ] | 1.2 | Button Export | API | Button |
+
+**Progress: 0/2 incremental options completed**
+```
+
+Check off boxes as you implement each option!
 
 ### Recommended Workflow
 
-1. **Run core analysis** with `/bokata` or `/bokata-feature`
+1. **Run core analysis** with `/bokata:bokata` (or `/bokata:feature`)
 2. **Review Walking Skeleton** - the minimum implementation needed
-3. *(Optional)* Run `/bokata-iterations-paths` for implementation strategies
-4. *(Optional)* Run `/bokata-matrix` for custom path building
-5. **Start implementing** based on your priorities
+3. **Check off implemented incremental options** as you work
+4. *(Optional)* Run `/bokata:paths` for implementation strategies
+5. *(Optional)* Run `/bokata:matrix` for custom path building
+6. **Track progress** directly in the analysis document
 
 ---
 
@@ -91,31 +111,43 @@ This convention is enforced by all commands to maintain consistency throughout a
 
 ## 🎯 How It Works
 
-### The Four Commands
+### The Commands (v0.4.0)
 
-**1. `/bokata` - Project Analysis**
+**1. `/bokata:bokata` - Project Analysis** ⭐ RECOMMENDED
 - Analyzes projects with multiple features
-- Generates cross-feature Walking Skeleton
-- Provides complete feature breakdown with dependencies
+- Generates cross-feature Walking Skeleton with **implementation checklists**
+- Command-based orchestration (9% faster)
+- Complete feature breakdown with dependencies
 - No effort/value/risk scores (dependencies only)
 
-**2. `/bokata-feature` - Single Feature Analysis**
+**1b. `/bokata:bokata-legacy` - Project Analysis (Agent-Based)**
+- Legacy agent-based orchestration option
+- Same analysis output as `/bokata:bokata`
+- For users who prefer agent-based approach
+- Still fully supported
+
+**2. `/bokata:feature` - Single Feature Analysis**
 - Focused analysis of a single feature
-- Generates feature-specific Walking Skeleton
+- Generates feature-specific Walking Skeleton with **implementation checklists**
 - Detailed step and increment breakdown with dependencies
 - No effort/value/risk scores (dependencies only)
 
-**3. `/bokata-iterations-paths` - Implementation Strategies**
+**3. `/bokata:paths` - Implementation Strategies**
 - Generates 3-5 implementation path options
 - Includes estimated timelines and story points
 - Strategic recommendations based on priorities
-- Must run after `/bokata` or `/bokata-feature`
+- Must run after `/bokata:bokata` or `/bokata:feature`
 
-**4. `/bokata-matrix` - Selection Matrix**
+**4. `/bokata:matrix` - Selection Matrix**
 - Complete increment catalog with detailed dependencies
 - Shows which increments work together
 - Enables custom path building
-- Must run after `/bokata` or `/bokata-feature`
+- Must run after `/bokata:bokata` or `/bokata:feature`
+
+**5. Individual Phase Commands (Advanced)**
+- `/bokata:backbone` - Extract features only
+- `/bokata:steps` - Decompose into steps only
+- `/bokata:increments` - Generate options only
 
 ### Guaranteed Deployable Paths
 

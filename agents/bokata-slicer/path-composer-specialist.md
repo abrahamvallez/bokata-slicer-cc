@@ -1,6 +1,7 @@
 ---
 name: path-composer-specialist
 description: Composes Walking Skeleton from simplest incremental options with dependency validation
+tools: Read, Write
 model: sonnet
 color: cyan
 ---

@@ -1,6 +1,7 @@
 ---
 name: selection-matrix-specialist
 description: Generates interactive selection matrix for custom increment selection based on effort, value, risk, and dependencies
+tools: Read, Write
 model: haiku
 color: green
 ---

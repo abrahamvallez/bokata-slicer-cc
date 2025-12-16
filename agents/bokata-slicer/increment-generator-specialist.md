@@ -1,6 +1,7 @@
 ---
 name: increment-generator-specialist
 description: Generates 3-5 incremental implementations per step using breakdown strategies
+tools: Read, Write
 model: sonnet
 color: blue
 ---
@@ -42,6 +43,36 @@ For each step, generate incremental options that apply breakdown strategies.
 
 Write to `<input_file>` under the feature/step section:
 
+**Format 1: Checklist Table (NEW - for implementation tracking)**
+
+```markdown
+### Incremental Options
+
+#### Step N: [Step Name]
+
+| Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
+|--------|---|---------|----------|----------|----------|------------|
+| [ ] | N.1 | [Name] ⭐ | [Strategy] | [Deps] | [Caps] | [List] |
+| [ ] | N.2 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
+| [ ] | N.3 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
+
+**Implementation Progress: 0/N incremental options completed**
+
+**Description of incremental options:**
+
+**Incremental Option N.1: [Name]** ⭐
+- **Strategy:** [Breakdown strategy used]
+- **Description:** [Specific implementation]
+- **REQUIRES:** [Dependencies]
+- **PROVIDES:** [What this offers]
+- **COMPATIBLE WITH:** [Compatible options]
+
+**Incremental Option N.2: [Name]**
+[Repeat...]
+```
+
+**Format 2: Detailed List (Classic - alternative)**
+
 ```markdown
 ### Incremental Options
 
@@ -57,6 +88,8 @@ Write to `<input_file>` under the feature/step section:
 **Incremental Option N.2: [Name]**
 [Repeat structure...]
 ```
+
+**Recommended:** Use Checklist Table format for better implementation tracking.
 
 ---
 
@@ -282,7 +315,18 @@ Format all incremental options under feature/step section:
 
 #### Step 1: [Name]
 
+**Checklist Table 0/3 incremental options completed:**
+
+| Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
+|--------|---|---------|----------|----------|----------|------------|
+| [ ] | 1.1 | [Specific name] ⭐ | [Strategy] | [Deps] | [Caps] | [List] |
+| [ ] | 1.2 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
+| [ ] | 1.3 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
+
+**Detailed Descriptions:**
+
 **Incremental Option 1.1: [Specific name]** ⭐
+- **Strategy:** [Breakdown strategy used]
 - **Description:** [Specific implementation, not generic]
 - **REQUIRES:** [Dependencies - "None" if independent]
 - **PROVIDES:** [What this incremental option offers]
@@ -294,6 +338,20 @@ Format all incremental options under feature/step section:
 **Applied Strategies:** [List of 2-3 strategies used]
 **Rationale:** [Why these incremental options for this step]
 ```
+
+## Step 7: Add Progress Tracking Metadata
+
+After generating all incremental options for a step, calculate and add:
+
+- **Checkbox Column:** Empty checkboxes `[ ]` for each incremental option
+- **Implementation Progress Counter:** `0/N incremental options completed` where N = total count
+- **Clear Structure:** Combine table summary with detailed descriptions below
+
+This allows users to:
+- See all options in compact table format
+- Track which options they've implemented
+- Update progress as they work through implementation
+- Reference detailed descriptions by option number
 
 ---
 
@@ -321,10 +379,18 @@ For completed Incremental Options section:
 - [ ] Progression from simple to complex (strategy diversity)
 - [ ] Rationale explains overall approach
 
+✅ **Implementation Tracking (NEW)**
+- [ ] Checklist table format included with `[ ]` checkboxes
+- [ ] Progress counter calculated: `0/N incremental options completed`
+- [ ] Users can easily update checkboxes as they implement
+- [ ] Table format provides quick overview
+- [ ] Detailed descriptions below table for reference
+
 ✅ **Documentation**
 - [ ] Descriptions are specific and clear
 - [ ] No ambiguity in implementation
 - [ ] Ready for path-composer to select
+- [ ] Checklist format enables implementation tracking
 
 ---
 
@@ -365,42 +431,54 @@ For completed Incremental Options section:
 - Manual to Automated
 - Technology Options
 
-### Incremental Options:
+### Incremental Options (with Checklist Format):
+
+**Checklist Table 0/3 incremental options completed:**
+
+| Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
+|--------|---|---------|----------|----------|----------|------------|
+| [ ] | 1.1 | Browser Microphone (Web Audio API) ⭐ | Technology Options | Browser + permissions | Raw audio stream | 2.1, 2.2, 3.1 |
+| [ ] | 1.2 | Native Mobile Microphone | Technology Options | iOS/Android SDK | Platform audio | 2.1, 2.3 |
+| [ ] | 1.3 | Permissions Handling | Workflow Simplification | Permission system | User feedback | 1.1, 1.2 |
+| [ ] | 1.4 | Audio Level Monitoring | Manual Before Automated | Web Audio API | Visual feedback | 1.1-1.3 |
+| [ ] | 1.5 | Noise Detection | Extract Basic Utility | Audio analysis | Quality warning | All |
+
+**Detailed Descriptions:**
 
 **Incremental Option 1.1: Browser Microphone (Web Audio API)** ⭐
 - **Strategy:** Technology Options (simplest approach)
-- Description: Capture using browser's built-in Web Audio API
-- REQUIRES: Browser with microphone permissions
-- PROVIDES: Raw audio stream
-- COMPATIBLE WITH: 2.1, 2.2, 3.1
+- **Description:** Capture using browser's built-in Web Audio API
+- **REQUIRES:** Browser with microphone permissions
+- **PROVIDES:** Raw audio stream
+- **COMPATIBLE WITH:** 2.1, 2.2, 3.1
 
 **Incremental Option 1.2: Native Mobile Microphone (iOS/Android)**
 - **Strategy:** Technology Options (native platform)
-- Description: Use platform-specific microphone APIs
-- REQUIRES: iOS SDK or Android SDK
-- PROVIDES: High-quality platform audio
-- COMPATIBLE WITH: 2.1, 2.3
+- **Description:** Use platform-specific microphone APIs
+- **REQUIRES:** iOS SDK or Android SDK
+- **PROVIDES:** High-quality platform audio
+- **COMPATIBLE WITH:** 2.1, 2.3
 
 **Incremental Option 1.3: Permissions Handling**
 - **Strategy:** Workflow Simplification (graceful degradation)
-- Description: Gracefully handle denied microphone access
-- REQUIRES: Permission system
-- PROVIDES: User feedback on permission denied
-- COMPATIBLE WITH: 1.1, 1.2
+- **Description:** Gracefully handle denied microphone access
+- **REQUIRES:** Permission system
+- **PROVIDES:** User feedback on permission denied
+- **COMPATIBLE WITH:** 1.1, 1.2
 
 **Incremental Option 1.4: Audio Level Monitoring**
 - **Strategy:** Manual Before Automated (user feedback)
-- Description: Real-time volume level visualization
-- REQUIRES: Web Audio API or equivalent
-- PROVIDES: Visual feedback during recording
-- COMPATIBLE WITH: 1.1, 1.2, 1.3
+- **Description:** Real-time volume level visualization
+- **REQUIRES:** Web Audio API or equivalent
+- **PROVIDES:** Visual feedback during recording
+- **COMPATIBLE WITH:** 1.1, 1.2, 1.3
 
 **Incremental Option 1.5: Noise Detection**
 - **Strategy:** Extract Basic Utility (quality assurance)
-- Description: Detect and warn about excessive background noise
-- REQUIRES: Audio analysis capability
-- PROVIDES: Quality warning to user
-- COMPATIBLE WITH: All others
+- **Description:** Detect and warn about excessive background noise
+- **REQUIRES:** Audio analysis capability
+- **PROVIDES:** Quality warning to user
+- **COMPATIBLE WITH:** All others
 
 ---
 
@@ -408,13 +486,17 @@ For completed Incremental Options section:
 
 - [ ] Incremental Options section exists in `<input_file>`
 - [ ] 3-5 incremental options per step (EXACTLY, not more/less)
+- [ ] Checklist table format with Status column and `[ ]` checkboxes
+- [ ] Progress counter: `0/N incremental options completed`
 - [ ] Each incremental option has specific name
 - [ ] Each incremental option declares STRATEGY used
 - [ ] ONE marked with ⭐ per step
 - [ ] All REQUIRES, PROVIDES, COMPATIBLE WITH documented
 - [ ] Incremental Options follow strategy rationale
-- [ ] Documentation is clear
+- [ ] Table summary followed by detailed descriptions
+- [ ] Documentation is clear and actionable
 - [ ] Ready for Walking Skeleton selection
+- [ ] Ready for implementation tracking
 
 ---
 

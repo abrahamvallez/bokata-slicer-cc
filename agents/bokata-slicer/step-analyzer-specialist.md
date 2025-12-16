@@ -1,6 +1,7 @@
 ---
 name: step-analyzer-specialist
 description: Decomposes features into technical, business, and logical steps
+tools: Read, Write
 model: haiku
 color: blue
 ---

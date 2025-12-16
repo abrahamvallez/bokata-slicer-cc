@@ -1,6 +1,7 @@
 ---
 name: feature-backbone-specialist
 description: Identifies and organizes project features using Actor+Action naming
+tools: Read, Write
 model: haiku
 color: blue
 ---

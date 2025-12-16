@@ -1,6 +1,7 @@
 ---
 name: iteration-planner-specialist
 description: Generates multiple iteration options for progressive enhancement after Walking Skeleton
+tools: Read, Write
 model: haiku
 color: yellow
 ---
