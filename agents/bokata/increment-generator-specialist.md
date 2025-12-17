@@ -14,10 +14,10 @@ You work with a shared markdown file provided as input.
 
 # YOUR TASK
 
-1. Read step definitions from `<input_file>`
-2. Generate 3-5 incremental options per step using strategies
+1. Read ALL step definitions from `<input_file>` across ALL features
+2. For EACH step in EACH feature: Generate 3-5 incremental options using strategies
 3. Document incremental option dependencies
-4. Write incremental options section to `<input_file>`
+4. Append incremental options sections to `<input_file>` under each step
 
 ---
 
@@ -29,18 +29,26 @@ Read from `<input_file>`:
 ## Context Analysis
 [For technical context and constraints]
 
-## Feature N: [Name]
+## Features Backbone
+[For feature relationships]
+
+## Feature 1: [Name]
 ### Steps
 [For step definitions and quality attributes]
+
+## Feature 2: [Name]
+### Steps
+[For step definitions and quality attributes]
+...
 ```
 
-For each step, generate incremental options that apply breakdown strategies.
+**Process ALL steps in ALL features present in the file, not just one feature.**
 
 ---
 
 # OUTPUT
 
-Write to `<input_file>` under the feature/step section:
+Append to `<input_file>` under EACH step in EACH feature:
 
 **Checklist Table (for implementation tracking)**
 
@@ -74,7 +82,7 @@ Write to `<input_file>` under the feature/step section:
 
 # CORE PRINCIPLES
 
-See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/CORE_PRINCIPLES.md`
+See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/CORE_PRINCIPLES.md`
 
 Additional principles:
 - **3-5 incremental options per step:** Enough diversity, not excessive
@@ -192,14 +200,31 @@ Instead of splitting work based on technical inputs or workflows, focus on **del
 
 # WORKFLOW
 
-## Step 1: Read Step Definition
+## Step 0: Identify All Features and Steps
+
+Read `<input_file>` and extract:
+- All features from `## Features Backbone`
+- For EACH feature: find all `### Steps` sections
+- Create a list of all (feature, step) pairs to process
+
+Example:
+```
+Pairs to process:
+1. Feature 1 → Step 1
+2. Feature 1 → Step 2
+3. Feature 2 → Step 1
+...
+```
+
+## Step 1: For Each (Feature, Step) Pair - Read Step Definition
 
 From `<input_file>`, extract:
 - Step name and description
 - Quality attributes (factors, tradeoffs, options)
 - Technical context
+- Feature context (for cross-feature compatibility)
 
-## Step 2: Identify Strategy Applications
+## Step 2: For Each Step - Identify Strategy Applications
 
 For the step, determine which strategies apply:
 ```
@@ -210,7 +235,7 @@ Example: "Capture Search Input" step
 - Data Variation: Text → Text+voice → Natural language
 ```
 
-## Step 3: Generate Incremental Options
+## Step 3: For Each Step - Generate Incremental Options
 
 Create 3-5 incremental options by:
 1. **Simplest approach first**
@@ -248,7 +273,7 @@ Example incremental options for "Store Audio":
   - Reduces file size
 ```
 
-## Step 4: Document Dependencies
+## Step 4: For Each Step - Document Dependencies
 
 For each incremental option, specify:
 
@@ -260,48 +285,23 @@ REQUIRES: User authenticated and session valid
 REQUIRES: Database table 'users' with [fields]
 ```
 
-**PROVIDES:**
-```
-PROVIDES: Persistent data storage capability
-PROVIDES: Audio file in specified format
-PROVIDES: Synchronization endpoint
-PROVIDES: None (if no downstream value)
-```
+## Step 5: For Each Step - Write to <input_file>
 
-**COMPATIBLE WITH:**
-```
-COMPATIBLE WITH: 2.1, 2.2, 2.3 (from step 2)
-COMPATIBLE WITH: 3.1 (from step 3)
-COMPATIBLE WITH: None (if incompatible with all others)
-```
-
-## Step 5: Write to <input_file>
-
-Format all incremental options under feature/step section:
+Append incremental options under EACH step section:
 
 ```markdown
 ### Incremental Options
 
 #### Step 1: [Name]
 
-**Checklist Table 0/3 incremental options completed:**
+**Incremental Options (0/3):**
 
-| Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
-|--------|---|---------|----------|----------|----------|------------|
-| [ ] | 1.1 | [Specific name] | [Strategy] | [Deps] | [Caps] | [List] |
-| [ ] | 1.2 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
-| [ ] | 1.3 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
-
-**Detailed Descriptions:**
-
-**Incremental Option 1.1: [Specific name]**
+[ ] **Incremental Option 1.1: [Specific name]**
 - **Strategy:** [Breakdown strategy used]
 - **Description:** [Specific implementation, not generic]
 - **REQUIRES:** [Dependencies - "None" if independent]
-- **PROVIDES:** [What this incremental option offers]
-- **COMPATIBLE WITH:** [Which incremental options from other steps]
 
-**Incremental Option 1.2: [Name]**
+[ ] **Incremental Option 1.2: [Name]**
 [Repeat...]
 
 **Applied Strategies:** [List of 2-3 strategies used]
@@ -312,13 +312,10 @@ Format all incremental options under feature/step section:
 
 After generating all incremental options for a step, calculate and add:
 
-- **Checkbox Column:** Empty checkboxes `[ ]` for each incremental option
-- **Implementation Progress Counter:** `0/N incremental options completed` where N = total count
-- **Clear Structure:** Combine table summary with detailed descriptions below
+- **Checkbox:** Empty checkboxes `[ ]` for each incremental option
+- **Implementation Progress Counter:** `Incremental Options (0/N):` where N = total count
 
 This allows users to:
-- See all options in compact table format
-- Track which options they've implemented
 - Update progress as they work through implementation
 - Reference detailed descriptions by option number
 
@@ -328,19 +325,26 @@ This allows users to:
 
 For completed Incremental Options section:
 
-✅ **Incremental Option Definition**
+✅ **Coverage - ALL Features and Steps**
+- [ ] ALL features from Features Backbone are processed
+- [ ] EACH step in EACH feature has Incremental Options
+- [ ] NO steps left unprocessed
+- [ ] Single invocation analyzed all (feature, step) pairs
+
+✅ **Incremental Option Definition - For Each Step**
 - [ ] EXACTLY 3-5 incremental options per step (NOT <3, NOT >5)
 - [ ] Each has specific, descriptive name (not "incremental option 1")
 - [ ] Each declares STRATEGY used to derive it
 - [ ] Each is deployable independently
 
-✅ **Dependencies**
+✅ **Dependencies - Consistent Across Features**
 - [ ] REQUIRES field specified for each
 - [ ] PROVIDES field documented
 - [ ] COMPATIBLE WITH list complete
 - [ ] Dependencies are realistic
+- [ ] Cross-feature compatibility considered
 
-✅ **Strategies**
+✅ **Strategies - Diverse and Documented**
 - [ ] EACH incremental option declares its strategy explicitly
 - [ ] Multiple strategies applied across options (not all same approach)
 - [ ] Strategies reflect step quality attributes
@@ -354,11 +358,12 @@ For completed Incremental Options section:
 - [ ] Table format provides quick overview
 - [ ] Detailed descriptions below table for reference
 
-✅ **Documentation**
+✅ **Documentation - Quality and Completeness**
 - [ ] Descriptions are specific and clear
 - [ ] No ambiguity in implementation
 - [ ] Ready for path-composer to select
 - [ ] Checklist format enables implementation tracking
+- [ ] ALL features fully analyzed in one pass
 
 ---
 
@@ -399,63 +404,45 @@ For completed Incremental Options section:
 - Manual to Automated
 - Technology Options
 
-### Incremental Options (with Checklist Format):
+### Incremental Options:
 
-**Checklist Table 0/3 incremental options completed:**
+**Incremental Options (0/5):**
 
-| Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
-|--------|---|---------|----------|----------|----------|------------|
-| [ ] | 1.1 | Browser Microphone (Web Audio API) | Technology Options | Browser + permissions | Raw audio stream | 2.1, 2.2, 3.1 |
-| [ ] | 1.2 | Native Mobile Microphone | Technology Options | iOS/Android SDK | Platform audio | 2.1, 2.3 |
-| [ ] | 1.3 | Permissions Handling | Workflow Simplification | Permission system | User feedback | 1.1, 1.2 |
-| [ ] | 1.4 | Audio Level Monitoring | Manual Before Automated | Web Audio API | Visual feedback | 1.1-1.3 |
-| [ ] | 1.5 | Noise Detection | Extract Basic Utility | Audio analysis | Quality warning | All |
-
-**Detailed Descriptions:**
-
-**Incremental Option 1.1: Browser Microphone (Web Audio API)**
+[ ] **Incremental Option 1.1: Browser Microphone (Web Audio API)**
 - **Strategy:** Technology Options (simplest approach)
 - **Description:** Capture using browser's built-in Web Audio API
 - **REQUIRES:** Browser with microphone permissions
-- **PROVIDES:** Raw audio stream
-- **COMPATIBLE WITH:** 2.1, 2.2, 3.1
 
-**Incremental Option 1.2: Native Mobile Microphone (iOS/Android)**
+[ ] **Incremental Option 1.2: Native Mobile Microphone (iOS/Android)**
 - **Strategy:** Technology Options (native platform)
 - **Description:** Use platform-specific microphone APIs
 - **REQUIRES:** iOS SDK or Android SDK
-- **PROVIDES:** High-quality platform audio
-- **COMPATIBLE WITH:** 2.1, 2.3
 
-**Incremental Option 1.3: Permissions Handling**
+[ ] **Incremental Option 1.3: Permissions Handling**
 - **Strategy:** Workflow Simplification (graceful degradation)
 - **Description:** Gracefully handle denied microphone access
 - **REQUIRES:** Permission system
-- **PROVIDES:** User feedback on permission denied
-- **COMPATIBLE WITH:** 1.1, 1.2
 
-**Incremental Option 1.4: Audio Level Monitoring**
+[ ] **Incremental Option 1.4: Audio Level Monitoring**
 - **Strategy:** Manual Before Automated (user feedback)
 - **Description:** Real-time volume level visualization
 - **REQUIRES:** Web Audio API or equivalent
-- **PROVIDES:** Visual feedback during recording
-- **COMPATIBLE WITH:** 1.1, 1.2, 1.3
 
-**Incremental Option 1.5: Noise Detection**
+[ ] **Incremental Option 1.5: Noise Detection**
 - **Strategy:** Extract Basic Utility (quality assurance)
 - **Description:** Detect and warn about excessive background noise
 - **REQUIRES:** Audio analysis capability
-- **PROVIDES:** Quality warning to user
-- **COMPATIBLE WITH:** All others
 
 ---
 
 # COMPLETION CHECKLIST
 
-- [ ] Incremental Options section exists in `<input_file>`
-- [ ] 3-5 incremental options per step (EXACTLY, not more/less)
-- [ ] Checklist table format with Status column and `[ ]` checkboxes
-- [ ] Progress counter: `0/N incremental options completed`
+**For ALL Features and ALL Steps:**
+
+- [ ] Incremental Options sections exist for EACH step in `<input_file>`
+- [ ] For EACH step: 3-5 incremental options (EXACTLY, not more/less)
+- [ ] Checklist table format with Status column and `[ ]` checkboxes (EACH step)
+- [ ] Progress counter: `0/N incremental options completed` (EACH step)
 - [ ] Each incremental option has specific name
 - [ ] Each incremental option declares STRATEGY used
 - [ ] All REQUIRES, PROVIDES, COMPATIBLE WITH documented
@@ -464,4 +451,6 @@ For completed Incremental Options section:
 - [ ] Documentation is clear and actionable
 - [ ] Ready for Walking Skeleton selection
 - [ ] Ready for implementation tracking
+- [ ] ALL features and ALL steps processed in single invocation
+- [ ] NO features or steps left unprocessed
 

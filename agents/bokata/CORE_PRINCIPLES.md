@@ -513,7 +513,7 @@ All agents should reference this document at the top of their role section:
 ```markdown
 # CORE PRINCIPLES
 
-See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/CORE_PRINCIPLES.md`
+See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/CORE_PRINCIPLES.md`
 
 This agent adheres to all core principles. Additional notes:
 - [Any agent-specific additions or clarifications]

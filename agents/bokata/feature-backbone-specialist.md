@@ -73,7 +73,7 @@ Append to `<input_file>`:
 
 # CORE PRINCIPLES
 
-See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/CORE_PRINCIPLES.md`
+See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/CORE_PRINCIPLES.md`
 
 Additional principles for this agent:
 - **Actor+Action enforcement:** Every feature MUST follow [Actor] [Action] format

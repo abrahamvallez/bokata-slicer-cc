@@ -25,7 +25,7 @@ Coordinate a complete Bokata analysis workflow by:
 
 # CORE PRINCIPLES
 
-See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/CORE_PRINCIPLES.md`
+See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/CORE_PRINCIPLES.md`
 
 **Key Concept:** See "Terminology Clarification" in CORE_PRINCIPLES.md for distinction between Increment, Vertical Slice, and Walking Skeleton.
 
@@ -121,7 +121,7 @@ Status: In Progress
 ### 1.1 Invoke project-explorer
 
 ```
-Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/project-explorer.md
+Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata/project-explorer.md
 
 Pass context:
 - user_input: [original input]
@@ -160,7 +160,7 @@ ACTION: Request specialist to complete missing sections
 ### 2.1 Invoke feature-backbone-specialist
 
 ```
-Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/feature-backbone-specialist.md
+Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata/feature-backbone-specialist.md
 
 Pass context:
 - file_path: [analysis file path]
@@ -220,7 +220,7 @@ FOR EACH feature in the feature list:
 ```
 3.1.1 Invoke step-analyzer-specialist
 
-Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/step-analyzer-specialist.md
+Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.md
 
 Pass context:
 - file_path: [analysis file path]
@@ -262,7 +262,7 @@ FOR EACH feature in the feature list:
 ```
 3.2.1 Invoke incremental-options-generator-specialist
 
-Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/incremental-options-generator-specialist.md
+Load: ${CLAUDE_PLUGIN_ROOT}/agents/bokata/incremental-options-generator-specialist.md
 
 Pass context:
 - file_path: [analysis file path]

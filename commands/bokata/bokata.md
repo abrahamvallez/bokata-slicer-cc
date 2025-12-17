@@ -96,7 +96,7 @@ Status: In Progress
 
 ### 1.1 Invoke project-explorer specialist
 
-Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/project-explorer.md`
+Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/project-explorer.md`
 
 Pass context:
 - `user_input`: [original user input]
@@ -123,7 +123,7 @@ ACTION: Re-invoke specialist with explicit request to complete missing sections
 
 ### 2.1 Invoke feature-backbone-specialist
 
-Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/feature-backbone-specialist.md`
+Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/feature-backbone-specialist.md`
 
 Pass context:
 - `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
@@ -164,78 +164,72 @@ Store feature names for Phase 3 iterations.
 
 ## Phase 3: Feature Decomposition
 
-**For each feature**.
+### 3.1 Step Analysis
 
-### 3.1 Step Analysis Loop
-
-FOR EACH feature in features_list invoke a step-analyzer-specialist in parallel:
+Invoke step-analyzer-specialist ONCE to analyze ALL features:
 
 #### 3.1.1 Invoke step-analyzer-specialist
 
-Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/step-analyzer-specialist.md`
+Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.md`
 
 Pass context:
 - `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
-- `feature_name`: [current feature]
 
-#### 3.1.2 Wait for Steps Completion
+#### 3.1.2 Wait for Steps Completion (All Features)
 
 Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
-- ✓ `## Feature {N}: Steps` section exists
-- ✓ Contains 3-7 steps (verify count)
+- ✓ `### Steps` sections added under EACH feature
+- ✓ Each feature has 3-7 steps (verify count per feature)
 - ✓ Each step has:
   - Description
+  - Layer assignment (UI/Logic/Data/Integration)
   - Quality Attributes (factors, tradeoffs, options)
 
-#### 3.1.3 Validate Steps
+#### 3.1.3 Validate Steps (All Features)
 
-For each step:
+For ALL features and their steps:
 - ✓ Has distinct responsibility
 - ✓ Clear input/output
 - ✓ Quality attributes defined
 - ✓ NOT implementation-focused (concept, not code)
+- ✓ Consistent naming across features
 
 **If validation fails:**
 ```
-ERROR: Steps validation failed for Feature "{feature}"
+ERROR: Steps validation failed
 ACTION: Re-invoke step-analyzer with feedback to fix issues
 ```
 
-### 3.2 Incremental Options Generation Loop
+### 3.2 Incremental Options Generation
 
-FOR EACH feature in features_list:
+Invoke increment-generator-specialist ONCE to analyze ALL features:
 
 #### 3.2.1 Invoke increment-generator-specialist
 
-Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/increment-generator-specialist.md`
+Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-specialist.md`
 
 Pass context:
 - `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
-- `feature_name`: [current feature]
-- `output_format`: "checklist" (NEW: enables progress tracking)
 
-#### 3.2.2 Wait for Incremental Options Completion
+#### 3.2.2 Wait for Incremental Options Completion (All Features)
 
 Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
-- ✓ `## Feature {N}: Incremental Options` section exists
+- ✓ `### Incremental Options` sections added under EACH step in EACH feature
 - ✓ For EACH step:
   - ✓ 3-5 incremental options generated
   - ✓ Each option has:
     - Description
     - REQUIRES specification
-    - PROVIDES specification
-    - COMPATIBLE WITH list
-  - ✓ **Checklist format: `| [ ] | N.1 | [Option] | ...`** (NEW)
-  - ✓ **Progress counter: `0/N incremental options completed`** (NEW)
 
-#### 3.2.3 Validate Incremental Options
+#### 3.2.3 Validate Incremental Options (All Features)
 
-For each incremental option:
+For ALL incremental options across ALL features:
 - ✓ Specific, not generic
 - ✓ Deployable independently
 - ✓ Dependencies explicit
 - ✓ Compatibility declared
 - ✓ Has clear value
+- ✓ Cross-feature compatibility verified
 
 **If validation fails:**
 ```

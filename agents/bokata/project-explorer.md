@@ -27,7 +27,7 @@ Investigate project context and write findings to the markdown file (`<input_fil
 
 # CORE PRINCIPLES
 
-See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/CORE_PRINCIPLES.md`
+See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/CORE_PRINCIPLES.md`
 
 Additional principles for investigation:
 - **Code analysis is optional** - Not all inputs have existing code

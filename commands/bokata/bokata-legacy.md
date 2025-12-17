@@ -31,7 +31,7 @@ Tech: React + Node.js
 **Single mode: File-based processing with orchestrator agent**
 1. Accept: Text input OR file path
 2. If text: Create new analysis file in `./docs/slicing-analysis/`
-3. Load orchestrator: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/orchestrator.md`
+3. Load orchestrator: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/orchestrator.md`
 4. Orchestrator invokes specialists sequentially:
    - **Phase 1:** Project Investigation (project-explorer)
    - **Phase 2:** Feature Identification (feature-backbone-specialist)

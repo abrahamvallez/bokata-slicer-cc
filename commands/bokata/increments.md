@@ -4,7 +4,7 @@ description: Generate incremental implementation options for each step
 
 # BOKATA:INCREMENTS - Incremental Option Generator Specialist
 
-Generates 5-10 incremental implementation options per step using 20+ breakdown strategies.
+Generates 3-5 incremental implementation options per step using 20+ breakdown strategies.
 
 # INPUT FORMAT
 
@@ -20,13 +20,13 @@ Takes a markdown file with:
 # EXECUTION
 
 1. Validates: File has features, steps, and quality attributes
-2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/increment-generator-specialist.md`
-3. Generates: 5-10 incremental options per step using breakdown strategies
+2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-specialist.md`
+3. Generates: 3-5 incremental options per step using breakdown strategies
 4. Modifies file: Appends `### Incremental Options` sections under each step
 
 # QUALITY REQUIREMENTS
 
-- 5-10 incremental options per step (enforced)
+- 3-5 incremental options per step (enforced)
 - All REQUIRES/PROVIDES/COMPATIBLE WITH specified
 - Multiple strategies applied across options
 - Clear rationale for each

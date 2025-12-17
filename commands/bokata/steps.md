@@ -19,7 +19,7 @@ Takes a markdown file with:
 # EXECUTION
 
 1. Validates: File has feature information
-2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/step-analyzer-specialist.md`
+2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.md`
 3. Decomposes: Each feature into 3-7 steps covering UI → Logic → Data
 4. Modifies file: Appends `### Steps` sections under each feature
 
