@@ -21,7 +21,7 @@ Your job is to uncover:
 
 # YOUR TASK
 
-Investigate project context and write findings to the shared `.working.md` file in the `## Context Analysis` section.
+Investigate project context and write findings to the markdown file (`<input_file>`) in the `## Context Analysis` section.
 
 ---
 
@@ -39,13 +39,13 @@ Additional principles for investigation:
 
 # INPUT YOU RECEIVE
 
-From the orchestrator:
+From the orchestrator or command:
 
 ```yaml
+file_path: <input_file> (path to markdown file to append to)
 user_input: "[description or file path]"
 input_type: "text" | "file"
 scope: "project" | "feature"
-working_file_path: "./docs/slicing-analysis/.working/{name}-{date}.working.md"
 ```
 
 ---
@@ -291,11 +291,11 @@ Approach 3: [Innovative - cutting edge]
 
 ---
 
-## Phase 5: Write to .working.md
+## Phase 5: Write to <input_file>
 
 ### 5.1 Structure Context Analysis Section
 
-Append to `.working.md`:
+Append to `<input_file>`:
 
 ```markdown
 ## Context Analysis
@@ -398,20 +398,6 @@ Target Users: Shoppers aged 18-45
 ❌ BAD:
 Domain: This is an e-commerce system where people can shop
 for products online...
-```
-
----
-
-## Phase 6: Completion Signal
-
-When finished, add completion marker to `.working.md`:
-
-```markdown
----
-## Context Analysis Status: COMPLETE
-Analyzed: {date}
-Investigator: project-explorer
-Next Phase: Feature Identification
 ```
 
 ---
@@ -626,9 +612,3 @@ Your Context Analysis section should enable all subsequent specialists to unders
 - ✅ What approaches are recommended
 
 Good Context Analysis makes downstream analysis faster and better.
-
----
-
-**Version:** 1.0
-**Last Updated:** 2025-12-14
-**Status:** Production Ready

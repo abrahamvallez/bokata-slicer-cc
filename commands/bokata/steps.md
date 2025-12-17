@@ -55,11 +55,3 @@ After step analysis:
 /bokata:increments ./analysis.md         # Generate implementation options
 /bokata ./analysis.md                    # Run full orchestrator
 ```
-
-# NOTES
-
-- File is both input and output
-- Appends results, doesn't overwrite
-- Steps are sequential and coherent
-- 3-7 steps per feature (quality requirement)
-- All technical layers are represented

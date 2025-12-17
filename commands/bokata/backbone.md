@@ -23,24 +23,6 @@ Takes a markdown file with:
 3. Extracts: Feature backbone using Actor+Action naming convention
 4. Modifies file: Appends `## Features Backbone` section
 
-# OUTPUT FORMAT
-
-The specialist appends to the file:
-
-```markdown
-## Features Backbone
-
-All features follow Actor+Action format:
-
-### Feature 1: [Actor] [Action]
-[Description]
-
-### Feature 2: [Actor] [Action]
-[Description]
-
-...
-```
-
 # VALID ACTORS
 
 User, Player, Coach, Admin, System, Customer, Manager, Developer, etc.
@@ -52,10 +34,3 @@ After backbone extraction:
 /bokata:steps ./analysis.md              # Decompose features into steps
 /bokata ./analysis.md                    # Run full orchestrator
 ```
-
-# NOTES
-
-- File is both input and output
-- Appends results, doesn't overwrite
-- Enforces Actor+Action naming convention
-- Extracts from existing context sections

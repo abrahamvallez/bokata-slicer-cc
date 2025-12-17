@@ -48,10 +48,7 @@ Input (Text or File)
     ├─ invokes → step-analyzer-specialist
     ├─ invokes → increment-generator-specialist (with checklist format)
     ↓
-[Phase 4] Walking Skeleton Composition
-    ↓ invokes → path-composer-specialist
-    ↓
-[Phase 5] Output Generation & Cleanup
+[Phase 4] Output Generation & Cleanup
     ↓
 Final Document with Progress Checklists
 ```
@@ -87,9 +84,6 @@ Status: In Progress
 ## Feature Sections
 [To be filled by step-analyzer and incremental-options-generator]
 
-## Walking Skeleton
-[To be filled by path-composer-specialist]
-
 ## Metadata
 [Generated at completion]
 ```
@@ -106,7 +100,7 @@ Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/project-explorer.m
 
 Pass context:
 - `user_input`: [original user input]
-- `working_file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
+- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 
 Wait for specialist to complete and append:
 - ✓ `## Context Analysis` section exists
@@ -132,7 +126,7 @@ ACTION: Re-invoke specialist with explicit request to complete missing sections
 Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/feature-backbone-specialist.md`
 
 Pass context:
-- `working_file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
+- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 
 Wait for specialist to complete and append:
 - ✓ `## Features Backbone` section exists
@@ -181,7 +175,7 @@ FOR EACH feature in features_list invoke a step-analyzer-specialist in parallel:
 Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/step-analyzer-specialist.md`
 
 Pass context:
-- `working_file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
+- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 - `feature_name`: [current feature]
 
 #### 3.1.2 Wait for Steps Completion
@@ -216,7 +210,7 @@ FOR EACH feature in features_list:
 Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/increment-generator-specialist.md`
 
 Pass context:
-- `working_file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
+- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 - `feature_name`: [current feature]
 - `output_format`: "checklist" (NEW: enables progress tracking)
 
@@ -226,7 +220,6 @@ Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
 - ✓ `## Feature {N}: Incremental Options` section exists
 - ✓ For EACH step:
   - ✓ 3-5 incremental options generated
-  - ✓ Simplest marked with ⭐
   - ✓ Each option has:
     - Description
     - REQUIRES specification
@@ -252,53 +245,7 @@ ACTION: Re-invoke specialist with specific feedback
 
 ---
 
-## Phase 4: Vertical Slice Composition (Walking Skeleton)
-
-**Compose vertical slices from incremental options.**
-
-### 4.1 Invoke path-composer-specialist
-
-Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/path-composer-specialist.md`
-
-Pass context:
-- `working_file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
-- `all_features_data`: [collected from ./docs/slicing-analysis/{name}-{date}.md]
-- `output_format`: "checklist" (NEW: enables implementation tracking)
-
-### 4.2 Wait for Walking Skeleton Completion
-
-Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
-- ✓ `## Walking Skeleton` section exists
-- ✓ `### Selected Incremental Options` list
-  - ✓ One incremental option per step (⭐ preferred)
-  - ✓ All compatible with each other
-- ✓ `### Rationale` explaining choices
-- ✓ `### Dependencies Analysis` verifying compatibility
-- ✓ `### Deployment Order` sequential and validated
-- ✓ **Implementation Checklist table with status** (NEW)
-- ✓ **Progress counter: `0/N incremental options implemented`** (NEW)
-
-### 4.3 Validate Walking Skeleton
-
-```
-✓ Uses only ⭐ incremental options (or justified alternatives)
-✓ All dependencies satisfied
-✓ All selected incremental options compatible
-✓ Covers all steps/features
-✓ End-to-end functionality demonstrated
-✓ Deployment order is logical
-```
-
-**If validation fails:**
-```
-ERROR: Walking Skeleton validation failed
-REASON: [Specific issue]
-ACTION: Re-invoke path-composer with feedback to fix
-```
-
----
-
-## Phase 5: Verify all phases completed
+## Phase 4: Verify all phases completed
 
 Verify all phases completed:
 
@@ -307,5 +254,4 @@ Verify all phases completed:
 ✓ ## Features Backbone - PRESENT
 ✓ ## Feature {N}: Steps - PRESENT (for each feature)
 ✓ ## Feature {N}: Incremental Options - PRESENT (with checklists)
-✓ ## Walking Skeleton - PRESENT (with implementation checklist)
 ```

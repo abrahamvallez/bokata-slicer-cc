@@ -16,9 +16,8 @@ You work with a shared markdown file provided as input.
 
 1. Read step definitions from `<input_file>`
 2. Generate 3-5 incremental options per step using strategies
-3. Mark the simplest incremental option with ⭐
-4. Document incremental option dependencies
-5. Write incremental options section to `<input_file>`
+3. Document incremental option dependencies
+4. Write incremental options section to `<input_file>`
 
 ---
 
@@ -43,7 +42,7 @@ For each step, generate incremental options that apply breakdown strategies.
 
 Write to `<input_file>` under the feature/step section:
 
-**Format 1: Checklist Table (NEW - for implementation tracking)**
+**Checklist Table (for implementation tracking)**
 
 ```markdown
 ### Incremental Options
@@ -52,7 +51,7 @@ Write to `<input_file>` under the feature/step section:
 
 | Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
 |--------|---|---------|----------|----------|----------|------------|
-| [ ] | N.1 | [Name] ⭐ | [Strategy] | [Deps] | [Caps] | [List] |
+| [ ] | N.1 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
 | [ ] | N.2 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
 | [ ] | N.3 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
 
@@ -60,7 +59,7 @@ Write to `<input_file>` under the feature/step section:
 
 **Description of incremental options:**
 
-**Incremental Option N.1: [Name]** ⭐
+**Incremental Option N.1: [Name]**
 - **Strategy:** [Breakdown strategy used]
 - **Description:** [Specific implementation]
 - **REQUIRES:** [Dependencies]
@@ -71,26 +70,6 @@ Write to `<input_file>` under the feature/step section:
 [Repeat...]
 ```
 
-**Format 2: Detailed List (Classic - alternative)**
-
-```markdown
-### Incremental Options
-
-#### Step N: [Step Name]
-
-**Incremental Option N.1: [Name]** ⭐
-- **Strategy:** [Breakdown strategy used - e.g., "Zero/One/Many", "Dummy to Dynamic"]
-- **Description:** [Specific implementation]
-- **REQUIRES:** [Dependencies - "None" if independent]
-- **PROVIDES:** [What this incremental option offers]
-- **COMPATIBLE WITH:** [Which incremental options from other steps work with this]
-
-**Incremental Option N.2: [Name]**
-[Repeat structure...]
-```
-
-**Recommended:** Use Checklist Table format for better implementation tracking.
-
 ---
 
 # CORE PRINCIPLES
@@ -99,7 +78,7 @@ See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata-slicer/CORE_PRINCIPLES.md`
 
 Additional principles:
 - **3-5 incremental options per step:** Enough diversity, not excessive
-- **Simplest marked with ⭐:** Minimum viable approach for each step
+- **Simplest marked with:** Minimum viable approach for each step
 - **Dependencies explicit:** REQUIRES, PROVIDES, COMPATIBLE WITH
 - **Deployable independently:** Each incremental option works standalone
 
@@ -234,7 +213,7 @@ Example: "Capture Search Input" step
 ## Step 3: Generate Incremental Options
 
 Create 3-5 incremental options by:
-1. **Simplest approach first** (this will be marked ⭐)
+1. **Simplest approach first**
 2. **Variations using different strategies**
 3. **Progressive complexity**
 4. **Clear naming** - NOT generic ("incremental option 1") but specific ("Manual CSV Export")
@@ -253,7 +232,7 @@ Create 3-5 incremental options by:
 
 Example incremental options for "Store Audio":
 ```
-⭐ 1.1: Save to Browser LocalStorage
+1.1: Save to Browser LocalStorage
   - Simplest, no backend needed
 
 1.2: Save to Device FileSystem
@@ -296,17 +275,7 @@ COMPATIBLE WITH: 3.1 (from step 3)
 COMPATIBLE WITH: None (if incompatible with all others)
 ```
 
-## Step 5: Mark Simplest
-
-Select ONE incremental option per step that is:
-- Minimum viable
-- Fewest dependencies
-- Most direct path to working functionality
-- Mark with ⭐
-
-Example Walking Skeleton uses ⭐ incremental options from all steps.
-
-## Step 6: Write to <input_file>
+## Step 5: Write to <input_file>
 
 Format all incremental options under feature/step section:
 
@@ -319,13 +288,13 @@ Format all incremental options under feature/step section:
 
 | Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
 |--------|---|---------|----------|----------|----------|------------|
-| [ ] | 1.1 | [Specific name] ⭐ | [Strategy] | [Deps] | [Caps] | [List] |
+| [ ] | 1.1 | [Specific name] | [Strategy] | [Deps] | [Caps] | [List] |
 | [ ] | 1.2 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
 | [ ] | 1.3 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
 
 **Detailed Descriptions:**
 
-**Incremental Option 1.1: [Specific name]** ⭐
+**Incremental Option 1.1: [Specific name]**
 - **Strategy:** [Breakdown strategy used]
 - **Description:** [Specific implementation, not generic]
 - **REQUIRES:** [Dependencies - "None" if independent]
@@ -364,7 +333,6 @@ For completed Incremental Options section:
 - [ ] Each has specific, descriptive name (not "incremental option 1")
 - [ ] Each declares STRATEGY used to derive it
 - [ ] Each is deployable independently
-- [ ] ONE marked with ⭐ (simplest)
 
 ✅ **Dependencies**
 - [ ] REQUIRES field specified for each
@@ -437,7 +405,7 @@ For completed Incremental Options section:
 
 | Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
 |--------|---|---------|----------|----------|----------|------------|
-| [ ] | 1.1 | Browser Microphone (Web Audio API) ⭐ | Technology Options | Browser + permissions | Raw audio stream | 2.1, 2.2, 3.1 |
+| [ ] | 1.1 | Browser Microphone (Web Audio API) | Technology Options | Browser + permissions | Raw audio stream | 2.1, 2.2, 3.1 |
 | [ ] | 1.2 | Native Mobile Microphone | Technology Options | iOS/Android SDK | Platform audio | 2.1, 2.3 |
 | [ ] | 1.3 | Permissions Handling | Workflow Simplification | Permission system | User feedback | 1.1, 1.2 |
 | [ ] | 1.4 | Audio Level Monitoring | Manual Before Automated | Web Audio API | Visual feedback | 1.1-1.3 |
@@ -445,7 +413,7 @@ For completed Incremental Options section:
 
 **Detailed Descriptions:**
 
-**Incremental Option 1.1: Browser Microphone (Web Audio API)** ⭐
+**Incremental Option 1.1: Browser Microphone (Web Audio API)**
 - **Strategy:** Technology Options (simplest approach)
 - **Description:** Capture using browser's built-in Web Audio API
 - **REQUIRES:** Browser with microphone permissions
@@ -490,7 +458,6 @@ For completed Incremental Options section:
 - [ ] Progress counter: `0/N incremental options completed`
 - [ ] Each incremental option has specific name
 - [ ] Each incremental option declares STRATEGY used
-- [ ] ONE marked with ⭐ per step
 - [ ] All REQUIRES, PROVIDES, COMPATIBLE WITH documented
 - [ ] Incremental Options follow strategy rationale
 - [ ] Table summary followed by detailed descriptions
@@ -498,8 +465,3 @@ For completed Incremental Options section:
 - [ ] Ready for Walking Skeleton selection
 - [ ] Ready for implementation tracking
 
----
-
-**Version:** 1.0
-**Last Updated:** 2025-12-14
-**Status:** Production Ready
