@@ -55,3 +55,6 @@ After step analysis:
 /bokata:increments ./analysis.md         # Generate implementation options
 /bokata ./analysis.md                    # Run full orchestrator
 ```
+
+> [!TIP]
+> **Token Optimization**: If you have many features, it's more efficient to run analysis in batches or split the file if you hit context limits.

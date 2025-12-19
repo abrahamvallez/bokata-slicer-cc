@@ -38,3 +38,6 @@ After increment generation for further analysis:
 /bokata:paths ./analysis.md              # Generate implementation paths
 /bokata:matrix ./analysis.md             # Generate selection matrix
 ```
+
+> [!TIP]
+> **Token Optimization**: For very large projects, split `analysis.md` into smaller files (e.g., per feature) to stay within context limits and reduce token costs.
