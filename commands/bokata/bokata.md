@@ -121,18 +121,24 @@ ACTION: Re-invoke specialist with explicit request to complete missing sections
 
 ## Phase 2: Feature Identification
 
-### 2.1 Invoke feature-backbone-specialist
+### 2.1 Invoke Agent
 
 Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/feature-backbone-specialist.md`
 
 Pass context:
-- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
+- `<input_file>`: [./docs/slicing-analysis/{name}-{date}.md path]
 
-Wait for specialist to complete and append:
-- ✓ `## Features Backbone` section exists
-- ✓ `### Features List` with Actor+Action naming
-- ✓ `### Feature Flow Narrative`
-- ✓ `### Dependencies and Relationships`
+### 2.1.1 Capture Agent Output
+
+Agent will return structured content with:
+- `## Features Backbone` section
+- `### Features List` with Actor+Action naming
+- `### Journey Flow`
+- `### Dependencies`
+
+### 2.1.2 Write Output to File
+
+Use Write tool to append agent's output to file.
 
 ### 2.2 Validate Feature Naming
 
@@ -168,74 +174,63 @@ Store feature names for Phase 3 iterations.
 
 Invoke step-analyzer-specialist ONCE to analyze ALL features:
 
-#### 3.1.1 Invoke step-analyzer-specialist
+#### 3.1.1 Invoke Agent
 
 Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.md`
 
 Pass context:
-- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
+- `<input_file>`: [./docs/slicing-analysis/{name}-{date}.md path]
 
-#### 3.1.2 Wait for Steps Completion (All Features)
+#### 3.1.2 Capture Agent Output
 
-Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
-- ✓ `### Steps` sections added under EACH feature
-- ✓ Each feature has 3-7 steps (verify count per feature)
-- ✓ Each step has:
-  - Description
-  - Layer assignment (UI/Logic/Data/Integration)
-  - Quality Attributes (factors, tradeoffs, options)
+Agent will return structured content with:
+- `### Steps` sections for EACH feature
+- 3-7 steps per feature with Layer, Description, Quality, Tradeoffs, Options
 
-#### 3.1.3 Validate Steps (All Features)
+#### 3.1.3 Write Output to File
 
-For ALL features and their steps:
-- ✓ Has distinct responsibility
-- ✓ Clear input/output
+Use Write tool to append agent's output to file under each feature section.
+
+#### 3.1.4 Validate Result
+
+Verify written content:
+- ✓ Steps sections present for ALL features
+- ✓ Each step has distinct responsibility
 - ✓ Quality attributes defined
-- ✓ NOT implementation-focused (concept, not code)
-- ✓ Consistent naming across features
+- ✓ Verb-focused naming, NOT implementation-focused
 
-**If validation fails:**
-```
-ERROR: Steps validation failed
-ACTION: Re-invoke step-analyzer with feedback to fix issues
-```
+**If validation fails:** Re-invoke with feedback
 
 ### 3.2 Incremental Options Generation
 
 Invoke increment-generator-specialist ONCE to analyze ALL features:
 
-#### 3.2.1 Invoke increment-generator-specialist
+#### 3.2.1 Invoke Agent
 
 Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-specialist.md`
 
 Pass context:
-- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
+- `<input_file>`: [./docs/slicing-analysis/{name}-{date}.md path]
 
-#### 3.2.2 Wait for Incremental Options Completion (All Features)
+#### 3.2.2 Capture Agent Output
 
-Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
-- ✓ `### Incremental Options` sections added under EACH step in EACH feature
-- ✓ For EACH step:
-  - ✓ 3-5 incremental options generated
-  - ✓ Each option has:
-    - Description
-    - REQUIRES specification
+Agent will return structured content with:
+- `### Incremental Options` sections for EACH step in EACH feature
+- 3-5 incremental options per step with Strategy, Description, Requires
 
-#### 3.2.3 Validate Incremental Options (All Features)
+#### 3.2.3 Write Output to File
 
-For ALL incremental options across ALL features:
-- ✓ Specific, not generic
-- ✓ Deployable independently
+Use Write tool to append agent's output to file under each step section.
+
+#### 3.2.4 Validate Result
+
+Verify written content:
+- ✓ Incremental Options present for ALL steps
+- ✓ Specific names (not generic)
+- ✓ Strategy declared
 - ✓ Dependencies explicit
-- ✓ Compatibility declared
-- ✓ Has clear value
-- ✓ Cross-feature compatibility verified
 
-**If validation fails:**
-```
-ERROR: Incremental options validation failed
-ACTION: Re-invoke specialist with specific feedback
-```
+**If validation fails:** Re-invoke with feedback
 
 ---
 

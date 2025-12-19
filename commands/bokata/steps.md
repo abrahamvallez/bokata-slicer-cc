@@ -18,10 +18,13 @@ Takes a markdown file with:
 
 # EXECUTION
 
-1. Validates: File has feature information
-2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.md`
-3. Decomposes: Each feature into 3-7 steps covering UI → Logic → Data
-4. Modifies file: Appends `### Steps` sections under each feature
+1. **Validate** file has Features Backbone section
+2. **Load** specialist agent: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.md`
+3. **Execute** agent with `<input_file>` parameter (processes ALL features in one pass)
+4. **Capture** agent's structured output (Steps sections for ALL features)
+5. **Write** captured output to file using Write tool, appending under each feature
+
+**Note:** Agent only reads and returns output. This command handles file writing.
 
 # OUTPUT FORMAT
 

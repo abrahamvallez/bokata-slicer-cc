@@ -18,10 +18,13 @@ Takes a markdown file with:
 
 # EXECUTION
 
-1. Validates: File exists and has context information
-2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/feature-backbone-specialist.md`
-3. Extracts: Feature backbone using Actor+Action naming convention
-4. Modifies file: Appends `## Features Backbone` section
+1. **Validate** file exists and has context information
+2. **Load** specialist agent: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/feature-backbone-specialist.md`
+3. **Execute** agent with `<input_file>` parameter
+4. **Capture** agent's structured output (Features Backbone section)
+5. **Write** captured output to file using Write tool, appending to existing content
+
+**Note:** Agent only reads and returns output. This command handles file writing.
 
 # VALID ACTORS
 

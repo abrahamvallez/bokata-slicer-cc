@@ -19,10 +19,13 @@ Takes a markdown file with:
 
 # EXECUTION
 
-1. Validates: File has features, steps, and quality attributes
-2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-specialist.md`
-3. Generates: 3-5 incremental options per step using breakdown strategies
-4. Modifies file: Appends `### Incremental Options` sections under each step
+1. **Validate** file has Features Backbone and Steps sections
+2. **Load** specialist agent: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-specialist.md`
+3. **Execute** agent with `<input_file>` parameter (processes ALL steps in ALL features)
+4. **Capture** agent's structured output (Incremental Options for ALL steps)
+5. **Write** captured output to file using Write tool, appending under each step
+
+**Note:** Agent only reads and returns output. This command handles file writing.
 
 # QUALITY REQUIREMENTS
 
