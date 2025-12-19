@@ -3,7 +3,7 @@ name: core-principles
 description: Centralized principles and methodology for all Bokata agents
 ---
 
-# Core Principles - Bokata Slicer
+# Core Principles - Bokata
 
 This document defines the core principles and methodology that apply to ALL agents, commands, and analysis in the Bokata system. Rather than repeating these principles in every agent file, all agents reference this single source of truth.
 
@@ -18,7 +18,7 @@ Every vertical slice must answer this question:
 ### Terminology Clarification
 - **Incremental Option**: A small, specific implementation unit within ONE step (one of several viable alternatives)
 - **Vertical Slice**: A selection of incremental options (typically one per step) that forms a complete end-to-end feature
-- **Walking Skeleton**: ONE specific vertical slice (the simplest one, using ⭐ incremental options)
+- **Walking Skeleton**: ONE specific vertical slice
 
 The fundamental question applies to the **vertical slice** (the complete composition), not to individual incremental options. A vertical slice is what gets shipped.
 
@@ -33,7 +33,7 @@ The fundamental question applies to the **vertical slice** (the complete composi
 
 ## Slice Requirements
 
-Every analyzed incremental option must satisfy these requirements:
+Every vertical slice must satisfy these requirements:
 
 ### 1. Cut Through All Technical Layers
 - ✅ UI/Presentation layer (what users see)
@@ -41,14 +41,10 @@ Every analyzed incremental option must satisfy these requirements:
 - ✅ Data layer (what's stored/accessed)
 - ✅ NOT: Just database schema, just UI mockups, just API specs
 
-Each incremental option must be a thin, complete vertical slice touching all layers.
-
 ### 2. Deliver Observable Value to Users
 - ✅ User can see/experience the result
 - ✅ Feature has measurable impact
 - ✅ NOT: Infrastructure only, setup only, preparation only
-
-If users can't see or use it, it's not a complete incremental option.
 
 ### 3. Can Be Deployed Independently
 - ✅ Feature works standalone
@@ -56,15 +52,11 @@ If users can't see or use it, it's not a complete incremental option.
 - ✅ Previous incremental options are its "zero" state
 - ✅ NOT: Depends on 5 other incremental options to work
 
-Deployability proves architecture is sound.
-
 ### 4. Enable Early Feedback
 - ✅ Users can test and respond
 - ✅ Team can validate assumptions
 - ✅ Risk is reduced early
 - ✅ NOT: Locked up in waterfall phases
-
-Early feedback beats late surprises.
 
 ### 5. Start With the Smallest That Works
 - ✅ Absolute minimum to deliver value
@@ -72,15 +64,9 @@ Early feedback beats late surprises.
 - ✅ Happy path first, edge cases later
 - ✅ NOT: Full-featured from day one
 
-"Good enough" beats "perfect never."
-
 ### 6. Explicit Dependencies
 - ✅ Every incremental option declares what it REQUIRES
-- ✅ Every incremental option declares what it PROVIDES
-- ✅ Compatibility between incremental options is explicit
 - ✅ NOT: Hidden dependencies, unclear constraints
-
-Transparency prevents integration surprises.
 
 ---
 

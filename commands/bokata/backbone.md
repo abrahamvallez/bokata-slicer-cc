@@ -20,8 +20,10 @@ Takes a markdown file with:
 
 1. Validates: File exists and has context information
 2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/feature-backbone-specialist.md`
-3. Extracts: Feature backbone using Actor+Action naming convention
-4. Modifies file: Appends `## Features Backbone` section
+   - Passes: file_path and context data
+3. Captures: Feature backbone markdown output from specialist
+4. Writes: Appends output to file as `## Features Backbone` section
+5. Verifies: Features Backbone section now exists in file
 
 # VALID ACTORS
 

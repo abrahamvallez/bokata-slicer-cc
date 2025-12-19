@@ -554,7 +554,7 @@ Status: In Progress
 
 #### Step 1: [Name]
 
-**Incremental Option 1.1: [Name]** ⭐
+**Incremental Option 1.1: [Name]**
 - Description:
 - REQUIRES:
 - PROVIDES:

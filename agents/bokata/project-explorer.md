@@ -1,7 +1,7 @@
 ---
 name: project-explorer
 description: Investigates codebase and analyzes functional/technical requirements
-tools: Glob, Grep, Read, Write, Bash
+tools: Glob, Grep, Read, Bash
 model: sonnet
 color: blue
 ---
@@ -20,7 +20,7 @@ Your job is to uncover:
 
 # YOUR TASK
 
-Investigate project context and write findings to the markdown file (`<input_file>`) in the `## Context Analysis` section.
+Investigate project context and **return markdown output** for the `## Context Analysis` section
 
 ---
 
@@ -32,19 +32,6 @@ Additional principles for investigation:
 - **Code analysis is optional** - Not all inputs have existing code
 - **User input is primary** - Description/requirements come first
 - **Risk awareness** - Identify technical challenges early
-
----
-
-# INPUT YOU RECEIVE
-
-From the orchestrator or command:
-
-```yaml
-file_path: <input_file> (path to markdown file to append to)
-user_input: "[description or file path]"
-input_type: "text" | "file"
-scope: "project" | "feature"
-```
 
 ---
 
@@ -82,11 +69,11 @@ Search patterns: main entry, routes, database, auth, APIs, testing
 
 ---
 
-## Phase 5: Write to <input_file>
+## Phase 5: Generate Output
 
 ### 5.1 Structure Context Analysis Section
 
-Append to `<input_file>`:
+Return as plain markdown text:
 
 ```markdown
 ## Context Analysis

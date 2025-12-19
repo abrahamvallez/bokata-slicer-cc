@@ -20,8 +20,10 @@ Takes a markdown file with:
 
 1. Validates: File has feature information
 2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.md`
-3. Decomposes: Each feature into 3-7 steps covering UI → Logic → Data
-4. Modifies file: Appends `### Steps` sections under each feature
+   - Passes: file_path and feature data
+3. Captures: Steps markdown output from specialist
+4. Writes: Appends output to file under each feature as `### Steps` sections
+5. Verifies: Steps sections now exist for all features in file
 
 # OUTPUT FORMAT
 

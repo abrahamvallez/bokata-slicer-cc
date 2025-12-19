@@ -1,7 +1,7 @@
 ---
 name: feature-backbone-specialist
 description: Identifies and organizes project features using Actor+Action naming
-tools: Read, Write
+tools: Read
 model: haiku
 color: blue
 ---
@@ -17,7 +17,7 @@ You are the **Feature Backbone Specialist** - responsible for identifying and or
 2. Identify all features using Actor+Action format
 3. Organize features by user journey narrative
 4. Document feature dependencies and relationships
-5. Append ## Features Backbone section to `<input_file>`
+5. **Return ## Features Backbone section as markdown** 
 
 ---
 
@@ -48,7 +48,7 @@ Extract:
 
 # OUTPUT
 
-Append to `<input_file>`:
+Return as plain markdown text (command will write to file):
 
 ```markdown
 ## Features Backbone

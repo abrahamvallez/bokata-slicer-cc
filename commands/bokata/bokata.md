@@ -100,10 +100,13 @@ Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/project-explorer.md`
 
 Pass context:
 - `user_input`: [original user input]
-- `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 
-Wait for specialist to complete and append:
-- ✓ `## Context Analysis` section exists
+### 1.1b Capture and Write Output
+
+Specialist returns markdown for `## Context Analysis` section
+
+Append to file_path:
+- ✓ `## Context Analysis` section now exists
 - ✓ `### Project Context` subsection filled
 - ✓ `### Technical Analysis` subsection filled
 - ✓ `### Functional Requirements` subsection filled
@@ -127,8 +130,12 @@ Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/feature-backbone-speciali
 Pass context:
 - `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 
-Wait for specialist to complete and append:
-- ✓ `## Features Backbone` section exists
+### 2.1b Capture and Write Output
+
+Specialist returns markdown for `## Features Backbone` section
+
+Append to file_path:
+- ✓ `## Features Backbone` section now exists
 - ✓ `### Features List` with Actor+Action naming
 - ✓ `### Feature Flow Narrative`
 - ✓ `### Dependencies and Relationships`
@@ -174,7 +181,14 @@ Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/step-analyzer-specialist.
 Pass context:
 - `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 
-#### 3.1.2 Wait for Steps Completion (All Features)
+#### 3.1.1b Capture and Write Output
+
+Specialist returns markdown for `### Steps` sections
+
+Append to file_path under each feature:
+- ✓ `### Steps` sections now exist for all features
+
+#### 3.1.2 Validate Steps Completion (All Features)
 
 Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
 - ✓ `### Steps` sections added under EACH feature
@@ -210,7 +224,14 @@ Load and execute: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-speci
 Pass context:
 - `file_path`: [./docs/slicing-analysis/{name}-{date}.md path]
 
-#### 3.2.2 Wait for Incremental Options Completion (All Features)
+#### 3.2.1b Capture and Write Output
+
+Specialist returns markdown for `### Incremental Options` sections
+
+Append to file_path under each step:
+- ✓ `### Incremental Options` sections now exist for all steps
+
+#### 3.2.2 Validate Incremental Options Completion (All Features)
 
 Monitor `./docs/slicing-analysis/{name}-{date}.md` for:
 - ✓ `### Incremental Options` sections added under EACH step in EACH feature

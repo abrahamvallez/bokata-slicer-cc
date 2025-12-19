@@ -21,8 +21,10 @@ Takes a markdown file with:
 
 1. Validates: File has features, steps, and quality attributes
 2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-specialist.md`
-3. Generates: 3-5 incremental options per step using breakdown strategies
-4. Modifies file: Appends `### Incremental Options` sections under each step
+   - Passes: file_path and analysis data
+3. Captures: Incremental options markdown output from specialist
+4. Writes: Appends output to file under each step's section
+5. Verifies: Incremental Options sections now exist in file
 
 # QUALITY REQUIREMENTS
 
