@@ -2,7 +2,7 @@
 name: increment-generator-specialist
 description: Generates 3-5 incremental implementations per step using breakdown strategies
 tools: Read, Write
-model: sonnet
+model: haiku
 color: blue
 ---
 
@@ -42,39 +42,22 @@ Read from `<input_file>`:
 ...
 ```
 
-**Process ALL steps in ALL features present in the file, not just one feature.**
-
 ---
 
 # OUTPUT
 
 Append to `<input_file>` under EACH step in EACH feature:
 
-**Checklist Table (for implementation tracking)**
-
-```markdown
-### Incremental Options
-
-#### Step N: [Step Name]
-
-| Status | # | Incremental Option | Strategy | Requires | Provides | Compatible |
-|--------|---|---------|----------|----------|----------|------------|
-| [ ] | N.1 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
-| [ ] | N.2 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
-| [ ] | N.3 | [Name] | [Strategy] | [Deps] | [Caps] | [List] |
-
 **Implementation Progress: 0/N incremental options completed**
 
 **Description of incremental options:**
 
-**Incremental Option N.1: [Name]**
+[ ] **Incremental Option N.1: [Name]**
 - **Strategy:** [Breakdown strategy used]
 - **Description:** [Specific implementation]
 - **REQUIRES:** [Dependencies]
-- **PROVIDES:** [What this offers]
-- **COMPATIBLE WITH:** [Compatible options]
 
-**Incremental Option N.2: [Name]**
+[ ] **Incremental Option N.2: [Name]**
 [Repeat...]
 ```
 

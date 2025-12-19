@@ -107,7 +107,6 @@ Wait for specialist to complete and append:
 - ✓ `### Project Context` subsection filled
 - ✓ `### Technical Analysis` subsection filled
 - ✓ `### Functional Requirements` subsection filled
-- ✓ `### Recommendations` subsection filled
 
 ### 1.2 Validate Context Analysis
 
@@ -166,7 +165,7 @@ Store feature names for Phase 3 iterations.
 
 ### 3.1 Step Analysis
 
-Invoke step-analyzer-specialist ONCE to analyze ALL features:
+Invoke 1 step-analyzer-specialist agents per each feature:
 
 #### 3.1.1 Invoke step-analyzer-specialist
 
@@ -202,7 +201,7 @@ ACTION: Re-invoke step-analyzer with feedback to fix issues
 
 ### 3.2 Incremental Options Generation
 
-Invoke increment-generator-specialist ONCE to analyze ALL features:
+Invoke 1 increment-generator-specialist per each feature
 
 #### 3.2.1 Invoke increment-generator-specialist
 

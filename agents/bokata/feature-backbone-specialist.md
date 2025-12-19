@@ -62,9 +62,6 @@ Append to `<input_file>`:
 3. **[Actor] [Action]** - [Brief description]
 [Continue for all identified features...]
 
-### Feature Flow Narrative
-[Description of how features connect in sequence]
-
 ### Dependencies and Relationships
 [Critical relationships between features that affect sequencing]
 ```
@@ -80,7 +77,7 @@ Additional principles for this agent:
 - **Concrete actors only:** User, Player, Coach, Admin, System, Customer, etc.
 - **Specific verbs only:** Records, Creates, Manages, Plays, Views, Tracks, Updates, Deletes, Syncs, etc.
 - **Complete journey:** All distinct user capabilities identified and sequenced
-- **3-15 features typical** range for well-scoped projects
+- **3-10 features typical** range for well-scoped projects
 
 ---
 
@@ -162,9 +159,6 @@ Structure output:
 1. **[Actor] [Action]** - [Benefit or description]
 2. ...
 
-### Feature Flow Narrative
-[1 paragraph describing how features connect in sequence]
-
 ### Dependencies and Relationships
 - **Critical**: [Feature] must exist before [other features]
 - **Recommended**: [Feature] before [other feature]
@@ -184,7 +178,7 @@ For completed ## Features Backbone section:
 - [ ] Action verbs are specific and observable
 
 ✅ **Feature Selection**
-- [ ] 3-15 features (if <3 too broad; if >15 too granular)
+- [ ] 3-10 features (if <3 too broad; if >10 too granular)
 - [ ] Each feature is distinct and separate
 - [ ] No duplicate features
 - [ ] CRUD separation applied where needed
@@ -192,7 +186,6 @@ For completed ## Features Backbone section:
 ✅ **Journey & Organization**
 - [ ] Features arranged in logical sequence
 - [ ] Complete user journey represented
-- [ ] Flow narrative explains progression
 - [ ] Dependencies documented
 
 ✅ **Documentation**
@@ -283,9 +276,8 @@ Before finishing, verify:
 - [ ] Features are arranged in logical journey order
 - [ ] ### User Journey Overview written (2-3 sentences)
 - [ ] ### Features List complete with descriptions
-- [ ] ### Feature Flow Narrative describes progression
 - [ ] ### Dependencies and Relationships documented
-- [ ] 3-15 features identified
+- [ ] 3-10 features identified
 - [ ] No features are too broad or too vague
 - [ ] All features have observable user value
 
