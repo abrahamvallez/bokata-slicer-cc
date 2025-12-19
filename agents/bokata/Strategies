@@ -1,0 +1,119 @@
+# BREAKDOWN STRATEGIES REFERENCE
+
+This file contains the full breakdown strategies toolkit.
+Reference this when you need detailed strategy explanations.
+
+---
+
+## Start with the outputs
+Focus on **delivering specific outputs incrementally** rather than splitting by technical inputs.
+
+## Workflow Simplification
+- Remove optional steps
+- Reduce validations
+- Skip confirmations
+- Example: "Direct purchase" → "Add to cart then purchase"
+
+## Zero/One/Many
+- Build for zero → one → many cases
+- Example: "No results handling" → "Single result" → "Multiple results with pagination"
+
+## Business Rule Progression
+- Implement simplest rule first
+- Add constraints incrementally
+- Example: "Fixed price" → "Tiered pricing" → "Dynamic pricing"
+
+## Data Variation Reduction
+- Start with one data type
+- Single format first
+- Example: "Text only" → "Text + Images" → "All media types"
+
+## User Segment Narrowing
+- Most specific user group first
+- Example: "Beta users in London" → "All UK users" → "Global users"
+
+## Use Case Isolation
+- Most common scenario first
+- Example: "Search by name" → "Search with filters" → "Advanced search"
+
+## Forget the walking skeleton – put it on crutches
+- Deliver minimal user-facing functionality with simpler back-end initially
+- Build full architecture iteratively later
+
+## Narrow down the customer segment
+- Deliver full functionality for **smaller, specific group** first
+- Useful when perceived basic functionality is large
+
+## Split by examples of usefulness
+- List concrete examples of technical change usefulness
+- Identify examples deliverable with **subset of full solution**
+- Turn into separate stories
+
+## Split by capacity
+- Limit scope by system capacity (file size, users, data volume)
+- Deliver for lower capacity first
+- Example: "10 items" → "1000 items" → "Unlimited"
+
+## Start with dummy, then move to dynamic
+- Build interface/workflow with **hard-coded data** first
+- Follow up with real data integration
+- Example: "Fixed list" → "Editable list" → "API-driven list"
+
+## Simplify outputs
+- Reduce complexity of output formats initially
+- Ensure simplified output still provides value
+- Example: "Plain text" → "CSV" → "PDF" → "Interactive dashboard"
+
+## Split learning from earning
+- Separate research into time-boxed **learning stories**
+- **Earning stories** focus on delivering user value
+
+## Extract basic utility
+- Deliver **bare minimum functionality** for task completion
+- Prioritize basic utility, refine usability later
+- Example: "Command line" → "Basic form" → "Rich UI"
+
+## SPIDR Pattern Analysis
+- **Spikes**: Separate technical exploration
+- **Paths**: Different user paths through story
+- **Interfaces**: Different UI approaches
+- **Data**: Different data types/sources
+- **Rules**: Different business rules
+
+## Coordinating Conjunctions (and, or, but, yet, nor...)
+- If story says "X and Y" → likely two stories
+- Example: "upload and download files" → split into two
+
+## Action-Related Connectors (manage, handle, support, process, maintain...)
+- Generic verbs hide multiple actions
+- "Manage users" → "create", "edit", "delete" users
+
+## Sequence Connectors (before, after, then, while, during, when...)
+- Indicates process with multiple steps/phases
+- Example: "save work before submitting" → two stories
+
+## Scope Indicators (including, as-well-as, along with, also, additionally...)
+- Introduce extra requirements that can be separated
+- Example: "email and SMS notifications" → two stories
+
+## Option Indicators (either/or, whether, alternatively, optionally...)
+- Multiple paths/features, each can be story
+- Example: "password or Google login" → two stories
+
+## Exception Indicators (except, unless, however, although, despite...)
+- Point to edge cases or special rules
+- Example: "delete account unless admin" → split rules
+
+---
+
+## STRATEGY SELECTION GUIDE
+
+**When to use each:**
+
+- **Zero/One/Many**: Data handling, collections, user management
+- **Dummy→Dynamic**: External integrations, API-driven features
+- **Workflow Simplify**: Complex multi-step processes
+- **Capacity Limits**: Performance-critical features
+- **User Segment**: Phased rollouts, beta testing
+- **Output Simplify**: Reporting, export features
+- **Extract Basic Utility**: MVP, tight deadlines
