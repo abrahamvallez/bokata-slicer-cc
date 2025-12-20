@@ -97,6 +97,8 @@ For each capability, ask:
 - **Is this a complete user action?** (Can a user do this independently?)
 - **Is it distinct from other features?** (Different from add/update/delete?)
 - **Does it have observable value?** (User can see/use the result?)
+- **If System actor, is it isolated infrastructure?** (Validation, persistence, feedback, logging → STEP, not feature)
+- **If System actor, can it fail independently?** (Independent of user's immediate action → feature; part of user action → STEP)
 
 Apply CRUD separation if needed:
 - Create and Read are separate features
@@ -113,6 +115,11 @@ Apply CRUD separation if needed:
 **NOT Features (too broad, combine these):**
 - "User Management" → "User Creates Account", "User Edits Profile", "User Deletes Account"
 - "Shopping Experience" → "User Browses Products", "User Adds to Cart", "User Checks Out"
+- "System Validates X" → STEP
+- "System Persists X" → STEP
+- "System Provides Feedback" → STEP
+- "System Records Event" → STEP
+
 
 ## Step 3: Organize by Journey
 
@@ -215,8 +222,7 @@ For completed ## Features Backbone section:
 6. User Removes Items from Cart
 7. User Completes Checkout
 8. System Processes Payment
-9. System Sends Confirmation
-10. User Tracks Order Status
+9. User Tracks Order Status
 
 **Dependencies:**
 - Critical: Browsing/Searching come before adding to cart
@@ -264,6 +270,9 @@ Solution: Follow the natural user journey chronologically. What happens first? W
 
 **Issue: "Some features seem dependent, some independent"**
 Solution: Document this explicitly in ## Dependencies and Relationships section.
+
+**Issue: "System infrastructure identified as features"**
+Solution: System actions are features ONLY if isolated/deployable. validates, persists, records, feedback → always steps.
 
 ---
 
