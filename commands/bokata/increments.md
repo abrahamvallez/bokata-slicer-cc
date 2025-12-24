@@ -4,7 +4,7 @@ description: Generate incremental implementation options for each step
 
 # BOKATA:INCREMENTS - Incremental Option Generator Specialist
 
-Generates 3-5 incremental implementation options per step using 20+ breakdown strategies.
+Generates MIN 3 incremental implementation options per step using breakdown strategies.
 
 # INPUT FORMAT
 
@@ -13,30 +13,28 @@ Generates 3-5 incremental implementation options per step using 20+ breakdown st
 ```
 
 Takes a markdown file with:
-- Features Backbone section
+- Features Backbone section (User Tasks)
 - Steps Analysis sections
-- Quality attributes for each step
 
 # EXECUTION
 
-1. Validates: File has features, steps, and quality attributes
+1. Validates: File has User Tasks and Steps
 2. Loads specialist: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/increment-generator-specialist.md`
-   - Passes: file_path and analysis data
+   - Passes: file_path
 3. Captures: Incremental options markdown output from specialist
-4. Writes: Appends output to file under each step's section
+4. Writes: Appends output to file under each step as `### Incremental Options`
 5. Verifies: Incremental Options sections now exist in file
 
 # QUALITY REQUIREMENTS
 
-- 3-5 incremental options per step (enforced)
-- All REQUIRES/PROVIDES/COMPATIBLE WITH specified
-- Multiple strategies applied across options
-- Clear rationale for each
+- MIN 3 incremental options per step (no maximum)
+- All REQUIRES/PROVIDES/COMPATIBLE WITH specified where necessary
+- Includes checkbox checkboxes for implementation tracking
 
 # NEXT STEPS
 
-After increment generation for further analysis:
+After increment generation:
 ```bash
 /bokata:paths ./analysis.md              # Generate implementation paths
-/bokata:matrix ./analysis.md             # Generate selection matrix
+/bokata:bokata ./analysis.md             # Run full orchestrator
 ```

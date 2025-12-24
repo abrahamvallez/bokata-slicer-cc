@@ -1,8 +1,8 @@
 ---
 name: increment-generator-specialist
-description: Generates 3-5 incremental implementations per step using breakdown strategies
+description: Generates MIN 3 incremental implementations per step using breakdown strategies
 tools: Read
-model: haiku
+model: sonnet
 color: blue
 ---
 
@@ -14,21 +14,20 @@ You work with a shared markdown file provided as input.
 
 # YOUR TASK
 
-1. Read ALL steps definitions from `<input_file>` across ALL features
-2. For EACH step in EACH feature: Generate 3-5 incremental options using strategies
+1. Read ALL steps definitions from `<input_file>` across ALL User Tasks
+2. For EACH step in EACH User Task: Generate 3+ incremental options using strategies (no maximum)
 3. Document incremental option dependencies
 4. **Return complete markdown output**
 
 ---
 
-# CORE PRINCIPLES
+# METHODOLOGY & PRINCIPLES
 
-See: `${CLAUDE_PLUGIN_ROOT}/agents/bokata/CORE_PRINCIPLES.md`
-
-Additional principles:
-- **3-5 incremental options per step:** Enough diversity, not excessive
-- **Dependencies explicit:** REQUIRES, PROVIDES, COMPATIBLE WITH
-- **Deployable independently:** Each incremental option works standalone
+## Incremental Option Characteristics
+- **Self-Contained:** Each option can be implemented and deployed independently.
+- **Specific:** Describes EXACTLY what is being done (e.g., "Manual CSV Export" vs "Implement export").
+- **Strategy-Driven:** Each step must declare which breakdown strategies were applied.
+- **Naming Rules Format:** `[Action] [Object]`
 
 ---
 
@@ -140,17 +139,28 @@ Instead of splitting work based on technical inputs or workflows, focus on **del
 
 # WORKFLOW
 
-## Step 1: Identify All Features and Steps
+## Step 1: Identify All User Tasks and Steps
 
 Read `<input_file>` and extract:
-- All features from `## Features Backbone`
-- For EACH feature: find all `### Steps` sections
+- All User Tasks from `## Features Backbone`
+- For EACH User Task: find all `### Steps` sections
   - Step name and description
   - Quality attributes (factors, tradeoffs, options)
   - Technical context
-  - Feature context (for cross-feature compatibility)
+  - User Task context (for cross-task compatibility)
 
-## Step 2: For Each Step - Identify Strategy Applications
+## Step 2: For Each Step - Identify Strategies Applications
+
+### Step 2.1: Define Quality Attributes
+
+For each step in each User Task, document:
+
+**Quality Factors:** What makes this step "good"?
+- Speed (fast execution)
+- Accuracy (correct results)
+- Simplicity (easy to implement)
+- Security (safe operations)
+- Reliability (consistent behavior)
 
 For the step, determine which strategies apply:
 ```
@@ -161,17 +171,18 @@ Example: "Capture Search Input" step
 - Data Variation: Text → Text+voice → Natural language
 ```
 
-## Step 3: For Each Step - Generate Incremental Options
+### Step 2.2: Generate Incremental Options
 
-Create 3-5 incremental options by:
-1. **Simplest approach first**
-2. **Variations using different strategies**
-3. **Progressive complexity**
-4. **Clear naming** - NOT generic ("incremental option 1") but specific ("Manual CSV Export")
+For each step in each User Task create 3+ incremental options by:
+1. **Determine different strategies to apply**
+2. **Create incremental options for each strategy in a progressive way**
+3. **Join incremental options from different strategies if possible**
+4. **Simplest incremental option first**
+5. **Incremental options progress from simplest to most complex**
+6. **Clean naming** - Use `[Action] [Object]`. Example: "Export to CSV".
 
 ### Validate Count:
-- **If <3 options:** Apply more strategies or document why
-- **If >5 options:** Consolidate similar approaches
+- **If <3 options:** Apply more strategies or document why.
 
 Example incremental options for "Store Audio":
 ```
@@ -191,34 +202,18 @@ Example incremental options for "Store Audio":
   - Reduces file size
 ```
 
-## Step 4: For Each Step - Document Dependencies
-
-For each incremental option, specify:
-
-**REQUIRES:**
-```
-REQUIRES: None
-REQUIRES: Backend endpoint POST /api/save
-REQUIRES: User authenticated and session valid
-REQUIRES: Database table 'users' with [fields]
-```
-
-## Step 5: Generate Output
+## Step 3: Generate Output
 
 For each step, generate markdown section:
 
 ```markdown
-### Incremental Options
+### Incremental Options 0/N
 
-**Implementation Progress: 0/N incremental options completed**
+[ ] **N.1: [Action] [Object]:** [Specific implementation]
 
-[ ] **Incremental Option N.1: [Specific name]**
-- **Strategy:** [Breakdown strategy used]
-- **Description:** [Specific implementation]
-- **REQUIRES:** [Dependencies or "None"]
+[ ] **N.2: [Action] [Object]:** [Specific implementation]
 
-[ ] **Incremental Option N.2: [Name]**
-[Repeat 2-4 more times...]
+[Repeat...]
 
 **Applied Strategies:** [List of 2-3 strategies]
 **Rationale:** [Why these options for this step]
@@ -230,66 +225,42 @@ For each step, generate markdown section:
 
 For completed Incremental Options section:
 
-✅ **Coverage - ALL Features and Steps**
-- [ ] ALL features from Features Backbone are processed
-- [ ] EACH step in EACH feature has Incremental Options
+✅ **Coverage - ALL User Tasks and Steps**
+- [ ] ALL User Tasks from Features Backbone are processed
+- [ ] EACH step in EACH user task has Incremental Options
 - [ ] NO steps left unprocessed
-- [ ] Single invocation analyzed all (feature, step) pairs
 
 ✅ **Incremental Option Definition - For Each Step**
-- [ ] EXACTLY 3-5 incremental options per step (NOT <3, NOT >5)
-- [ ] Each has specific, descriptive name (not "incremental option 1")
-- [ ] Each declares STRATEGY used to derive it
+- [ ] 3+ incremental options per step
+- [ ] Each has specific [Action] [Object] name
 - [ ] Each is deployable independently
 
-✅ **Dependencies - Consistent Across Features**
-- [ ] REQUIRES field specified for each
-- [ ] PROVIDES field documented
-- [ ] COMPATIBLE WITH list complete
-- [ ] Dependencies are realistic
-- [ ] Cross-feature compatibility considered
-
 ✅ **Strategies - Diverse and Documented**
-- [ ] EACH incremental option declares its strategy explicitly
 - [ ] Multiple strategies applied across options (not all same approach)
 - [ ] Strategies reflect step quality attributes
 - [ ] Progression from simple to complex (strategy diversity)
 - [ ] Rationale explains overall approach
 
-✅ **Implementation Tracking (NEW)**
-- [ ] Checklist table format included with `[ ]` checkboxes
+✅ **Implementation Tracking**
 - [ ] Progress counter calculated: `0/N incremental options completed`
 - [ ] Users can easily update checkboxes as they implement
-- [ ] Table format provides quick overview
-- [ ] Detailed descriptions below table for reference
 
 ✅ **Documentation - Quality and Completeness**
 - [ ] Descriptions are specific and clear
 - [ ] No ambiguity in implementation
 - [ ] Ready for path-composer to select
 - [ ] Checklist format enables implementation tracking
-- [ ] ALL features fully analyzed in one pass
-
 ---
 
 # EXAMPLES
 
-## Example: "Capture Audio Input" Step
+## Example: "Capture Audio Input" Step (0/3)
 
-**Incremental Options (0/3):**
+[ ] **1.1: Browser Microphone (Web Audio API):** Capture using browser's built-in Web Audio API with basic permissions
 
-[ ] **Incremental Option 1.1: Browser Microphone (Web Audio API)**
-- **Strategy:** Start with Outputs (simplest working approach)
-- **Description:** Capture using browser's built-in Web Audio API with basic permissions
-- **REQUIRES:** Browser with microphone permissions
+[ ] **1.2: Native Mobile Audio:** Use platform-specific microphone APIs for iOS/Android
 
-[ ] **Incremental Option 1.2: Native Mobile Audio**
-- **Strategy:** Zero/One/Many (platform-specific)
-- **Description:** Use platform-specific microphone APIs for iOS/Android
-- **REQUIRES:** iOS SDK or Android SDK
+[ ] **1.3: Audio Processing Pipeline:** Add noise reduction and level monitoring with visual feedback
 
-[ ] **Incremental Option 1.3: Audio Processing Pipeline**
-- **Strategy:** Manual Before Automated (enhanced quality)
-- **Description:** Add noise reduction and level monitoring with visual feedback
-- **REQUIRES:** Web Audio API analysis node
-
+**Applied Strategies:** [List of 2-3 strategies]
+**Rationale:** [Why these options for this step]
