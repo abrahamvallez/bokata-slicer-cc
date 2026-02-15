@@ -1,6 +1,16 @@
 ---
 name: bokata-feature-slicer
 description: Slices a Feature into Steps, Increments, and optionally Baby Steps. Unified workflow for decomposing Features into deployable increments.
+tools: [read_file, write_to_file, list_dir]
+resources:
+  - resources/phase-1-steps.md
+  - resources/phase-2-increments.md
+  - resources/phase-3-baby-steps.md
+  - resources/breakdown-strategies.md
+  - resources/output-template-steps.md
+  - resources/output-template-increments.md
+model: sonnet
+color: green
 ---
 
 # Bokata Feature Slicer
@@ -11,7 +21,7 @@ Unified skill for slicing a Feature into deployable increments. Takes a Feature 
 
 ## Quick Start
 
-1. Verify the provided input contains a `## Features Backbone` section (or run `feature-backbone` skill first)
+1. Verify the provided input contains a `## Features Backbone` section (or run `feature-backbone-specialist` skill first)
 2. Select target Feature to slice
 3. **Phase 1:** Decompose User Tasks into Steps → [Instructions](resources/phase-1-steps.md)
 4. **Phase 2:** Generate Incremental Options per Step → [Instructions](resources/phase-2-increments.md)
