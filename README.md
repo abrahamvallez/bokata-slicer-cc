@@ -1,67 +1,82 @@
-# Bokata: A Prompt System for Task Decomposition and Vertical Slicing
+# Bokata: Vertical Slicing & Task Decomposition Prompt Framework
 
-**Bokata** is a prompt engineering framework designed to guide Large Language Models (LLMs) in the task of decomposing complex software requirements into incremental and actionable development plans.
+**Bokata** is a prompt engineering framework designed to guide Large Language Models (LLMs) in decomposing complex software requirements into incremental, high-value, and actionable development plans.
 
-This repository does not contain an executable application, but rather a set of "prompts" (instructions) in Markdown format that orchestrate a software analysis and design process.
+Using techniques like **Vertical Slicing** and **User Story Mapping**, Bokata transforms vague ideas or large PRDs into a structured "Walking Skeleton" and a prioritized backlog of functional increments.
 
-## Core Concepts
+---
 
-The system is based on the interaction of three main components:
+## 🏗️ Project Structure & Skills
 
-1.  **Commands (`/commands`):** These are the system's entry points. A "command" is a high-level prompt that initiates a workflow. The user loads the content of a command into the LLM along with the description of their project or feature.
-2.  **Specialist Agents (`/agents`):** These are "role prompts" that turn the LLM into a specialist with a very specific task (e.g., analyzing steps, generating options, exploring the project). They are coordinated by a main agent, the **Orchestrator**.
-3.  **"Bokata Slicer" Methodology:** Inspired by vertical slicing techniques like the "Hamburger Method," the goal is to produce software increments that are small, functional end-to-end, and deliver real value to the user at each step.
+The system is organized into specialized **Skills**. Each Skill is a self-contained prompt (located in its respective directory as `SKILL.md`) that defines a specific role and workflow.
 
-## Repository Structure
+### 1. `project-explorer`
+**Goal:** Deep investigation of the technical and functional context.
+- **Analysis:** Scans existing codebases (if any) to identify tech stacks, patterns, and architectural constraints.
+- **Requirements extraction:** Distills user descriptions into core capabilities, user goals, and business rules.
+- **Output:** Produces the `## Context Analysis`, the foundation for all subsequent steps.
 
--   `📁 /agents`: Contains the role definitions for each specialist agent.
-    -   `bokata/*.md`: The specialized agents for the Bokata workflow (Orchestrator not included as a single file anymore, but concept remains).
--   `📁 /commands`: Contains the main prompts that act as entry points.
-    -   `bokata/*.md`: Commands to initiate different scopes of the Bokata analysis.
+### 2. `feature-backbone-specialist`
+**Goal:** Map the user journey using User Story Mapping.
+- **Features:** Identifies broad high-level goals in `[Actor] [Action] [Result] [Object]` format.
+- **User Tasks:** Breaks Features into concrete, value-delivering actions (`[Action] [Result] [Object]`).
+- **Narrative:** Organizes tasks according to the chronological user journey.
+- **Output:** Produces the `## Features Backbone`.
 
-## Model Recommendations & Benchmarks
+### 3. `acceptance-criteria-generator`
+**Goal:** Formalize behavior using Gherkin (Given/When/Then).
+- **Example Mapping:** Discovers hidden business logic, rules, and edge cases.
+- **Validation:** Ensures every User Task has a clear "Happy Path" and "Sad Path".
+- **Output:** Executable specifications that bridge the gap between requirements and testing.
 
-Based on extensive testing, here is how different LLMs perform with the Bokata prompts:
+### 4. `bokata-feature-slicer`
+**Goal:** The core decomposition engine. It processes a specific Feature through three mandatory phases:
+- **Phase 1: Step Analysis:** Decomposes User Tasks into functional steps across all layers (UI, Logic, Data, Integration).
+- **Phase 2: Incremental Options:** Generates multiple development options for each step (from "Mocked/Basic" to "Full Production").
+- **Phase 3: Baby Steps Plan:** Synthesizes the simplest possible end-to-end version (**Walking Skeleton**) and a prioritized backlog of increments.
 
--   **Sonnet 4.5**: Highly recommended.
-    -   *Pros*: Performs well, very explanatory.
-    -   *Cons*: Can be verbose (writes more output than strictly necessary), consuming more tokens. Introduction of the analysis can be slow.
--   **Gemini 3 Pro**: **Top Recommendation**.
-    -   *Pros*: Follows instructions precisely, extremely fast, and produces very correct analysis.
-    -   *Cons*: None significant observed.
--   **Haiku**:
-    -   *Pros*: Follows instructions.
-    -   *Cons*: Steps can be overly refined (too granular), and full analysis is somewhat slow.
--   **Gemini Flash**:
-    -   *Pros*: Fast and correct analysis.
+---
 
-**Current Advice**: Use **Sonnet 4.5** for agentic workflows where explanation is key, or **Gemini 3 Pro** for speed and precision.
+## 🛠️ Methodology
 
-## Recommended Workflows
+Bokata is built on industry-proven software design principles:
 
-While the `bokata` command performs the entire analysis in one go, it can be token-intensive. For better control and efficiency, we recommend the following modular approach:
+### Vertical Slicing (The Hamburger Method)
+Instead of building horizontal layers (Database first, then API, then UI), Bokata encourages **Vertical Slices**. A slice is a thin piece of functionality that touches all layers and is deployable/testable on its own.
 
-1.  **Phase 1: Analysis**: Start by performing a high-level analysis of your requirements. You can use the specific agent or another analysis agent for this.
-2.  **Phase 2: Backbone**: Use the analysis result with the `backbone` command to generate the Story Map structure.
-3.  **Phase 3: Detailing**:
-    *   **Fast Track (Checklist only)**: If you only need the task checklist without deep reasoning, run the `babysteps` command directly with the Backbone output.
-    *   **Deep Dive (Full Reasoning)**: For a comprehensive breakdown, execute the commands in this order:
-        1.  `steps` (Decompose user tasks)
-        2.  `increments` (Define slices)
-        3.  `baby-steps-specialist` agent (Final refined checklist)
+### Walking Skeleton
+A "Walking Skeleton" is the tiniest possible implementation of the vertical slice that connects all main components. It "walks" through the system end-to-end, proving the architecture before adding meat (complexity) to the bones.
 
-## How to Use
+### Linguistic Pattern Detection
+The system uses "Linguistic Cues" to identify where a task needs further splitting:
+- **Conjunctions:** "And/Or" usually mean two tasks.
+- **Generic Verbs:** "Manage" or "Handle" always hide multiple CRUD operations.
+- **Exceptions:** "Unless/Except" point to hidden business rules.
 
-The use of this system is conceptual and is performed within the interface of an advanced language model (such as Google Gemini, Claude, etc.). The general process is as follows:
+### Breakdown Strategies Toolkit
+The `bokata-feature-slicer` applies 16+ specific strategies to create increments:
+- **Zero/One/Many:** Handle empty states first, then one item, then lists.
+- **Dummy to Dynamic:** Use hardcoded data before building full integrations.
+- **Workflow Simplification:** Skip optional steps or validations in the first increment.
 
-1.  **Select a Command:** Choose a prompt from the `/commands` directory. For example, `commands/bokata/bokata.md` for a full project analysis.
-2.  **Load the Prompt:** Copy and paste the entire content of the command file into your LLM's chat window.
-3.  **Add Context:** Immediately after the command prompt, add the description of the feature or project you want to analyze.
-4.  **Execute:** Send the combined prompt to the LLM. The model will follow the instructions to perform the analysis.
-5.  **Result:** The LLM will generate a Markdown document with the detailed analysis, including the incremental options.
+---
 
-This system is designed to be an "augmented thinking" tool, where the LLM not only gives an answer but follows a structured and transparent process to arrive at it.
+## 🚀 How to Execute
 
-## License
+You can use the agents individually or follow the recommended "Full Loop" for maximum precision.
 
-This project is under the MIT License. You can use, modify, and distribute it freely. For more details, see the `LICENSE` file.
+### Individual Execution
+- **Individual Agents:** You can launch `project-explorer`, `feature-backbone-specialist`, or `acceptance-criteria-generator` independently to analyze specific parts of your project.
+- **The Slicer:** `bokata-feature-slicer` is a specialized workflow. It **requires** a `## Features Backbone` as input. If it doesn't find the necessary info, it will recommend running the previous agents first.
+
+### Recommended "Full Loop" Workflow
+For the best results, launch the agents in sequence:
+1. **Explore:** Run `project-explorer` to understand the domain and tech stack.
+2. **Backbone:** Use the output from Explorer to run `feature-backbone-specialist`.
+3. **Criteria:** (Optional but Recommended) Run `acceptance-criteria-generator` to define rules.
+4. **Slice:** Run `bokata-feature-slicer` on a target feature to get your incremental roadmap.
+
+---
+
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
