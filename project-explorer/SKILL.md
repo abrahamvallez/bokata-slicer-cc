@@ -1,11 +1,6 @@
 ---
 name: project-explorer
 description: Investigates codebase and analyzes functional/technical requirements
-tools: [list_dir, grep_search, read_file, run_command, write_to_file]
-resources:
-  - resources/output-template.md
-model: sonnet
-color: blue
 ---
 
 # Bokata: Project Explorer

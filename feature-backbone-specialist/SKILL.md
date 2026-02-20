@@ -1,13 +1,6 @@
 ---
 name: feature-backbone-specialist
 description: Identifies Features and User Tasks using User Story Mapping methodology
-tools: [read_file, write_to_file]
-resources:
-  - resources/output-template.md
-  - resources/methodology.md
-  - resources/examples.md
-model: sonnet
-color: purple
 ---
 
 # Bokata: Features Backbone Specialist

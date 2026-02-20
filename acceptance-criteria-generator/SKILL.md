@@ -1,11 +1,6 @@
 ---
 name: acceptance-criteria-generator
 description: Generates Gherkin Acceptance Criteria using Feature Mapping and Example Mapping methodologies from any key input source.
-tools: [read_file, write_to_file]
-resources:
-  - resources/output-template.md
-model: sonnet
-color: purple
 ---
 
 # Bokata: Acceptance Criteria Generator

@@ -1,16 +1,6 @@
 ---
 name: bokata-feature-slicer
 description: Slices a Feature into Steps, Increments, and optionally Baby Steps. Unified workflow for decomposing Features into deployable increments.
-tools: [read_file, write_to_file, list_dir]
-resources:
-  - resources/phase-1-steps.md
-  - resources/phase-2-increments.md
-  - resources/phase-3-baby-steps.md
-  - resources/breakdown-strategies.md
-  - resources/output-template-steps.md
-  - resources/output-template-increments.md
-model: sonnet
-color: green
 ---
 
 # Bokata Feature Slicer
