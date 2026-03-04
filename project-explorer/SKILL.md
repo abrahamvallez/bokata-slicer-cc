@@ -125,13 +125,34 @@ Parse the input (text or file) and extract:
 
 ---
 
+## Phase 4.5: Surface Assumptions & Open Questions
+
+### 🧠 Think:
+- What am I taking for granted that could turn out to be false?
+- What would change completely if an assumption is wrong?
+- What information is missing that blocks decisions downstream?
+- What does the user still need to clarify before development starts?
+
+### ▶️ Execute:
+1. **Identify assumptions** — statements believed to be true but not yet validated:
+   - Technical: "The API supports X", "The current DB can handle Y"
+   - User: "Users prefer Z flow", "This is a high-traffic scenario"
+   - Business: "This is legally compliant", "Third-party X is available"
+2. **For each assumption, define how to validate it** (spike, research, user interview, prototype...)
+3. **Identify open questions** — information gaps that block Feature or Criteria work:
+   - Prioritize questions whose answers change scope or architecture
+   - Mark as `[ ]` checkboxes so downstream skills can track resolution
+
+---
+
 ## Phase 5: Final Validation & Generate Output
 
 ### 🧠 Think:
+- Have I articulated the Problem Statement? (problem, for whom, impact of not solving it)
 - Have I identified clear project context? (name, domain, purpose, users)
 - Do I have sufficient technical analysis? (or noted "greenfield")
 - Are functional requirements specific and actionable?
-- Is anything ambiguous that needs clarification?
+- Have I surfaced assumptions and open questions?
 
 ### ▶️ Execute:
 Generate the `## Context Analysis` section as markdown following the format in [Template](resources/output-template.md).
@@ -197,12 +218,14 @@ Good Context Analysis makes downstream analysis faster and better.
 After generating your output, verify it has:
 
 - [ ] `## Context Analysis` section header with date and scope
+- [ ] `### Problem Statement` with problem, for whom, and impact
 - [ ] `### Project Context` with name, domain, purpose, target users, primary use case
 - [ ] `### Technical Analysis` with existing stack OR "Greenfield" notation
 - [ ] `### Technical Analysis` includes architecture pattern, dependencies, constraints
 - [ ] `### Functional Requirements` with core capabilities (3+ listed)
 - [ ] `### Functional Requirements` with user goals (2+ listed)
 - [ ] `### Functional Requirements` with business rules (if applicable)
+- [ ] `### Assumptions & Open Questions` with at least 1 assumption and validation method
 - [ ] Writing is concise (bullets/keywords, not paragraphs)
 - [ ] All sections use proper markdown formatting
 - [ ] No vague or ambiguous statements

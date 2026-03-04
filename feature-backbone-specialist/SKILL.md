@@ -79,9 +79,17 @@ Read the Analysis section from the provided input and extract:
 - What are the distinct phases of the user journey?
 - Can each goal be completed as a coherent unit?
 - Do these represent different stages (setup → core → enhancement)?
+- **Why** does the user need each feature? What's the underlying benefit?
+- How would a user know this feature is working well? What's the observable success?
 
 ### ▶️ Execute:
 Group capabilities into Features following the [Methodology Guidelines](resources/methodology.md). Ensure each Feature name follows **[Actor] [Action] [Result] [Object]**.
+
+For each Feature, also define:
+1. **User Story** — `As a [actor], I want to [action], so that [benefit/outcome]`
+   - The "so that" clause is critical: it captures WHY, not just what
+2. **Success Metrics** — 1-2 observable signals that the feature is delivering value
+   - Think: what changes for the user when this exists vs. doesn't exist?
 
 ---
 
@@ -136,6 +144,8 @@ For each Feature, document dependencies by:
 - Do all Features follow [Actor] [Action] format?
 - Do all User Tasks follow [Action] [Result] [Object] format (NO actor)?
 - Are all actions specific (not generic like "manage" or "handle")?
+- Does each Feature have a User Story with a meaningful "so that" clause?
+- Are Success Metrics observable and concrete (not vague like "users are happy")?
 
 ### ▶️ Execute:
 Generate markdown output following the [Output Template](resources/output-template.md).
@@ -158,6 +168,8 @@ Before finishing, verify your output:
 - [ ] `### Feature Dependencies` section documented
 - [ ] 2+ Features identified (MIN 2)
 - [ ] Each Feature follows [Actor] [Action] [Result] [Object] format
+- [ ] Each Feature has a **User Story** with a non-trivial "so that" clause
+- [ ] Each Feature has **Success Metrics** (at least 1, observable and concrete)
 - [ ] 3+ User Tasks per Feature (MIN 3)
 - [ ] All User Tasks follow [Action] [Result] [Object] format (NO actor)
 

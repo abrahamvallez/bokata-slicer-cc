@@ -6,7 +6,11 @@
 ### Features Map
 
 #### Feature 1: [Actor] [Action] [Result] [Object]
+**User Story:** As a [actor], I want to [action], so that [benefit/outcome].
 **Purpose:** [What user accomplishes with this feature]
+**Success Metrics:**
+- {Measurable signal that this feature is working for the user}
+- {Another observable outcome or completion condition}
 
 **User Tasks:**
 1. **[Action] [Result] [Object]** - [Brief description]
@@ -14,7 +18,10 @@
 3. **[Action] [Result] [Object]** - [Brief description]
 
 #### Feature 2: [Actor] [Action] [Result] [Object]
+**User Story:** As a [actor], I want to [action], so that [benefit/outcome].
 **Purpose:** [What user accomplishes with this feature]
+**Success Metrics:**
+- {Measurable signal that this feature is working for the user}
 
 **User Tasks:**
 1. **[Action] [Result] [Object]** - [Brief description]
