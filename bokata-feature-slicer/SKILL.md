@@ -39,19 +39,19 @@ Read the provided input and:
    - Verify input contains `## Features Backbone` with User Tasks defined — if missing, run `feature-backbone` skill first before proceeding
    - Optionally check for Acceptance Criteria — if missing, suggest `acceptance-criteria-generator`
 
-2. **Phase 1 — Steps (always):**
+2. **Phase 1 — Steps:**
    Follow instructions in [Phase 1: Step Analysis](resources/phase-1-steps.md)
    - Decompose each User Task into functional Steps (UI → Logic → Data → Integration)
    - Use [output template](resources/output-template-steps.md) for format
    - Validate: minimum 3 steps per User Task, all layers represented
 
-3. **Phase 2 — Increments (always):**
+3. **Phase 2 — Increments:**
    Follow instructions in [Phase 2: Incremental Options](resources/phase-2-increments.md)
    - Generate 3+ Incremental Options per Step using [breakdown strategies](resources/breakdown-strategies.md)
    - Use [output template](resources/output-template-increments.md) for format
    - Validate: minimum 3 options per step, strategies documented
 
-4. **Phase 3 — Baby Steps (only if requested):**
+4. **Phase 3 — Baby Steps:**
    Follow instructions in [Phase 3: Baby Steps](resources/phase-3-baby-steps.md)
    - Identify Walking Skeleton (simplest end-to-end options)
    - Organize remaining increments into a backlog
@@ -66,19 +66,19 @@ Input: Features Backbone
          │
          ▼
 ┌─────────────────────┐
-│   Phase 1: Steps    │  ← Always
+│   Phase 1: Steps    │
 │  (Decompose Tasks)  │
 └────────┬────────────┘
          │
          ▼
 ┌─────────────────────┐
-│ Phase 2: Increments │  ← Always
+│ Phase 2: Increments │
 │ (Generate Options)  │
 └────────┬────────────┘
          │
-         ▼ (optional)
+         ▼
 ┌─────────────────────┐
-│ Phase 3: Baby Steps │  ← Only if requested
+│ Phase 3: Baby Steps │
 │ (Synthesize Plan)   │
 └─────────────────────┘
 ```

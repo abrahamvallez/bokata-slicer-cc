@@ -126,24 +126,24 @@ Return **ONLY** the markdown for the ToDo list:
 ## 💀 Walking Skeleton
 *Goal: End-to-end connectivity and basic value. No bells and whistles.*
 
-- [ ] **[User Task 1]** [Simplest Option for Step 1]: [Description] -- (Task: User Task 1)
-- [ ] **[User Task 1]** [Simplest Option for Step 2]: [Description] -- (Task: User Task 1)
-- [ ] **[User Task 1]** [Simplest Option for Step 3]: [Description] -- (Task: User Task 1)
-- [ ] **[User Task 2]** [Simplest Option for Step 1]: [Description] -- (Task: User Task 2)
-- [ ] **[User Task 2]** [Simplest Option for Step 2]: [Description] -- (Task: User Task 2)
+- [ ] **[User Task 1]** [Simplest Option for Step 1]: [Complete description] -- (Task: User Task 1)
+- [ ] **[User Task 1]** [Simplest Option for Step 2]: [Complete Description] -- (Task: User Task 1)
+- [ ] **[User Task 1]** [Simplest Option for Step 3]: [Complete Description] -- (Task: User Task 1)
+- [ ] **[User Task 2]** [Simplest Option for Step 1]: [Complete Description] -- (Task: User Task 2)
+- [ ] **[User Task 2]** [Simplest Option for Step 2]: [Complete Description] -- (Task: User Task 2)
 
 ## 🏗️ Increments Backlog
 *Select and prioritize these increments manually to build upon the Walking Skeleton.*
 
 ### User Task 1: [Name]
-- [ ] **[User Task 1]** [Option 2 for Step 1]: [Description] -- (Enhances: Step 1)
-- [ ] **[User Task 1]** [Option 3 for Step 1]: [Description] -- (Enhances: Step 1)
-- [ ] **[User Task 1]** [Option 2 for Step 2]: [Description] -- (Enhances: Step 2)
-- [ ] **[User Task 1]** [Option 3 for Step 2]: [Description] -- (Enhances: Step 2)
+- [ ] **[User Task 1]** [Option 2 for Step 1]: [Complete Description] -- (Enhances: Step 1)
+- [ ] **[User Task 1]** [Option 3 for Step 1]: [Complete Description] -- (Enhances: Step 1)
+- [ ] **[User Task 1]** [Option 2 for Step 2]: [Complete Description] -- (Enhances: Step 2)
+- [ ] **[User Task 1]** [Option 3 for Step 2]: [Complete Description] -- (Enhances: Step 2)
 
 ### User Task 2: [Name]
-- [ ] **[User Task 2]** [Option 2 for Step 1]: [Description] -- (Enhances: Step 1)
-- [ ] **[User Task 2]** [Option 3 for Step 1]: [Description] -- (Enhances: Step 1)
+- [ ] **[User Task 2]** [Option 2 for Step 1]: [Complete Description] -- (Enhances: Step 1)
+- [ ] **[User Task 2]** [Option 3 for Step 1]: [Complete Description] -- (Enhances: Step 1)
 
 [Continue for all User Tasks...]
 ```
@@ -164,6 +164,11 @@ Return **ONLY** the markdown for the ToDo list:
 - Only choose higher options (1.2, 1.3) if option 1.1 is not viable for end-to-end flow
 - Skeleton must demonstrate EVERY User Task's core value proposition
 - Each skeleton item must be independently deployable
+
+**System Tasks in the Walking Skeleton:**
+System Tasks that are prerequisites for User Tasks must appear as baby steps
+before those User Tasks. The order is: opening transitions → user tasks that depend
+on them → closing transitions.
 
 ### 2. Increments Bank Organization
 
