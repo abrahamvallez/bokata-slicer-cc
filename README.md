@@ -67,7 +67,7 @@ You can use the agents individually or follow the recommended "Full Loop" for ma
 
 ### Individual Execution
 - **Individual Agents:** You can launch `project-explorer`, `feature-backbone-specialist`, or `acceptance-criteria-generator` independently to analyze specific parts of your project.
-- **The Slicer:** `bokata-feature-slicer` is a specialized workflow. It **requires** a `## Features Backbone` as input. If it doesn't find the necessary info, it will recommend running the previous agents first.
+- **The Slicer:** `bokata-feature-slicer` works best with a structured Features Backbone as input, but can also accept Features and User Tasks in any format (plain text, PRD, conversational context). If it can't identify Features/User Tasks, it will recommend running the previous agents first.
 
 ### Recommended "Full Loop" Workflow
 For the best results, launch the agents in sequence:

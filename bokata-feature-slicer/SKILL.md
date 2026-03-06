@@ -11,7 +11,7 @@ Unified skill for slicing a Feature into deployable increments. Takes a Feature 
 
 ## Quick Start
 
-1. Verify the provided input contains a `## Features Backbone` section (or run `feature-backbone-specialist` skill first)
+1. Identify the Feature(s) to slice from the provided input (see [Prerequisites](#prerequisites))
 2. Select target Feature to slice
 3. **Phase 1:** Decompose User Tasks into Steps → [Instructions](resources/phase-1-steps.md)
 4. **Phase 2:** Generate Incremental Options per Step → [Instructions](resources/phase-2-increments.md)
@@ -21,11 +21,15 @@ Unified skill for slicing a Feature into deployable increments. Takes a Feature 
 
 ## Prerequisites
 
-The provided input must contain a **`## Features Backbone`** section with:
-- Features identified
-- User Tasks defined under each Feature (with descriptions and context)
+This skill needs one or more **Features with User Tasks** to slice. The input can come in **any form**:
 
-This content is produced by the `feature-backbone` skill. If the input does not contain `## Features Backbone`, run the `feature-backbone` skill first to generate it.
+- **A `## Features Backbone` section** (as produced by `feature-backbone-specialist`) — richest and most structured input
+- **A list of Features and User Tasks** in any text or markdown format
+- **Plain text description** of features to decompose
+- **Conversational context** — information provided through prior agent conversation
+- **A PRD or requirements document** describing the functionality
+
+The skill will extract Features and User Tasks from whatever input is provided. If the input lacks clearly defined Features and User Tasks, the skill will either infer them from context or recommend running `feature-backbone-specialist` first.
 
 Optionally, Acceptance Criteria (from `acceptance-criteria-generator`) enrich the decomposition.
 
@@ -36,7 +40,8 @@ Optionally, Acceptance Criteria (from `acceptance-criteria-generator`) enrich th
 Read the provided input and:
 
 1. **Prerequisite Check:**
-   - Verify input contains `## Features Backbone` with User Tasks defined — if missing, run `feature-backbone` skill first before proceeding
+   - Identify Features and User Tasks from the provided input (structured markdown, plain text, PRD, or conversational context)
+   - If Features/User Tasks cannot be identified, recommend running `feature-backbone-specialist` first
    - Optionally check for Acceptance Criteria — if missing, suggest `acceptance-criteria-generator`
 
 2. **Phase 1 — Steps:**
@@ -62,7 +67,7 @@ Read the provided input and:
 ## Execution Flow
 
 ```
-Input: Features Backbone
+Input: Features & User Tasks
          │
          ▼
 ┌─────────────────────┐

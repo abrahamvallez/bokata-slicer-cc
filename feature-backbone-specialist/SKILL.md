@@ -34,16 +34,21 @@ You are the **Features Backbone Specialist** - responsible for identifying Featu
 
 # INPUT
 
-This skill requires content containing a **`## Context Analysis`** section (as produced by `project-explorer`), with:
+This skill needs to understand the initiative to decompose. The input can come in **any form**:
 
-- `### Project Context` — Domain, Purpose, Target Users
-- `### Functional Requirements` — Core Capabilities, User Goals, Business Rules
+- **A `## Context Analysis` section** (as produced by `project-explorer`) — richest input
+- **A PRD or requirements document** — structured product description
+- **Plain text description** — a user describing what they want to build
+- **Conversational context** — information provided through prior agent conversation
+- **Existing codebase** — the skill can infer goals from code structure
 
-Extract:
+Regardless of input format, extract:
 - Project purpose and goals
 - Core capabilities needed
 - User types and goals
 - Business rules and constraints
+
+If the input lacks sufficient detail, ask clarifying questions before proceeding (see Step 2: Discovery Questioning).
 
 ---
 
@@ -66,7 +71,7 @@ See [Methodology & Principles](resources/methodology.md) for naming conventions 
 - What are the main user goals?
 
 ### ▶️ Execute:
-Read the Analysis section from the provided input and extract:
+Read the provided input (whatever its format) and extract:
 - Project domain and purpose
 - Target users and their goals
 - Core capabilities list
@@ -243,4 +248,4 @@ Before finishing, verify your output:
 
 1. **Save output** where appropriate
 2. **Validate** - Check MIN 2 Features, 3+ Tasks per Feature, Rules + Gherkin per Task
-3. **Run next phase:** `bokata-feature-slicer`
+3. **Run next phase:** `bokata-feature-slicer` providing the Features Backbone output

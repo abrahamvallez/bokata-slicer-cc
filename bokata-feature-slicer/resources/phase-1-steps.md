@@ -27,10 +27,9 @@ Decompose each User Task into technical, business, and logical steps using the H
 - [List observations about each task]
 
 #### ▶️ Execute:
-1. Locate `## Features Backbone` section in the provided input
-2. Extract all User Tasks from `### Features Map` subsections
-3. For each User Task, capture: name, description, and parent Feature context
-4. Create a list of all User Tasks to process
+1. Identify all User Tasks from the provided input (whether from a `## Features Backbone` section, plain text, PRD, or conversational context)
+2. For each User Task, capture: name, description, and parent Feature context
+3. Create a list of all User Tasks to process
 
 ---
 

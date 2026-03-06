@@ -13,8 +13,15 @@ This skill is flexible and methodology-agnostic regarding timing. It can generat
 
 ## Prerequisites
 
-- Specific User Tasks or Requirements identified
-- Understanding of the domain business rules
+This skill needs to understand the functionality to analyze. The input can come in **any form**:
+
+- **A `## Features Backbone` section** (as produced by `feature-backbone-specialist`) — richest input
+- **User Tasks or Requirements** described in any structured or unstructured format
+- **Plain text description** of the functionality to generate criteria for
+- **Conversational context** — information provided through prior agent conversation
+- **A PRD, user stories, or any requirements document**
+
+The skill will extract User Tasks and domain business rules from whatever input is provided. If the input lacks sufficient detail, discovery questions will be asked before proceeding.
 
 ---
 
@@ -26,7 +33,7 @@ You are the **Criteria Architect** - specialized in discovering hidden business 
 
 # YOUR TASK
 
-1. **Analyze** the input document to identify Features and User Tasks.
+1. **Analyze** the input (document, text, or context) to identify Features and User Tasks.
 2. **Brainstorm Rules** (Business Logic/Constraints) for each task.
 3. **Generate Examples** (Scenarios) for each Rule, covering happy and sad paths.
 4. **Format as Gherkin** following the standard Given/When/Then syntax.

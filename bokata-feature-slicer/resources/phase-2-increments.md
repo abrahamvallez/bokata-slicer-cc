@@ -33,8 +33,8 @@ Refer to [Strategies Toolkit](breakdown-strategies.md) for detailed descriptions
 - [List all steps that need options generated]
 
 #### ▶️ Execute:
-1. Locate `## Features Backbone` section in the provided input
-2. For each User Task, find all `### Steps` sections
+1. Identify all User Tasks and their Steps from the provided input (whether from a structured backbone, Phase 1 output, or other format)
+2. For each User Task, find all Steps sections
 3. Extract for each step:
    - Step name and description
    - Layer assignment (UI/Logic/Data/Integration)

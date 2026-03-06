@@ -18,8 +18,8 @@ Take the complete breakdown (Features, User Tasks, Steps, Incremental Options) a
 - [List User Tasks and their step counts]
 
 #### ▶️ Execute:
-1. Locate `## Features Backbone` section in the provided input
-2. Identify all User Tasks under the target Feature
+1. Identify all User Tasks under the target Feature from the provided input (structured backbone, plain text, or prior phase output)
+2. Map out the complete Feature structure
 3. Count Steps per User Task
 4. Count Incremental Options per Step
 5. Create a complete map of the Feature structure

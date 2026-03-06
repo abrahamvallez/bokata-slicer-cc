@@ -214,7 +214,7 @@ After generating your output, verify it has:
 After completing Context Analysis:
 
 1. **Save output** where appropriate (the user decides the destination)
-2. **Run next phase:** `feature-backbone` skill, providing the `## Context Analysis` output as input
+2. **Run next phase:** `feature-backbone-specialist` skill, providing the Context Analysis output as input (or any other form of project description)
 
 ---
 
