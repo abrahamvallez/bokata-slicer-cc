@@ -1,4 +1,4 @@
-# Phase 3: Baby Steps Synthesis (Optional)
+# Phase 3: Vertical Slices Synthesis
 
 Take the complete breakdown (Features, User Tasks, Steps, Incremental Options) and synthesize it into a clear, prioritized development plan. Identify the "Walking Skeleton" (minimum viable vertical slices) first, then organize all remaining increments into a flexible backlog.
 
@@ -6,7 +6,7 @@ Take the complete breakdown (Features, User Tasks, Steps, Incremental Options) a
 
 ## SYNTHESIS PROCESS
 
-**Important:** Think step-by-step before generating Baby Steps plan.
+**Important:** Think step-by-step before generating Vertical Slices plan.
 
 ### Step 1: Understanding the Analysis
 
@@ -38,12 +38,15 @@ For EACH User Task, for EACH Step:
 
 #### ▶️ Execute:
 For each step in each User Task, select the simplest viable option:
-1. Choose option 1.1 (first option) unless not viable for end-to-end flow
-2. If 1.1 doesn't enable E2E, choose the next simplest option
-3. Ensure every User Task is represented in the skeleton
+1. Evaluate ALL options for each step
+2. Select the option that is: simplest to implement, enables end-to-end flow, and delivers real user value
+3. The option number does NOT determine selection — option .2 or .3 may be simpler in context
+4. Ensure every User Task is represented in the skeleton
 
 Walking Skeleton Selection Rules:
-- Prefer option .1 (first option per step) when possible
+- Evaluate all options and choose the GENUINELY simplest viable one per step
+- "Simplest" = fewest dependencies, least infrastructure, fastest to ship
+- Option numbering is a complexity hint, not a mandate — verify by comparing options
 - Every User Task MUST be represented in skeleton
 - Each skeleton item must be independently deployable
 - Skeleton must demonstrate end-to-end flow for entire Feature
@@ -62,7 +65,7 @@ Walking Skeleton Selection Rules:
 #### ▶️ Execute:
 Validate skeleton completeness against these criteria:
 1. All User Tasks represented (no gaps)
-2. Each uses simplest viable option (.1 typically)
+2. Each uses genuinely simplest viable option (evaluated across all options)
 3. End-to-end functionality demonstrated
 4. Shippable tomorrow (minimal but complete)
 5. Every item is independently deployable
@@ -121,16 +124,21 @@ Perform final validation checks:
 Return **ONLY** the markdown for the ToDo list:
 
 ```markdown
-# Baby Steps: [Feature Name]
+# Vertical Slices: [Feature Name]
 
 ## 💀 Walking Skeleton
 *Goal: End-to-end connectivity and basic value. No bells and whistles.*
 
+### User Task 1: [Name]
 - [ ] **[User Task 1]** [Simplest Option for Step 1]: [Complete description] -- (Task: User Task 1)
 - [ ] **[User Task 1]** [Simplest Option for Step 2]: [Complete Description] -- (Task: User Task 1)
 - [ ] **[User Task 1]** [Simplest Option for Step 3]: [Complete Description] -- (Task: User Task 1)
+
+### User Task 2: [Name]
 - [ ] **[User Task 2]** [Simplest Option for Step 1]: [Complete Description] -- (Task: User Task 2)
 - [ ] **[User Task 2]** [Simplest Option for Step 2]: [Complete Description] -- (Task: User Task 2)
+
+[Continue for all User Tasks...]
 
 ## 🏗️ Increments Backlog
 *Select and prioritize these increments manually to build upon the Walking Skeleton.*
@@ -160,8 +168,9 @@ Return **ONLY** the markdown for the ToDo list:
 - **Principle**: Better a clumsy but working full flow than a perfect but incomplete fragment
 
 **Walking Skeleton Selection Rules:**
-- Choose option 1.1, 2.1, 3.1 (first option per step) when possible
-- Only choose higher options (1.2, 1.3) if option 1.1 is not viable for end-to-end flow
+- Evaluate all options and choose the GENUINELY simplest viable one per step
+- "Simplest" = fewest dependencies, least infrastructure, fastest to ship
+- Option numbering is a complexity hint, not a mandate — verify by comparing options
 - Skeleton must demonstrate EVERY User Task's core value proposition
 - Each skeleton item must be independently deployable
 
@@ -234,7 +243,7 @@ on them → closing transitions.
 
 ✅ **Walking Skeleton**
 - [ ] Covers ALL User Tasks in the Feature
-- [ ] Uses simplest option for each step (typically option .1)
+- [ ] Uses genuinely simplest option for each step (evaluated across all options, not just `.1`)
 - [ ] Demonstrates end-to-end flow for each User Task
 - [ ] Could ship tomorrow and deliver user value
 - [ ] Every item has User Task tag: `**[User Task Name]**`
@@ -261,7 +270,7 @@ on them → closing transitions.
 ## COMMON ISSUES
 
 **Issue: "Walking Skeleton too complex"**
-→ Solution: Use only option .1 (first option) per step. If you're using .2 or .3, you're adding complexity.
+→ Solution: Compare ALL options per step and pick the one with fewest dependencies and simplest implementation path. Do not default to .1 without evaluating the alternatives.
 
 **Issue: "Not all User Tasks in skeleton"**
 → Solution: EVERY User Task must be represented, even if minimal.
