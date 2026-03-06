@@ -143,6 +143,8 @@ Read the provided input or context and extract:
 ### ▶️ Execute:
 Group capabilities into Features following the [Methodology Guidelines](resources/methodology.md). Ensure each Feature name follows **[Actor] [Verb] [Object]**.
 
+**Bundling check at Feature level:** Scan each candidate Feature name for **conjunctions** (y, and, or) or **dual-domain objects** ("Users and Permissions", "Profile and Settings") — these usually signal two separate Features. Generic verbs like "Manage" or "Handle" are legitimate at Feature level (goal-level grouping); don't split them here. See [Bundling Heuristics](resources/bundling-heuristics.md) — "When NOT to split" section especially.
+
 ---
 
 ## Step 3: For Each Feature — Identify User Tasks
@@ -157,6 +159,8 @@ Group capabilities into Features following the [Methodology Guidelines](resource
 
 ### ▶️ Execute:
 Identify 3+ User Tasks per Feature following the [Naming Conventions](resources/methodology.md) (`[Verb] [Object]`, NO actor).
+
+**Bundling check (before moving to Step 4):** Scan each candidate task name using [Bundling Heuristics](resources/bundling-heuristics.md). Catch bundled tasks here — before generating ACs — to avoid rework. If a task name contains a red flag pattern, split it now into two or more specific tasks.
 
 Identify System Tasks where the trigger is a workflow transition (not a direct user action). See [System Tasks section in Methodology](resources/methodology.md).
 
@@ -238,38 +242,6 @@ Check your output against the [Quality Criteria](resources/methodology.md) and s
 
 ---
 
-# ID GENERATION
-
-Every Feature and User Task must have a deterministic ID comment in the output.
-
-**Algorithm:**
-1. Normalize the name: lowercase → trim → collapse spaces to hyphens → remove non-alphanumeric chars
-2. Take the first 4 characters of the MD5 hash of the normalized name
-3. Format: `{PROJECT}-{TYPE}-{HASH}`
-
-**Types:** `FEAT` for Features, `TASK` for User Tasks
-
-**Project prefix for this project:** `BKC` (first 3 chars of project name, uppercase)
-
-**Examples:**
-- Feature "Player Manages Competitive Profile" → normalize: `player-manages-competitive-profile` → MD5[0:4] → `BKC-FEAT-a3f1`
-- Task "Create Player Account" → normalize: `create-player-account` → MD5[0:4] → `BKC-TASK-9c2b`
-
-**To generate IDs programmatically** (if Bash is available):
-```bash
-# Feature ID
-echo -n "player-manages-competitive-profile" | md5sum | cut -c1-4
-# → a3f1  →  BKC-FEAT-a3f1
-
-# Task ID
-echo -n "create-player-account" | md5sum | cut -c1-4
-# → 9c2b  →  BKC-TASK-9c2b
-```
-
-If Bash is not available, derive the 4-char hash by best approximation from the normalized name — consistency matters more than cryptographic precision here.
-
----
-
 # OUTPUT CHECKLIST
 
 Before finishing, verify your output:
@@ -288,6 +260,18 @@ Before finishing, verify your output:
 - [ ] All User Tasks follow `[Verb] [Object]` format (NO actor)
 - [ ] Each User Task has at least 1 Rule with Gherkin scenario(s)
 - [ ] Each System Task has an explicit **Trigger** field
+
+**User Task Bundling Check — scan each User Task name before finalizing:**
+
+Read [Bundling Heuristics](resources/bundling-heuristics.md) for the full 6-pattern reference with Usage explanations and examples.
+
+Quick scan — flag any task whose name contains:
+- [ ] Conjunctions: y, o, and, or → likely two tasks
+- [ ] Generic action verbs: gestionar, manejar, manage, handle, administer → likely CRUD bundling
+- [ ] Sequence words: antes de, después de, then, while → likely multi-phase flow
+- [ ] Scope additions: incluyendo, también, including, also, additionally → separable feature
+- [ ] Options: opcionalmente, either/or, alternatively → multiple paths
+- [ ] Exceptions: excepto, unless, however → edge case or special rule
 
 ---
 

@@ -6,7 +6,7 @@ Decompose each User Task into technical, business, and logical steps using the H
 
 ## DECOMPOSITION PRINCIPLES
 
-- **Minimum 3 steps required** - Fewer = too broad. No maximum, but avoid unnecessary granularity.
+- **Aim for 4+ steps** - 3 is acceptable if all relevant layers are covered and the task is genuinely simple. Don't force an artificial step — instead note why 3 is sufficient.
 - **Functional, not technical** - Focus on WHAT happens, not implementation details.
 - **Complete layers** - Cover UI → Logic → Data → Integration where applicable.
 - **Quality over counts** - Better clear, meaningful steps than many vague ones.
@@ -19,15 +19,8 @@ Decompose each User Task into technical, business, and logical steps using the H
 
 ### Step 1: Identify User Tasks
 
-#### 🧠 Think:
-- What User Tasks exist in the provided input?
-- What Feature does each belong to?
-- What is each User Task trying to accomplish?
-- What domain context applies?
-- [List observations about each task]
-
-#### ▶️ Execute:
-1. Locate `## Features Backbone` section in the provided input
+Extract all User Tasks from the input:
+1. Locate `## Features Backbone` section
 2. Extract all User Tasks from `### Features Map` subsections
 3. For each User Task, capture: name, description, and parent Feature context
 4. Create a list of all User Tasks to process
@@ -90,6 +83,7 @@ For each phase, create a step by:
 2. Assigning a functional layer: UI | Logic | Data | Integration
 3. Ensuring coverage of relevant technical layers
 4. Avoiding implementation details (no "create class", "write method")
+5. For each step, look for a key technical decision in the research context (existing services, constraints, patterns) and add it as **Technical Note**. If no research context is available, omit the field.
 
 #### Layer Assignment Guide:
 - **UI:** User-facing interactions (forms, buttons, displays, inputs, feedback)
@@ -135,39 +129,6 @@ For each phase, create a step by:
 Generate markdown output via [Output Template](output-template-steps.md).
 
 ---
-
-## QUALITY CRITERIA
-
-For completed Steps sections:
-
-✅ **Step Definition - For EACH User Task**
-- [ ] Minimum 3 steps per User Task (WARNING if exactly 3)
-- [ ] Each step has distinct responsibility
-- [ ] Steps flow logically (1 → 2 → 3...)
-- [ ] No steps are redundant or overlapping
-
-✅ **Coverage**
-- [ ] ALL User Tasks identified in backbone have Steps sections
-- [ ] No User Tasks skipped
-- [ ] No duplicate step processing
-
-✅ **Step Naming - Consistent Across Tasks**
-- [ ] Format: **[Action] [Object]** (e.g., "Validate Email", "Persist Data")
-- [ ] Verb-focused: "Capture...", "Validate...", "Store...", "Sync...", "Calculate...", "Display..."
-- [ ] Describes WHAT, not HOW
-- [ ] NO implementation terms (class, method, async, function, component, etc.)
-- [ ] Naming consistent across all User Tasks
-
-✅ **Layer Assignments**
-- [ ] Each step has a layer assigned (UI, Logic, Data, or Integration)
-- [ ] Layer assignment makes sense for the step's purpose
-- [ ] Complete flow coverage (UI → Logic → Data where applicable)
-
-✅ **Documentation**
-- [ ] Each step has clear 1-2 sentence description
-- [ ] No ambiguity in what step accomplishes
-- [ ] Descriptions are functional, not technical
-- [ ] Ready for Phase 2 (increment generation)
 
 ---
 
@@ -260,26 +221,12 @@ For completed Steps sections:
 
 ---
 
-## OUTPUT CHECKLIST
+## BEFORE SUBMITTING — verify your output for ALL User Tasks:
 
-Before finishing Phase 1, verify your output for ALL User Tasks:
-
-**Coverage:**
-- [ ] ALL User Tasks from Features map are identified
-- [ ] Steps section exists for EACH User Task
-- [ ] NO User Tasks left unprocessed
-
-**Structure & Format:**
-- [ ] `## User Task: [Name]` header for each User Task
-- [ ] `### Steps` section header under each User Task
-- [ ] Each step numbered sequentially: `#### Step N: [Action] [Object]`
-- [ ] All formatting is proper markdown
-
-**Step Quality:**
-- [ ] Minimum 3 steps per User Task (WARNING if exactly 3)
-- [ ] Each step follows [Action] [Object] format
-- [ ] Each step has `**Layer:**` specification (UI/Logic/Data/Integration)
-- [ ] Each step has `**Description:**` (1-2 sentences, functional focus)
-- [ ] Steps flow logically within each User Task
-- [ ] All steps are functional (WHAT), NOT technical implementation (HOW)
-- [ ] NO steps mention code constructs (class, method, function, async, etc.)
+- [ ] ALL User Tasks from Features map have a Steps section (no gaps)
+- [ ] Each step follows `[Action] [Object]` format — verb-focused (Capture, Validate, Store, Sync, Display...)
+- [ ] Each step has `**Layer:**` (UI/Logic/Data/Integration) and `**Description:**` (1-2 sentences, functional)
+- [ ] Each step has `**Technical Note:**` if research context was available (omit otherwise)
+- [ ] Aim for 4+ steps per User Task — if staying at 3, note why it's sufficient
+- [ ] Steps flow logically (1 → 2 → 3...), no redundant or overlapping steps
+- [ ] All steps describe WHAT, not HOW — no code constructs (class, method, function, async, component...)

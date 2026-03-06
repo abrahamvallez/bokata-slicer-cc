@@ -1,5 +1,49 @@
 # BREAKDOWN STRATEGIES TOOLKIT
 
+## Start here: Linguistic Pattern Detection
+
+Before picking a strategy, scan the step name and description for linguistic signals that indicate bundled work. These patterns tell you what kind of split is needed.
+
+### Coordinating Conjunctions (and, or, but, yet, nor...)
+- If step says "X and Y," split into separate options
+- Example: "Upload and download files" → "Upload files" + "Download files"
+
+### Action-Related Connectors (manage, handle, support, process, maintain...)
+- These hide multiple actions under a generic verb
+- Example: "Manage users" → "Create users" + "Edit users" + "Delete users"
+
+### Sequence Connectors (before, after, then, while, during, when...)
+- Indicates a process with multiple phases
+- Example: "Save before submit" → "Save work" + "Submit work"
+
+### Scope Indicators (including, as-well-as, along with, also, additionally...)
+- Introduce extra requirements that can be separated
+- Example: "Notifications via email and SMS" → "Email notifications" + "SMS notifications"
+
+### Option Indicators (either/or, whether, alternatively, optionally...)
+- Multiple paths or features
+- Example: "Login with password or Google" → "Password login" + "Google OAuth login"
+
+### Exception Indicators (except, unless, however, although, despite...)
+- Point to edge cases or special rules
+- Example: "Delete account unless admin" → "User account deletion" + "Admin restrictions"
+
+If no linguistic patterns are found, use the **Automation Gradient** (Strategy 0) as your default starting lens.
+
+---
+
+## Strategy 0: Automation Gradient (default fallback)
+
+When no linguistic pattern signals an obvious split, use this gradient as a starting lens to generate options across the automation spectrum:
+
+  **manual → hardcoded → semi-automated → fully automated → scalable → enterprise-grade**
+
+- Example: "Send notification" → "Manual email" → "Hardcoded template email" → "Triggered email" → "Multi-channel automated" → "Personalized with rules engine"
+
+This gradient works for almost any step and guarantees a progression from simplest to most complete.
+
+---
+
 ## 1. Start with the Outputs
 Instead of splitting work based on technical inputs or workflows, focus on **delivering specific outputs incrementally**. This makes it easier to create a sensible incremental plan and quickly deliver valuable data.
 - Example: "Basic report" → "Interactive report" → "Dashboard with exports"
@@ -76,28 +120,3 @@ Instead of splitting work based on technical inputs or workflows, focus on **del
 - **Data**: Different data types/sources
 - **Rules**: Different business rules
 
-## Linguistic Pattern Detection
-
-### Coordinating Conjunctions (and, or, but, yet, nor...)
-- If story says "X and Y," split into separate options
-- Example: "Upload and download files" → "Upload files" + "Download files"
-
-### Action-Related Connectors (manage, handle, support, process, maintain...)
-- These hide multiple actions under generic verb
-- Example: "Manage users" → "Create users" + "Edit users" + "Delete users"
-
-### Sequence Connectors (before, after, then, while, during, when...)
-- Indicates process with multiple phases
-- Example: "Save before submit" → "Save work" + "Submit work"
-
-### Scope Indicators (including, as-well-as, along with, also, additionally...)
-- Introduce extra requirements that can be separated
-- Example: "Notifications via email and SMS" → "Email notifications" + "SMS notifications"
-
-### Option Indicators (either/or, whether, alternatively, optionally...)
-- Multiple paths or features
-- Example: "Login with password or Google" → "Password login" + "Google OAuth login"
-
-### Exception Indicators (except, unless, however, although, despite...)
-- Point to edge cases or special rules
-- Example: "Delete account unless admin" → "User account deletion" + "Admin restrictions"

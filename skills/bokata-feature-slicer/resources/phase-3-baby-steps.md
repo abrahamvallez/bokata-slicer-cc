@@ -26,6 +26,14 @@ Take the complete breakdown (Features, User Tasks, Steps, Incremental Options) a
 
 ---
 
+### Radical Slicing Challenge (before selecting candidates)
+
+Before picking anything, ask yourself per step: **"If we had to ship tomorrow, which option would we choose?"**
+
+If that answer differs from your initial instinct — use that option. The skeleton should feel uncomfortably minimal. If it feels comfortable, it's probably still too big.
+
+---
+
 ### Step 2: Identifying Walking Skeleton Candidates
 
 #### 🧠 Think:
@@ -34,6 +42,8 @@ For EACH User Task, for EACH Step:
 - Does it cut through all necessary layers (UI → Logic → Data)?
 - Can it deliver END-TO-END functionality (even if minimal)?
 - Is it independently deployable?
+- Can it be built in 1-3 days by one developer?
+- Is it reversible? (especially for Data layer — can it be undone without data loss or migration complexity?)
 - [List simplest option per step per task]
 
 #### ▶️ Execute:
@@ -45,7 +55,8 @@ For each step in each User Task, select the simplest viable option:
 
 Walking Skeleton Selection Rules:
 - Evaluate all options and choose the GENUINELY simplest viable one per step
-- "Simplest" = fewest dependencies, least infrastructure, fastest to ship
+- "Simplest" = fewest dependencies, least infrastructure, fastest to ship — buildable in 1-3 days by one developer
+- Prefer reversible options over irreversible ones, especially Data layer items (a reversible option can be undone without data loss or migration complexity)
 - Option numbering is a complexity hint, not a mandate — verify by comparing options
 - Every User Task MUST be represented in skeleton
 - Each skeleton item must be independently deployable

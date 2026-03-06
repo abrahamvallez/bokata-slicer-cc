@@ -1,11 +1,14 @@
 ---
 name: bokata-feature-slicer
-description: Slices a Feature into Steps, Increments, and a Vertical Slices plan (Walking Skeleton + Backlog). Use this skill whenever you need to break down a Feature into implementable work — after generating a Features Backbone, when planning a sprint, or when a user asks to slice, decompose, or plan implementation of a feature. Accepts any feature description as input (plain text, backbone section, or feature-context.md). Always invoke after feature-backbone-specialist when the pipeline continues to implementation planning.
+description: Slices a Feature into a Walking Skeleton and Increments Backlog — a ready-to-implement delivery plan. Internal phases (Steps and Incremental Options) are used as reasoning but not surfaced by default. Use this skill whenever you need to break down a Feature into implementable work — after generating a Features Backbone, when planning a sprint, or when a user asks to slice, decompose, or plan implementation of a feature.
 ---
 
 # Bokata Feature Slicer
 
-Unified skill for slicing a Feature into deployable increments. Takes a Feature from the Features Backbone and produces Steps, Incremental Options, and a Vertical Slices plan.
+Unified skill for slicing a Feature into deployable increments. Takes a Feature from the Features Backbone and produces a **Walking Skeleton + Increments Backlog** ready to implement.
+
+**Default output:** Walking Skeleton + Increments Backlog (Phase 3 only)
+**Optional:** pass `--show-steps`, `--show-increments`, or `--show-all` in arguments to surface intermediate phases.
 
 ---
 
@@ -16,9 +19,11 @@ Unified skill for slicing a Feature into deployable increments. Takes a Feature 
 1. Understand the Feature to slice from the provided input — any form works (plain text, backbone section, feature-context.md, or conversation context)
 2. Select target Feature to slice
 3. _(Optional)_ Enrich with a slicer research summary and discovery context if not already present
-4. **Phase 1:** Decompose User Tasks into Steps → [Instructions](resources/phase-1-steps.md)
-5. **Phase 2:** Generate Incremental Options per Step → [Instructions](resources/phase-2-increments.md)
-6. **Phase 3:** Synthesize Vertical Slices plan → [Instructions](resources/phase-3-baby-steps.md)
+4. **Phase 1 (internal):** Decompose User Tasks into Steps → [Instructions](resources/phase-1-steps.md)
+5. **Phase 2 (internal):** Generate Incremental Options per Step → [Instructions](resources/phase-2-increments.md)
+6. **Phase 3 (output):** Synthesize Walking Skeleton + Increments Backlog → [Instructions](resources/phase-3-baby-steps.md)
+
+Phases 1 and 2 are internal reasoning steps — do them thoroughly but only surface their output if the user explicitly requests it.
 
 ---
 
@@ -41,7 +46,7 @@ Optionally enriched by:
 
 ## Phase 0 — Discovery
 
-### 🧠 Think (as an expert tech lead in discovery):
+### Think (as an expert tech lead in discovery):
 Before decomposing, scan the Feature and its User Tasks for gaps that would produce wrong steps or increment options:
 
 - **Technical clarity**: Are the User Tasks specific enough to decompose into layers? Any vague actions?
@@ -52,7 +57,7 @@ Before decomposing, scan the Feature and its User Tasks for gaps that would prod
 
 Only ask about gaps where **the answer would change a Step or an Increment option**. If the input is clear, don't ask.
 
-### ▶️ Execute:
+### Execute:
 1. List ambiguities internally
 2. Filter to only **high-value questions** (answer changes a Step or an Increment option)
 3. Group questions by theme (Technical Clarity, Layer Ambiguity, Increment Scope, Dependencies, Constraints)
@@ -66,7 +71,7 @@ Only ask about gaps where **the answer would change a Step or an Increment optio
 
 ---
 
-5. State assumptions you are making for gaps you are NOT questioning
+6. State assumptions you are making for gaps you are NOT questioning
 
 **Format for questions:**
 ```
@@ -108,23 +113,21 @@ Read the provided input and:
    - Verify you understand what Feature and User Tasks to slice — extract from input in any form; if no feature information is present at all, ask the user
    - Optionally check for Acceptance Criteria — if missing, proceed without them
 
-2. **Phase 1 — Steps:**
+2. **Phase 1 — Steps (internal):**
    Follow instructions in [Phase 1: Step Analysis](resources/phase-1-steps.md)
    - Decompose each User Task into functional Steps (UI → Logic → Data → Integration)
-   - Use [output template](resources/output-template-steps.md) for format
-   - Validate: minimum 3 steps per User Task, all layers represented
+   - Do this work internally — don't output Phase 1 results unless `--show-steps` or `--show-all` was requested
 
-3. **Phase 2 — Increments:**
+3. **Phase 2 — Increments (internal):**
    Follow instructions in [Phase 2: Incremental Options](resources/phase-2-increments.md)
    - Generate 3+ Incremental Options per Step using [breakdown strategies](resources/breakdown-strategies.md)
-   - Use [output template](resources/output-template-increments.md) for format
-   - Validate: minimum 3 options per step, strategies documented
+   - Do this work internally — don't output Phase 2 results unless `--show-increments` or `--show-all` was requested
 
-4. **Phase 3 — Vertical Slices:**
+4. **Phase 3 — Walking Skeleton + Increments Backlog (output):**
    Follow instructions in [Phase 3: Vertical Slices](resources/phase-3-baby-steps.md)
-   - Identify Walking Skeleton (simplest end-to-end options)
+   - Identify Walking Skeleton (simplest end-to-end options, buildable in 1-3 days)
    - Organize remaining increments into a backlog
-   - Validate: all User Tasks in skeleton, all options accounted for
+   - **This is always the output** — produce it regardless of args
 
 ---
 
@@ -135,20 +138,21 @@ Input: Feature description (any form)
          │
          ▼
 ┌─────────────────────┐
-│   Phase 1: Steps    │
+│   Phase 1: Steps    │  ← internal reasoning
 │  (Decompose Tasks)  │
 └────────┬────────────┘
          │
          ▼
 ┌─────────────────────┐
-│ Phase 2: Increments │
+│ Phase 2: Increments │  ← internal reasoning
 │ (Generate Options)  │
 └────────┬────────────┘
          │
          ▼
 ┌─────────────────────┐
-│ Phase 3: Vertical   │
-│ Slices (Synthesize) │
+│  Phase 3: Output    │  ← surfaced to user
+│  Walking Skeleton   │
+│  + Backlog          │
 └─────────────────────┘
 ```
 
@@ -161,42 +165,31 @@ Input: Feature description (any form)
 | [Phase 1 Instructions](resources/phase-1-steps.md) | Step Analysis workflow and quality criteria |
 | [Phase 2 Instructions](resources/phase-2-increments.md) | Increment generation workflow and quality criteria |
 | [Phase 3 Instructions](resources/phase-3-baby-steps.md) | Vertical Slices synthesis workflow |
-| [Breakdown Strategies](resources/breakdown-strategies.md) | Toolkit of 16+ strategies for Phase 2 |
-| [Steps Output Template](resources/output-template-steps.md) | Format for Phase 1 output |
-| [Increments Output Template](resources/output-template-increments.md) | Format for Phase 2 output |
+| [Breakdown Strategies](resources/breakdown-strategies.md) | Toolkit of strategies for Phase 2 |
+| [Steps Output Template](resources/output-template-steps.md) | Format for Phase 1 output (used when --show-steps) |
+| [Increments Output Template](resources/output-template-increments.md) | Format for Phase 2 output (used when --show-increments) |
 
 ---
 
 ## Output Checklist
 
-At the end of this workflow, you should have produced:
-
-### Upstream Inputs (verify before starting):
-- [ ] Feature information present in some form (plain text, `## Features Backbone` section, or `feature-context.md`)
-- [ ] `## Slicer Research Summary: [Feature]` present in input (recommended, not blocking — note if absent)
-- [ ] `## Discovery Context — Slicer: [Feature]` present in input (optional — note if absent)
-
-### Phase 1 — Steps Analysis (always):
-- [ ] Feature ID cross-link present: `<!-- Feature ID: {PRJ}-FEAT-{hash} -->`
-- [ ] Each User Task has Task ID cross-link: `<!-- Task ID: {PRJ}-TASK-{hash} | ACs: features.md#{PRJ}-TASK-{hash} -->`
-- [ ] All User Tasks for the target Feature have Steps
-- [ ] Each Step has Layer (UI/Logic/Data/Integration) and Description
-- [ ] Each Step has **Technical Note** from research
-- [ ] Minimum 3 steps per User Task
-- [ ] All steps are functional (WHAT, not HOW)
-
-### Phase 2 — Incremental Options (always):
-- [ ] All Steps have Incremental Options
-- [ ] Minimum 3 options per Step
-- [ ] Applied Strategies and Rationale documented per Step
-- [ ] Options progress from simple → complex
-
-### Phase 3 — Vertical Slices Plan:
+### Phase 3 — Walking Skeleton + Backlog (always verify before outputting):
 - [ ] `## 💀 Walking Skeleton` covers ALL User Tasks
-- [ ] Walking Skeleton uses genuinely simplest viable options (evaluated across all options, not just `.1`)
-- [ ] `## 🏗️ Increments Backlog` with all remaining options
+- [ ] Every Walking Skeleton item is genuinely the simplest viable option (buildable in 1-3 days)
+- [ ] Every Walking Skeleton item is reversible (especially Data layer items)
+- [ ] `## 🏗️ Increments Backlog` contains all remaining options
 - [ ] Backlog grouped by User Task
 - [ ] All items use correct tag format: `**[User Task Name]**`
+- [ ] No generic tasks — all items are specific increments from Phase 2 analysis
+
+### Internal verification (before Phase 3 synthesis):
+- [ ] All User Tasks have been decomposed into Steps (Phase 1 complete)
+- [ ] All Steps have 3+ Incremental Options (Phase 2 complete)
+- [ ] Walking Skeleton uses options evaluated across all Phase 2 options, not just `.1` defaults
+
+### Upstream Inputs (verify before starting):
+- [ ] Feature information present in some form
+- [ ] `## Slicer Research Summary: [Feature]` present (recommended — note if absent)
 
 ---
 
@@ -204,6 +197,6 @@ At the end of this workflow, you should have produced:
 
 After completing the slicing:
 
-1. **Save output** — The user decides where to save each phase's output
+1. **Save output** — The user decides where to save
 2. **Validate** — Check output against the Output Checklist above
 3. **Implement** — Start with Walking Skeleton items, then pick increments from the backlog
