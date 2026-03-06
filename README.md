@@ -33,7 +33,7 @@ The system is organized into specialized **Skills**. Each Skill is a self-contai
 **Goal:** The core decomposition engine. It processes a specific Feature through three mandatory phases:
 - **Phase 1: Step Analysis:** Decomposes User Tasks into functional steps across all layers (UI, Logic, Data, Integration).
 - **Phase 2: Incremental Options:** Generates multiple development options for each step (from "Mocked/Basic" to "Full Production").
-- **Phase 3: Baby Steps Plan:** Synthesizes the simplest possible end-to-end version (**Walking Skeleton**) and a prioritized backlog of increments.
+- **Phase 3: Vertical Slices and Increments Plan:** Synthesizes the simplest possible end-to-end version (**Walking Skeleton**) and a prioritized backlog of increments.
 
 ---
 

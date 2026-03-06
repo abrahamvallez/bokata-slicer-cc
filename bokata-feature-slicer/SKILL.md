@@ -1,11 +1,11 @@
 ---
 name: bokata-feature-slicer
-description: Slices a Feature into Steps, Increments, and optionally Baby Steps. Unified workflow for decomposing Features into deployable increments.
+description: Slices a Feature into Steps, Increments, and optionally Vertical Slices and Increments. Unified workflow for decomposing Features into deployable increments.
 ---
 
 # Bokata Feature Slicer
 
-Unified skill for slicing a Feature into deployable increments. Takes a Feature from the Features Backbone and produces Steps, Incremental Options, and optionally a Baby Steps plan.
+Unified skill for slicing a Feature into deployable increments. Takes a Feature from the Features Backbone and produces Steps, Incremental Options, and optionally a Vertical Slices and Increments plan.
 
 ---
 
@@ -15,7 +15,7 @@ Unified skill for slicing a Feature into deployable increments. Takes a Feature 
 2. Select target Feature to slice
 3. **Phase 1:** Decompose User Tasks into Steps → [Instructions](resources/phase-1-steps.md)
 4. **Phase 2:** Generate Incremental Options per Step → [Instructions](resources/phase-2-increments.md)
-5. **Phase 3 (optional):** Synthesize Baby Steps plan → [Instructions](resources/phase-3-baby-steps.md)
+5. **Phase 3 (optional):** Synthesize Vertical Slices and Increments plan → [Instructions](resources/phase-3-vertical-slices.md)
 
 ---
 
@@ -51,8 +51,8 @@ Read the provided input and:
    - Use [output template](resources/output-template-increments.md) for format
    - Validate: minimum 3 options per step, strategies documented
 
-4. **Phase 3 — Baby Steps:**
-   Follow instructions in [Phase 3: Baby Steps](resources/phase-3-baby-steps.md)
+4. **Phase 3 — Vertical Slices and Increments:**
+   Follow instructions in [Phase 3: Vertical Slices and Increments](resources/phase-3-vertical-slices.md)
    - Identify Walking Skeleton (simplest end-to-end options)
    - Organize remaining increments into a backlog
    - Validate: all User Tasks in skeleton, all options accounted for
@@ -77,10 +77,11 @@ Input: Features Backbone
 └────────┬────────────┘
          │
          ▼
-┌─────────────────────┐
-│ Phase 3: Baby Steps │
-│ (Synthesize Plan)   │
-└─────────────────────┘
+┌───────────────────────┐
+│ Phase 3: Vertical     │
+│ Slices & Increments   │
+│ (Synthesize Plan)     │
+└───────────────────────┘
 ```
 
 ---
@@ -91,7 +92,7 @@ Input: Features Backbone
 |----------|---------|
 | [Phase 1 Instructions](resources/phase-1-steps.md) | Step Analysis workflow and quality criteria |
 | [Phase 2 Instructions](resources/phase-2-increments.md) | Increment generation workflow and quality criteria |
-| [Phase 3 Instructions](resources/phase-3-baby-steps.md) | Baby Steps synthesis workflow (optional) |
+| [Phase 3 Instructions](resources/phase-3-vertical-slices.md) | Vertical Slices and Increments synthesis workflow (optional) |
 | [Breakdown Strategies](resources/breakdown-strategies.md) | Toolkit of 16+ strategies for Phase 2 |
 | [Steps Output Template](resources/output-template-steps.md) | Format for Phase 1 output |
 | [Increments Output Template](resources/output-template-increments.md) | Format for Phase 2 output |
@@ -114,9 +115,9 @@ At the end of this workflow, you should have produced:
 - [ ] Applied Strategies and Rationale documented per Step
 - [ ] Options progress from simple → complex
 
-### Phase 3 — Baby Steps Plan (only if requested):
+### Phase 3 — Vertical Slices and Increments Plan (only if requested):
 - [ ] `## 💀 Walking Skeleton` covers ALL User Tasks
-- [ ] Walking Skeleton uses simplest options (`.1`)
+- [ ] Walking Skeleton uses simplest viable options (selected by analysis)
 - [ ] `## 🏗️ Increments Backlog` with all remaining options
 - [ ] Backlog grouped by User Task
 - [ ] All items use correct tag format: `**[User Task Name]**`
