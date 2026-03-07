@@ -1,5 +1,5 @@
 ---
-name: acceptance-criteria-generator
+name: bokata-ac-analyst
 description: Generates Gherkin Acceptance Criteria (Given/When/Then scenarios) using Feature Mapping and Example Mapping methodologies. Includes integrated discovery phase that asks clarifying questions about business rules and edge cases before generating criteria. Use this skill whenever you need testable specs for User Tasks, need to define business rules as scenarios, or want to formalize acceptance criteria from a backbone, PRD, or raw user stories.
 ---
 

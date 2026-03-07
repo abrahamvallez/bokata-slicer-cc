@@ -1,5 +1,5 @@
 ---
-name: research
+name: bokata-research
 description: Unified Research Specialist — runs all three research phases (feature backbone, acceptance criteria, and slicer) before any downstream skill invocation. Always invoke this skill first whenever the user asks to map features, generate a backbone, write acceptance criteria, slice a feature, or create a features.md. Do not skip this skill even if the user provides a PRD or detailed context — research enriches every downstream output with domain vocabulary, actors, codebase patterns, and business constraints. Always produces Feature Research Summary, Criteria Research Summary, and Slicer Research Summary.
 ---
 

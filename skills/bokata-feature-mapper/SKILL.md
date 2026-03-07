@@ -1,13 +1,13 @@
 ---
-name: feature-backbone-specialist
-description: Identifies Features and User Tasks using User Story Mapping methodology, then generates Gherkin acceptance criteria inline. Includes integrated discovery phase that asks clarifying questions before generating the backbone. Use this skill whenever mapping features from a PRD or initiative description, generating a features.md, or decomposing user goals into testable tasks.
+name: bokata-feature-mapper
+description: Identifies Features and User Tasks using User Story Mapping methodology. Includes integrated discovery phase that asks clarifying questions before generating the backbone. Use this skill whenever mapping features from a PRD or initiative description, generating a features.md, or decomposing user goals into tasks.
 ---
 
 # Bokata: Features Backbone Specialist
 
 ## Overview
 
-The **Features Backbone Specialist** uses User Story Mapping methodology to identify the high-level Features and User Tasks that represent your complete user journey, and generates Gherkin acceptance criteria for each task inline.
+The **Features Backbone Specialist** uses User Story Mapping methodology to identify the high-level Features and User Tasks that represent your complete user journey.
 
 This skill follows a "Mile Wide, Inch Deep" philosophy to map the entire scope before drilling into details.
 
@@ -15,7 +15,7 @@ This skill follows a "Mile Wide, Inch Deep" philosophy to map the entire scope b
 
 # YOUR ROLE
 
-You are the **Features Backbone Specialist** - responsible for identifying Features and User Tasks that represent the complete user journey using User Story Mapping methodology, and generating acceptance criteria for each task using Feature Mapping and Example Mapping principles.
+You are the **Features Backbone Specialist** - responsible for identifying Features and User Tasks that represent the complete user journey using User Story Mapping methodology.
 
 ---
 
@@ -24,11 +24,10 @@ You are the **Features Backbone Specialist** - responsible for identifying Featu
 1. Read project context
 2. Identify Features (high-level goals) in `[Actor] [Verb] [Object]` format
 3. For each Feature: identify User Tasks (`[Verb] [Object]`) — **Do NOT include the Actor**
-4. For each User Task: generate Rules + Gherkin scenarios inline (Identify Rules → Generate Scenarios → Format as Gherkin)
-5. Identify System Tasks where workflow transitions exist
-6. Organize by user journey narrative
-7. Document feature-level dependencies
-8. **Return ## Features Backbone section as markdown** using the format in [Template](resources/output-template.md)
+4. Identify System Tasks where workflow transitions exist
+5. Organize by user journey narrative
+6. Document feature-level dependencies
+7. **Return ## Features Backbone section as markdown** using the format in [Template](resources/output-template.md)
 
 ---
 
@@ -166,33 +165,7 @@ Identify System Tasks where the trigger is a workflow transition (not a direct u
 
 ---
 
-## Step 4: For Each User Task — Generate Acceptance Criteria (Preliminary)
-
-### 🧠 Think:
-For EACH User Task:
-- What are the business logic constraints and validation rules?
-- What is the standard success case?
-- What are the critical error or edge cases?
-- What state changes occur?
-
-### ▶️ Execute:
-Apply the following methodology for each User Task:
-
-1. **Identify Rules (Blue Cards):** name each distinct business logic constraint
-2. **Generate Scenarios (Green Cards):** for each Rule, write at least one happy path and one edge case where applicable
-3. **Format as Gherkin:** Given (precondition) / When (action) / Then (observable result)
-4. Inline the Rules + Gherkin directly under each User Task in the output
-
-Gherkin principles:
-- Use concrete data ("player 'rookie99'", "ELO 1200") not abstract terms
-- Describe behavior, not UI clicks ("submits form", not "clicks button")
-- One `When` per scenario (single action)
-
-> **Note on scope:** The Gherkin generated here is **preliminary** — it captures the most obvious rules and happy paths to validate scope during mapping. For tasks that need thorough coverage (edge cases, permissions, boundary conditions, error states), use `acceptance-criteria-generator` as a dedicated follow-up step.
-
----
-
-## Step 5: Organize by Journey
+## Step 4: Organize by Journey
 
 ### 🧠 Think:
 - What's the natural sequence? (What happens first? core? later?)
@@ -205,7 +178,7 @@ Arrange Features and User Tasks in chronological user journey order.
 
 ---
 
-## Step 6: Document Dependencies
+## Step 5: Document Dependencies
 
 ### 🧠 Think:
 - What dependencies exist between Features?
@@ -221,14 +194,13 @@ For each Feature, document dependencies by:
 
 ---
 
-## Step 7: Final Validation & Output
+## Step 6: Final Validation & Output
 
 ### 🧠 Think:
 - Do I have MIN 2 Features? (WARNING if exactly 2)
 - Does each Feature have MIN 3 User Tasks? (WARNING if exactly 3)
 - Do all Features follow `[Actor] [Verb] [Object]` format?
 - Do all User Tasks follow `[Verb] [Object]` format (NO actor)?
-- Does each User Task have at least 1 Rule with at least 1 Gherkin scenario?
 - Do all System Tasks have an explicit Trigger?
 
 ### ▶️ Execute:
@@ -258,7 +230,6 @@ Before finishing, verify your output:
 - [ ] 3+ User Tasks per Feature (MIN 3)
 - [ ] Each User Task has `<!-- Task ID: {PRJ}-TASK-{hash} -->` comment
 - [ ] All User Tasks follow `[Verb] [Object]` format (NO actor)
-- [ ] Each User Task has at least 1 Rule with Gherkin scenario(s)
 - [ ] Each System Task has an explicit **Trigger** field
 
 **User Task Bundling Check — scan each User Task name before finalizing:**
@@ -278,5 +249,5 @@ Quick scan — flag any task whose name contains:
 ## NEXT STEPS
 
 1. **Save output** where appropriate
-2. **Validate** - Check MIN 2 Features, 3+ Tasks per Feature, Rules + Gherkin per Task
+2. **Validate** - Check MIN 2 Features, 3+ Tasks per Feature
 3. **Run next phase:** Proceed to feature slicing for each Feature

@@ -31,7 +31,7 @@ Phases 1 and 2 are internal reasoning steps — do them thoroughly but only surf
 
 A Feature to slice — described in any form:
 - Plain text or conversation context
-- `## Features Backbone` section with Features and User Tasks defined
+- Features Backbone with Features and User Tasks defined
 - `feature-context.md` content (contains backbone + criteria research already consolidated)
 
 Optionally, Acceptance Criteria enrich the decomposition.
