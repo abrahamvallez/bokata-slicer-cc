@@ -83,7 +83,7 @@ For each phase, create a step by:
 2. Assigning a functional layer: UI | Logic | Data | Integration
 3. Ensuring coverage of relevant technical layers
 4. Avoiding implementation details (no "create class", "write method")
-5. For each step, look for a key technical decision in the research context (existing services, constraints, patterns) and add it as **Technical Note**. If no research context is available, omit the field.
+5. For each step, look for a key technical decision in the research context (existing services, constraints, patterns) and add it as **Technical Note**. If no research context is available, omit the field. Technical Notes describe architectural/design decisions — not code constructs (no class names, method names, or specific config syntax).
 
 #### Layer Assignment Guide:
 - **UI:** User-facing interactions (forms, buttons, displays, inputs, feedback)

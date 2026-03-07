@@ -231,6 +231,7 @@ Before finishing, verify your output:
 - [ ] Each User Task has `<!-- Task ID: {PRJ}-TASK-{hash} -->` comment
 - [ ] All User Tasks follow `[Verb] [Object]` format (NO actor)
 - [ ] Each System Task has an explicit **Trigger** field
+- [ ] User Task descriptions describe user actions, not implementation details (no class names, method names, or internal service references)
 
 **User Task Bundling Check — scan each User Task name before finalizing:**
 

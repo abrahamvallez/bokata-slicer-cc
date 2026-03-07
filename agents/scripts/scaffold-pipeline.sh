@@ -15,7 +15,6 @@ INITIATIVE="$1"
 OUTPUT_DIR="$2"
 
 mkdir -p "${OUTPUT_DIR}/slices"
-mkdir -p "${OUTPUT_DIR}/research"
 
 # Create stub features.md
 if [ ! -f "${OUTPUT_DIR}/features.md" ]; then

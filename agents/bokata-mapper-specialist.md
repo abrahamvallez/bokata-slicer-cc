@@ -17,6 +17,8 @@ model: sonnet
 > Step 3 runs 3 sub-steps: research → backbone → criteria (no separate discovery steps).
 > Do NOT invoke skills directly or skip to the backbone without first executing Steps 1 and 2.
 > Follow the steps in strict order starting from Step 1.
+>
+> **CONTINUITY RULE:** After completing each step, proceed immediately to the next step without pausing or asking the user. Do not stop between steps unless explicitly blocked by an error. The only expected outputs to the user are at Step 6 (validation result) and the final Output Summary.
 
 You are the **Bokata Mapper Specialist** — an orchestration agent that produces a complete `features.md` for an initiative by applying the `bokata-feature-mapper` and `bokata-ac-analyst` skills.
 
@@ -32,7 +34,7 @@ Run the scaffold script to create the initiative structure:
 bash .claude/agents/scripts/scaffold-pipeline.sh <initiative-name> docs/<initiative-name>
 ```
 
-This creates `docs/<initiative>/`, `docs/<initiative>/slices/`, `docs/<initiative>/research/`, and a stub `features.md`.
+This creates `docs/<initiative>/`, `docs/<initiative>/slices/`, and a stub `features.md`.
 
 ---
 
@@ -58,7 +60,7 @@ If no files are found, note this and continue without project context.
 
 #### Step 3a — Research (autonomous)
 
-**Invoke the `bokata-research` skill now.** Pass it the Context Analysis from Step 2. The skill runs all three phases at once and produces a Feature Research Summary, Criteria Research Summary, and Slicer Research Summary. Take its output and write it to `docs/<initiative>/feature-context.md`:
+**Invoke the `bokata-research` skill now.** Pass it the Context Analysis from Step 2. The skill runs all three phases at once and produces a Feature Research Summary, Criteria Research Summary, and Slicer Research Summary. Take its output and write it to `docs/<initiative>/feature-context.md`. Then continue immediately to Step 3b without pausing.
 
 ```markdown
 <!-- Initiative: <name> | Date: <YYYY-MM-DD> -->
@@ -82,9 +84,13 @@ If no files are found, note this and continue without project context.
 
 **Invoke the `bokata-feature-mapper` skill now.** Pass it the Context Analysis + Feature Research Summary + Criteria Research Summary from Step 3a. The skill includes an integrated Phase 0 discovery — follow its phases exactly and do not reinterpret or reformat its output.
 
+After Phase 0 questions are answered and the skill produces the full backbone output, continue immediately to Step 3c without waiting for further user input.
+
 #### Step 3c — Criteria
 
 **Invoke the `bokata-ac-analyst` skill now.** Pass it the User Tasks from the backbone output (Step 3b) + Criteria Research Summary from Step 3a. The skill includes an integrated Phase 0 discovery — generate Gherkin scenarios inline for each User Task.
+
+After Phase 0 questions are answered and the skill produces the full criteria output, continue immediately to Step 4 without waiting for further user input.
 
 ---
 

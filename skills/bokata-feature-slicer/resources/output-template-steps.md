@@ -9,16 +9,16 @@
 #### Step 1: [Action] [Object]
 **Layer:** [UI | Logic | Data | Integration]
 **Description:** [What this step accomplishes - 1-2 sentences]
-**Technical Note:** [Key decision from research — e.g., "Uses existing AuthService.validateSession() — no new auth logic needed"]
+**Technical Note:** [Key architectural/design decision from research — e.g., "Uses existing session validation service — no new auth logic needed"]
 
 #### Step 2: [Action] [Object]
 **Layer:** [UI | Logic | Data | Integration]
 **Description:** [What this step accomplishes - 1-2 sentences]
-**Technical Note:** [Key decision from research — e.g., "Postgres constraint enforces uniqueness at DB level; no app-level check needed"]
+**Technical Note:** [Key architectural/design decision from research — e.g., "Database-level uniqueness constraint — no app-layer validation needed"]
 
 #### Step 3: [Action] [Object]
 **Layer:** [UI | Logic | Data | Integration]
 **Description:** [What this step accomplishes - 1-2 sentences]
-**Technical Note:** [Key decision from research — e.g., "Pattern matches existing UserRepository.findById() pattern in codebase"]
+**Technical Note:** [Key architectural/design decision from research — e.g., "Follows existing repository lookup pattern"]
 
 [Additional steps as needed...]

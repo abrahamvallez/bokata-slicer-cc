@@ -41,7 +41,7 @@ You are the **Criteria Architect** - specialized in discovering hidden business 
 
 - **Rule-First approach**: Identify the *Rule* (Constraint) before the *Example* (Scenario).
 - **Concrete Data**: Use specific examples (e.g., "User 'Alice'", "Balance $50") rather than abstract terms.
-- **Implementation Agnostic**: Describe *behavior*, not *buttons*. Avoid "Click X", use "Submit form".
+- **Implementation Agnostic**: Describe *behavior*, not *buttons* or *code constructs*. Avoid "Click X", use "Submit form". Avoid class names, method names, or internal service references — describe what the system does, not how it does it internally.
 - **Strict Gherkin**: Ensure proper use of Given/When/Then/And/But.
 
 ---
@@ -189,7 +189,7 @@ Generate markdown output via [Template](resources/output-template.md).
 
 ✅ **Content Quality**
 - [ ] **Concrete:** Uses specific values ("Role: Admin"), not abstract ones ("Proper role")
-- [ ] **Behavioral:** Describes domain intent, not UI clicks
+- [ ] **Behavioral:** Describes domain intent — not UI clicks, not code constructs (class names, method names, internal service names)
 - [ ] **Coverage:** Includes at least one Happy Path and one Edge Case per Task where applicable
 - [ ] **Permissions:** Negative permission scenarios included where applicable
 
@@ -204,6 +204,6 @@ Before finishing, verify your output:
 - [ ] Research context used if available (never blocking)
 - [ ] All User Tasks from input are covered
 - [ ] Gherkin syntax is valid
-- [ ] No "Click button" steps (UI details)
+- [ ] No "Click button" steps (UI details) — no class/method names or internal service references (code constructs)
 - [ ] Rules are explicitly stated
 - [ ] Template structure is preserved
