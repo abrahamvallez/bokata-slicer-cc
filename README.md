@@ -1,82 +1,194 @@
-# Bokata: Vertical Slicing & Task Decomposition Prompt Framework
+# Bokata: Vertical Slicing & Feature Decomposition Framework
 
-**Bokata** is a prompt engineering framework designed to guide Large Language Models (LLMs) in decomposing complex software requirements into incremental, high-value, and actionable development plans.
-
-Using techniques like **Vertical Slicing** and **User Story Mapping**, Bokata transforms vague ideas or large PRDs into a structured "Walking Skeleton" and a prioritized backlog of functional increments.
+**v2.0** — A prompt engineering framework for Claude Code that decomposes complex software requirements into incremental, deployable plans using Vertical Slicing and User Story Mapping.
 
 ---
 
-## 🏗️ Project Structure & Skills
+## What is Bokata?
 
-The system is organized into specialized **Skills**. Each Skill is a self-contained prompt (located in its respective directory as `SKILL.md`) that defines a specific role and workflow.
+Bokata guides LLMs to transform vague ideas or large PRDs into:
+- A structured **Features Backbone** (actors, user tasks, acceptance criteria)
+- A **Walking Skeleton** (the thinnest end-to-end deployable slice)
+- A prioritized **Increments Backlog** ready to implement
 
-### 1. `project-explorer`
-**Goal:** Deep investigation of the technical and functional context.
-- **Analysis:** Scans existing codebases (if any) to identify tech stacks, patterns, and architectural constraints.
-- **Requirements extraction:** Distills user descriptions into core capabilities, user goals, and business rules.
-- **Output:** Produces the `## Context Analysis`, the foundation for all subsequent steps.
-
-### 2. `feature-backbone-specialist`
-**Goal:** Map the user journey using User Story Mapping.
-- **Features:** Identifies broad high-level goals in `[Actor] [Action] [Result] [Object]` format.
-- **User Tasks:** Breaks Features into concrete, value-delivering actions (`[Action] [Result] [Object]`).
-- **Narrative:** Organizes tasks according to the chronological user journey.
-- **Output:** Produces the `## Features Backbone`.
-
-### 3. `acceptance-criteria-generator`
-**Goal:** Formalize behavior using Gherkin (Given/When/Then).
-- **Example Mapping:** Discovers hidden business logic, rules, and edge cases.
-- **Validation:** Ensures every User Task has a clear "Happy Path" and "Sad Path".
-- **Output:** Executable specifications that bridge the gap between requirements and testing.
-
-### 4. `bokata-feature-slicer`
-**Goal:** The core decomposition engine. It processes a specific Feature through three mandatory phases:
-- **Phase 1: Step Analysis:** Decomposes User Tasks into functional steps across all layers (UI, Logic, Data, Integration).
-- **Phase 2: Incremental Options:** Generates multiple development options for each step (from "Mocked/Basic" to "Full Production").
-- **Phase 3: Baby Steps Plan:** Synthesizes the simplest possible end-to-end version (**Walking Skeleton**) and a prioritized backlog of increments.
+Built on **Vertical Slicing** (the Hamburger Method) and **Walking Skeleton** principles.
 
 ---
 
-## 🛠️ Methodology
+## Architecture
 
-Bokata is built on industry-proven software design principles:
+Bokata v2.0 introduces a two-layer architecture:
+
+```
+agents/                         ← Orchestration agents (personas)
+├── bokata-mapper-specialist    ← Runs the full features pipeline
+└── bokata-slicer-specialist    ← Runs the slicing pipeline per feature
+
+skills/                         ← Methodology skills (tools)
+├── bokata-research/            ← Context & domain research
+├── bokata-feature-mapper/      ← User Story Mapping (features + tasks)
+├── bokata-ac-analyst/          ← Gherkin acceptance criteria
+└── bokata-feature-slicer/      ← Walking Skeleton + Increments Backlog
+```
+
+---
+
+## Skills
+
+### `bokata-research`
+Unified research specialist — runs three phases before any downstream skill:
+1. **Feature Research** — domain vocabulary, actors, existing patterns
+2. **Criteria Research** — business rules, permissions, state transitions per task
+3. **Slicer Research** — tech stack, architecture constraints, available libraries
+
+Produces `feature-context.md` that enriches all downstream outputs.
+
+### `bokata-feature-mapper`
+Identifies Features and User Tasks using User Story Mapping methodology.
+- Features in `[Actor] [Verb] [Object]` format
+- User Tasks in `[Verb] [Object]` format (no actor)
+- Integrated Phase 0 discovery with clarifying questions
+- Bundling heuristics to catch merged tasks before they cause rework
+
+Output: `## Features Backbone` section with dependency map.
+
+### `bokata-ac-analyst`
+Generates robust Gherkin scenarios (Given/When/Then) using Feature Mapping and Example Mapping.
+- Rule-first approach: defines business rules before writing scenarios
+- Covers happy path, error states, edge cases, and permissions
+- Integrated Phase 0 discovery for each User Task
+
+Output: Executable specifications cross-linked to backbone IDs.
+
+### `bokata-feature-slicer`
+Core decomposition engine — takes a Feature and produces an implementation plan.
+- **Phase 1 (internal):** Decomposes tasks into functional steps (UI → Logic → Data → Integration)
+- **Phase 2 (internal):** Generates 3+ incremental options per step
+- **Phase 3 (output):** Synthesizes Walking Skeleton + Increments Backlog
+
+Output: `## Walking Skeleton` (buildable in 1-3 days) + `## Increments Backlog`.
+
+---
+
+## Agents
+
+Agents are thin orchestration personas that wire skills together and handle file I/O.
+
+### `bokata-mapper-specialist`
+Runs the full features pipeline for an initiative:
+1. Scaffolds directory structure
+2. Loads project context
+3. Invokes `bokata-research` → `bokata-feature-mapper` → `bokata-ac-analyst`
+4. Generates deterministic IDs for Features and User Tasks
+5. Writes `docs/<initiative>/features.md`
+6. Validates output
+
+### `bokata-slicer-specialist`
+Runs the slicing pipeline for a single Feature:
+1. Reads target Feature from `features.md`
+2. Loads context from `feature-context.md`
+3. Invokes `bokata-feature-slicer`
+4. Writes `docs/<initiative>/slices/<FEATURE-ID>-<name>.md`
+5. Updates `walking-skeleton-plan.md`
+
+---
+
+## Recommended Workflow
+
+```
+1. bokata-mapper-specialist   →  docs/<initiative>/features.md
+                                  docs/<initiative>/feature-context.md
+
+2. bokata-slicer-specialist   →  docs/<initiative>/slices/<FEATURE-ID>-<name>.md
+   (once per Feature)             docs/<initiative>/walking-skeleton-plan.md
+```
+
+Skills can also be invoked standalone — no prior pipeline required.
+
+---
+
+## Output Structure
+
+```
+docs/
+└── <initiative>/
+    ├── feature-context.md          ← Research summaries
+    ├── features.md                 ← Backbone + acceptance criteria
+    ├── walking-skeleton-plan.md    ← Consolidated skeleton across features
+    └── slices/
+        └── <FEAT-ID>-<name>.md    ← Walking Skeleton + Backlog per feature
+```
+
+---
+
+## Methodology
+
+Bokata applies four established software delivery practices, combined into a single pipeline:
+
+---
+
+### User Story Mapping
+> *Jeff Patton — "User Story Mapping" (O'Reilly, 2014)*
+
+Map the complete user journey before drilling into details — **"mile wide, inch deep"**. This prevents building features in isolation and reveals the full scope before committing to any implementation.
+
+Bokata applies it via `bokata-feature-mapper`:
+- **Features (the backbone):** High-level user goals in `[Actor] [Verb] [Object]` format — what users are trying to accomplish, not what the system does.
+- **User Tasks:** Concrete, value-delivering actions under each feature, in `[Verb] [Object]` format (actor is inherited).
+- **Bundling heuristics:** Linguistic signals (conjunctions, generic verbs like "manage", sequence connectors) that reveal when a task is actually two tasks in disguise.
+
+---
+
+### Example Mapping
+> *Matt Wynne — Cucumber blog, 2015*
+
+Discover business rules before writing acceptance criteria. Start with the **rule** (the constraint), then generate **examples** (scenarios) that illustrate it — not the other way around.
+
+Bokata applies it via `bokata-ac-analyst`:
+- Rules are identified per User Task (validation, permissions, state transitions, boundaries)
+- Each rule produces at least one happy path and one edge case / error scenario
+- Output is strict Gherkin (Given/When/Then) — behavior-focused, implementation-agnostic
+
+---
 
 ### Vertical Slicing (The Hamburger Method)
-Instead of building horizontal layers (Database first, then API, then UI), Bokata encourages **Vertical Slices**. A slice is a thin piece of functionality that touches all layers and is deployable/testable on its own.
+> *Various agile sources; popularized in ATDD and XP communities*
+
+Instead of building horizontal layers (Database → API → UI), build **vertical slices** — thin pieces of functionality that touch all layers and are independently deployable and testable.
+
+The hamburger metaphor: each slice goes top-to-bottom through the stack, not side-to-side. A slice is only "done" when it can be deployed and verified end-to-end.
+
+Bokata generates slices via `bokata-feature-slicer` using a toolkit of 16+ breakdown strategies:
+- **Zero/One/Many** — handle empty states first, then one item, then lists
+- **Dummy to Dynamic** — hardcoded data before full integrations
+- **Workflow Simplification** — skip optional steps or validations in the first increment
+- **Automation Gradient** — manual → hardcoded → semi-automated → fully automated
+- **SPIDR** — split by Spikes, Paths, Interfaces, Data, or Rules
+- And 11 more strategies in [`breakdown-strategies.md`](skills/bokata-feature-slicer/resources/breakdown-strategies.md)
+
+---
 
 ### Walking Skeleton
-A "Walking Skeleton" is the tiniest possible implementation of the vertical slice that connects all main components. It "walks" through the system end-to-end, proving the architecture before adding meat (complexity) to the bones.
+> *Alistair Cockburn — "Crystal Clear" (2004); also central to "Growing Object-Oriented Software, Guided by Tests" (Freeman & Pryce, 2009)*
 
-### Linguistic Pattern Detection
-The system uses "Linguistic Cues" to identify where a task needs further splitting:
-- **Conjunctions:** "And/Or" usually mean two tasks.
-- **Generic Verbs:** "Manage" or "Handle" always hide multiple CRUD operations.
-- **Exceptions:** "Unless/Except" point to hidden business rules.
+The Walking Skeleton is the thinnest possible implementation that connects all main architectural components end-to-end. It "walks" through the system — proving the architecture is sound — before adding complexity.
 
-### Breakdown Strategies Toolkit
-The `bokata-feature-slicer` applies 16+ specific strategies to create increments:
-- **Zero/One/Many:** Handle empty states first, then one item, then lists.
-- **Dummy to Dynamic:** Use hardcoded data before building full integrations.
-- **Workflow Simplification:** Skip optional steps or validations in the first increment.
+Key properties:
+- Covers **all User Tasks** in a Feature (breadth-first, not depth-first)
+- Each item is buildable in **1–3 days**
+- Data layer items are **reversible** (schema changes that can be undone)
+- It is not a prototype — it ships to production
+
+Bokata's `bokata-feature-slicer` always outputs a Walking Skeleton as its primary deliverable, with the remaining increment options organized as a backlog to build on top of it.
 
 ---
 
-## 🚀 How to Execute
+## Credits & Inspiration
 
-You can use the agents individually or follow the recommended "Full Loop" for maximum precision.
-
-### Individual Execution
-- **Individual Agents:** You can launch `project-explorer`, `feature-backbone-specialist`, or `acceptance-criteria-generator` independently to analyze specific parts of your project.
-- **The Slicer:** `bokata-feature-slicer` is a specialized workflow. It **requires** a `## Features Backbone` as input. If it doesn't find the necessary info, it will recommend running the previous agents first.
-
-### Recommended "Full Loop" Workflow
-For the best results, launch the agents in sequence:
-1. **Explore:** Run `project-explorer` to understand the domain and tech stack.
-2. **Backbone:** Use the output from Explorer to run `feature-backbone-specialist`.
-3. **Criteria:** (Optional but Recommended) Run `acceptance-criteria-generator` to define rules.
-4. **Slice:** Run `bokata-feature-slicer` on a target feature to get your incremental roadmap.
+The skills and agents architecture is inspired by skills from [eferro/skill-factory](https://github.com/eferro/skill-factory/tree/main)
 
 ---
 
-## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## License
+
+MIT — see [LICENSE](LICENSE).

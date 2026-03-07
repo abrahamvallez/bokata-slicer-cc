@@ -1,3 +1,5 @@
+<!-- Initiative: {initiative-name} | Date: {YYYY-MM-DD} | Constitution: {version} -->
+
 ## Features Backbone
 
 ### Feature Overview
@@ -7,12 +9,14 @@
 
 ### Features Map
 
-#### Feature 1: [Actor] [Verb] [Object]
+## Feature: [Actor] [Verb] [Object]
+<!-- ID: {PRJ}-FEAT-{hash} -->
 **Purpose:** [What the user accomplishes with this feature]
 
 ---
 
-#### User Task 1.1: [Verb] [Object]
+### User Task: [Verb] [Object]
+<!-- Task ID: {PRJ}-TASK-{hash} -->
 [One-line description of what the user does]
 
 **Rule: [Constraint or business logic statement]**
@@ -40,7 +44,8 @@ Scenario: [Scenario name]
 
 ---
 
-#### User Task 1.2: [Verb] [Object]
+### User Task: [Verb] [Object]
+<!-- Task ID: {PRJ}-TASK-{hash} -->
 [One-line description]
 
 **Rule: [Constraint]**
@@ -54,18 +59,20 @@ Scenario: [Scenario name]
 
 ---
 
-#### System Task 1.X: [Verb] [Object]
+#### System Task: [Verb] [Object]
 **Trigger:** [workflow transition that fires it — e.g. "order confirmed", "session expired"]
 The system [description of what it executes and what it produces].
 
 ---
 
-#### Feature 2: [Actor] [Verb] [Object]
+## Feature: [Actor] [Verb] [Object]
+<!-- ID: {PRJ}-FEAT-{hash} -->
 **Purpose:** [What the user accomplishes with this feature]
 
 ---
 
-#### User Task 2.1: [Verb] [Object]
+### User Task: [Verb] [Object]
+<!-- Task ID: {PRJ}-TASK-{hash} -->
 [One-line description]
 
 **Rule: [Constraint]**
@@ -83,3 +90,11 @@ Scenario: [Scenario name]
 - **Critical**: [Feature X] must exist before [Feature Y]
 - **Recommended**: [Feature A] before [Feature B]
 - **Independent**: [Features] can be done in any order
+
+---
+
+### Constitution Compliance
+- [ ] All Features align with stated architecture principles
+- [ ] No prohibited patterns introduced
+- [ ] Security requirements addressed
+- [ ] Non-goals respected (no out-of-scope features added)

@@ -26,19 +26,9 @@ Refer to [Strategies Toolkit](breakdown-strategies.md) for detailed descriptions
 
 ### Step 1: Identify All Steps
 
-#### 🧠 Think:
-- What User Tasks and Steps are in the provided input?
-- What is the domain and technical context?
-- What constraints or patterns are established?
-- [List all steps that need options generated]
-
-#### ▶️ Execute:
 1. Locate `## Features Backbone` section in the provided input
 2. For each User Task, find all `### Steps` sections
-3. Extract for each step:
-   - Step name and description
-   - Layer assignment (UI/Logic/Data/Integration)
-   - Technical context from descriptions
+3. Extract for each step: name, description, layer (UI/Logic/Data/Integration), and any technical notes
 4. Create a complete list of all steps requiring incremental options
 
 ---
@@ -67,14 +57,13 @@ For each step:
 
 #### ▶️ Execute:
 
-**2.1: Define Quality Attributes**
+**2.1: Identify the critical quality dimension**
 
-For each step, document quality factors:
-1. Speed (fast execution)
-2. Accuracy (correct results)
-3. Simplicity (easy to implement)
-4. Security (safe operations)
-5. Reliability (consistent behavior)
+Don't list quality attributes as a checklist — use them as decision guides:
+- What matters most for this step? (speed, accuracy, simplicity, security, reliability)
+- Ensure at least one generated option optimizes for **simplicity** (the Walking Skeleton candidate)
+- Ensure at least one option optimizes for the **most critical quality dimension** of this step
+Let the quality dimension shape which options you generate, not the other way around.
 
 **2.2: Determine Applicable Strategies**
 
@@ -153,34 +142,6 @@ Formatting requirements:
 ## QUALITY CRITERIA
 
 For completed Incremental Options sections:
-
-✅ **Coverage - ALL User Tasks and Steps**
-- [ ] ALL User Tasks from Features Backbone are processed
-- [ ] EACH step in EACH User Task has Incremental Options
-- [ ] NO steps left unprocessed
-
-✅ **Incremental Option Definition - For Each Step**
-- [ ] Minimum 3 incremental options per step (WARNING if exactly 3)
-- [ ] Each has specific [Action] [Object] name
-- [ ] Each is deployable independently
-- [ ] Options are specific, not generic
-
-✅ **Strategies - Diverse and Documented**
-- [ ] Multiple strategies applied across options (not all same approach)
-- [ ] Strategies reflect step quality attributes
-- [ ] Progression from simple to complex (strategy diversity)
-- [ ] Rationale explains overall approach
-
-✅ **Implementation Tracking**
-- [ ] Progress counter: `(0/N incremental options completed)`
-- [ ] Checkbox format enables easy tracking: `[ ] **N.1: Name**`
-- [ ] Users can check boxes as they implement
-
-✅ **Documentation - Quality and Completeness**
-- [ ] Descriptions are specific and clear
-- [ ] No ambiguity in implementation
-- [ ] Applied strategies documented
-- [ ] Rationale provided for option set
 
 ---
 
@@ -280,19 +241,11 @@ If you're stuck, ask me to list strategies for a specific step, and I'll suggest
 
 ---
 
-## OUTPUT CHECKLIST
+## BEFORE SUBMITTING — verify for ALL Steps:
 
-Before finishing Phase 2, verify:
-
-**Coverage:**
-- [ ] ALL User Tasks from Features Backbone are processed
-- [ ] ALL Steps have Incremental Options sections
-- [ ] NO steps left unprocessed
-
-**Options Quality:**
-- [ ] Minimum 3 options per Step (WARNING if exactly 3)
-- [ ] Checkbox format: `[ ] **N.M: Name** - Description`
-- [ ] Applied Strategies section (2-3 strategies)
-- [ ] Rationale section (1-2 sentences)
+- [ ] ALL Steps have Incremental Options (no gaps)
+- [ ] At least one option per step is clearly the simplest viable (Walking Skeleton candidate)
+- [ ] Aim for 4+ options per step — 3 is acceptable if the step is genuinely narrow; note why
+- [ ] Each option uses `[ ] **N.M: Name** - Description` format and is independently deployable
 - [ ] Options progress from simple → complex
-- [ ] All options specific and independently deployable
+- [ ] Applied Strategies (2-3) and Rationale documented per step
