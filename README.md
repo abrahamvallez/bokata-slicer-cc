@@ -95,15 +95,32 @@ Runs the slicing pipeline for a single Feature:
 
 ## Recommended Workflow
 
-```
-1. bokata-mapper-specialist   →  docs/<initiative>/features.md
-                                  docs/<initiative>/feature-context.md
+Skills are the primary way to use Bokata — invoke them directly in Claude Code. Agents are optional orchestration wrappers that automate file I/O and chaining.
 
-2. bokata-slicer-specialist   →  docs/<initiative>/slices/<FEATURE-ID>-<name>.md
-   (once per Feature)             docs/<initiative>/walking-skeleton-plan.md
+### Minimum workflow
+
+```
+bokata-feature-mapper   →  Features Backbone (actors, tasks, dependencies)
+bokata-feature-slicer   →  Walking Skeleton + Increments Backlog (per feature)
 ```
 
-Skills can also be invoked standalone — no prior pipeline required.
+### Full workflow (with enrichment steps)
+
+```
+bokata-research         →  feature-context.md (domain, rules, tech constraints)
+        ↓
+bokata-feature-mapper   →  Features Backbone
+        ↓
+bokata-ac-analyst       →  Acceptance criteria in Gherkin (optional, per task)
+        ↓
+bokata-feature-slicer   →  Walking Skeleton + Increments Backlog (per feature)
+```
+
+**When to add each step:**
+- `bokata-research` — use it when you don't have project context to hand off, or when the domain/tech stack is unfamiliar. Run it once per initiative before anything else.
+- `bokata-ac-analyst` — use it before slicing when you need precise behavioral specs, or when the feature has complex rules, permissions, or edge cases worth nailing down first.
+
+Each skill works standalone — you can start anywhere in the pipeline.
 
 ---
 

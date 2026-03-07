@@ -19,43 +19,11 @@
 <!-- Task ID: {PRJ}-TASK-{hash} -->
 [One-line description of what the user does]
 
-**Rule: [Constraint or business logic statement]**
-
-```gherkin
-Scenario: [Scenario name]
-  Given [precondition / context]
-  When [user action]
-  Then [observable result]
-  And [additional assertion if needed]
-```
-
-<!-- Add one or more Gherkin scenarios per Rule. Each Rule can have as many scenarios as needed to cover happy paths and edge cases. -->
-
-**Rule: [Another constraint for the same task]**
-
-```gherkin
-Scenario: [Scenario name]
-  Given [context]
-  When [action]
-  Then [result]
-```
-
-<!-- Repeat: add more Rules + their scenarios until the task is fully specified. -->
-
 ---
 
 ### User Task: [Verb] [Object]
 <!-- Task ID: {PRJ}-TASK-{hash} -->
 [One-line description]
-
-**Rule: [Constraint]**
-
-```gherkin
-Scenario: [Scenario name]
-  Given [context]
-  When [action]
-  Then [result]
-```
 
 ---
 
@@ -74,15 +42,6 @@ The system [description of what it executes and what it produces].
 ### User Task: [Verb] [Object]
 <!-- Task ID: {PRJ}-TASK-{hash} -->
 [One-line description]
-
-**Rule: [Constraint]**
-
-```gherkin
-Scenario: [Scenario name]
-  Given [context]
-  When [action]
-  Then [result]
-```
 
 ---
 
