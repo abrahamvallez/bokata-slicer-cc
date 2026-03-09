@@ -28,7 +28,7 @@ If the feature is not found, stop and report the error.
 
 ## Step 2: Load project context
 
-1. Read `docs/<initiative>/feature-context.md` — this contains the Feature Research Summary, Criteria Research Summary, and Slicer Research Summary already consolidated. Extract and pass all three summaries as context, plus: tech stack, domain vocabulary, actors, architecture constraints.
+1. Read `docs/<initiative>/feature-context.md` and pass its full content to the skill. It contains the Feature Research Summary, Criteria Research Summary, and Slicer Research Summary.
 2. If `feature-context.md` does not exist, run:
    ```bash
    bash .claude/agents/scripts/find-project-context.sh . docs/<initiative-name>

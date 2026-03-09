@@ -36,11 +36,13 @@ A Feature to slice — described in any form:
 
 Optionally, Acceptance Criteria enrich the decomposition.
 
-Optionally enriched by:
-- `## Slicer Research Summary: [Feature]` — recommended
-- `## Discovery Context — Slicer: [Feature]` — optional
+Optionally enriched by any context containing:
+- **Codebase patterns, libraries, and architecture constraints** (e.g. `## Slicer Research Summary: [Feature]`) — **recommended**
+- **Domain vocabulary and actors** (e.g. `## Feature Research Summary`) — for consistent naming across increments
+- **Business rules** (e.g. `## Criteria Research Summary`) — rules that affect which increment options are acceptable
+- **Technical clarifications** (e.g. `## Discovery Context — Slicer: [Feature]`) — layer and scope decisions from Phase 0
 
-**Note:** `## Slicer Research Summary` and `## Discovery Context` are recommended but not blocking — proceed without them if absent.
+**Note:** All enrichment is recommended but not blocking — proceed without it if absent.
 
 ---
 
@@ -181,6 +183,7 @@ Input: Feature description (any form)
 - [ ] Backlog grouped by User Task
 - [ ] All items use correct tag format: `**[User Task Name]**`
 - [ ] No generic tasks — all items are specific increments from Phase 2 analysis
+- [ ] Walking Skeleton descriptions answer "what user sees/does" — technology references OK, endpoint/field/function names NOT OK
 
 ### Internal verification (before Phase 3 synthesis):
 - [ ] All User Tasks have been decomposed into Steps (Phase 1 complete)

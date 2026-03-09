@@ -91,6 +91,17 @@ Runs the slicing pipeline for a single Feature:
 4. Writes `docs/<initiative>/slices/<FEATURE-ID>-<name>.md`
 5. Updates `walking-skeleton-plan.md`
 
+**What to pass:** Only the initiative name and the Feature to slice (name or ID). The agent reads `features.md` and `feature-context.md` automatically — no need to attach documents.
+
+```
+Slice the feature "Player Sets Up Account" from initiative basket-chess
+Slice BKC-FEAT-f16d from initiative basket-chess
+```
+
+If `feature-context.md` does not exist, the agent falls back to discovering project context via the scaffold scripts. The slicer skill can proceed without a Slicer Research Summary, though output quality improves with it.
+
+**Prerequisite:** `bokata-mapper-specialist` must have run first to produce `docs/<initiative>/features.md`. Running the slicer standalone without that file requires passing the feature definition manually.
+
 ---
 
 ## Recommended Workflow
@@ -121,6 +132,93 @@ bokata-feature-slicer   →  Walking Skeleton + Increments Backlog (per feature)
 - `bokata-ac-analyst` — use it before slicing when you need precise behavioral specs, or when the feature has complex rules, permissions, or edge cases worth nailing down first.
 
 Each skill works standalone — you can start anywhere in the pipeline.
+
+---
+
+## Invocation Examples
+
+### Agents
+
+Agents are invoked by name. They read and write files automatically — just give them the initiative name and what to work on.
+
+**bokata-mapper-specialist** — full features pipeline for an initiative:
+```
+Run bokata-mapper-specialist for initiative "basket-chess". The PRD is in docs/PRD.md.
+```
+```
+Map the features for the "user-authentication" initiative. Use the description below:
+[paste PRD or description]
+```
+
+**bokata-slicer-specialist** — slice a single feature by name or ID:
+```
+Run bokata-slicer-specialist. Slice "Player Executes Game Turn" from initiative basket-chess.
+```
+```
+Slice BKC-FEAT-fc3e from initiative basket-chess.
+```
+```
+Re-slice BKC-FEAT-f16d — I updated the User Tasks in features.md.
+```
+
+---
+
+### Skills
+
+Skills are invoked by name with the relevant context pasted inline. No files are required — paste whatever you have.
+
+**bokata-research** — run before mapping when the domain or codebase is unfamiliar:
+```
+Run bokata-research for this initiative:
+[paste PRD or description]
+```
+```
+Run bokata-research. Context Analysis:
+[paste ## Context Analysis section]
+```
+
+**bokata-feature-mapper** — map features from any description:
+```
+Run bokata-feature-mapper:
+[paste PRD, description, or conversation context]
+```
+```
+Run bokata-feature-mapper with this enriched context:
+[paste PRD]
+
+## Feature Research Summary
+[paste research output]
+```
+
+**bokata-ac-analyst** — generate Gherkin criteria for specific User Tasks:
+```
+Run bokata-ac-analyst for these User Tasks:
+- Create Match
+- Join Match
+- Leave Match
+```
+```
+Run bokata-ac-analyst:
+[paste ## Features Backbone section]
+
+## Criteria Research Summary
+[paste criteria research output]
+```
+
+**bokata-feature-slicer** — slice a feature into a Walking Skeleton:
+```
+Run bokata-feature-slicer:
+[paste Feature definition with User Tasks]
+```
+```
+Run bokata-feature-slicer with --show-steps:
+[paste Feature definition]
+
+## Slicer Research Summary: Player Executes Game Turn
+[paste slicer research output]
+```
+
+Use `--show-steps`, `--show-increments`, or `--show-all` to surface intermediate phases.
 
 ---
 

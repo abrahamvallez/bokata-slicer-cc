@@ -63,7 +63,7 @@ AMBIGUOUS: [list items needing clarification — will surface in Phase 0a]
 
 ---
 
-## 5. Dependency & Risk Mapping
+## 5. Key Risks & Dependencies
 
 **Questions to answer:**
 - Which features depend on external systems, APIs, or third-party services?
@@ -86,10 +86,30 @@ After completing research, document findings as:
 ```markdown
 ## Feature Research Summary
 
-**Domain vocabulary:** [key terms decided]
-**Actors confirmed:** [list all actors]
-**Scope boundary:** [in/out/ambiguous]
-**Key risks:** [list high-risk items]
-**Benchmark reference:** [analogous systems used]
-**Unresolved items:** [UNRESOLVED: X — defaulting to Y]
+### Domain Vocabulary
+- term: definition
+- term: definition
+
+### Actors
+- Actor A: role description
+- Actor B: role description
+
+### Scope Boundaries
+IN SCOPE: [list]
+OUT OF SCOPE: [list]
+AMBIGUOUS: [list]
+
+### Existing Patterns
+[analogous features or flows found in the codebase, or NONE if greenfield]
+
+### Benchmark Reference
+[2-3 analogous systems used for domain completeness check]
+
+### Key Risks
+HIGH RISK: [feature/area] — reason: [unknown/external dependency/complexity]
+MEDIUM RISK: [feature/area] — reason: [...]
+EXTERNAL DEPS: [feature/area] → [external system/API]
+
+### Unresolved Items
+UNRESOLVED: [item] — defaulting to [value]
 ```

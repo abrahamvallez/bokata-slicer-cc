@@ -50,12 +50,14 @@ Output immediately and continue to Phase 2:
 
 ## Output
 
-`## Feature Research Summary` with:
-- **Domain vocabulary**: Key terms and their definitions in this codebase/domain
-- **Actors confirmed**: User types found in the codebase or docs, with roles
-- **Scope boundaries**: What is explicitly in/out of scope based on existing docs
-- **Existing patterns**: Analogous features or flows already present
-- **Unresolved items**: `UNRESOLVED: <default used>`
+`## Feature Research Summary` with `###` subsections:
+- **Domain Vocabulary**: Key terms and definitions in this codebase/domain
+- **Actors**: User types found in codebase or docs, with roles
+- **Scope Boundaries**: IN SCOPE / OUT OF SCOPE / AMBIGUOUS lists
+- **Existing Patterns**: Analogous features or flows already present (NONE if greenfield)
+- **Benchmark Reference**: 2-3 analogous systems used for domain completeness check
+- **Key Risks**: HIGH/MEDIUM risk items and external dependencies
+- **Unresolved Items**: `UNRESOLVED: <default used>`
 
 ---
 
@@ -63,7 +65,7 @@ Output immediately and continue to Phase 2:
 
 ## Input
 
-- **User Tasks** — from backbone, user stories, or plain description
+- **Feature domain** — the initiative description or PRD; no User Tasks required at this stage
 - **`## Discovery Context — Criteria`** section — optional, enriches research focus
 
 ## Greenfield Shortcut
@@ -72,20 +74,22 @@ No codebase to search — derive constraints from PRD/input only. Skip all Glob/
 
 ## Workflow
 
-1. Read [research-guide-criteria.md](resources/research-guide-criteria.md) and answer all questions for each User Task
-2. For tasks with complex permission matrices, consider parallel Explore agents (one per task):
-   - Agent per task: state transitions + permissions + constraints
-   - Compile findings, then produce output
+1. Read [research-guide-criteria.md](resources/research-guide-criteria.md) and answer all questions at Feature-domain level — not per User Task (they don't exist yet)
+2. For domains with complex permission structures, consider parallel Explore agents:
+   - Agent 1: state transitions and business rules in the codebase
+   - Agent 2: permission configurations and role definitions
+   - Agent 3: domain invariants from existing validations
 3. Document findings before producing output
 4. Mark unresolved items as `UNRESOLVED: <default used>`
 
 ## Output
 
-`## Criteria Research Summary` organized per User Task:
-- **Business rules confirmed**: Validation constraints, uniqueness rules, allowed values
-- **Permissions**: Role-based access restrictions
-- **State transitions**: What gets created/updated/deleted
-- **Boundary conditions**: Numerical limits, time windows, thresholds
+`## Criteria Research Summary` organized by domain concern (not per User Task) with `###` subsections:
+- **Business Rules**: Validation constraints, uniqueness rules, allowed values across the domain
+- **Permissions & Roles**: Role-based access restrictions applicable to this feature domain
+- **State & Transitions**: Entities, valid states, transition triggers, cascades
+- **Boundary Conditions**: Numerical limits, time windows, thresholds
+- **Domain Invariants**: Rules that must hold regardless of which task triggers them
 - **Unresolved**: `UNRESOLVED: <default used>`
 
 ---
@@ -136,6 +140,6 @@ Output immediately:
 
 Before finishing, verify all three phases:
 
-**Phase 1:** `## Feature Research Summary` present · vocabulary · actors · scope · patterns · unresolved
-**Phase 2:** `## Criteria Research Summary` present · per-task subsections · rules · permissions · transitions · boundaries · unresolved
-**Phase 3:** `## Slicer Research Summary: [name]` present · patterns · libraries · architecture · tech stack · unresolved
+**Phase 1:** `## Feature Research Summary` present · Domain Vocabulary · Actors · Scope Boundaries · Existing Patterns · Benchmark Reference · Key Risks · Unresolved Items
+**Phase 2:** `## Criteria Research Summary` present · domain-level sections (not per-task) · Business Rules · Permissions & Roles · State & Transitions · Boundary Conditions · Domain Invariants · Unresolved
+**Phase 3:** `## Slicer Research Summary: [name]` present · Existing Patterns · Available Libraries · Required Layers · Project Constraints · Security Notes · Unresolved

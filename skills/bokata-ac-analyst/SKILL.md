@@ -50,7 +50,12 @@ You are the **Criteria Architect** - specialized in discovering hidden business 
 
 Accepts: User Tasks list, feature backbone text, PRD snippet, raw user stories, or conversation context.
 
-**Note:** Research summary and discovery context enrich output but are never required — proceed with any available context.
+**Optional enrichment (if present in context):**
+- **Domain business rules** (e.g. `## Criteria Research Summary`) — constraints, permissions, state transitions, and boundary conditions across the feature domain; use as starting point for deriving Rules per User Task
+- **Domain vocabulary and actors** (e.g. `## Feature Research Summary`) — use for consistent naming in scenarios
+- **Task clarifications** (e.g. `## Discovery Context — Criteria`) — resolved ambiguities from prior discovery
+
+Research context enriches output but is never required — proceed with any available context.
 
 ---
 
@@ -153,7 +158,7 @@ For EACH User Task:
     - Then: Observable Result
 
 ### ▶️ Execute:
-1. Define Rules per User Task (use any research context provided)
+1. Define Rules per User Task — if domain business rules or constraints are present in context (e.g. `## Criteria Research Summary`), use them as the source of Rules: map each domain constraint to the relevant User Task before generating scenarios
 2. Write Scenarios per Rule
 3. Ensure coverage of Happy Path and Edge Cases
 4. Include at least one negative permission scenario where applicable

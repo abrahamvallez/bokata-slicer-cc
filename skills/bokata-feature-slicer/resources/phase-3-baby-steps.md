@@ -80,6 +80,7 @@ Validate skeleton completeness against these criteria:
 3. End-to-end functionality demonstrated
 4. Shippable tomorrow (minimal but complete)
 5. Every item is independently deployable
+6. NO code-level details: no endpoint signatures, no field schemas, no function/class names — technology references are fine ("Web Audio API", "LocalStorage"), code constructs are not
 
 If validation fails, revisit Step 2 selections.
 
@@ -133,6 +134,8 @@ Perform final validation checks:
 ## OUTPUT FORMAT
 
 Return **ONLY** the markdown for the ToDo list:
+
+> **Rule:** Walking Skeleton item descriptions must answer "what can the user do or see?" and may reference the technology/approach used. Do NOT include endpoint signatures, field schemas, or function/class names.
 
 ```markdown
 # Vertical Slices: [Feature Name]
@@ -231,6 +234,13 @@ on them → closing transitions.
 - Uses simplest options (Browser APIs, LocalStorage, basic UI)
 - Could ship tomorrow and get user feedback
 
+**Same items written wrong ❌ (do NOT do this):**
+```markdown
+- [ ] **Records Audio Input** POST /recordings {blob, mime_type, duration_ms, device_id} — raw audio to S3 bucket
+- [ ] **Organizes Library** GET /recordings → [{id, title, created_at, duration_ms}] — queries recordings table
+- [ ] **Plays Audio** Audio.play(src: s3SignedUrl) — streams from presigned URL
+```
+
 ### Bad Walking Skeleton ❌
 
 ```markdown
@@ -260,6 +270,7 @@ on them → closing transitions.
 - [ ] Every item has User Task tag: `**[User Task Name]**`
 - [ ] Every item has checkbox: `[ ]`
 - [ ] Every item has description
+- [ ] Descriptions answer "what can the user see/do?" — technology references OK, endpoint/field/function names NOT OK
 
 ✅ **Increments Bank**
 - [ ] Contains ALL non-skeleton options
@@ -291,3 +302,10 @@ on them → closing transitions.
 
 **Issue: "Increments Bank is unorganized"**
 → Solution: Group by User Task, maintain Step order within groups.
+
+**Issue: "Walking Skeleton items contain endpoint signatures, schemas, or function names"**
+→ Solution: Each description must answer "what can the user do or see?" Technology references are fine.
+  ✅ "[Comment on clip] — Text field on player timeline; user types and comment is saved"
+  ✅ "[Comment on clip] — Uses existing comments endpoint to persist the comment"
+  ❌ "[Comment on clip] — POST /comments { content_type, content_id, timestamp_ms, text, author_id? }"
+Phase 1/2 reasoning is internal scaffolding — don't surface code-level details in the output.
