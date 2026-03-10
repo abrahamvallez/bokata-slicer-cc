@@ -15,6 +15,18 @@ Built on **Vertical Slicing** (the Hamburger Method) and **Walking Skeleton** pr
 
 ---
 
+## Installation
+
+Uses [skills CLI](https://github.com/vercel-labs/skills) — supports Claude Code and 40+ other AI agents (Cursor, Copilot, Codex, etc.).
+
+```bash
+npx skills add abrahamvallez/bokata-skills
+```
+
+The CLI will prompt you to select which skills to install and which agents to target. Claude Code is always included automatically.
+
+---
+
 ## Architecture
 
 Bokata v2.0 introduces a two-layer architecture:
