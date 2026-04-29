@@ -1,0 +1,110 @@
+{
+  "expectations": [
+    {
+      "text": "La sección ## Features Backbone está presente en el output",
+      "passed": false,
+      "evidence": "The document uses '# Features Backbone — Social Proof Toast (Clip2Coach)' as an H1 title, not '## Features Backbone' as an H2 section header. No H2 section named 'Features Backbone' exists in the output."
+    },
+    {
+      "text": "Se identifican al menos 2 Features",
+      "passed": true,
+      "evidence": "The output contains 5 features: Feature 1 (Visitante Ve Prueba Social en Landing), Feature 2 (Visitante Ve Prueba Social en Página de Registro), Feature 3 (Sistema Controla Frecuencia del Toast), Feature 4 (Equipo Mide Impacto del Toast en Conversión), Feature 5 (Equipo Conecta Toast a Datos Reales)."
+    },
+    {
+      "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+      "passed": true,
+      "evidence": "All 5 features follow the [Actor][Verb][Object] structure: 'Visitante Ve Prueba Social en Landing', 'Visitante Ve Prueba Social en Página de Registro', 'Sistema Controla Frecuencia del Toast', 'Equipo Mide Impacto del Toast en Conversión', 'Equipo Conecta Toast a Datos Reales (Fase 2)'. The format is structurally correct even though some actors are not from the PRD."
+    },
+    {
+      "text": "Cada User Task NO incluye el Actor como prefijo",
+      "passed": true,
+      "evidence": "Reviewed all User Tasks across all 5 features. None begin with the actor name as a prefix (e.g., no 'Visitante llega...', 'Sistema verifica...' etc.). Tasks use verbs directly: 'Llega a la landing page...', 'Verifica si el usuario...', 'Configura el feature flag...'."
+    },
+    {
+      "text": "Cada Feature tiene al menos 3 User Tasks",
+      "passed": false,
+      "evidence": "Per grading instructions, System Tasks do not count toward the 3 User Task minimum. Feature 3 ('Sistema Controla Frecuencia del Toast') has 6 tasks but ALL are system operations (Verifica, Consulta sessionStorage, Evalúa los datos, Selecciona la ventana temporal, Guarda en sessionStorage, Omite el toast) — 0 real user tasks. Feature 4 and 5 tasks are also team/system operations, not user actions. Only Features 1 and 2 have valid user tasks."
+    },
+    {
+      "text": "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+      "passed": false,
+      "evidence": "No HTML comments of any kind appear in the output. Feature identifiers are expressed only as '## Feature 1:', '## Feature 2:', etc. — plain markdown headers with no <!-- ID: ... --> comments."
+    },
+    {
+      "text": "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+      "passed": false,
+      "evidence": "No HTML comments appear anywhere in the output. User Tasks are listed as plain numbered lists (1., 2., 3., etc.) with no <!-- Task ID: ... --> annotations."
+    },
+    {
+      "text": "La sección ## Feature Dependencies está presente",
+      "passed": true,
+      "evidence": "Line 98 contains '## Feature Dependencies' as a proper H2 section header, followed by a dependency diagram in a code block and an 'Orden de implementación sugerido' subsection."
+    },
+    {
+      "text": "Los actores identificados reflejan correctamente el PRD: visitante no autenticado (o Visitor) y/o Coach como distintos actores según el contexto",
+      "passed": false,
+      "evidence": "The output uses 'Visitante' correctly for Features 1 and 2. However, it also introduces 'Sistema', 'Equipo de producto', and 'Equipo de ingeniería' as actors — none of which are the PRD's primary actors. The Coach (authenticated user excluded from the toast) is never used as an actor. The PRD's second distinct actor is absent."
+    },
+    {
+      "text": "Las Features representan objetivos del usuario, no implementación técnica (sin mencionar sessionStorage, IntersectionObserver, Redis, ni endpoints en nombres de Features/Tasks)",
+      "passed": false,
+      "evidence": "Feature 5 name contains 'Datos Reales' but its tasks explicitly mention: 'Crea el endpoint GET /api/social-proof', 'Configura Redis cache con TTL de 30 minutos', 'Implementa las queries SQL'. Feature 3 tasks include 'Consulta sessionStorage' and 'Guarda en sessionStorage que el toast fue mostrado'. Technical implementation terms appear in multiple task names."
+    },
+    {
+      "text": "Las User Tasks describen acciones del usuario o comportamientos observables, no operaciones internas del sistema",
+      "passed": false,
+      "evidence": "Feature 3 tasks are entirely system operations: 'Verifica si el usuario tiene sesión activa', 'Consulta sessionStorage', 'Evalúa los datos de actividad contra los thresholds', 'Selecciona la ventana temporal correcta', 'Guarda en sessionStorage', 'Omite el toast'. Feature 5 tasks are all technical implementations: 'Crea el endpoint', 'Configura Redis cache', 'Implementa las queries SQL'. These describe internal system behavior, not observable user actions."
+    },
+    {
+      "text": "Todo el scope identificado es trazable al PRD — no se inventan features no descritas en el PRD",
+      "passed": true,
+      "evidence": "All 5 features can be traced to the PRD: Features 1-2 map to US-1/US-2 (landing/signup visibility), Feature 3 maps to FR-5 and US-4 (session control), Feature 4 maps to the 'Analytics & Tracking' section and A/B test requirements, Feature 5 maps to the explicitly described 'Fase 2' backend with real data. No invented scope detected."
+    },
+    {
+      "text": "Las capacidades principales están cubiertas: ver prueba social, descartar el toast, comportamiento por sesión, exclusión de usuarios autenticados",
+      "passed": true,
+      "evidence": "Ver prueba social: Features 1 and 2 cover this for landing and signup pages. Descartar el toast: Feature 1 Task 5 ('Cierra el toast manualmente con el botón ×') and Task 4 ('Hace hover sobre el toast para pausar el auto-dismiss'). Comportamiento por sesión: Feature 3 covers session-based control (sessionStorage, not showing twice). Exclusión de usuarios autenticados: Feature 3 Task 1 ('Verifica si el usuario tiene sesión activa antes de mostrar')."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 7,
+    "total": 13,
+    "pass_rate": 0.46
+  },
+  "execution_metrics": {
+    "tool_calls": {"Read": 1, "Write": 2, "Bash": 1, "Glob": 0, "Grep": 0},
+    "total_tool_calls": 4,
+    "total_steps": 3,
+    "files_created": [
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/social-proof-toast-prd/without_skill/outputs/features-backbone.md",
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/social-proof-toast-prd/without_skill/outputs/metrics.json"
+    ],
+    "errors_encountered": 0,
+    "output_chars": 3891,
+    "transcript_chars": 12500
+  },
+  "timing": {
+    "executor_duration_seconds": 51.0,
+    "total_duration_seconds": 51.0
+  },
+  "claims": [],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [
+      "Assertion 1 is borderline — the document title contains 'Features Backbone' as H1, which may be considered equivalent to the required H2 section depending on template strictness.",
+      "Assertion 3 passes on format grounds, but Feature 3 uses 'Sistema' as actor which fails Assertion 9 — these are related failures."
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "The skill (or prompt) should explicitly forbid 'Sistema', 'Equipo', or engineering actors — only Visitor/Coach and equivalents from the PRD should appear.",
+      "The template must require HTML comment IDs for both Features (<!-- ID: F1 -->) and Tasks (<!-- Task ID: T1.1 -->) — the without_skill run produced zero IDs.",
+      "The prompt should emphasize that User Tasks must describe observable user behavior, not backend/system operations. Feature 3 is entirely composed of system internals.",
+      "The '## Features Backbone' H2 section header should be part of the required template structure — the without_skill run used H1 instead.",
+      "Phase 2 features (like Feature 5 with Redis/endpoints) should either be excluded or clearly marked as out-of-scope for a User Story Map, since they represent implementation tasks, not user goals."
+    ],
+    "overall": "The without_skill run produced a structurally recognizable output but with significant quality gaps: no IDs (HTML comments), system actors mixed with user actors, technical implementation leaking into Feature and Task names, and several features consisting entirely of system operations rather than user actions. Pass rate of 46% (6/13) confirms the skill is needed to produce compliant output."
+  }
+}

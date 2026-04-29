@@ -1,0 +1,110 @@
+{
+  "expectations": [
+    {
+      "text": "La sección ## Features Backbone está presente en el output",
+      "passed": true,
+      "evidence": "Line 35 contains '## Features Backbone' as a top-level section header."
+    },
+    {
+      "text": "Se identifican al menos 2 Features",
+      "passed": true,
+      "evidence": "4 Features are identified: 'Visitor Views Social Proof Toast', 'System Delivers Activity Data', 'System Tracks Toast Engagement', 'Engineer Configures A/B Test'."
+    },
+    {
+      "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+      "passed": true,
+      "evidence": "All 4 Features follow the 3-component format: 'Visitor Views Social Proof Toast' [Visitor][Views][Social Proof Toast], 'System Delivers Activity Data' [System][Delivers][Activity Data], 'System Tracks Toast Engagement' [System][Tracks][Toast Engagement], 'Engineer Configures A/B Test' [Engineer][Configures][A/B Test]."
+    },
+    {
+      "text": "Cada User Task NO incluye el Actor como prefijo",
+      "passed": true,
+      "evidence": "All 12 User Task names (e.g., 'View Toast on Landing Page', 'Dismiss Toast Manually', 'Fetch Activity Data from Endpoint', 'Create Feature Flag for Toast Visibility') begin with a verb, not an actor name."
+    },
+    {
+      "text": "Cada Feature tiene al menos 3 User Tasks",
+      "passed": false,
+      "evidence": "'System Delivers Activity Data' has only 2 User Tasks: 'Fetch Activity Data from Endpoint' and 'Display Hardcoded Data in Fase 1' (the other 2 are System Tasks and do not count). 'System Tracks Toast Engagement' also has only 2 User Tasks: 'Confirm Toast Was Seen' and 'Record How Toast Was Closed' (the third is a System Task). Two of the four features fail the minimum of 3 User Tasks."
+    },
+    {
+      "text": "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+      "passed": true,
+      "evidence": "All 4 features have HTML comment IDs: '<!-- ID: C2C-FEAT-a1b2 -->', '<!-- ID: C2C-FEAT-m3n4 -->', '<!-- ID: C2C-FEAT-s9t0 -->', '<!-- ID: C2C-FEAT-y5z6 -->'."
+    },
+    {
+      "text": "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+      "passed": true,
+      "evidence": "All 12 User Tasks have HTML comment Task IDs (e.g., '<!-- Task ID: C2C-TASK-c3d4 -->', '<!-- Task ID: C2C-TASK-e5f6 -->'). System Tasks do not have Task IDs, but User Tasks consistently do."
+    },
+    {
+      "text": "La sección ## Feature Dependencies está presente",
+      "passed": true,
+      "evidence": "Line 177 contains '### Feature Dependencies' with 5 dependency entries (Critical and Recommended). The section uses ### rather than ## but is clearly present and complete."
+    },
+    {
+      "text": "Los actores identificados reflejan correctamente el PRD: visitante no autenticado (o Visitor) y/o Coach como distintos actores según el contexto",
+      "passed": false,
+      "evidence": "'Visitor' is correctly identified and used as a primary actor. However, 'Coach' (the authenticated user, the PRD's second human actor) never appears as an actor in any Feature or User Task — they are only mentioned as an exclusion target in the Discovery Context ('Authenticated User: Coach already logged in. Must never see the toast'). Instead, 'System' and 'Engineer' are used as feature-level actors, which are not the human actors described in the PRD user stories. Coach's perspective is entirely absent from the Features Map."
+    },
+    {
+      "text": "Las Features representan objetivos del usuario, no implementación técnica (sin mencionar sessionStorage, IntersectionObserver, Redis, ni endpoints en nombres de Features/Tasks)",
+      "passed": false,
+      "evidence": "User Task name 'Fetch Activity Data from Endpoint' explicitly contains the prohibited term 'Endpoint'. User Task 'Display Hardcoded Data in Fase 1' contains 'Hardcoded', a technical implementation term. The scope boundary section also mentions sessionStorage, Redis, and endpoints, but those appear in the Discovery Context (not Feature/Task names), so only the Task name violations are strictly in scope: 'Fetch Activity Data from Endpoint' fails the check."
+    },
+    {
+      "text": "Las User Tasks describen acciones del usuario o comportamientos observables, no operaciones internas del sistema",
+      "passed": false,
+      "evidence": "Several User Tasks describe system/automated operations rather than user actions: 'Fetch Activity Data from Endpoint' (describes the frontend component calling an API endpoint, not a user action), 'Display Hardcoded Data in Fase 1' (describes component rendering behavior), 'Confirm Toast Was Seen' (described as 'The visitor's browser emits a social_proof_toast_viewed event' — an automated system emission, not a user action), 'Record How Toast Was Closed' (also an automated browser emission event, not a user action)."
+    },
+    {
+      "text": "Todo el scope identificado es trazable al PRD — no se inventan features no descritas en el PRD",
+      "passed": true,
+      "evidence": "All 4 Features map directly to PRD scope: toast display (FR-1/FR-2), backend data endpoint (Fase 2), analytics tracking (social_proof_toast_viewed/dismissed events), and A/B test feature flag (Fase 1) are all explicitly described in the PRD scope section."
+    },
+    {
+      "text": "Las capacidades principales están cubiertas: ver prueba social, descartar el toast, comportamiento por sesión, exclusión de usuarios autenticados",
+      "passed": true,
+      "evidence": "All four main capabilities are represented: (1) ver prueba social — 'Visitor Views Social Proof Toast' Feature with 'View Toast on Landing Page'/'View Toast on Signup Page'; (2) descartar el toast — 'Dismiss Toast Manually' User Task; (3) comportamiento por sesión — System Task 'Guard Against Repeat Display' (sessionStorage one-per-session); (4) exclusión de usuarios autenticados — System Task 'Suppress Toast for Authenticated Users'."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 4,
+    "total": 13,
+    "pass_rate": 0.69
+  },
+  "execution_metrics": {
+    "tool_calls": {"Read": 6, "Write": 2, "Bash": 4, "Glob": 0, "Grep": 0},
+    "total_tool_calls": 12,
+    "total_steps": 6,
+    "files_created": [
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/social-proof-toast-prd/with_skill/outputs/features-backbone.md",
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/social-proof-toast-prd/with_skill/outputs/metrics.json"
+    ],
+    "errors_encountered": 0,
+    "output_chars": 9757,
+    "transcript_chars": 0
+  },
+  "timing": {
+    "executor_duration_seconds": 110.5,
+    "total_duration_seconds": 110.5
+  },
+  "claims": [],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [
+      "Assertion 8: Feature Dependencies section uses ### (H3) rather than ## (H2) — considered a pass since the section is clearly present and complete, but the heading level diverges from the assertion wording.",
+      "Assertion 10: 'Display Hardcoded Data in Fase 1' uses 'Hardcoded' which is a technical implementation term; the assertion's explicit prohibited list only names sessionStorage, IntersectionObserver, Redis, and endpoints, but the spirit of the assertion covers implementation language broadly."
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 5 failure: 'System Delivers Activity Data' and 'System Tracks Toast Engagement' each have only 2 User Tasks. The skill should enforce a minimum of 3 User Tasks per Feature and should not allow System Tasks to compensate for missing User Tasks.",
+      "Assertion 9 failure: Coach (authenticated user) is only treated as an exclusion target, never as an active actor. If Coach has no tasks in the scope, the Discovery Context should explicitly note this — or the Feature for exclusion should be framed from the Visitor's perspective (e.g., 'Visitor Is Excluded When Authenticated').",
+      "Assertion 10 failure: The User Task name 'Fetch Activity Data from Endpoint' exposes an internal API endpoint. A more user-oriented name would be 'See Up-to-Date Activity Counts' or 'View Real Activity Data in Toast'.",
+      "Assertion 11 failure: Tasks like 'Confirm Toast Was Seen' and 'Record How Toast Was Closed' are analytics event emissions (system behavior), not user actions. These should be System Tasks or reframed as observable user behaviors (e.g., 'See Toast Impression Recorded' is still awkward — better left as System Tasks).",
+      "The 'System' actor is used for two Features that are entirely backend/automated with no human interaction. Consider whether these belong as Features at all, or should be consolidated as System Tasks under the Visitor feature."
+    ],
+    "overall": "The output demonstrates strong structural compliance (IDs, section headers, feature format, scope traceability) and good PRD coverage of core capabilities. The primary weaknesses are: (1) two Features lack the minimum 3 User Tasks when System Tasks are correctly excluded from the count; (2) several tasks labeled as User Tasks actually describe internal system operations (analytics event emissions, API calls); (3) Coach is absent as an active actor despite being a PRD-defined human actor; and (4) one Task name contains a prohibited technical term ('Endpoint'). These issues suggest the skill's instructions on User Task definition and actor identification need tightening."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "eval_id": 2,
+  "eval_name": "social-proof-toast-prd",
+  "prompt": "Genera el Features Backbone para esta feature de Clip2Coach. Si tienes preguntas de clarificación, usa tu criterio y documenta tus asunciones en lugar de preguntar.\n\nEl PRD está en: /Users/abrahamvallez/Dev/clip-2-coach/docs/prd/PRD-social-proof-toast.md",
+  "assertions": [
+    "La sección ## Features Backbone está presente en el output",
+    "Se identifican al menos 2 Features",
+    "Cada Feature sigue el formato [Actor][Verb][Object]",
+    "Cada User Task NO incluye el Actor como prefijo",
+    "Cada Feature tiene al menos 3 User Tasks",
+    "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+    "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+    "La sección ## Feature Dependencies está presente",
+    "Los actores identificados reflejan correctamente el PRD: visitante no autenticado (o Visitor) y/o Coach como distintos actores según el contexto",
+    "Las Features representan objetivos del usuario, no implementación técnica (sin mencionar sessionStorage, IntersectionObserver, Redis, ni endpoints en nombres de Features/Tasks)",
+    "Las User Tasks describen acciones del usuario o comportamientos observables, no operaciones internas del sistema",
+    "Todo el scope identificado es trazable al PRD — no se inventan features no descritas en el PRD",
+    "Las capacidades principales están cubiertas: ver prueba social, descartar el toast, comportamiento por sesión, exclusión de usuarios autenticados"
+  ]
+}

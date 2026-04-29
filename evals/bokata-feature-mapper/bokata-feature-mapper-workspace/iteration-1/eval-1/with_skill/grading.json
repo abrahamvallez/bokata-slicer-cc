@@ -1,0 +1,106 @@
+{
+  "expectations": [
+    {
+      "text": "La sección ## Features Backbone está presente en el output",
+      "passed": true,
+      "evidence": "Line 35 contains '## Features Backbone' as a section header."
+    },
+    {
+      "text": "Se identifican al menos 2 Features",
+      "passed": true,
+      "evidence": "5 Features identified: C2C-FEAT-001 'Coach Accesses Quiz Creation Entry Point', C2C-FEAT-002 'Coach Configures Video Source for Quiz', C2C-FEAT-003 'Coach Composes Quiz Questions', C2C-FEAT-004 'Coach Publishes and Shares Quiz', C2C-FEAT-005 'Coach Creates Quiz from Existing Clip'."
+    },
+    {
+      "text": "Cada Feature sigue el formato [Actor][Verb][Object] (ej: 'Coach Creates Quiz', no 'Create Quiz' ni 'Coach Creates Quiz From Video URL')",
+      "passed": false,
+      "evidence": "Two Features violate the strict 3-component [Actor][Verb][Object] rule: 'Coach Accesses Quiz Creation Entry Point' (5 words after Actor — too many), 'Coach Configures Video Source for Quiz' (5 words after Actor — too many). Clean compliant examples would be 'Coach Accesses Dashboard', 'Coach Configures Video', etc. Only 'Coach Composes Quiz Questions', 'Coach Publishes and Shares Quiz' (compound verb), and 'Coach Creates Quiz from Existing Clip' (has qualifier) are near the boundary. Strictly applying the rule, C2C-FEAT-001 and C2C-FEAT-002 clearly fail."
+    },
+    {
+      "text": "Cada User Task NO incluye el Actor como prefijo (ej: 'Creates Quiz' no 'Coach Creates Quiz')",
+      "passed": true,
+      "evidence": "All 18 User Tasks start with a verb, not with 'Coach'. Examples: 'Discovers New Quiz CTA on Dashboard', 'Navigates to Standalone Quiz Creation Route', 'Enters YouTube Video URL', 'Selects Timestamp for Quiz Moment', 'Writes Quiz Question Text', 'Publishes Quiz', 'Copies Shareable Quiz Link', 'Accesses Quiz Creation from Clip'. None begin with 'Coach'."
+    },
+    {
+      "text": "Cada Feature tiene al menos 3 User Tasks",
+      "passed": true,
+      "evidence": "C2C-FEAT-001: 3 tasks (C2C-TASK-001 to 003). C2C-FEAT-002: 4 tasks (C2C-TASK-004 to 007). C2C-FEAT-003: 4 tasks (C2C-TASK-008 to 011). C2C-FEAT-004: 3 tasks (C2C-TASK-012 to 014). C2C-FEAT-005: 4 tasks (C2C-TASK-015 to 018). All Features have at least 3 User Tasks."
+    },
+    {
+      "text": "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+      "passed": true,
+      "evidence": "All 5 Features have HTML comment IDs: <!-- ID: C2C-FEAT-001 --> through <!-- ID: C2C-FEAT-005 -->."
+    },
+    {
+      "text": "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+      "passed": true,
+      "evidence": "All 18 User Tasks have HTML comment IDs: <!-- Task ID: C2C-TASK-001 --> through <!-- Task ID: C2C-TASK-018 -->."
+    },
+    {
+      "text": "La sección ## Feature Dependencies está presente",
+      "passed": false,
+      "evidence": "The dependencies content exists (lines 195–200) but is formatted as '### Feature Dependencies' (H3 level), not '## Feature Dependencies' (H2 level) as the assertion requires. The heading level does not match the expected section marker."
+    },
+    {
+      "text": "Las Features representan objetivos del usuario, no pasos de implementación técnica (sin nombres de modelos, rutas, ni clases en los nombres de Features)",
+      "passed": true,
+      "evidence": "No Feature name contains technical terms like 'QuizStandalone', '/create-quiz', class names, or route names. Technical terms (QuizStandalone model, /create-quiz route) appear only in System Tasks and the Discovery Context, not in Feature names."
+    },
+    {
+      "text": "Las User Tasks describen acciones del usuario, no operaciones internas del sistema",
+      "passed": true,
+      "evidence": "All 18 User Tasks are phrased from the Coach's perspective (e.g., 'Enters YouTube Video URL', 'Selects Timestamp', 'Writes Quiz Question Text'). System operations are correctly separated into two explicit 'System Task' sections ('Loads Video Player Without Saved Clip', 'Persists QuizStandalone Record') which are NOT listed as User Tasks."
+    },
+    {
+      "text": "Todo el scope identificado es trazable al input — no se inventan features o tasks no mencionadas",
+      "passed": true,
+      "evidence": "All 5 Features map to content in the input: entry point CTA (new dashboard CTA), video URL + timestamp configuration (Option A), quiz composition (question + answer options), publish and share (shareable link), and backward compat clip path. The 'Identifies Difference Between Creation Paths' task is a reasonable inference from dual-path scope, not an invention."
+    },
+    {
+      "text": "Las capacidades principales del input están cubiertas: crear quiz desde URL, elegir timestamp, escribir pregunta con opciones, compartir quiz",
+      "passed": true,
+      "evidence": "Crear quiz desde URL: covered by C2C-FEAT-002 (Enters YouTube Video URL, C2C-TASK-004). Elegir timestamp: covered by C2C-TASK-005 and C2C-TASK-006. Escribir pregunta con opciones: covered by C2C-FEAT-003 (C2C-TASK-008 to 011). Compartir quiz: covered by C2C-FEAT-004 (C2C-TASK-013, C2C-TASK-014)."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 2,
+    "total": 12,
+    "pass_rate": 0.83
+  },
+  "execution_metrics": {
+    "tool_calls": {"Read": 5, "Write": 2, "Bash": 2, "Glob": 0, "Grep": 0},
+    "total_tool_calls": 9,
+    "total_steps": 6,
+    "files_created": [
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/informal-quiz-input/with_skill/outputs/features-backbone.md",
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/informal-quiz-input/with_skill/outputs/metrics.json"
+    ],
+    "errors_encountered": 0,
+    "output_chars": 7821,
+    "transcript_chars": 14200
+  },
+  "timing": {
+    "executor_duration_seconds": 100.8,
+    "total_duration_seconds": 100.8
+  },
+  "claims": [],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Assertion 3 required judgment: 'Coach Publishes and Shares Quiz' uses a compound verb (Publishes and Shares) — marked FAIL due to the two clearer violations (FEAT-001, FEAT-002) but this Feature itself is borderline.",
+      "Assertion 8: '### Feature Dependencies' (H3) vs '## Feature Dependencies' (H2) — the section exists but at the wrong heading level; marked FAIL on strict reading."
+    ],
+    "needs_review": [
+      "Feature naming discipline (assertion 3): the skill prompt should reinforce strict [Actor][SingleVerb][Object] with concrete bad examples like 'Coach Accesses Quiz Creation Entry Point' (too many words).",
+      "Section heading level for Feature Dependencies: the template should enforce H2 (##) not H3 (###)."
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Add an explicit constraint in the skill prompt: Feature name must be exactly 3 words (Actor + Verb + Object), with examples of too-long names to avoid.",
+      "Enforce ## (H2) heading for Feature Dependencies in the output template so grading on section presence is unambiguous.",
+      "Consider adding a checklist item in the Constitution Compliance section that validates Feature name length/structure before the skill completes."
+    ],
+    "overall": "Strong output overall — correct IDs, proper User Task phrasing, good scope coverage, and clean separation of System Tasks from User Tasks. Two failures: Feature names are too verbose (violating strict [Actor][Verb][Object]), and the Feature Dependencies heading uses H3 instead of H2. These are format/discipline issues, not conceptual ones, and suggest the skill prompt needs tighter constraints on Feature name structure and section heading levels."
+  }
+}

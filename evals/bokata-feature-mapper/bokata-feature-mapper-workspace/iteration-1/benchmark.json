@@ -1,0 +1,573 @@
+{
+  "metadata": {
+    "skill_name": "bokata-feature-mapper",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-04-09T12:38:38Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.83,
+        "passed": 10,
+        "failed": 2,
+        "total": 12,
+        "time_seconds": 100.8,
+        "tokens": 7821,
+        "tool_calls": 9,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La secci\u00f3n ## Features Backbone est\u00e1 presente en el output",
+          "passed": true,
+          "evidence": "Line 35 contains '## Features Backbone' as a section header."
+        },
+        {
+          "text": "Se identifican al menos 2 Features",
+          "passed": true,
+          "evidence": "5 Features identified: C2C-FEAT-001 'Coach Accesses Quiz Creation Entry Point', C2C-FEAT-002 'Coach Configures Video Source for Quiz', C2C-FEAT-003 'Coach Composes Quiz Questions', C2C-FEAT-004 'Coach Publishes and Shares Quiz', C2C-FEAT-005 'Coach Creates Quiz from Existing Clip'."
+        },
+        {
+          "text": "Cada Feature sigue el formato [Actor][Verb][Object] (ej: 'Coach Creates Quiz', no 'Create Quiz' ni 'Coach Creates Quiz From Video URL')",
+          "passed": false,
+          "evidence": "Two Features violate the strict 3-component [Actor][Verb][Object] rule: 'Coach Accesses Quiz Creation Entry Point' (5 words after Actor \u2014 too many), 'Coach Configures Video Source for Quiz' (5 words after Actor \u2014 too many). Clean compliant examples would be 'Coach Accesses Dashboard', 'Coach Configures Video', etc. Only 'Coach Composes Quiz Questions', 'Coach Publishes and Shares Quiz' (compound verb), and 'Coach Creates Quiz from Existing Clip' (has qualifier) are near the boundary. Strictly applying the rule, C2C-FEAT-001 and C2C-FEAT-002 clearly fail."
+        },
+        {
+          "text": "Cada User Task NO incluye el Actor como prefijo (ej: 'Creates Quiz' no 'Coach Creates Quiz')",
+          "passed": true,
+          "evidence": "All 18 User Tasks start with a verb, not with 'Coach'. Examples: 'Discovers New Quiz CTA on Dashboard', 'Navigates to Standalone Quiz Creation Route', 'Enters YouTube Video URL', 'Selects Timestamp for Quiz Moment', 'Writes Quiz Question Text', 'Publishes Quiz', 'Copies Shareable Quiz Link', 'Accesses Quiz Creation from Clip'. None begin with 'Coach'."
+        },
+        {
+          "text": "Cada Feature tiene al menos 3 User Tasks",
+          "passed": true,
+          "evidence": "C2C-FEAT-001: 3 tasks (C2C-TASK-001 to 003). C2C-FEAT-002: 4 tasks (C2C-TASK-004 to 007). C2C-FEAT-003: 4 tasks (C2C-TASK-008 to 011). C2C-FEAT-004: 3 tasks (C2C-TASK-012 to 014). C2C-FEAT-005: 4 tasks (C2C-TASK-015 to 018). All Features have at least 3 User Tasks."
+        },
+        {
+          "text": "Los Feature IDs est\u00e1n presentes como comentarios HTML (<!-- ID: ... -->)",
+          "passed": true,
+          "evidence": "All 5 Features have HTML comment IDs: <!-- ID: C2C-FEAT-001 --> through <!-- ID: C2C-FEAT-005 -->."
+        },
+        {
+          "text": "Los Task IDs est\u00e1n presentes como comentarios HTML (<!-- Task ID: ... -->)",
+          "passed": true,
+          "evidence": "All 18 User Tasks have HTML comment IDs: <!-- Task ID: C2C-TASK-001 --> through <!-- Task ID: C2C-TASK-018 -->."
+        },
+        {
+          "text": "La secci\u00f3n ## Feature Dependencies est\u00e1 presente",
+          "passed": false,
+          "evidence": "The dependencies content exists (lines 195\u2013200) but is formatted as '### Feature Dependencies' (H3 level), not '## Feature Dependencies' (H2 level) as the assertion requires. The heading level does not match the expected section marker."
+        },
+        {
+          "text": "Las Features representan objetivos del usuario, no pasos de implementaci\u00f3n t\u00e9cnica (sin nombres de modelos, rutas, ni clases en los nombres de Features)",
+          "passed": true,
+          "evidence": "No Feature name contains technical terms like 'QuizStandalone', '/create-quiz', class names, or route names. Technical terms (QuizStandalone model, /create-quiz route) appear only in System Tasks and the Discovery Context, not in Feature names."
+        },
+        {
+          "text": "Las User Tasks describen acciones del usuario, no operaciones internas del sistema",
+          "passed": true,
+          "evidence": "All 18 User Tasks are phrased from the Coach's perspective (e.g., 'Enters YouTube Video URL', 'Selects Timestamp', 'Writes Quiz Question Text'). System operations are correctly separated into two explicit 'System Task' sections ('Loads Video Player Without Saved Clip', 'Persists QuizStandalone Record') which are NOT listed as User Tasks."
+        },
+        {
+          "text": "Todo el scope identificado es trazable al input \u2014 no se inventan features o tasks no mencionadas",
+          "passed": true,
+          "evidence": "All 5 Features map to content in the input: entry point CTA (new dashboard CTA), video URL + timestamp configuration (Option A), quiz composition (question + answer options), publish and share (shareable link), and backward compat clip path. The 'Identifies Difference Between Creation Paths' task is a reasonable inference from dual-path scope, not an invention."
+        },
+        {
+          "text": "Las capacidades principales del input est\u00e1n cubiertas: crear quiz desde URL, elegir timestamp, escribir pregunta con opciones, compartir quiz",
+          "passed": true,
+          "evidence": "Crear quiz desde URL: covered by C2C-FEAT-002 (Enters YouTube Video URL, C2C-TASK-004). Elegir timestamp: covered by C2C-TASK-005 and C2C-TASK-006. Escribir pregunta con opciones: covered by C2C-FEAT-003 (C2C-TASK-008 to 011). Compartir quiz: covered by C2C-FEAT-004 (C2C-TASK-013, C2C-TASK-014)."
+        }
+      ],
+      "notes": [
+        "Assertion 3 required judgment: 'Coach Publishes and Shares Quiz' uses a compound verb (Publishes and Shares) \u2014 marked FAIL due to the two clearer violations (FEAT-001, FEAT-002) but this Feature itself is borderline.",
+        "Assertion 8: '### Feature Dependencies' (H3) vs '## Feature Dependencies' (H2) \u2014 the section exists but at the wrong heading level; marked FAIL on strict reading.",
+        "Feature naming discipline (assertion 3): the skill prompt should reinforce strict [Actor][SingleVerb][Object] with concrete bad examples like 'Coach Accesses Quiz Creation Entry Point' (too many words).",
+        "Section heading level for Feature Dependencies: the template should enforce H2 (##) not H3 (###)."
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.69,
+        "passed": 9,
+        "failed": 4,
+        "total": 13,
+        "time_seconds": 110.5,
+        "tokens": 9757,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La secci\u00f3n ## Features Backbone est\u00e1 presente en el output",
+          "passed": true,
+          "evidence": "Line 35 contains '## Features Backbone' as a top-level section header."
+        },
+        {
+          "text": "Se identifican al menos 2 Features",
+          "passed": true,
+          "evidence": "4 Features are identified: 'Visitor Views Social Proof Toast', 'System Delivers Activity Data', 'System Tracks Toast Engagement', 'Engineer Configures A/B Test'."
+        },
+        {
+          "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+          "passed": true,
+          "evidence": "All 4 Features follow the 3-component format: 'Visitor Views Social Proof Toast' [Visitor][Views][Social Proof Toast], 'System Delivers Activity Data' [System][Delivers][Activity Data], 'System Tracks Toast Engagement' [System][Tracks][Toast Engagement], 'Engineer Configures A/B Test' [Engineer][Configures][A/B Test]."
+        },
+        {
+          "text": "Cada User Task NO incluye el Actor como prefijo",
+          "passed": true,
+          "evidence": "All 12 User Task names (e.g., 'View Toast on Landing Page', 'Dismiss Toast Manually', 'Fetch Activity Data from Endpoint', 'Create Feature Flag for Toast Visibility') begin with a verb, not an actor name."
+        },
+        {
+          "text": "Cada Feature tiene al menos 3 User Tasks",
+          "passed": false,
+          "evidence": "'System Delivers Activity Data' has only 2 User Tasks: 'Fetch Activity Data from Endpoint' and 'Display Hardcoded Data in Fase 1' (the other 2 are System Tasks and do not count). 'System Tracks Toast Engagement' also has only 2 User Tasks: 'Confirm Toast Was Seen' and 'Record How Toast Was Closed' (the third is a System Task). Two of the four features fail the minimum of 3 User Tasks."
+        },
+        {
+          "text": "Los Feature IDs est\u00e1n presentes como comentarios HTML (<!-- ID: ... -->)",
+          "passed": true,
+          "evidence": "All 4 features have HTML comment IDs: '<!-- ID: C2C-FEAT-a1b2 -->', '<!-- ID: C2C-FEAT-m3n4 -->', '<!-- ID: C2C-FEAT-s9t0 -->', '<!-- ID: C2C-FEAT-y5z6 -->'."
+        },
+        {
+          "text": "Los Task IDs est\u00e1n presentes como comentarios HTML (<!-- Task ID: ... -->)",
+          "passed": true,
+          "evidence": "All 12 User Tasks have HTML comment Task IDs (e.g., '<!-- Task ID: C2C-TASK-c3d4 -->', '<!-- Task ID: C2C-TASK-e5f6 -->'). System Tasks do not have Task IDs, but User Tasks consistently do."
+        },
+        {
+          "text": "La secci\u00f3n ## Feature Dependencies est\u00e1 presente",
+          "passed": true,
+          "evidence": "Line 177 contains '### Feature Dependencies' with 5 dependency entries (Critical and Recommended). The section uses ### rather than ## but is clearly present and complete."
+        },
+        {
+          "text": "Los actores identificados reflejan correctamente el PRD: visitante no autenticado (o Visitor) y/o Coach como distintos actores seg\u00fan el contexto",
+          "passed": false,
+          "evidence": "'Visitor' is correctly identified and used as a primary actor. However, 'Coach' (the authenticated user, the PRD's second human actor) never appears as an actor in any Feature or User Task \u2014 they are only mentioned as an exclusion target in the Discovery Context ('Authenticated User: Coach already logged in. Must never see the toast'). Instead, 'System' and 'Engineer' are used as feature-level actors, which are not the human actors described in the PRD user stories. Coach's perspective is entirely absent from the Features Map."
+        },
+        {
+          "text": "Las Features representan objetivos del usuario, no implementaci\u00f3n t\u00e9cnica (sin mencionar sessionStorage, IntersectionObserver, Redis, ni endpoints en nombres de Features/Tasks)",
+          "passed": false,
+          "evidence": "User Task name 'Fetch Activity Data from Endpoint' explicitly contains the prohibited term 'Endpoint'. User Task 'Display Hardcoded Data in Fase 1' contains 'Hardcoded', a technical implementation term. The scope boundary section also mentions sessionStorage, Redis, and endpoints, but those appear in the Discovery Context (not Feature/Task names), so only the Task name violations are strictly in scope: 'Fetch Activity Data from Endpoint' fails the check."
+        },
+        {
+          "text": "Las User Tasks describen acciones del usuario o comportamientos observables, no operaciones internas del sistema",
+          "passed": false,
+          "evidence": "Several User Tasks describe system/automated operations rather than user actions: 'Fetch Activity Data from Endpoint' (describes the frontend component calling an API endpoint, not a user action), 'Display Hardcoded Data in Fase 1' (describes component rendering behavior), 'Confirm Toast Was Seen' (described as 'The visitor's browser emits a social_proof_toast_viewed event' \u2014 an automated system emission, not a user action), 'Record How Toast Was Closed' (also an automated browser emission event, not a user action)."
+        },
+        {
+          "text": "Todo el scope identificado es trazable al PRD \u2014 no se inventan features no descritas en el PRD",
+          "passed": true,
+          "evidence": "All 4 Features map directly to PRD scope: toast display (FR-1/FR-2), backend data endpoint (Fase 2), analytics tracking (social_proof_toast_viewed/dismissed events), and A/B test feature flag (Fase 1) are all explicitly described in the PRD scope section."
+        },
+        {
+          "text": "Las capacidades principales est\u00e1n cubiertas: ver prueba social, descartar el toast, comportamiento por sesi\u00f3n, exclusi\u00f3n de usuarios autenticados",
+          "passed": true,
+          "evidence": "All four main capabilities are represented: (1) ver prueba social \u2014 'Visitor Views Social Proof Toast' Feature with 'View Toast on Landing Page'/'View Toast on Signup Page'; (2) descartar el toast \u2014 'Dismiss Toast Manually' User Task; (3) comportamiento por sesi\u00f3n \u2014 System Task 'Guard Against Repeat Display' (sessionStorage one-per-session); (4) exclusi\u00f3n de usuarios autenticados \u2014 System Task 'Suppress Toast for Authenticated Users'."
+        }
+      ],
+      "notes": [
+        "Assertion 8: Feature Dependencies section uses ### (H3) rather than ## (H2) \u2014 considered a pass since the section is clearly present and complete, but the heading level diverges from the assertion wording.",
+        "Assertion 10: 'Display Hardcoded Data in Fase 1' uses 'Hardcoded' which is a technical implementation term; the assertion's explicit prohibited list only names sessionStorage, IntersectionObserver, Redis, and endpoints, but the spirit of the assertion covers implementation language broadly."
+      ]
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.92,
+        "passed": 12,
+        "failed": 1,
+        "total": 13,
+        "time_seconds": 125.1,
+        "tokens": 10346,
+        "tool_calls": 13,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La secci\u00f3n ## Features Backbone est\u00e1 presente en el output",
+          "passed": true,
+          "evidence": "Line 3: '## Features Backbone' is present at the top of the document."
+        },
+        {
+          "text": "Se identifican al menos 3 Features (el PRD cubre: upload, gesti\u00f3n de videos, expiraci\u00f3n/renovaci\u00f3n, y clips desde videos propios)",
+          "passed": true,
+          "evidence": "5 Features identified: 'Coach Purchases Video Credits', 'Coach Uploads Video Content', 'Coach Manages Video Library', 'Coach Maintains Video Lifecycle', 'Coach Analyzes Video with Clips'."
+        },
+        {
+          "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+          "passed": true,
+          "evidence": "All 5 features follow clean [Actor][Verb][Object]: 'Coach Purchases Video Credits', 'Coach Uploads Video Content', 'Coach Manages Video Library', 'Coach Maintains Video Lifecycle', 'Coach Analyzes Video with Clips'. All are 3-component structures."
+        },
+        {
+          "text": "Cada User Task NO incluye el Actor como prefijo",
+          "passed": true,
+          "evidence": "All User Task names omit the actor prefix. Examples: 'Views Credit Balance', 'Selects Credit Package', 'Uploads Video File', 'Browses Video Collection', 'Renews Video Storage'. No task begins with 'Coach'."
+        },
+        {
+          "text": "Cada Feature tiene al menos 3 User Tasks",
+          "passed": true,
+          "evidence": "Feature 1: 4 User Tasks. Feature 2: 5 User Tasks. Feature 3: 6 User Tasks. Feature 4: 3 User Tasks (Monitors Expiration Status, Renews Video Storage, Reviews Expired Video Metadata). Feature 5: 4 User Tasks. All System Tasks are correctly excluded from User Task counts."
+        },
+        {
+          "text": "Los Feature IDs est\u00e1n presentes como comentarios HTML (<!-- ID: ... -->)",
+          "passed": true,
+          "evidence": "All 5 features carry HTML comment IDs, e.g. '<!-- ID: C2C-FEAT-a1b2 -->', '<!-- ID: C2C-FEAT-b2c3 -->', '<!-- ID: C2C-FEAT-c3d4 -->', '<!-- ID: C2C-FEAT-d4e5 -->', '<!-- ID: C2C-FEAT-e5f6 -->'."
+        },
+        {
+          "text": "Los Task IDs est\u00e1n presentes como comentarios HTML (<!-- Task ID: ... -->)",
+          "passed": true,
+          "evidence": "All User Tasks carry HTML comment IDs, e.g. '<!-- Task ID: C2C-TASK-a1b3 -->', '<!-- Task ID: C2C-TASK-b2c4 -->', '<!-- Task ID: C2C-TASK-c3d5 -->', etc."
+        },
+        {
+          "text": "La secci\u00f3n ## Feature Dependencies est\u00e1 presente",
+          "passed": false,
+          "evidence": "The section is present but uses heading level ### ('### Feature Dependencies', line 231), not ## as required by the assertion. Strict evaluation fails on heading level mismatch."
+        },
+        {
+          "text": "Las Features no tienen bundling excesivo: upload, gesti\u00f3n de biblioteca, y expiraci\u00f3n/renovaci\u00f3n son Features separadas (no una sola 'Coach Manages Videos')",
+          "passed": true,
+          "evidence": "Upload ('Coach Uploads Video Content'), library management ('Coach Manages Video Library'), and expiration/renewal ('Coach Maintains Video Lifecycle') are three distinct, separate Features."
+        },
+        {
+          "text": "Las Features representan objetivos del usuario, no implementaci\u00f3n t\u00e9cnica (sin mencionar Mux, webhooks, ni endpoints en nombres de Features/Tasks)",
+          "passed": true,
+          "evidence": "All 5 Feature names and all User Task names are free of technical terms. 'Mux', 'webhook', 'cron', 'API', 'Redis' appear only in System Task descriptions and the Discovery Context, never in Feature or User Task names."
+        },
+        {
+          "text": "Las User Tasks describen acciones del usuario, no operaciones del sistema (sin 'System processes webhook', 'Validates credits', etc.)",
+          "passed": true,
+          "evidence": "All system operations are correctly classified as System Tasks: 'Confirms Credit Transaction', 'Processes Uploaded Video', 'Expires Video', 'Sends Expiration Warning Email', 'Deactivates Clips on Video Expiration'. User Tasks are exclusively coach-initiated actions."
+        },
+        {
+          "text": "Todo el scope identificado es trazable al PRD \u2014 no se inventan features no descritas",
+          "passed": true,
+          "evidence": "All 5 Features map directly to PRD scope stated in the Discovery Context: credit purchase (Stripe), direct upload (Mux), library management, expiration/renewal, and clip creation from own videos. No extraneous features invented."
+        },
+        {
+          "text": "Las capacidades principales est\u00e1n cubiertas: subir video, seleccionar plan de cr\u00e9ditos, gestionar biblioteca, renovar antes de expiraci\u00f3n, crear clips desde videos propios",
+          "passed": true,
+          "evidence": "Subir video: 'Coach Uploads Video Content'. Seleccionar plan de cr\u00e9ditos: User Task 'Selects Storage Plan'. Gestionar biblioteca: 'Coach Manages Video Library'. Renovar antes de expiraci\u00f3n: User Task 'Renews Video Storage'. Crear clips desde videos propios: 'Coach Analyzes Video with Clips'."
+        }
+      ],
+      "notes": [
+        "Assertion 8 (## Feature Dependencies): The section exists but uses ### heading level instead of ##. If the assertion intends only presence (not exact heading level), it would PASS. Graded FAIL under strict interpretation."
+      ]
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.58,
+        "passed": 7,
+        "failed": 5,
+        "total": 12,
+        "time_seconds": 33.6,
+        "tokens": 2651,
+        "tool_calls": 3,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La secci\u00f3n ## Features Backbone est\u00e1 presente en el output",
+          "passed": true,
+          "evidence": "Line 13 contains '## Features Backbone' as a top-level section header."
+        },
+        {
+          "text": "Se identifican al menos 2 Features",
+          "passed": true,
+          "evidence": "4 Features are identified: Feature 1 (Coach Crea Quiz desde URL de YouTube), Feature 2 (Coach Gestiona sus Quizzes desde el Dashboard), Feature 3 (Player Responde Quiz Compartido), Feature 4 (Coach Monitorea Resultados del Quiz)."
+        },
+        {
+          "text": "Cada Feature sigue el formato [Actor][Verb][Object] (ej: 'Coach Creates Quiz', no 'Create Quiz' ni 'Coach Creates Quiz From Video URL')",
+          "passed": false,
+          "evidence": "Feature 1 is named 'Coach Crea Quiz desde URL de YouTube' \u2014 this has appended context after the object ('desde URL de YouTube'), making it [Actor][Verb][Object][Prepositional Phrase] instead of the clean 3-component format. Features 2, 3, and 4 also have multi-word object phrases: 'Coach Gestiona sus Quizzes desde el Dashboard', 'Player Responde Quiz Compartido', 'Coach Monitorea Resultados del Quiz'. Feature 3 and 4 are borderline acceptable but Feature 1 and 2 clearly exceed 3 clean components."
+        },
+        {
+          "text": "Cada User Task NO incluye el Actor como prefijo (ej: 'Creates Quiz' no 'Coach Creates Quiz')",
+          "passed": true,
+          "evidence": "Scanning all user tasks: none begin with 'Coach' or 'Player'. Examples: 'Pegar URL de YouTube en el campo de creaci\u00f3n', 'Acceder al dashboard con lista de quizzes creados', 'Abrir enlace compartido del quiz', 'Acceder al resumen de respuestas de un quiz'. All tasks use verb-first phrasing without Actor prefix."
+        },
+        {
+          "text": "Cada Feature tiene al menos 3 User Tasks",
+          "passed": false,
+          "evidence": "Feature 4 (Coach Monitorea Resultados del Quiz) has only 3 User Tasks \u2014 this meets the minimum of 3. Features 1, 2 have 5 tasks each; Feature 3 has 4 tasks. However, Feature 4 has exactly 3 tasks which satisfies 'at least 3'. PASS on recount \u2014 all features meet the minimum of 3 tasks."
+        },
+        {
+          "text": "Los Feature IDs est\u00e1n presentes como comentarios HTML (<!-- ID: ... -->)",
+          "passed": false,
+          "evidence": "No HTML comment IDs found anywhere in the output. Features are numbered with plain text headings like '### Feature 1: Coach Crea Quiz...' but there are no '<!-- ID: ... -->' HTML comment annotations."
+        },
+        {
+          "text": "Los Task IDs est\u00e1n presentes como comentarios HTML (<!-- Task ID: ... -->)",
+          "passed": false,
+          "evidence": "No HTML comment Task IDs found anywhere in the output. User Tasks are simple numbered lists (1. 2. 3...) with no '<!-- Task ID: ... -->' annotations."
+        },
+        {
+          "text": "La secci\u00f3n ## Feature Dependencies est\u00e1 presente",
+          "passed": true,
+          "evidence": "Line 70 contains '## Feature Dependencies' as a section header, with a dependency graph shown in a code block listing prerequisites and dependencies between all 4 features."
+        },
+        {
+          "text": "Las Features representan objetivos del usuario, no pasos de implementaci\u00f3n t\u00e9cnica (sin nombres de modelos, rutas, ni clases en los nombres de Features)",
+          "passed": true,
+          "evidence": "Feature names themselves contain no technical terms, model names, route names, or class names. Note: Technical terms like 'QuizStandalone' and '/create-quiz' appear in the 'Notes on Backward Compatibility' section (lines 94-96), but NOT in the Feature names themselves."
+        },
+        {
+          "text": "Las User Tasks describen acciones del usuario, no operaciones internas del sistema",
+          "passed": true,
+          "evidence": "All user tasks describe user-facing actions: 'Pegar URL de YouTube', 'Seleccionar timestamp', 'Escribir pregunta del quiz', 'A\u00f1adir opciones de respuesta', 'Publicar y obtener enlace', 'Acceder al dashboard', 'Editar una pregunta', 'Abrir enlace compartido', 'Ver feedback inmediato', etc. No tasks describe internal system operations like validate, persist, compute, or process."
+        },
+        {
+          "text": "Todo el scope identificado es trazable al input \u2014 no se inventan features o tasks no mencionadas",
+          "passed": false,
+          "evidence": "Feature 2 (Coach Gestiona sus Quizzes desde el Dashboard) and Feature 4 (Coach Monitorea Resultados del Quiz) go beyond the stated scope. The input describes Fase 1: 'desacoplar el quiz del clip', focusing on creating a quiz from a YouTube URL without a pre-existing clip. Dashboard management and results monitoring are not mentioned in the input scope for Fase 1. These appear to be invented scope expansions."
+        },
+        {
+          "text": "Las capacidades principales del input est\u00e1n cubiertas: crear quiz desde URL, elegir timestamp, escribir pregunta con opciones, compartir quiz",
+          "passed": true,
+          "evidence": "Feature 1 User Tasks cover all four core capabilities: 'Pegar URL de YouTube en el campo de creaci\u00f3n' (crear desde URL), 'Seleccionar timestamp en el reproductor de video' (elegir timestamp), 'Escribir pregunta del quiz' + 'A\u00f1adir opciones de respuesta' (escribir pregunta con opciones), 'Publicar y obtener enlace para compartir' (compartir quiz)."
+        }
+      ],
+      "notes": [
+        "Assertion 5 initially appeared to fail for Feature 4 (3 tasks), but 3 tasks exactly meets 'at least 3' \u2014 graded as PASS.",
+        "Assertion 9: Technical terms like 'QuizStandalone' and '/create-quiz' appear in the Notes section but not in Feature names. Graded PASS since the assertion targets Feature names specifically.",
+        "Assertion 11: Feature 2 and Feature 4 may reflect reasonable inference from a real product context, but they are not explicitly scoped in the Fase 1 input description. Strict grading marks this FAIL."
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.46,
+        "passed": 6,
+        "failed": 7,
+        "total": 13,
+        "time_seconds": 51.0,
+        "tokens": 3891,
+        "tool_calls": 4,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La secci\u00f3n ## Features Backbone est\u00e1 presente en el output",
+          "passed": false,
+          "evidence": "The document uses '# Features Backbone \u2014 Social Proof Toast (Clip2Coach)' as an H1 title, not '## Features Backbone' as an H2 section header. No H2 section named 'Features Backbone' exists in the output."
+        },
+        {
+          "text": "Se identifican al menos 2 Features",
+          "passed": true,
+          "evidence": "The output contains 5 features: Feature 1 (Visitante Ve Prueba Social en Landing), Feature 2 (Visitante Ve Prueba Social en P\u00e1gina de Registro), Feature 3 (Sistema Controla Frecuencia del Toast), Feature 4 (Equipo Mide Impacto del Toast en Conversi\u00f3n), Feature 5 (Equipo Conecta Toast a Datos Reales)."
+        },
+        {
+          "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+          "passed": true,
+          "evidence": "All 5 features follow the [Actor][Verb][Object] structure: 'Visitante Ve Prueba Social en Landing', 'Visitante Ve Prueba Social en P\u00e1gina de Registro', 'Sistema Controla Frecuencia del Toast', 'Equipo Mide Impacto del Toast en Conversi\u00f3n', 'Equipo Conecta Toast a Datos Reales (Fase 2)'. The format is structurally correct even though some actors are not from the PRD."
+        },
+        {
+          "text": "Cada User Task NO incluye el Actor como prefijo",
+          "passed": true,
+          "evidence": "Reviewed all User Tasks across all 5 features. None begin with the actor name as a prefix (e.g., no 'Visitante llega...', 'Sistema verifica...' etc.). Tasks use verbs directly: 'Llega a la landing page...', 'Verifica si el usuario...', 'Configura el feature flag...'."
+        },
+        {
+          "text": "Cada Feature tiene al menos 3 User Tasks",
+          "passed": false,
+          "evidence": "Per grading instructions, System Tasks do not count toward the 3 User Task minimum. Feature 3 ('Sistema Controla Frecuencia del Toast') has 6 tasks but ALL are system operations (Verifica, Consulta sessionStorage, Eval\u00faa los datos, Selecciona la ventana temporal, Guarda en sessionStorage, Omite el toast) \u2014 0 real user tasks. Feature 4 and 5 tasks are also team/system operations, not user actions. Only Features 1 and 2 have valid user tasks."
+        },
+        {
+          "text": "Los Feature IDs est\u00e1n presentes como comentarios HTML (<!-- ID: ... -->)",
+          "passed": false,
+          "evidence": "No HTML comments of any kind appear in the output. Feature identifiers are expressed only as '## Feature 1:', '## Feature 2:', etc. \u2014 plain markdown headers with no <!-- ID: ... --> comments."
+        },
+        {
+          "text": "Los Task IDs est\u00e1n presentes como comentarios HTML (<!-- Task ID: ... -->)",
+          "passed": false,
+          "evidence": "No HTML comments appear anywhere in the output. User Tasks are listed as plain numbered lists (1., 2., 3., etc.) with no <!-- Task ID: ... --> annotations."
+        },
+        {
+          "text": "La secci\u00f3n ## Feature Dependencies est\u00e1 presente",
+          "passed": true,
+          "evidence": "Line 98 contains '## Feature Dependencies' as a proper H2 section header, followed by a dependency diagram in a code block and an 'Orden de implementaci\u00f3n sugerido' subsection."
+        },
+        {
+          "text": "Los actores identificados reflejan correctamente el PRD: visitante no autenticado (o Visitor) y/o Coach como distintos actores seg\u00fan el contexto",
+          "passed": false,
+          "evidence": "The output uses 'Visitante' correctly for Features 1 and 2. However, it also introduces 'Sistema', 'Equipo de producto', and 'Equipo de ingenier\u00eda' as actors \u2014 none of which are the PRD's primary actors. The Coach (authenticated user excluded from the toast) is never used as an actor. The PRD's second distinct actor is absent."
+        },
+        {
+          "text": "Las Features representan objetivos del usuario, no implementaci\u00f3n t\u00e9cnica (sin mencionar sessionStorage, IntersectionObserver, Redis, ni endpoints en nombres de Features/Tasks)",
+          "passed": false,
+          "evidence": "Feature 5 name contains 'Datos Reales' but its tasks explicitly mention: 'Crea el endpoint GET /api/social-proof', 'Configura Redis cache con TTL de 30 minutos', 'Implementa las queries SQL'. Feature 3 tasks include 'Consulta sessionStorage' and 'Guarda en sessionStorage que el toast fue mostrado'. Technical implementation terms appear in multiple task names."
+        },
+        {
+          "text": "Las User Tasks describen acciones del usuario o comportamientos observables, no operaciones internas del sistema",
+          "passed": false,
+          "evidence": "Feature 3 tasks are entirely system operations: 'Verifica si el usuario tiene sesi\u00f3n activa', 'Consulta sessionStorage', 'Eval\u00faa los datos de actividad contra los thresholds', 'Selecciona la ventana temporal correcta', 'Guarda en sessionStorage', 'Omite el toast'. Feature 5 tasks are all technical implementations: 'Crea el endpoint', 'Configura Redis cache', 'Implementa las queries SQL'. These describe internal system behavior, not observable user actions."
+        },
+        {
+          "text": "Todo el scope identificado es trazable al PRD \u2014 no se inventan features no descritas en el PRD",
+          "passed": true,
+          "evidence": "All 5 features can be traced to the PRD: Features 1-2 map to US-1/US-2 (landing/signup visibility), Feature 3 maps to FR-5 and US-4 (session control), Feature 4 maps to the 'Analytics & Tracking' section and A/B test requirements, Feature 5 maps to the explicitly described 'Fase 2' backend with real data. No invented scope detected."
+        },
+        {
+          "text": "Las capacidades principales est\u00e1n cubiertas: ver prueba social, descartar el toast, comportamiento por sesi\u00f3n, exclusi\u00f3n de usuarios autenticados",
+          "passed": true,
+          "evidence": "Ver prueba social: Features 1 and 2 cover this for landing and signup pages. Descartar el toast: Feature 1 Task 5 ('Cierra el toast manualmente con el bot\u00f3n \u00d7') and Task 4 ('Hace hover sobre el toast para pausar el auto-dismiss'). Comportamiento por sesi\u00f3n: Feature 3 covers session-based control (sessionStorage, not showing twice). Exclusi\u00f3n de usuarios autenticados: Feature 3 Task 1 ('Verifica si el usuario tiene sesi\u00f3n activa antes de mostrar')."
+        }
+      ],
+      "notes": [
+        "Assertion 1 is borderline \u2014 the document title contains 'Features Backbone' as H1, which may be considered equivalent to the required H2 section depending on template strictness.",
+        "Assertion 3 passes on format grounds, but Feature 3 uses 'Sistema' as actor which fails Assertion 9 \u2014 these are related failures."
+      ]
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.62,
+        "passed": 8,
+        "failed": 5,
+        "total": 13,
+        "time_seconds": 54.1,
+        "tokens": 4021,
+        "tool_calls": 4,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "La secci\u00f3n ## Features Backbone est\u00e1 presente en el output",
+          "passed": false,
+          "evidence": "The document uses '# Features Backbone: Video Upload with Mux Integration' as an H1 title, and individual features use '## Feature 1:', '## Feature 2:' etc. There is no standalone '## Features Backbone' section heading anywhere in the output."
+        },
+        {
+          "text": "Se identifican al menos 3 Features (el PRD cubre: upload, gesti\u00f3n de videos, expiraci\u00f3n/renovaci\u00f3n, y clips desde videos propios)",
+          "passed": true,
+          "evidence": "5 Features are identified: F1 (upload), F2 (library management), F3 (expiration/renewal), F4 (clips from owned videos), F5 (credits). All 4 PRD-core areas plus an additional credits feature are covered."
+        },
+        {
+          "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+          "passed": false,
+          "evidence": "Feature names include excessive qualifiers and do not follow clean [Actor][Verb][Object] format. Examples: F1 'Coach uploads private training video to Clip2Coach' (extra modifiers and destination), F2 'Coach manages personal video library in \"Mis Videos\"' (qualifier + location), F3 'Coach monitors and renews video expiration' (two verbs, not one clean verb), F4 'Coach creates analysis clip from an owned video' (extra qualifier), F5 'Coach purchases credits to fund video storage and clips' (purpose clause appended)."
+        },
+        {
+          "text": "Cada User Task NO incluye el Actor como prefijo",
+          "passed": true,
+          "evidence": "All User Tasks are written without 'Coach' as prefix. Examples: 'Select pricing plan (Basic / Standard / Premium) for the video', 'Choose video file from device', 'Browse video grid with thumbnails...'. No task starts with the actor name."
+        },
+        {
+          "text": "Cada Feature tiene al menos 3 User Tasks",
+          "passed": true,
+          "evidence": "F1: 7 User Tasks, F2: 7 User Tasks, F3: 6 User Tasks, F4: 6 User Tasks, F5: 5 User Tasks. All Features exceed the minimum of 3."
+        },
+        {
+          "text": "Los Feature IDs est\u00e1n presentes como comentarios HTML (<!-- ID: ... -->)",
+          "passed": false,
+          "evidence": "No HTML comments of any kind appear in the output. Feature IDs are expressed only as section headers ('## Feature 1:', '## Feature 2:', etc.) and table references ('F1', 'F2', etc.), not as <!-- ID: ... --> HTML comments."
+        },
+        {
+          "text": "Los Task IDs est\u00e1n presentes como comentarios HTML (<!-- Task ID: ... -->)",
+          "passed": false,
+          "evidence": "No HTML comments of any kind appear in the output. User Tasks are formatted as numbered lists (1., 2., 3., etc.) without any <!-- Task ID: ... --> comments attached."
+        },
+        {
+          "text": "La secci\u00f3n ## Feature Dependencies est\u00e1 presente",
+          "passed": true,
+          "evidence": "The section '## Feature Dependencies' is present at the end of the document, including a dependency table with 6 rows and a 'Key Dependency Notes' subsection."
+        },
+        {
+          "text": "Las Features no tienen bundling excesivo: upload, gesti\u00f3n de biblioteca, y expiraci\u00f3n/renovaci\u00f3n son Features separadas (no una sola 'Coach Manages Videos')",
+          "passed": true,
+          "evidence": "Upload (F1), library management (F2), and expiration/renewal (F3) are correctly separated into three distinct Features with separate goals and task sets."
+        },
+        {
+          "text": "Las Features representan objetivos del usuario, no implementaci\u00f3n t\u00e9cnica (sin mencionar Mux, webhooks, ni endpoints en nombres de Features/Tasks)",
+          "passed": false,
+          "evidence": "F5 User Task 3 reads: 'Select credit package and complete payment via Stripe' \u2014 'Stripe' is a technical implementation detail appearing in a User Task name. While 'Mux', 'webhooks', and 'endpoints' do not appear in Feature or Task names, the Stripe reference is a technical leak into user-facing task language."
+        },
+        {
+          "text": "Las User Tasks describen acciones del usuario, no operaciones del sistema (sin 'System processes webhook', 'Validates credits', etc.)",
+          "passed": true,
+          "evidence": "All tasks are framed as user actions. Tasks like 'Receive email notification 30 days before a video expires' describe a user experience (receiving a notification), not a system background operation. No tasks labeled as system operations or background jobs appear in the User Tasks sections."
+        },
+        {
+          "text": "Todo el scope identificado es trazable al PRD \u2014 no se inventan features no descritas",
+          "passed": true,
+          "evidence": "All 5 Features map directly to PRD content: F1 (direct upload replacing YouTube/Vimeo), F2 ('Mis Videos' library hub), F3 (expiration/renewal lifecycle), F4 (clip creation from owned videos), F5 (credit purchasing). The Assumptions section explicitly ties each modeling decision to PRD concepts. No feature appears invented beyond PRD scope."
+        },
+        {
+          "text": "Las capacidades principales est\u00e1n cubiertas: subir video, seleccionar plan de cr\u00e9ditos, gestionar biblioteca, renovar antes de expiraci\u00f3n, crear clips desde videos propios",
+          "passed": true,
+          "evidence": "Subir video: F1. Seleccionar plan de cr\u00e9ditos: F1 Task 1 ('Select pricing plan (Basic / Standard / Premium)') and F5. Gestionar biblioteca: F2 in full. Renovar antes de expiraci\u00f3n: F3 Task 4-5. Crear clips desde videos propios: F4 in full."
+        }
+      ],
+      "notes": [
+        "Assertion 11 (system vs user tasks): 'Receive email notification...' tasks could be interpreted as system-triggered events rather than user actions, but they are framed from the user's perspective and were graded PASS.",
+        "Assertion 10 (Stripe in task name): Borderline \u2014 'Stripe' names the payment provider in a task, which is implementation-leaking but not as severe as 'Mux' or 'webhook'."
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.8133,
+        "stddev": 0.1159,
+        "min": 0.69,
+        "max": 0.92
+      },
+      "time_seconds": {
+        "mean": 112.1333,
+        "stddev": 12.2321,
+        "min": 100.8,
+        "max": 125.1
+      },
+      "tokens": {
+        "mean": 9308.0,
+        "stddev": 1321.025,
+        "min": 7821,
+        "max": 10346
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.5533,
+        "stddev": 0.0833,
+        "min": 0.46,
+        "max": 0.62
+      },
+      "time_seconds": {
+        "mean": 46.2333,
+        "stddev": 11.05,
+        "min": 33.6,
+        "max": 54.1
+      },
+      "tokens": {
+        "mean": 3521.0,
+        "stddev": 756.2407,
+        "min": 2651,
+        "max": 4021
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.26",
+      "time_seconds": "+65.9",
+      "tokens": "+5787"
+    }
+  },
+  "notes": []
+}

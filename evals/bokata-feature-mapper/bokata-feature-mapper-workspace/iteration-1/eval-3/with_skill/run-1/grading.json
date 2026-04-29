@@ -1,0 +1,114 @@
+{
+  "expectations": [
+    {
+      "text": "La sección ## Features Backbone está presente en el output",
+      "passed": true,
+      "evidence": "Line 3: '## Features Backbone' is present at the top of the document."
+    },
+    {
+      "text": "Se identifican al menos 3 Features (el PRD cubre: upload, gestión de videos, expiración/renovación, y clips desde videos propios)",
+      "passed": true,
+      "evidence": "5 Features identified: 'Coach Purchases Video Credits', 'Coach Uploads Video Content', 'Coach Manages Video Library', 'Coach Maintains Video Lifecycle', 'Coach Analyzes Video with Clips'."
+    },
+    {
+      "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+      "passed": true,
+      "evidence": "All 5 features follow clean [Actor][Verb][Object]: 'Coach Purchases Video Credits', 'Coach Uploads Video Content', 'Coach Manages Video Library', 'Coach Maintains Video Lifecycle', 'Coach Analyzes Video with Clips'. All are 3-component structures."
+    },
+    {
+      "text": "Cada User Task NO incluye el Actor como prefijo",
+      "passed": true,
+      "evidence": "All User Task names omit the actor prefix. Examples: 'Views Credit Balance', 'Selects Credit Package', 'Uploads Video File', 'Browses Video Collection', 'Renews Video Storage'. No task begins with 'Coach'."
+    },
+    {
+      "text": "Cada Feature tiene al menos 3 User Tasks",
+      "passed": true,
+      "evidence": "Feature 1: 4 User Tasks. Feature 2: 5 User Tasks. Feature 3: 6 User Tasks. Feature 4: 3 User Tasks (Monitors Expiration Status, Renews Video Storage, Reviews Expired Video Metadata). Feature 5: 4 User Tasks. All System Tasks are correctly excluded from User Task counts."
+    },
+    {
+      "text": "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+      "passed": true,
+      "evidence": "All 5 features carry HTML comment IDs, e.g. '<!-- ID: C2C-FEAT-a1b2 -->', '<!-- ID: C2C-FEAT-b2c3 -->', '<!-- ID: C2C-FEAT-c3d4 -->', '<!-- ID: C2C-FEAT-d4e5 -->', '<!-- ID: C2C-FEAT-e5f6 -->'."
+    },
+    {
+      "text": "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+      "passed": true,
+      "evidence": "All User Tasks carry HTML comment IDs, e.g. '<!-- Task ID: C2C-TASK-a1b3 -->', '<!-- Task ID: C2C-TASK-b2c4 -->', '<!-- Task ID: C2C-TASK-c3d5 -->', etc."
+    },
+    {
+      "text": "La sección ## Feature Dependencies está presente",
+      "passed": false,
+      "evidence": "The section is present but uses heading level ### ('### Feature Dependencies', line 231), not ## as required by the assertion. Strict evaluation fails on heading level mismatch."
+    },
+    {
+      "text": "Las Features no tienen bundling excesivo: upload, gestión de biblioteca, y expiración/renovación son Features separadas (no una sola 'Coach Manages Videos')",
+      "passed": true,
+      "evidence": "Upload ('Coach Uploads Video Content'), library management ('Coach Manages Video Library'), and expiration/renewal ('Coach Maintains Video Lifecycle') are three distinct, separate Features."
+    },
+    {
+      "text": "Las Features representan objetivos del usuario, no implementación técnica (sin mencionar Mux, webhooks, ni endpoints en nombres de Features/Tasks)",
+      "passed": true,
+      "evidence": "All 5 Feature names and all User Task names are free of technical terms. 'Mux', 'webhook', 'cron', 'API', 'Redis' appear only in System Task descriptions and the Discovery Context, never in Feature or User Task names."
+    },
+    {
+      "text": "Las User Tasks describen acciones del usuario, no operaciones del sistema (sin 'System processes webhook', 'Validates credits', etc.)",
+      "passed": true,
+      "evidence": "All system operations are correctly classified as System Tasks: 'Confirms Credit Transaction', 'Processes Uploaded Video', 'Expires Video', 'Sends Expiration Warning Email', 'Deactivates Clips on Video Expiration'. User Tasks are exclusively coach-initiated actions."
+    },
+    {
+      "text": "Todo el scope identificado es trazable al PRD — no se inventan features no descritas",
+      "passed": true,
+      "evidence": "All 5 Features map directly to PRD scope stated in the Discovery Context: credit purchase (Stripe), direct upload (Mux), library management, expiration/renewal, and clip creation from own videos. No extraneous features invented."
+    },
+    {
+      "text": "Las capacidades principales están cubiertas: subir video, seleccionar plan de créditos, gestionar biblioteca, renovar antes de expiración, crear clips desde videos propios",
+      "passed": true,
+      "evidence": "Subir video: 'Coach Uploads Video Content'. Seleccionar plan de créditos: User Task 'Selects Storage Plan'. Gestionar biblioteca: 'Coach Manages Video Library'. Renovar antes de expiración: User Task 'Renews Video Storage'. Crear clips desde videos propios: 'Coach Analyzes Video with Clips'."
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "failed": 1,
+    "total": 13,
+    "pass_rate": 0.92
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 6,
+      "Write": 2,
+      "Bash": 5,
+      "Glob": 0,
+      "Grep": 0
+    },
+    "total_tool_calls": 13,
+    "total_steps": 8,
+    "files_created": [
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/video-upload-mux-prd/with_skill/outputs/features-backbone.md",
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/video-upload-mux-prd/with_skill/outputs/metrics.json"
+    ],
+    "errors_encountered": 0,
+    "output_chars": 10346,
+    "transcript_chars": 42000
+  },
+  "timing": {
+    "executor_duration_seconds": 125.1,
+    "total_duration_seconds": 125.1
+  },
+  "claims": [],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [
+      "Assertion 8 (## Feature Dependencies): The section exists but uses ### heading level instead of ##. If the assertion intends only presence (not exact heading level), it would PASS. Graded FAIL under strict interpretation."
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 8 should clarify whether heading level matters (## vs ###) to avoid ambiguity in future evaluations.",
+      "Assertion 10 could explicitly state whether technical terms in task descriptions (vs. names) are acceptable — the output uses 'Mux' in task descriptions but not in task names.",
+      "The skill correctly avoided bundling and maintained clean [Actor][Verb][Object] naming throughout — the template enforcement is working well.",
+      "Consider adding an assertion for credit purchase as a distinct Feature, since it is a prerequisite flow not obvious from the PRD title."
+    ],
+    "overall": "Strong output: 12/13 assertions passed. The only failure is a minor heading-level inconsistency (### instead of ##) on the Feature Dependencies section. Feature decomposition, naming conventions, User vs System Task separation, and PRD traceability are all exemplary."
+  }
+}

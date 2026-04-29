@@ -1,0 +1,20 @@
+{
+  "eval_id": 3,
+  "eval_name": "video-upload-mux-prd",
+  "prompt": "Genera el Features Backbone para esta iniciativa de Clip2Coach. Si tienes preguntas de clarificación, usa tu criterio y documenta tus asunciones en lugar de preguntar.\n\nEl PRD está en: /Users/abrahamvallez/Dev/clip-2-coach/docs/prd/video-upload-mux-prd.md\n\nIMPORTANTE: El archivo tiene al final una sección '## Features Backbone' — ignórala completamente y genera el backbone desde cero usando solo las secciones 1-5 del PRD.",
+  "assertions": [
+    "La sección ## Features Backbone está presente en el output",
+    "Se identifican al menos 3 Features (el PRD cubre: upload, gestión de videos, expiración/renovación, y clips desde videos propios)",
+    "Cada Feature sigue el formato [Actor][Verb][Object]",
+    "Cada User Task NO incluye el Actor como prefijo",
+    "Cada Feature tiene al menos 3 User Tasks",
+    "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+    "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+    "La sección ## Feature Dependencies está presente",
+    "Las Features no tienen bundling excesivo: upload, gestión de biblioteca, y expiración/renovación son Features separadas (no una sola 'Coach Manages Videos')",
+    "Las Features representan objetivos del usuario, no implementación técnica (sin mencionar Mux, webhooks, ni endpoints en nombres de Features/Tasks)",
+    "Las User Tasks describen acciones del usuario, no operaciones del sistema (sin 'System processes webhook', 'Validates credits', etc.)",
+    "Todo el scope identificado es trazable al PRD — no se inventan features no descritas",
+    "Las capacidades principales están cubiertas: subir video, seleccionar plan de créditos, gestionar biblioteca, renovar antes de expiración, crear clips desde videos propios"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "expectations": [
+    {
+      "text": "La sección ## Features Backbone está presente en el output",
+      "passed": false,
+      "evidence": "The document uses '# Features Backbone: Video Upload with Mux Integration' as an H1 title, and individual features use '## Feature 1:', '## Feature 2:' etc. There is no standalone '## Features Backbone' section heading anywhere in the output."
+    },
+    {
+      "text": "Se identifican al menos 3 Features (el PRD cubre: upload, gestión de videos, expiración/renovación, y clips desde videos propios)",
+      "passed": true,
+      "evidence": "5 Features are identified: F1 (upload), F2 (library management), F3 (expiration/renewal), F4 (clips from owned videos), F5 (credits). All 4 PRD-core areas plus an additional credits feature are covered."
+    },
+    {
+      "text": "Cada Feature sigue el formato [Actor][Verb][Object]",
+      "passed": false,
+      "evidence": "Feature names include excessive qualifiers and do not follow clean [Actor][Verb][Object] format. Examples: F1 'Coach uploads private training video to Clip2Coach' (extra modifiers and destination), F2 'Coach manages personal video library in \"Mis Videos\"' (qualifier + location), F3 'Coach monitors and renews video expiration' (two verbs, not one clean verb), F4 'Coach creates analysis clip from an owned video' (extra qualifier), F5 'Coach purchases credits to fund video storage and clips' (purpose clause appended)."
+    },
+    {
+      "text": "Cada User Task NO incluye el Actor como prefijo",
+      "passed": true,
+      "evidence": "All User Tasks are written without 'Coach' as prefix. Examples: 'Select pricing plan (Basic / Standard / Premium) for the video', 'Choose video file from device', 'Browse video grid with thumbnails...'. No task starts with the actor name."
+    },
+    {
+      "text": "Cada Feature tiene al menos 3 User Tasks",
+      "passed": true,
+      "evidence": "F1: 7 User Tasks, F2: 7 User Tasks, F3: 6 User Tasks, F4: 6 User Tasks, F5: 5 User Tasks. All Features exceed the minimum of 3."
+    },
+    {
+      "text": "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+      "passed": false,
+      "evidence": "No HTML comments of any kind appear in the output. Feature IDs are expressed only as section headers ('## Feature 1:', '## Feature 2:', etc.) and table references ('F1', 'F2', etc.), not as <!-- ID: ... --> HTML comments."
+    },
+    {
+      "text": "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+      "passed": false,
+      "evidence": "No HTML comments of any kind appear in the output. User Tasks are formatted as numbered lists (1., 2., 3., etc.) without any <!-- Task ID: ... --> comments attached."
+    },
+    {
+      "text": "La sección ## Feature Dependencies está presente",
+      "passed": true,
+      "evidence": "The section '## Feature Dependencies' is present at the end of the document, including a dependency table with 6 rows and a 'Key Dependency Notes' subsection."
+    },
+    {
+      "text": "Las Features no tienen bundling excesivo: upload, gestión de biblioteca, y expiración/renovación son Features separadas (no una sola 'Coach Manages Videos')",
+      "passed": true,
+      "evidence": "Upload (F1), library management (F2), and expiration/renewal (F3) are correctly separated into three distinct Features with separate goals and task sets."
+    },
+    {
+      "text": "Las Features representan objetivos del usuario, no implementación técnica (sin mencionar Mux, webhooks, ni endpoints en nombres de Features/Tasks)",
+      "passed": false,
+      "evidence": "F5 User Task 3 reads: 'Select credit package and complete payment via Stripe' — 'Stripe' is a technical implementation detail appearing in a User Task name. While 'Mux', 'webhooks', and 'endpoints' do not appear in Feature or Task names, the Stripe reference is a technical leak into user-facing task language."
+    },
+    {
+      "text": "Las User Tasks describen acciones del usuario, no operaciones del sistema (sin 'System processes webhook', 'Validates credits', etc.)",
+      "passed": true,
+      "evidence": "All tasks are framed as user actions. Tasks like 'Receive email notification 30 days before a video expires' describe a user experience (receiving a notification), not a system background operation. No tasks labeled as system operations or background jobs appear in the User Tasks sections."
+    },
+    {
+      "text": "Todo el scope identificado es trazable al PRD — no se inventan features no descritas",
+      "passed": true,
+      "evidence": "All 5 Features map directly to PRD content: F1 (direct upload replacing YouTube/Vimeo), F2 ('Mis Videos' library hub), F3 (expiration/renewal lifecycle), F4 (clip creation from owned videos), F5 (credit purchasing). The Assumptions section explicitly ties each modeling decision to PRD concepts. No feature appears invented beyond PRD scope."
+    },
+    {
+      "text": "Las capacidades principales están cubiertas: subir video, seleccionar plan de créditos, gestionar biblioteca, renovar antes de expiración, crear clips desde videos propios",
+      "passed": true,
+      "evidence": "Subir video: F1. Seleccionar plan de créditos: F1 Task 1 ('Select pricing plan (Basic / Standard / Premium)') and F5. Gestionar biblioteca: F2 in full. Renovar antes de expiración: F3 Task 4-5. Crear clips desde videos propios: F4 in full."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 5,
+    "total": 13,
+    "pass_rate": 0.62
+  },
+  "execution_metrics": {
+    "tool_calls": {"Read": 1, "Write": 2, "Bash": 1, "Glob": 0, "Grep": 0},
+    "total_tool_calls": 4,
+    "total_steps": 3,
+    "files_created": [
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/video-upload-mux-prd/without_skill/outputs/features-backbone.md",
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/video-upload-mux-prd/without_skill/outputs/metrics.json"
+    ],
+    "errors_encountered": 0,
+    "output_chars": 4021,
+    "transcript_chars": 18500
+  },
+  "timing": {
+    "executor_duration_seconds": 54.1,
+    "total_duration_seconds": 54.1
+  },
+  "claims": [],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [
+      "Assertion 11 (system vs user tasks): 'Receive email notification...' tasks could be interpreted as system-triggered events rather than user actions, but they are framed from the user's perspective and were graded PASS.",
+      "Assertion 10 (Stripe in task name): Borderline — 'Stripe' names the payment provider in a task, which is implementation-leaking but not as severe as 'Mux' or 'webhook'."
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 1: Consider whether H1 title 'Features Backbone' satisfies the spirit of the assertion, or tighten the assertion to accept any heading level.",
+      "Assertion 3: The clean [Actor][Verb][Object] rule should be enforced in the skill prompt more explicitly — current output adds qualifiers, purpose clauses, and locations consistently.",
+      "Assertions 6 & 7: HTML comment IDs are a hard formatting requirement that the model completely missed without the skill. This is a strong differentiator for the with_skill condition.",
+      "Assertion 10: Consider whether naming a payment provider (Stripe) in a task is the same category of violation as naming an infrastructure service (Mux) — the assertion could be split or clarified.",
+      "Overall: The without_skill run produced solid content quality (good feature separation, full scope coverage, proper task framing) but failed all structural/formatting requirements (HTML IDs, section heading). The skill likely adds the formatting guardrails."
+    ],
+    "overall": "The without_skill run passes 8/13 assertions (62%). Content quality is good — correct feature granularity, no bundling, full PRD scope coverage — but the output fails on all structural formatting requirements (HTML comment IDs for Features and Tasks, missing ## Features Backbone heading) and on Feature naming cleanliness ([Actor][Verb][Object] format not respected). A minor technical leak (Stripe in a task name) also triggers a fail. The skill is expected to resolve the formatting and naming discipline gaps."
+  }
+}

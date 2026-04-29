@@ -1,0 +1,106 @@
+{
+  "expectations": [
+    {
+      "text": "La sección ## Features Backbone está presente en el output",
+      "passed": true,
+      "evidence": "Line 13 contains '## Features Backbone' as a top-level section header."
+    },
+    {
+      "text": "Se identifican al menos 2 Features",
+      "passed": true,
+      "evidence": "4 Features are identified: Feature 1 (Coach Crea Quiz desde URL de YouTube), Feature 2 (Coach Gestiona sus Quizzes desde el Dashboard), Feature 3 (Player Responde Quiz Compartido), Feature 4 (Coach Monitorea Resultados del Quiz)."
+    },
+    {
+      "text": "Cada Feature sigue el formato [Actor][Verb][Object] (ej: 'Coach Creates Quiz', no 'Create Quiz' ni 'Coach Creates Quiz From Video URL')",
+      "passed": false,
+      "evidence": "Feature 1 is named 'Coach Crea Quiz desde URL de YouTube' — this has appended context after the object ('desde URL de YouTube'), making it [Actor][Verb][Object][Prepositional Phrase] instead of the clean 3-component format. Features 2, 3, and 4 also have multi-word object phrases: 'Coach Gestiona sus Quizzes desde el Dashboard', 'Player Responde Quiz Compartido', 'Coach Monitorea Resultados del Quiz'. Feature 3 and 4 are borderline acceptable but Feature 1 and 2 clearly exceed 3 clean components."
+    },
+    {
+      "text": "Cada User Task NO incluye el Actor como prefijo (ej: 'Creates Quiz' no 'Coach Creates Quiz')",
+      "passed": true,
+      "evidence": "Scanning all user tasks: none begin with 'Coach' or 'Player'. Examples: 'Pegar URL de YouTube en el campo de creación', 'Acceder al dashboard con lista de quizzes creados', 'Abrir enlace compartido del quiz', 'Acceder al resumen de respuestas de un quiz'. All tasks use verb-first phrasing without Actor prefix."
+    },
+    {
+      "text": "Cada Feature tiene al menos 3 User Tasks",
+      "passed": false,
+      "evidence": "Feature 4 (Coach Monitorea Resultados del Quiz) has only 3 User Tasks — this meets the minimum of 3. Features 1, 2 have 5 tasks each; Feature 3 has 4 tasks. However, Feature 4 has exactly 3 tasks which satisfies 'at least 3'. PASS on recount — all features meet the minimum of 3 tasks."
+    },
+    {
+      "text": "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+      "passed": false,
+      "evidence": "No HTML comment IDs found anywhere in the output. Features are numbered with plain text headings like '### Feature 1: Coach Crea Quiz...' but there are no '<!-- ID: ... -->' HTML comment annotations."
+    },
+    {
+      "text": "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+      "passed": false,
+      "evidence": "No HTML comment Task IDs found anywhere in the output. User Tasks are simple numbered lists (1. 2. 3...) with no '<!-- Task ID: ... -->' annotations."
+    },
+    {
+      "text": "La sección ## Feature Dependencies está presente",
+      "passed": true,
+      "evidence": "Line 70 contains '## Feature Dependencies' as a section header, with a dependency graph shown in a code block listing prerequisites and dependencies between all 4 features."
+    },
+    {
+      "text": "Las Features representan objetivos del usuario, no pasos de implementación técnica (sin nombres de modelos, rutas, ni clases en los nombres de Features)",
+      "passed": true,
+      "evidence": "Feature names themselves contain no technical terms, model names, route names, or class names. Note: Technical terms like 'QuizStandalone' and '/create-quiz' appear in the 'Notes on Backward Compatibility' section (lines 94-96), but NOT in the Feature names themselves."
+    },
+    {
+      "text": "Las User Tasks describen acciones del usuario, no operaciones internas del sistema",
+      "passed": true,
+      "evidence": "All user tasks describe user-facing actions: 'Pegar URL de YouTube', 'Seleccionar timestamp', 'Escribir pregunta del quiz', 'Añadir opciones de respuesta', 'Publicar y obtener enlace', 'Acceder al dashboard', 'Editar una pregunta', 'Abrir enlace compartido', 'Ver feedback inmediato', etc. No tasks describe internal system operations like validate, persist, compute, or process."
+    },
+    {
+      "text": "Todo el scope identificado es trazable al input — no se inventan features o tasks no mencionadas",
+      "passed": false,
+      "evidence": "Feature 2 (Coach Gestiona sus Quizzes desde el Dashboard) and Feature 4 (Coach Monitorea Resultados del Quiz) go beyond the stated scope. The input describes Fase 1: 'desacoplar el quiz del clip', focusing on creating a quiz from a YouTube URL without a pre-existing clip. Dashboard management and results monitoring are not mentioned in the input scope for Fase 1. These appear to be invented scope expansions."
+    },
+    {
+      "text": "Las capacidades principales del input están cubiertas: crear quiz desde URL, elegir timestamp, escribir pregunta con opciones, compartir quiz",
+      "passed": true,
+      "evidence": "Feature 1 User Tasks cover all four core capabilities: 'Pegar URL de YouTube en el campo de creación' (crear desde URL), 'Seleccionar timestamp en el reproductor de video' (elegir timestamp), 'Escribir pregunta del quiz' + 'Añadir opciones de respuesta' (escribir pregunta con opciones), 'Publicar y obtener enlace para compartir' (compartir quiz)."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 5,
+    "total": 12,
+    "pass_rate": 0.58
+  },
+  "execution_metrics": {
+    "tool_calls": {"Read": 0, "Write": 2, "Bash": 1, "Glob": 0, "Grep": 0},
+    "total_tool_calls": 3,
+    "total_steps": 2,
+    "files_created": [
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/informal-quiz-input/without_skill/outputs/features-backbone.md",
+      "/Users/abrahamvallez/Dev/claude-code-prompts/skills/bokata-feature-mapper-workspace/iteration-1/informal-quiz-input/without_skill/outputs/metrics.json"
+    ],
+    "errors_encountered": 0,
+    "output_chars": 2651,
+    "transcript_chars": 4200
+  },
+  "timing": {
+    "executor_duration_seconds": 33.6,
+    "total_duration_seconds": 33.6
+  },
+  "claims": [],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Assertion 5 initially appeared to fail for Feature 4 (3 tasks), but 3 tasks exactly meets 'at least 3' — graded as PASS.",
+      "Assertion 9: Technical terms like 'QuizStandalone' and '/create-quiz' appear in the Notes section but not in Feature names. Graded PASS since the assertion targets Feature names specifically."
+    ],
+    "needs_review": [
+      "Assertion 11: Feature 2 and Feature 4 may reflect reasonable inference from a real product context, but they are not explicitly scoped in the Fase 1 input description. Strict grading marks this FAIL."
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "The prompt or skill instructions should explicitly require HTML comment IDs (<!-- ID: ... --> and <!-- Task ID: ... -->) — this was the most clear structural failure and likely indicates the without_skill run lacks that formatting requirement.",
+      "Feature name format [Actor][Verb][Object] should be enforced more strictly — 'Coach Crea Quiz desde URL de YouTube' is a common LLM pattern of appending context. The skill should constrain names to exactly 3 tokens.",
+      "Scope guardrails should be tighter for Fase 1: the without_skill run invented Feature 2 (Dashboard) and Feature 4 (Monitoring) which are reasonable product features but not part of the stated input scope.",
+      "Consider adding an assertion to check that the output language matches the input language, or that mixed-language outputs are flagged."
+    ],
+    "overall": "The without_skill run produced a structurally coherent output covering the core capabilities from the input, but failed on 5 of 12 assertions. The most significant failures are: missing HTML comment IDs for Features and Tasks (assertions 6 and 7), Feature names not following the strict 3-component format (assertion 3), and scope creep beyond Fase 1 (assertion 11). The output demonstrates that without the skill's formatting constraints, the model produces readable but non-conformant structure."
+  }
+}

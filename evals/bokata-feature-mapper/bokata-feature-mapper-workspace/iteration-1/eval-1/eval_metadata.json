@@ -1,0 +1,19 @@
+{
+  "eval_id": 1,
+  "eval_name": "informal-quiz-input",
+  "prompt": "Genera el Features Backbone para esta iniciativa de Clip2Coach. Si tienes preguntas de clarificación, usa tu criterio y documenta tus asunciones en lugar de preguntar.\n\n### FASE 1: Desacoplar el Quiz del Clip (Semanas 2-4)\n\n**Objetivo**: Que cualquier usuario registrado pueda crear un quiz sin haber creado un clip antes.\n\n#### Opcion A: Quiz desde URL de YouTube (RECOMENDADA)\n\nFlujo nuevo:\n```\nCoach pega URL de YouTube → Elige momento del video (timestamp) →\nEscribe pregunta → Anade opciones de respuesta → Comparte\n```\n\n**Cambios necesarios**:\n- Nuevo modelo `QuizStandalone` que acepta `videoUrl` + `timestamp` en lugar de `clipId`\n- Nueva ruta: `/create-quiz` (sin clipId) con campo de URL de video\n- Adaptar el player para mostrar video en timestamp sin necesitar clip guardado\n- Mantener compatibilidad: el quiz sigue pudiendo crearse desde un clip existente\n- Nuevo CTA en la home/dashboard: \"Crea un quiz desde cualquier video\"\n\n**Criterio de exito**: un coach nuevo puede crear y compartir un quiz en menos de 3 minutos desde el registro.",
+  "assertions": [
+    "La sección ## Features Backbone está presente en el output",
+    "Se identifican al menos 2 Features",
+    "Cada Feature sigue el formato [Actor][Verb][Object] (ej: 'Coach Creates Quiz', no 'Create Quiz' ni 'Coach Creates Quiz From Video URL')",
+    "Cada User Task NO incluye el Actor como prefijo (ej: 'Creates Quiz' no 'Coach Creates Quiz')",
+    "Cada Feature tiene al menos 3 User Tasks",
+    "Los Feature IDs están presentes como comentarios HTML (<!-- ID: ... -->)",
+    "Los Task IDs están presentes como comentarios HTML (<!-- Task ID: ... -->)",
+    "La sección ## Feature Dependencies está presente",
+    "Las Features representan objetivos del usuario, no pasos de implementación técnica (sin nombres de modelos, rutas, ni clases en los nombres de Features)",
+    "Las User Tasks describen acciones del usuario, no operaciones internas del sistema",
+    "Todo el scope identificado es trazable al input — no se inventan features o tasks no mencionadas",
+    "Las capacidades principales del input están cubiertas: crear quiz desde URL, elegir timestamp, escribir pregunta con opciones, compartir quiz"
+  ]
+}
