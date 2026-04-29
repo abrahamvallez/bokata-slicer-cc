@@ -1,0 +1,6 @@
+# Eval workspaces — resultados efímeros de runs, no se commitean
+*-workspace/
+
+# Python
+__pycache__/
+*.pyc

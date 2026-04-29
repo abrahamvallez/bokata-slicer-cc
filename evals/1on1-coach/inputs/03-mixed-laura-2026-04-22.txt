@@ -1,0 +1,27 @@
+Fathom 1on1 | 2026-04-22 | Marcos & Laura
+
+Marcos (0:00): Laura, ¿cómo estás? ¿Tienes algo concreto que quieras tratar hoy?
+Laura (0:08): Sí, hay un par de cosas. Tengo un bloqueo con el módulo de notificaciones que lleva ya tres días, y también quería hablar de algo que me ha preocupado esta semana.
+Marcos (0:22): Cuéntame lo del bloqueo primero.
+Laura (0:28): Okay, el problema es que el servicio de notificaciones de terceros que estamos usando, SendGrid, tiene un comportamiento raro con los webhooks de entrega. A veces marca como entregado pero el usuario no recibe nada, y no hay forma de distinguirlo por el payload. He estado leyendo la documentación y no hay solución clara.
+Marcos (1:02): ¿Ya lo has escalado con el equipo de backend?
+Laura (1:08): Sí, hablé con Javier el martes. Él tampoco lo había visto antes. Me dijo que probablemente necesitemos añadir un mecanismo de confirmación desde el cliente.
+Marcos (1:22): Eso tiene sentido. ¿Qué necesitas para desbloquearte?
+Laura (1:30): Necesito que alguien con más contexto de la arquitectura de eventos me confirme si puedo añadir ese mecanismo sin romper el contrato actual de la API.
+Marcos (1:45): Okay. Yo hablaré con Andrés hoy, él es el dueño de esa parte. ¿Te parece bien que os conecte mañana por la mañana?
+Laura (1:55): Perfecto, eso me ayuda mucho.
+Marcos (1:58): Bien. ¿Y lo otro que querías comentar?
+Laura (2:05): Esto es más delicado... La semana pasada, en la revisión del sprint, Javier hizo un comentario sobre mi código que... bueno, o sea, creo que no tuvo mala intención, pero lo dijo delante de todo el equipo y fue bastante directo. Algo tipo "este código no sigue los estándares, parece que no leíste la guía". Me sentó mal.
+Marcos (2:45): Entiendo. ¿Cómo te quedaste después de eso?
+Laura (2:52): Pues incómoda. No dije nada porque fue en público y no quería generar un conflicto, pero me quedé dándole vueltas.
+Marcos (3:10): Gracias por contármelo. ¿El código en cuestión seguía los estándares o tenía algo que mejorar?
+Laura (3:20): Había una parte que sí se podía mejorar, lo reconozco. Pero el comentario fue muy abrupto, sin contexto.
+Marcos (3:32): De acuerdo. Te voy a ser directo: creo que Javier se equivocó en las formas, pero también quiero que te veas reflejada en esto. Para futuras situaciones así, ¿cómo crees que podrías haber respondido en el momento?
+Laura (3:52): Pues... podría haberle preguntado en qué parte específicamente veía el problema, para entenderlo mejor. Creo que reaccionar de forma más curiosa que defensiva.
+Marcos (4:10): Exactamente. Eso es exactamente lo que esperaría de alguien en tu nivel. ¿Te sientes con herramientas para hacerlo así la próxima vez?
+Laura (4:22): Sí, creo que sí. Y sería bueno también tener una conversación con Javier para cerrar el tema.
+Marcos (4:35): Muy bien. Yo voy a hablar con Javier aparte sobre las formas del feedback público. Y tú, si te sientes cómoda, habla con él esta semana. ¿Quieres que te prepare para esa conversación?
+Laura (4:55): No hace falta, creo que puedo manejarlo. Pero gracias.
+Marcos (5:02): Perfecto. ¿Hay algo más?
+Laura (5:06): No, eso es todo. Gracias Marcos.
+Marcos (5:10): Hasta la próxima.

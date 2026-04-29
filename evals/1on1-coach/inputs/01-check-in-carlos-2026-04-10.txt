@@ -1,0 +1,22 @@
+Fathom Notetaker | 2026-04-10 | 1on1 Ana & Carlos
+
+0:00 - Ana: Hola Carlos, ¿cómo estás? ¿Qué tal el fin de semana?
+0:24 - Carlos: Bien, la verdad que bien. Fui a ver a mis padres así que bien desconectado del trabajo.
+0:35 - Ana: Genial, oye ¿cómo te sientes con el sprint? Esta semana ha sido bastante intensa.
+0:52 - Carlos: Sí, ha sido una semana pesada. Lo del bug de producción el martes me quitó toda la mañana, pero lo resolví. Fue un poco frustrante porque no era un bug nuestro, era un problema de la librería de terceros.
+1:30 - Ana: Sí, me enteré. ¿Cómo te quedaste después de eso?
+1:38 - Carlos: Pues... un poco quemado, la verdad. No es la primera vez que algo externo nos bloquea y no tenemos visibilidad hasta que explota en producción.
+1:55 - Ana: Entiendo, eso es frustrante. ¿Tienes alguna idea de cómo podríamos mejorar eso?
+2:12 - Carlos: La verdad es que sí. Creo que necesitamos alertas más tempranas en las dependencias críticas. Podríamos usar Dependabot con umbrales de seguridad más estrictos.
+2:35 - Ana: Me parece una buena idea. ¿Quieres encargarte de investigar eso y presentarlo en la próxima reunión técnica?
+2:48 - Carlos: Sí, con mucho gusto. Dame una semana.
+2:55 - Ana: Perfecto. Oye, ¿cómo estás con la carga de trabajo en general? Llevas varios sprints muy cargado.
+3:10 - Carlos: Sí, es verdad. Estoy bien pero noto que me queda poco espacio para tareas técnicas más creativas, siempre estoy resolviendo incidencias.
+3:28 - Ana: ¿Qué tipo de trabajo técnico te gustaría tener más espacio para hacer?
+3:38 - Carlos: Me gustaría explorar más la parte de arquitectura de datos, es algo que me apetece y creo que le daría valor al equipo.
+3:55 - Ana: Tiene sentido. Vamos a hablar de eso en nuestra próxima revisión de IDP para ver cómo encajarlo en el trimestre.
+4:12 - Carlos: Sí, bien. Gracias.
+4:18 - Ana: ¿Algo más que quieras comentar?
+4:25 - Carlos: No, creo que lo dicho.
+4:30 - Ana: Perfecto. Pues hablamos la semana que viene. Cuídate.
+4:35 - Carlos: Tú también, hasta luego.

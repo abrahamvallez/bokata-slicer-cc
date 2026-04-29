@@ -1,0 +1,26 @@
+Otter.ai Transcript | 2026-03-15 | Sarah & Alex 1:1
+
+[00:00:05] Sarah: Hey Alex, good to see you. How's the week going?
+[00:00:12] Alex: Pretty good, thanks. I just wrapped up the auth refactor. It took longer than expected but I'm happy with how it turned out.
+[00:00:24] Sarah: I saw the PR, it looked really clean. That was a tough piece to get right.
+[00:00:32] Alex: Yeah, I had to rewrite parts of it twice because I realized I'd missed some edge cases around token refresh. But I learned a lot.
+[00:00:45] Sarah: That's a great way to think about it. So, I wanted to use this 1:1 to talk about your career path a bit. We haven't done that in a while. How are you feeling about where you are right now?
+[00:01:02] Alex: Honestly, I feel like I'm doing good technically, but I'm wondering about the next step. I've been a senior engineer for almost two years and I'm starting to think about what the path to staff looks like.
+[00:01:20] Sarah: That's great that you're thinking about it. What does staff level mean to you?
+[00:01:28] Alex: I think it means having more architectural influence, maybe driving cross-team initiatives. Less about implementing and more about shaping direction.
+[00:01:42] Sarah: That's a solid understanding. What do you think are the gaps between where you are now and that level?
+[00:01:52] Alex: Hmm... I think I still default to execution mode. I don't always push back early enough when I see architectural problems. I tend to just build it and then say something later.
+[00:02:10] Sarah: I appreciate that self-awareness. I actually wanted to share some feedback on exactly that. On the checkout flow project, there was a moment where you could have escalated the schema design issue three weeks earlier. Do you remember that?
+[00:02:28] Alex: Yeah. I wasn't sure if it was my call to raise it or if I was just overthinking it.
+[00:02:38] Sarah: That's the thing — at staff level, that uncertainty has to tip toward speaking up. The cost of raising a false alarm is low; the cost of not raising it is high.
+[00:02:52] Alex: Right, that makes sense. I'll try to be more proactive about that.
+[00:03:00] Sarah: Let's make it concrete. What if you committed to flagging architectural concerns in the design doc review phase going forward, even if you're not sure?
+[00:03:12] Alex: Yeah, I can do that.
+[00:03:16] Sarah: Great. One more thing — I want you to start leading the weekly architecture sync. It'd be good visibility for you and good practice for the cross-team influence part.
+[00:03:28] Alex: Oh, that would be great actually. I'd love that.
+[00:03:35] Sarah: Perfect. I'll hand it over to you starting next Thursday. Okay, anything on your side?
+[00:03:42] Alex: Just one thing — I've been wanting to do a deep dive on distributed tracing. Is there budget for the OpenTelemetry conference in June?
+[00:03:54] Sarah: Let me check. I think so, but I'll confirm by end of week.
+[00:04:02] Alex: That'd be great, thanks.
+[00:04:06] Sarah: Alright, good talk. See you Thursday.
+[00:04:09] Alex: See you then, thanks Sarah.

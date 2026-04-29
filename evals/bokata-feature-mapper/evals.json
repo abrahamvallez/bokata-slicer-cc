@@ -1,0 +1,70 @@
+{
+  "skill_name": "bokata-feature-mapper",
+  "skill_path": "skills/bokata-feature-mapper",
+  "evals": [
+    {
+      "id": 1,
+      "name": "informal-quiz-input",
+      "prompt": "Genera el Features Backbone para esta iniciativa de Clip2Coach. Si tienes preguntas de clarificación, usa tu criterio y documenta tus asunciones en lugar de preguntar.\n\nEl input está en: evals/bokata-feature-mapper/inputs/01-quiz-standalone-informal.md",
+      "expected_output": "Features Backbone con 2+ Features en formato [Actor][Verb][Object], cada una con 3+ User Tasks en formato [Verb][Object] sin actor, actores correctos, sin bundling, sin detalles de implementación",
+      "files": ["evals/bokata-feature-mapper/inputs/01-quiz-standalone-informal.md"],
+      "expectations": [
+        "Se identifican al menos 2 Features",
+        "Cada Feature tiene al menos 3 User Tasks",
+        "Cada Feature expresa un objetivo de usuario usando exactamente [Actor][Verb][Object] — sin cláusulas adicionales, sin conjunciones en el nombre",
+        "Ningún Feature usa 'System', 'Sistema', 'Engineer' ni 'Equipo' como Actor — las acciones del sistema son System Tasks, no Features",
+        "Ningún User Task incluye el Actor como prefijo (las tasks son solo [Verb][Object])",
+        "Ningún User Task usa verbos genéricos de gestión: Manage, Handle, Gestionar, Manejar, Administrar — deben splitearse en verbos específicos",
+        "Ningún User Task contiene una conjunción ('y', 'and', 'o', 'or') que indique bundling de dos acciones en una sola task",
+        "Ningún User Task describe una operación interna del sistema (validar internamente, persistir, procesar en background, computar) — solo acciones observables del usuario",
+        "Ningún nombre de Feature ni User Task contiene términos de implementación técnica (nombres de modelos como QuizStandalone, rutas como /create-quiz, nombres de clases o métodos)",
+        "Todas las System Tasks (si las hay) tienen un campo Trigger explícito que describe qué acción del usuario las dispara",
+        "El scope generado es trazable al input — no se añaden Features ni Tasks no mencionadas en el input original",
+        "Las capacidades clave del input están cubiertas por al menos una Feature o Task: crear quiz desde URL de YouTube, seleccionar timestamp, escribir pregunta con opciones de respuesta, compartir quiz"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "social-proof-toast-prd",
+      "prompt": "Genera el Features Backbone para esta feature de Clip2Coach. Si tienes preguntas de clarificación, usa tu criterio y documenta tus asunciones en lugar de preguntar.\n\nEl PRD está en: evals/bokata-feature-mapper/inputs/02-social-proof-toast-prd.md",
+      "expected_output": "Features Backbone con 2+ Features para el social proof toast, actores correctos (Visitor/Coach, no System), con 3+ User Tasks cada una, sin términos técnicos ni acciones de sistema disfrazadas de User Tasks",
+      "files": ["evals/bokata-feature-mapper/inputs/02-social-proof-toast-prd.md"],
+      "expectations": [
+        "Se identifican al menos 2 Features",
+        "Cada Feature tiene al menos 3 User Tasks",
+        "Cada Feature expresa un objetivo de usuario usando exactamente [Actor][Verb][Object] — sin cláusulas adicionales ni conjunciones en el nombre",
+        "Los actores de las Features reflejan los actores del PRD: Visitor (visitante no autenticado) y/o Coach — NOT 'System', 'Sistema', 'Engineer', 'Equipo de producto', ni 'Equipo de ingeniería'",
+        "Ningún User Task incluye el Actor como prefijo",
+        "Ningún User Task usa verbos genéricos de gestión: Manage, Handle, Gestionar, Manejar, Administrar",
+        "Ningún User Task contiene una conjunción ('y', 'and', 'o', 'or') que indique bundling",
+        "Ningún User Task describe una operación interna del sistema — no aparece sessionStorage, IntersectionObserver, Redis, thresholds, SQL ni endpoints en los nombres de Tasks",
+        "Ningún nombre de Feature ni User Task contiene términos de implementación técnica (sessionStorage, IntersectionObserver, Redis, GET /api/social-proof, feature flag key names)",
+        "Todas las System Tasks (si las hay) tienen un campo Trigger explícito",
+        "El scope generado es trazable al PRD — no se añaden Features no descritas en el PRD",
+        "Las capacidades clave del PRD están cubiertas: que el visitante vea prueba social, que pueda descartar el toast, que no se repita en la misma sesión, que los usuarios autenticados no lo vean"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "video-upload-mux-prd",
+      "prompt": "Genera el Features Backbone para esta iniciativa de Clip2Coach. Si tienes preguntas de clarificación, usa tu criterio y documenta tus asunciones en lugar de preguntar.\n\nEl PRD está en: evals/bokata-feature-mapper/inputs/03-video-upload-mux-prd.md",
+      "expected_output": "Features Backbone con 3+ Features bien diferenciadas (upload, gestión de biblioteca, expiración/renovación, clips), actores correctos (Coach), sin bundling, sin términos técnicos de Mux/Stripe, System Tasks con Trigger documentado",
+      "files": ["evals/bokata-feature-mapper/inputs/03-video-upload-mux-prd.md"],
+      "expectations": [
+        "Se identifican al menos 3 Features — el PRD cubre dominios distintos: subir videos, gestionar biblioteca, gestionar expiración/renovación, y crear clips desde videos propios",
+        "Cada Feature tiene al menos 3 User Tasks",
+        "Cada Feature expresa un objetivo de usuario usando exactamente [Actor][Verb][Object] — sin cláusulas adicionales ni conjunciones en el nombre",
+        "Ningún Feature usa 'System', 'Sistema' ni actores no-humanos del PRD como Actor",
+        "No hay bundling de dominios: Upload y gestión de biblioteca son Features separadas; expiración y renovación no se colapsan en una Feature genérica tipo 'Coach Manages Videos'",
+        "Ningún User Task incluye el Actor como prefijo",
+        "Ningún User Task usa verbos genéricos de gestión que oculten CRUD: Manage, Handle, Gestionar, Manejar, Administrar",
+        "Ningún User Task contiene una conjunción ('y', 'and', 'o', 'or') que indique bundling — por ejemplo 'Filters and Sorts Videos' debe splitearse",
+        "Ningún User Task describe una operación interna del sistema (procesamiento de webhook de Mux, descuento automático de créditos, job de expiración automática)",
+        "Ningún nombre de Feature ni User Task contiene términos de implementación técnica (Mux, Stripe, webhook, cron job, signed URL, HLS/DASH, Direct Uploads API)",
+        "Todas las System Tasks (si las hay) tienen un campo Trigger explícito que describe qué acción del usuario las dispara",
+        "El scope generado es trazable al PRD — no se añaden Features no descritas en las secciones 1-5",
+        "Las capacidades clave del PRD están cubiertas: subir video con selección de plan de créditos, gestionar la biblioteca de videos, renovar un video antes de que expire, crear clips desde videos propios"
+      ]
+    }
+  ]
+}

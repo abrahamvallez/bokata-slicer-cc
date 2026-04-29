@@ -1,0 +1,66 @@
+{
+  "skill_name": "1on1-coach",
+  "skill_path": "skills/1on1-coach",
+  "evals": [
+    {
+      "id": 1,
+      "name": "check-in-spanish",
+      "prompt": "Analiza este 1on1 y genera los tres documentos de output:\n\nevals/1on1-coach/inputs/01-check-in-carlos-2026-04-10.txt",
+      "expected_output": "Tres archivos: outputs/shareable/2026-04-10-carlos-summary.md, outputs/coaching/2026-04-10-carlos-analysis.md, outputs/coaching/2026-04-10-carlos-coaching.md. Contenido en español. Tipo detectado: check-in. Quotes verbatim con timestamps en formato [M:SS].",
+      "files": ["evals/1on1-coach/inputs/01-check-in-carlos-2026-04-10.txt"],
+      "assertions": [
+        "Se crea el archivo outputs/shareable/2026-04-10-carlos-summary.md",
+        "Se crea el archivo outputs/coaching/2026-04-10-carlos-analysis.md",
+        "Se crea el archivo outputs/coaching/2026-04-10-carlos-coaching.md",
+        "El tipo detectado en los outputs es 'check-in' (no career, no feedback, no unblocking)",
+        "El contenido de los tres archivos está escrito en español",
+        "Al menos una cita verbatim aparece en el summary con formato '> \"texto\" — Nombre [M:SS]'",
+        "Los timestamps en las citas usan el formato del transcript: [M:SS] (e.g. [0:52], [1:38]) — nunca convertidos a segundos",
+        "El analysis contiene la sección 'Meeting Effectiveness' o equivalente traducido",
+        "El summary NO contiene análisis privado del manager ni coaching questions",
+        "El analysis lleva advertencia de que es solo para el manager",
+        "Al menos un action item aparece en el summary con formato '- [ ] @Nombre: descripción'"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "career-english",
+      "prompt": "Process this 1on1 transcript and generate the three output documents:\n\nevals/1on1-coach/inputs/02-career-alex-2026-03-15.txt",
+      "expected_output": "Three files: outputs/shareable/2026-03-15-alex-summary.md, outputs/coaching/2026-03-15-alex-analysis.md, outputs/coaching/2026-03-15-alex-coaching.md. Content in English. Type detected: career. Timestamps in [HH:MM:SS] format matching Otter.ai style.",
+      "files": ["evals/1on1-coach/inputs/02-career-alex-2026-03-15.txt"],
+      "assertions": [
+        "Se crea el archivo outputs/shareable/2026-03-15-alex-summary.md",
+        "Se crea el archivo outputs/coaching/2026-03-15-alex-analysis.md",
+        "Se crea el archivo outputs/coaching/2026-03-15-alex-coaching.md",
+        "El tipo detectado en los outputs es 'career'",
+        "El contenido de los tres archivos está escrito en inglés",
+        "Al menos una cita verbatim aparece con timestamps en formato [HH:MM:SS] (e.g. [00:01:52]) — respetando el formato del transcript de Otter.ai",
+        "El analysis incluye una sección de Career & Development (o traducida) dado el tipo 'career'",
+        "El analysis menciona el momento de feedback de Sarah sobre el checkout flow project",
+        "El summary incluye los dos action items concretos: que Alex lidere el architecture sync y que Sarah confirme presupuesto para la conferencia",
+        "El coaching.md contiene preguntas de tipo socrático (no afirmaciones, sino preguntas abiertas)",
+        "El summary NO contiene juicios privados sobre el manager ni áreas de mejora del manager"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "mixed-unblocking-feedback-spanish",
+      "prompt": "Analiza el siguiente 1on1 de Laura con Marcos y genera los documentos:\n\nevals/1on1-coach/inputs/03-mixed-laura-2026-04-22.txt",
+      "expected_output": "Tres archivos: outputs/shareable/2026-04-22-laura-summary.md, outputs/coaching/2026-04-22-laura-analysis.md, outputs/coaching/2026-04-22-laura-coaching.md. Contenido en español. Tipo: mixed con unblocking y feedback. Timestamps en formato (MM:SS) del transcript.",
+      "files": ["evals/1on1-coach/inputs/03-mixed-laura-2026-04-22.txt"],
+      "assertions": [
+        "Se crea el archivo outputs/shareable/2026-04-22-laura-summary.md",
+        "Se crea el archivo outputs/coaching/2026-04-22-laura-analysis.md",
+        "Se crea el archivo outputs/coaching/2026-04-22-laura-coaching.md",
+        "El tipo detectado refleja ambas dimensiones del mixed: unblocking y feedback (e.g. 'mixed: unblocking + feedback')",
+        "El contenido de los tres archivos está en español",
+        "Los timestamps usan el formato original del transcript: (MM:SS) → referenciados como [MM:SS] en los outputs (e.g. [0:28], [2:05])",
+        "El analysis incluye una sección de Psychological Safety dado el incidente de feedback público de Javier",
+        "El summary cubre los dos temas principales: el bloqueo técnico con SendGrid y el incidente de feedback con Javier",
+        "El summary incluye los action items: que Marcos conecte a Laura con Andrés, y que Laura hable con Javier",
+        "El analysis contiene Problem Classification con al menos una entrada en la categoría Team o Individual",
+        "El summary mantiene un tono neutral y constructivo — no incluye la calificación 'Javier se equivocó' ni valoraciones del manager"
+      ]
+    }
+  ]
+}
