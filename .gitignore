@@ -1,5 +1,6 @@
 # Eval workspaces — se commitean métricas (benchmark, grading, timing) pero no los outputs generados
-*-workspace/**/outputs/
+**/*-workspace/**/outputs/**
+**/outputs/
 
 # Python
 __pycache__/
