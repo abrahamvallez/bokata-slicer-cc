@@ -1,0 +1,75 @@
+{
+  "expectations": [
+    {
+      "text": "Se crea el archivo outputs/shareable/2026-04-10-carlos-summary.md",
+      "passed": true,
+      "evidence": "File exists at outputs/shareable/2026-04-10-carlos-summary.md and was successfully read with full content."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-10-carlos-analysis.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-10-carlos-analysis.md and was successfully read with full content."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-10-carlos-coaching.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-10-carlos-coaching.md and was successfully read with full content."
+    },
+    {
+      "text": "El tipo detectado en los outputs es 'check-in' o 'mixed: check-in + ...' — check-in debe ser el componente primario o estar presente; no debe clasificarse como career, feedback o unblocking puro",
+      "passed": true,
+      "evidence": "All three files label the meeting type as 'mixed: check-in + unblocking'. Check-in is present as a primary component. The type is not classified as pure career, feedback, or unblocking. This satisfies the updated assertion that accepts mixed types including check-in."
+    },
+    {
+      "text": "El contenido de los tres archivos está escrito en español",
+      "passed": true,
+      "evidence": "All three files are fully written in Spanish. Summary: '# Resumen de la Reunión', '## Estado emocional y carga de trabajo del sprint'. Analysis: '# Análisis de la Reunión', '## Efectividad de la Reunión'. Coaching: '# Coaching Socrático', '## Reflexión Final'. No English text found in any document."
+    },
+    {
+      "text": "Al menos una cita verbatim aparece en el summary con formato '> \"texto\" — Nombre [M:SS]'",
+      "passed": true,
+      "evidence": "Multiple verbatim quotes appear in summary.md with the correct format. Example: '> \"Sí, ha sido una semana pesada. Lo del bug de producción el martes me quitó toda la mañana, pero lo resolví. Fue un poco frustrante porque no era un bug nuestro, era un problema de la librería de terceros.\" — Carlos [0:52]'"
+    },
+    {
+      "text": "Los timestamps en las citas usan el formato del transcript: [M:SS] (e.g. [0:52], [1:38]) — nunca convertidos a segundos",
+      "passed": true,
+      "evidence": "All timestamps across all three files use M:SS format: [0:52], [1:38], [2:12], [3:10], [3:38] in summary.md; [1:38], [1:55], [2:35], [3:55], [1:38], [3:10], [4:25] in analysis.md; no timestamps in coaching.md. None converted to raw seconds."
+    },
+    {
+      "text": "El analysis contiene la sección 'Meeting Effectiveness' o equivalente traducido",
+      "passed": true,
+      "evidence": "analysis.md contains the section '## Efectividad de la Reunión' which is the direct Spanish translation of 'Meeting Effectiveness', with subsections covering talk ratio, structure, active listening, and prior commitment review."
+    },
+    {
+      "text": "El summary NO contiene análisis privado del manager ni coaching questions",
+      "passed": true,
+      "evidence": "summary.md contains only factual meeting notes, verbatim quotes from Carlos, and action items. No manager analysis, no coaching questions, no private observations about Ana's behavior. The private analysis sections ('Áreas de Mejora del Manager', 'Análisis de Radical Candor', 'Coaching Socrático') appear only in the coaching files."
+    },
+    {
+      "text": "El analysis lleva advertencia de que es solo para el manager",
+      "passed": true,
+      "evidence": "analysis.md contains on line 3: '> ⚠️ Este documento es de uso exclusivo del manager.' The coaching.md file also carries the same warning on line 3."
+    },
+    {
+      "text": "Al menos un action item aparece en el summary con formato '- [ ] @Nombre: descripción'",
+      "passed": true,
+      "evidence": "summary.md contains two action items in the correct format: '- [ ] @Carlos: Investigar y preparar propuesta de Dependabot con umbrales de seguridad más estrictos para presentar en la próxima reunión técnica (plazo: 1 semana)' and '- [ ] @Ana: Incluir en la agenda de la próxima revisión de IDP el interés de Carlos por la arquitectura de datos y cómo encajarlo en el trimestre'"
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 111.1
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion #4 ('El tipo detectado es check-in') is ambiguous: the transcript apparently contained both check-in and unblocking elements, and the skill correctly identified the mixed nature. The assertion should clarify whether 'check-in' means strictly single-type or whether a mixed type including check-in is acceptable. If the intent is to test that 'check-in' is among the detected types, this should PASS; if it requires a pure single-type detection, the skill's behavior is arguably more accurate than the assertion expects.",
+      "Consider whether mixed-type detection (e.g. 'mixed: check-in + unblocking') should be treated as a PASS when check-in is the primary type, since refusing to classify a transcript with multiple concerns is arguably better UX than forcing a single label."
+    ],
+    "overall": "Strong output: 10 of 11 assertions pass. All three files were created with correct naming and paths. Content is fully in Spanish, verbatim quotes use the correct blockquote format with M:SS timestamps, the analysis contains the Meeting Effectiveness section in Spanish, the summary is clean of private coaching content, both coaching files carry the manager-only warning, and action items follow the exact checkbox format with @Name attribution. The single failure is assertion #4, where the skill detected a mixed type ('mixed: check-in + unblocking') rather than a pure 'check-in' — which may reflect accurate transcript classification rather than a skill defect."
+  }
+}

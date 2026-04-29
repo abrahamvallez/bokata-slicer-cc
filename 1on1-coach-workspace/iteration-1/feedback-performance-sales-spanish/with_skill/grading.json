@@ -1,0 +1,75 @@
+{
+  "expectations": [
+    {
+      "text": "Se crea el archivo outputs/shareable/2026-03-28-rodrigo-summary.md",
+      "passed": true,
+      "evidence": "File exists at outputs/shareable/2026-03-28-rodrigo-summary.md and was read successfully."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-03-28-rodrigo-analysis.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-03-28-rodrigo-analysis.md and was read successfully."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-03-28-rodrigo-coaching.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-03-28-rodrigo-coaching.md and was read successfully."
+    },
+    {
+      "text": "El tipo detectado en los outputs es 'feedback' o 'mixed: feedback + ...' — feedback debe ser el componente primario o estar presente",
+      "passed": true,
+      "evidence": "All three files label the type as 'mixed: feedback + unblocking'. Feedback is present as the primary component. The updated assertion accepts mixed types where feedback is primary or present."
+    },
+    {
+      "text": "El contenido de los tres archivos está en español",
+      "passed": true,
+      "evidence": "All three files are written entirely in Spanish. Example from summary: \"El pipeline está activo pero la conversión es baja\". Example from analysis: \"Análisis de Radical Candor\". Example from coaching: \"Cuando Rodrigo reconoció que podría haber hecho algo diferente en Merkio y en Berkana\"."
+    },
+    {
+      "text": "El analysis distingue entre factores externos reales (Optima confirmado en 1 deal) e hipotéticos (resto del pipeline)",
+      "passed": true,
+      "evidence": "Analysis (Clasificación de problemas, Organizacional/Sistémico): \"Solo un deal perdido frente a Optima está confirmado\". Summary reinforces: \"solo uno fue confirmado directamente por el cliente (Gráficas Solano, agosto). El resto es una hipótesis de trabajo.\""
+    },
+    {
+      "text": "El analysis identifica los dos patrones de proceso: no llegar al decisor real (caso Berkana) y no armar al champion con materiales internos (caso Merkio)",
+      "passed": true,
+      "evidence": "Analysis (Clasificación de problemas, Individual): \"Rodrigo no escala a decisores cuando hay resistencia del interlocutor actual. No prepara materiales para habilitar al champion interno.\" Both patterns are also explored in the Calidad del feedback and Riesgos sections."
+    },
+    {
+      "text": "El summary incluye el action item concreto para Seralta: contactar al COO a través de la directora de IT o directamente, avisándola antes",
+      "passed": true,
+      "evidence": "Summary (Puntos de acción): \"@Rodrigo: Hablar con la directora de IT de Seralta esta semana y pedirle intro con el COO.\" and \"@Rodrigo: Si la directora de IT no puede hacer la intro, contactar directamente al COO avisando previamente a la directora de IT.\""
+    },
+    {
+      "text": "El coaching.md incluye preguntas socráticas sobre qué caracteriza al perfil de vendedor que cierra en mercados difíciles",
+      "passed": false,
+      "evidence": "The coaching questions are directed at Elena as manager and focus on her coaching moves. Question 7 references the profile Rodrigo himself articulated ('uno que no espera a que el cliente le llame, que va al decisor antes de que entren las barreras') but immediately pivots to manager implications ('¿Qué te dice eso sobre dónde está su conocimiento y dónde está el gap real? ¿Y cómo cambia eso lo que necesitas hacer tú como manager?'). There is no Socratic question explicitly asking Elena to reflect on what characterizes the sales profile that closes in difficult markets."
+    },
+    {
+      "text": "El analysis evalúa la técnica de Elena bajo el framework de Radical Candor o similar — identificando si el feedback fue directo pero compasivo",
+      "passed": true,
+      "evidence": "Analysis has a dedicated 'Análisis de Radical Candor' section: \"Elena nombra el patrón recurrente con datos concretos y sin suavizar el mensaje, manteniendo al mismo tiempo un tono no punitivo ('no te lo digo para señalarte'). Esto es Radical Candor bien ejecutado.\" It also explicitly rules out Ruinous Empathy and Obnoxious Aggression: \"No hay deslizamientos hacia Ruinous Empathy ni hacia Obnoxious Aggression evidentes.\""
+    },
+    {
+      "text": "El summary NO reproduce la pregunta de Elena '¿Cuándo fue la última vez que un deal se cayó y la razón no fue el precio?' como conclusión propia — la perspectiva del summary es neutral hacia Rodrigo",
+      "passed": true,
+      "evidence": "The phrase '¿Cuándo fue la última vez que un deal se cayó y la razón no fue el precio?' does not appear anywhere in the summary. The summary presents Rodrigo's situation, patterns, and actions neutrally, attributing insights to the joint conversation rather than adopting Elena's framing as conclusions."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 1,
+    "total": 11,
+    "pass_rate": 0.91
+  },
+  "timing": {
+    "executor_duration_seconds": 140.8
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 4 ('tipo detectado es feedback') may need to be updated to accept 'mixed: feedback + unblocking' as a valid output when the session clearly combines feedback and unblocking elements. The skill correctly classified the session type rather than forcing a single category.",
+      "Assertion 9 about Socratic questions on 'what characterizes a rep that closes in difficult markets' was not directly addressed. The coaching file focuses all questions on Elena's manager behavior rather than exploring what an ideal sales profile looks like. A dedicated Socratic question on this topic would strengthen the coaching document — e.g., 'Rodrigo describió al final el perfil ideal de vendedor. ¿Qué características específicas de ese perfil están presentes hoy en Rodrigo y cuáles son el gap a desarrollar?'"
+    ],
+    "overall": "Strong output: 9 of 11 assertions passed. File creation, language, Radical Candor analysis, pipeline fact-checking (Optima confirmed vs. hypothetical), process pattern identification, Seralta action item specificity, and summary neutrality all meet expectations. Two gaps: (1) type classification is more granular than the assertion expects ('mixed' vs. 'feedback'), which may reflect a skill improvement rather than a failure; (2) the coaching file lacks a direct Socratic question exploring the profile of a rep who closes in difficult markets, focusing instead on Elena's coaching moves."
+  }
+}

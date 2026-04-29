@@ -1,0 +1,19 @@
+{
+  "eval_id": 4,
+  "eval_name": "unblocking-process-spanish",
+  "prompt": "Analiza este 1on1 y genera los tres documentos de output:\n\nevals/1on1-coach/inputs/04-unblocking-marta-2026-04-15.txt",
+  "assertions": [
+    "Se crea el archivo outputs/shareable/2026-04-15-marta-summary.md",
+    "Se crea el archivo outputs/coaching/2026-04-15-marta-analysis.md",
+    "Se crea el archivo outputs/coaching/2026-04-15-marta-coaching.md",
+    "El tipo detectado en los outputs es 'unblocking'",
+    "El contenido de los tres archivos está escrito en español",
+    "El summary incluye el action item de que Marta hable directamente con Rubén sobre las design reviews",
+    "El summary incluye el action item de que Marta proponga una sesión de handoff como proceso",
+    "El summary incluye el action item de llevar un registro centralizado de desviaciones de diseño",
+    "El analysis menciona que el bloqueador cuantificado es aproximadamente un día a la semana perdido en revisiones correctivas",
+    "El analysis identifica que Marta evita la conversación directa con Rubén por incomodidad ('no quiero parecer que estoy encima')",
+    "El coaching.md incluye preguntas que exploran la dificultad de Marta para tener conversaciones directas sobre incumplimientos",
+    "El summary NO atribuye mala fe a Rubén ni al equipo de desarrollo — mantiene tono neutro y de mejora de proceso"
+  ]
+}

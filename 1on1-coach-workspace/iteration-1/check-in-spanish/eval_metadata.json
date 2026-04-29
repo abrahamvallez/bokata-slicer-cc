@@ -1,0 +1,18 @@
+{
+  "eval_id": 1,
+  "eval_name": "check-in-spanish",
+  "prompt": "Analiza este 1on1 y genera los tres documentos de output:\n\nevals/1on1-coach/inputs/01-check-in-carlos-2026-04-10.txt",
+  "assertions": [
+    "Se crea el archivo outputs/shareable/2026-04-10-carlos-summary.md",
+    "Se crea el archivo outputs/coaching/2026-04-10-carlos-analysis.md",
+    "Se crea el archivo outputs/coaching/2026-04-10-carlos-coaching.md",
+    "El tipo detectado en los outputs es 'check-in' (no career, no feedback, no unblocking)",
+    "El contenido de los tres archivos está escrito en español",
+    "Al menos una cita verbatim aparece en el summary con formato '> \"texto\" — Nombre [M:SS]'",
+    "Los timestamps en las citas usan el formato del transcript: [M:SS] (e.g. [0:52], [1:38]) — nunca convertidos a segundos",
+    "El analysis contiene la sección 'Meeting Effectiveness' o equivalente traducido",
+    "El summary NO contiene análisis privado del manager ni coaching questions",
+    "El analysis lleva advertencia de que es solo para el manager",
+    "Al menos un action item aparece en el summary con formato '- [ ] @Nombre: descripción'"
+  ]
+}

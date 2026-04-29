@@ -1,0 +1,18 @@
+{
+  "eval_id": 2,
+  "eval_name": "career-english",
+  "prompt": "Process this 1on1 transcript and generate the three output documents:\n\nevals/1on1-coach/inputs/02-career-alex-2026-03-15.txt",
+  "assertions": [
+    "Se crea el archivo outputs/shareable/2026-03-15-alex-summary.md",
+    "Se crea el archivo outputs/coaching/2026-03-15-alex-analysis.md",
+    "Se crea el archivo outputs/coaching/2026-03-15-alex-coaching.md",
+    "El tipo detectado en los outputs es 'career'",
+    "El contenido de los tres archivos está escrito en inglés",
+    "Al menos una cita verbatim aparece con timestamps en formato [HH:MM:SS] (e.g. [00:01:52]) — respetando el formato del transcript de Otter.ai",
+    "El analysis incluye una sección de Career & Development (o traducida) dado el tipo 'career'",
+    "El analysis menciona el momento de feedback de Sarah sobre el checkout flow project",
+    "El summary incluye los dos action items concretos: que Alex lidere el architecture sync y que Sarah confirme presupuesto para la conferencia",
+    "El coaching.md contiene preguntas de tipo socrático (no afirmaciones, sino preguntas abiertas)",
+    "El summary NO contiene juicios privados sobre el manager ni áreas de mejora del manager"
+  ]
+}

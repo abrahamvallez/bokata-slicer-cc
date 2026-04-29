@@ -1,0 +1,81 @@
+{
+  "expectations": [
+    {
+      "text": "Se crea el archivo outputs/shareable/2026-04-15-marta-summary.md",
+      "passed": true,
+      "evidence": "File exists at outputs/shareable/2026-04-15-marta-summary.md, confirmed by directory listing."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-15-marta-analysis.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-15-marta-analysis.md, confirmed by directory listing."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-15-marta-coaching.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-15-marta-coaching.md, confirmed by directory listing."
+    },
+    {
+      "text": "El tipo detectado en los outputs es 'unblocking'",
+      "passed": true,
+      "evidence": "All three files explicitly state the type. Summary line 5: '**Tipo de 1on1:** unblocking'. Analysis line 8: '**Tipo de 1on1:** `unblocking`'. Coaching line 7: '**Tipo de 1on1:** unblocking'."
+    },
+    {
+      "text": "El contenido de los tres archivos está escrito en español",
+      "passed": true,
+      "evidence": "All three files are entirely written in Spanish. Summary opens with '# Resumen de la reunión'; analysis opens with '# Análisis de la reunión'; coaching opens with '# Coaching Socrático'. No English content found."
+    },
+    {
+      "text": "El summary incluye el action item de que Marta hable directamente con Rubén sobre las design reviews",
+      "passed": true,
+      "evidence": "Summary line 42: '- [ ] @Marta: Pedir a Rubén directamente que asista a las design reviews semanales, explicando el impacto de su ausencia en la implementación.' Also reinforced in body: 'Marta pedirá a Rubén de forma directa y clara que asista a las design reviews'."
+    },
+    {
+      "text": "El summary incluye el action item de que Marta proponga una sesión de handoff como proceso",
+      "passed": true,
+      "evidence": "Summary line 41: '- [ ] @Marta: Proponer formalmente a Rubén la incorporación de sesiones de handoff de media hora al terminar cada flujo.' Also in body: 'Marta llevará la propuesta de sesiones de handoff formalmente a Rubén, enmarcándola como una mejora de proceso'."
+    },
+    {
+      "text": "El summary incluye el action item de llevar un registro centralizado de desviaciones de diseño",
+      "passed": true,
+      "evidence": "Summary line 43: '- [ ] @Marta: Crear un registro centralizado de desviaciones (fecha, qué cambió, si se corrigió o no).' Also mentioned in body: 'Marta comenzará a llevar un registro centralizado de las desviaciones (fecha, qué se desvirtuó, si se corrigió)'."
+    },
+    {
+      "text": "El analysis menciona que el bloqueador cuantificado es aproximadamente un día a la semana perdido en revisiones correctivas",
+      "passed": true,
+      "evidence": "Analysis line 49: 'Marta está absorbiendo trabajo de revisión de calidad que no es suyo (casi un día a la semana)'. Quote cited in analysis line 50: '\"Hay semanas que me lleva casi un día entre revisar, documentar, hacer el seguimiento...\" — Marta [3:02]'."
+    },
+    {
+      "text": "El analysis identifica que Marta evita la conversación directa con Rubén por incomodidad ('no quiero parecer que estoy encima')",
+      "passed": true,
+      "evidence": "Analysis lines 36-38 in 'Seguridad psicológica' section: 'no quiero parecer que estoy encima' is listed as an explicit marker. Full quote: 'Los marcadores son claros: \"no sé si eso me corresponde a mí\", \"no quiero parecer que estoy encima\", \"no quiero que parezca que le estoy echando la bronca.\"'"
+    },
+    {
+      "text": "El coaching.md incluye preguntas que exploran la dificultad de Marta para tener conversaciones directas sobre incumplimientos",
+      "passed": true,
+      "evidence": "Coaching question 3 directly addresses this: 'Marta mostró hesitación recurrente a la hora de dar visibilidad de problemas hacia Rubén y hacia Jaime —con expresiones muy concretas sobre no querer parecer que se queja o que está encima. ¿Qué crees que hay debajo de esa hesitación, y qué dice sobre el entorno en el que trabaja?' Question 5 also probes when Rubén's non-compliance requires direct manager intervention."
+    },
+    {
+      "text": "El summary NO atribuye mala fe a Rubén ni al equipo de desarrollo — mantiene tono neutro y de mejora de proceso",
+      "passed": true,
+      "evidence": "The summary describes Rubén's behavior factually and neutrally: 'ha asistido solo una vez en las últimas cuatro semanas'. Action items are framed as process improvements: 'enmarcándola como una mejora de proceso, no como una queja'. No attribution of bad intent or blame language appears in the shareable document."
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "failed": 0,
+    "total": 12,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 191.2
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "The coaching questions could more directly probe Marta's specific difficulty with Rubén (incumplimiento de compromisos) vs. the broader pattern of escalation hesitancy — question 3 covers the general pattern well but doesn't isolate the Rubén dynamic specifically.",
+      "The analysis correctly identifies the 'no quiero parecer que estoy encima' quote, but it appears in the context of Jaime (not Rubén) in the original conversation. The analysis extrapolates this to Rubén correctly but could be more explicit about the distinction.",
+      "The summary's neutral framing of Rubén is well executed. A future improvement could be adding an explicit note that tone was intentionally kept neutral for shareability."
+    ],
+    "overall": "Perfect pass rate (12/12). All three files were created with correct names and dates. The skill correctly identified the session type as 'unblocking', produced all content in Spanish, captured all three action items in the summary's task list, quantified the time blocker (~1 day/week), surfaced Marta's psychological safety pattern including the 'no quiero parecer que estoy encima' marker, included coaching questions targeting direct-conversation difficulty, and maintained a neutral, process-improvement tone throughout the shareable document. The output quality is high across all dimensions."
+  }
+}

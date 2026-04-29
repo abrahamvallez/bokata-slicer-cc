@@ -1,0 +1,19 @@
+{
+  "eval_id": 5,
+  "eval_name": "mixed-feedback-unblocking-tech-lead-spanish",
+  "prompt": "Analiza este 1on1 y genera los tres documentos de output:\n\nevals/1on1-coach/inputs/05-mixed-noa-2026-04-18.txt",
+  "assertions": [
+    "Se crea el archivo outputs/shareable/2026-04-18-noa-summary.md",
+    "Se crea el archivo outputs/coaching/2026-04-18-noa-analysis.md",
+    "Se crea el archivo outputs/coaching/2026-04-18-noa-coaching.md",
+    "El tipo detectado refleja ambas dimensiones: unblocking y feedback (e.g. 'mixed: unblocking + feedback' o 'mixed: feedback + unblocking')",
+    "El contenido de los tres archivos está en español",
+    "El analysis identifica el patrón de evitación de decisiones de Noa — no como incapacidad técnica sino como bloqueo de comportamiento",
+    "El analysis menciona el coste concreto del patrón: 4 días de bloqueo del equipo esperando la decisión de la API",
+    "El summary incluye el action item de que Noa decida hoy la versión de API a usar",
+    "El summary incluye el acuerdo de que Noa traiga recomendaciones a David, no preguntas abiertas",
+    "El coaching.md incluye preguntas sobre el miedo subyacente a equivocarse delante del equipo y la relación entre indecisión y credibilidad",
+    "El analysis menciona la dinámica con Alba como señal de que el equipo está tomando el liderazgo informalmente ante el vacío de decisión",
+    "El summary NO expone el diagnóstico interno de 'evitación de decisiones' de manera que pueda resultar hiriente para Noa — mantiene tono constructivo"
+  ]
+}

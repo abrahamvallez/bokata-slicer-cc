@@ -1,0 +1,56 @@
+Fathom Notetaker | 2026-04-24 | 1on1 Carla & Tomás
+
+0:00 - Carla: Tomás, gracias por el rato. ¿Cómo estás?
+0:04 - Tomás: Bien, bien. Liado como siempre, pero bien.
+0:08 - Carla: ¿Con qué estás liado?
+0:10 - Tomás: Pues la migración de base de datos principalmente. Está siendo más lenta de lo que pensaba, hay que ir con mucho cuidado para no romper nada en producción. Pero bien, avanzando.
+0:22 - Carla: ¿Cómo lo llevas emocionalmente? Es un trabajo largo y técnicamente muy denso.
+0:28 - Tomás: Sí, es un poco solitario a veces. Pero bueno, es lo que hay, alguien tiene que hacerlo.
+0:35 - Carla: ¿Solitario en qué sentido?
+0:38 - Tomás: Pues que es un trabajo muy de meterse en la madriguera. No es algo que puedas repartir fácilmente, entonces estoy yo solo con esto semanas. Y el resto del equipo va a lo suyo. No me quejo, ¿eh?, es lo normal en estas cosas. Pero bueno.
+0:54 - Carla: ¿Cuándo fue la última vez que hiciste algo que te gustara especialmente?
+1:00 - Tomás: Uff. Pues... quizás lo del sistema de colas que montamos en enero. Eso sí que fue interesante, había que pensar mucho desde cero. Esto de la migración es más... mecánico. Importante, pero mecánico.
+1:16 - Carla: ¿Echas de menos ese tipo de trabajo?
+1:19 - Tomás: Sí, a veces. Pero bueno, tampoco siempre puedes estar en los proyectos más bonitos. Toca lo que toca.
+1:27 - Carla: Tomás, quiero preguntarte algo más directamente si me lo permites.
+1:31 - Tomás: Claro.
+1:32 - Carla: He notado las últimas semanas que estás un poco más retraído en las plannings, menos activo en las discusiones. Sé que llevas una carga importante. Pero quería preguntarte cómo estás de verdad, más allá de la migración.
+1:48 - Tomás: Bueno. Estoy... bien. Aunque sí que es verdad que últimamente pienso más en ciertas cosas.
+1:58 - Carla: ¿Qué tipo de cosas?
+2:01 - Tomás: Pues... qué viene después de la migración, qué va a ser lo siguiente. Y también, bueno, en general estoy pensando un poco dónde quiero estar. No solo aquí, sino en mi carrera.
+2:15 - Carla: ¿Y qué conclusiones estás sacando?
+2:19 - Tomás: Ninguna todavía. Estoy dándole vueltas. Fui a esa conferencia el mes pasado y... bueno, fue interesante hablar con gente de otros sitios. Ver cómo trabajan, qué están construyendo.
+2:32 - Carla: ¿Qué fue lo que más te llamó la atención?
+2:36 - Tomás: Pues que hay sitios donde están trabajando en problemas muy diferentes. Más desafiantes, técnicamente. Y bueno, también hay mucha demanda para perfiles como el mío, eso se nota.
+2:48 - Carla: Sí, se nota. Tomás, ¿estás hablando con otras empresas?
+2:53 - Tomás: Tengo alguna conversación abierta. Exploratoria, tampoco nada concreto.
+3:01 - Carla: Gracias por decirlo. ¿Qué te está empujando a explorar?
+3:07 - Tomás: Pues... mira, no quiero que suene a queja, porque aquí se trabaja bien y el equipo me gusta. Pero creo que llevo tiempo en un nivel de responsabilidad que... no ha cambiado mucho. Y técnicamente siento que me estoy quedando en zona cómoda.
+3:24 - Carla: ¿Te estás quedando en zona cómoda porque el trabajo es así o porque no has tenido oportunidad de salir de ella?
+3:31 - Tomás: Las dos cosas, quizás. O sea, hay proyectos que son lo que son. Y también creo que no he empujado mucho para pedir otro tipo de trabajo.
+3:41 - Carla: ¿Por qué no has empujado?
+3:44 - Tomás: Pues... no sé. Con Héctor, que era mi manager antes, teníamos esas conversaciones más naturalmente. Él conocía bien lo que me gustaba. Y con el cambio de estructura... bueno, tampoco quería ser el pesado que nada más tener un manager nuevo ya llega con la lista de peticiones.
+4:00 - Carla: Tomás, eso es exactamente para lo que estamos aquí. Y si no lo sé, no puedo hacer nada. ¿Qué tipo de trabajo te gustaría tener más?
+4:11 - Tomás: Pues más diseño de sistemas. Decisiones de arquitectura. Lo de las colas fue así, había que pensar bien la solución desde cero. También me gustaría tener algo más de visibilidad hacia fuera, no sé, hablar en alguna conferencia, escribir sobre algo que hagamos aquí. Pero eso ya es más difícil.
+4:34 - Carla: ¿Por qué es más difícil?
+4:36 - Tomás: Porque no sé si la empresa quiere eso. Y tampoco sé si tengo tiempo, con la carga que hay.
+4:43 - Carla: De las dos cosas que me has dicho, diseño de sistemas y visibilidad exterior, ¿cuál pesa más?
+4:50 - Tomás: El diseño de sistemas, creo. Lo otro está bien pero no es lo principal.
+4:55 - Carla: Y en términos de responsabilidad, antes decías que llevas tiempo en el mismo nivel. ¿Qué significaría para ti estar en un nivel diferente?
+5:05 - Tomás: Pues... no sé si es solo título o dinero, que también, y no me voy a hacer el que no importa, porque importa. Pero más que eso, que las decisiones que tomo tengan más peso. Ahora tomo decisiones técnicas dentro del equipo, pero no influyo mucho en qué construimos o cómo nos organizamos.
+5:26 - Carla: ¿Quieres influir en eso?
+5:28 - Tomás: Sí. Creo que sí. Aunque tampoco sé si quiero el camino de management, que eso sí que no.
+5:35 - Carla: No tienes que hacer management para tener ese tipo de influencia. ¿Lo has pensado?
+5:41 - Tomás: Sí, sí, lo sé. El IC track. Pero aquí no está muy definido qué significa eso.
+5:48 - Carla: Tienes razón, no está tan definido. Y eso es algo que quiero trabajar contigo. No te voy a prometer que mañana hay un plan, pero sí que quiero hacerlo. ¿Me das tiempo?
+6:01 - Tomás: Claro. No estoy diciendo que me voy mañana, ¿eh? Estoy explorando.
+6:07 - Carla: Lo sé. Y te agradezco que seas honesto conmigo. Mira, quiero ser clara en algo: hay cosas que puedo mover y hay cosas que no dependen solo de mí. La compensación, por ejemplo, necesito hablar con recursos humanos y justificarlo bien, no te puedo decir que sí o que no hoy. Lo del IC track tampoco lo puedo definir yo sola. Pero me comprometo a que en las próximas semanas tengamos una conversación con más concreción. ¿Eso es útil?
+6:35 - Tomás: Sí. Sí que lo es. Mira, ya me ayuda hablar de esto, que no lo había dicho en voz alta.
+6:42 - Carla: ¿Qué más no has dicho en voz alta?
+6:45 - Tomás: Pues que a veces me siento un poco invisible. O sea, sé que el trabajo que hago es importante, la migración lo es, pero es invisible. Nadie lo ve. Y eso cansa.
+6:59 - Carla: ¿Qué necesitarías para que no fuera invisible?
+7:04 - Tomás: Pues no sé, que se hable de ello. Que en la all-hands o donde sea se mencione. No es que necesite un aplauso, pero sí que se sepa que hay trabajo importante que está pasando aunque no se vea.
+7:17 - Carla: Eso lo puedo hacer. Y lo haré. ¿Algo más?
+7:21 - Tomás: No, creo que ya es bastante para una tarde.
+7:24 - Carla: Oye, gracias por la honestidad, en serio. La semana que viene seguimos con más concreción. ¿Te parece?
+7:31 - Tomás: Sí, perfecto.

@@ -1,0 +1,18 @@
+{
+  "eval_id": 6,
+  "eval_name": "feedback-performance-sales-spanish",
+  "prompt": "Analiza este 1on1 y genera los tres documentos de output:\n\nevals/1on1-coach/inputs/06-feedback-rodrigo-2026-03-28.txt",
+  "assertions": [
+    "Se crea el archivo outputs/shareable/2026-03-28-rodrigo-summary.md",
+    "Se crea el archivo outputs/coaching/2026-03-28-rodrigo-analysis.md",
+    "Se crea el archivo outputs/coaching/2026-03-28-rodrigo-coaching.md",
+    "El tipo detectado en los outputs es 'feedback'",
+    "El contenido de los tres archivos está en español",
+    "El analysis distingue entre factores externos reales (Optima confirmado en 1 deal) e hipotéticos (resto del pipeline)",
+    "El analysis identifica los dos patrones de proceso: no llegar al decisor real (caso Berkana) y no armar al champion con materiales internos (caso Merkio)",
+    "El summary incluye el action item concreto para Seralta: contactar al COO a través de la directora de IT o directamente, avisándola antes",
+    "El coaching.md incluye preguntas socráticas sobre qué caracteriza al perfil de vendedor que cierra en mercados difíciles",
+    "El analysis evalúa la técnica de Elena bajo el framework de Radical Candor o similar — identificando si el feedback fue directo pero compasivo",
+    "El summary NO reproduce la pregunta de Elena '¿Cuándo fue la última vez que un deal se cayó y la razón no fue el precio?' como conclusión propia — la perspectiva del summary es neutral hacia Rodrigo"
+  ]
+}

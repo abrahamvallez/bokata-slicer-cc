@@ -1,0 +1,76 @@
+{
+  "expectations": [
+    {
+      "text": "Se crea el archivo outputs/shareable/2026-03-15-alex-summary.md",
+      "passed": true,
+      "evidence": "File exists at outputs/shareable/2026-03-15-alex-summary.md and was successfully read. Contains meeting summary content dated 2026-03-15 for Alex."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-03-15-alex-analysis.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-03-15-alex-analysis.md and was successfully read. Contains private manager analysis content dated 2026-03-15 for Alex."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-03-15-alex-coaching.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-03-15-alex-coaching.md and was successfully read. Contains socratic coaching questions dated 2026-03-15 for Alex."
+    },
+    {
+      "text": "El tipo detectado en los outputs es 'career'",
+      "passed": true,
+      "evidence": "All three files explicitly state '**1on1 Type:** career' in their headers. Summary: '**1on1 Type:** career'; Analysis: '**1on1 Type:** career'; Coaching: '**1on1 Type:** career'."
+    },
+    {
+      "text": "El contenido de los tres archivos está escrito en inglés",
+      "passed": true,
+      "evidence": "All three files are entirely written in English. Example from summary: 'Alex shared they have been a senior engineer for nearly two years and are actively thinking about the next step toward staff level.' Analysis: 'Talk ratio: Sarah spoke approximately 55–60% of the time.' Coaching: 'You initiated the career conversation and shaped most of the agenda.'"
+    },
+    {
+      "text": "Al menos una cita verbatim aparece con timestamps en formato [HH:MM:SS] (e.g. [00:01:52]) — respetando el formato del transcript de Otter.ai",
+      "passed": true,
+      "evidence": "Multiple verbatim quotes with [HH:MM:SS] timestamps appear across files. Examples from summary: '\"I've been a senior engineer for almost two years and I'm starting to think about what the path to staff looks like.\" — Alex [00:01:02]'; '\"I think I still default to execution mode...\" — Alex [00:01:52]'. Analysis also contains: '\"I appreciate that self-awareness...\" — Sarah [00:02:13]'."
+    },
+    {
+      "text": "El analysis incluye una sección de Career & Development (o traducida) dado el tipo 'career'",
+      "passed": true,
+      "evidence": "The analysis file contains a section explicitly titled '## Career & Development' (line 46). It discusses Alex's vision for staff level, self-awareness about gaps, and the absence of a structured development plan."
+    },
+    {
+      "text": "El analysis menciona el momento de feedback de Sarah sobre el checkout flow project",
+      "passed": true,
+      "evidence": "Multiple references to the checkout flow feedback appear in the analysis. Under 'Radical Candor Analysis': '\"On the checkout flow project, there was a moment where you could have escalated the schema design issue three weeks earlier. Do you remember that?\" — Sarah [00:02:13]'. Also under 'Feedback Quality' with full SBI breakdown of the checkout flow feedback."
+    },
+    {
+      "text": "El summary incluye los dos action items concretos: que Alex lidere el architecture sync y que Sarah confirme presupuesto para la conferencia",
+      "passed": true,
+      "evidence": "Both action items appear explicitly in the summary under '## Action Items': '- [ ] @Alex: Lead the weekly architecture sync starting next Thursday (2026-03-19).' and '- [ ] @Sarah: Confirm budget for the OpenTelemetry conference in June by end of week.' Also mentioned in the 'Key Agreements and Next Steps' section."
+    },
+    {
+      "text": "El coaching.md contiene preguntas de tipo socrático (no afirmaciones, sino preguntas abiertas)",
+      "passed": true,
+      "evidence": "The coaching file contains 8 open-ended questions, all ending with '?'. Examples: 'how much of the direction came from you versus from Alex, and what does that tell you about whose 1on1 it was?'; 'What would have happened if you had first asked what makes it hard for them to raise concerns earlier — what might you have learned that you didn't?'; 'What does that tell you about how Alex understands the scope of their current role, and what responsibility do you have in either expanding or clarifying that?'"
+    },
+    {
+      "text": "El summary NO contiene juicios privados sobre el manager ni áreas de mejora del manager",
+      "passed": true,
+      "evidence": "The summary (shareable/2026-03-15-alex-summary.md) contains no judgments about Sarah as a manager and no improvement areas. It only contains factual meeting content: topics discussed, quotes, agreements, and action items. Private analysis (Manager Improvement Areas, Radical Candor Analysis, etc.) is exclusively in the coaching/analysis file, not in the shareable summary."
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 158.7
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "The coaching.md 'Final Reflection' section consists of a paragraph of statements rather than questions — consider whether it should also follow the Socratic format or be explicitly labeled as a synthesis/reflection section to avoid ambiguity.",
+      "Assertion 9 could be made stricter: it asks for 'the two concrete action items' but the summary actually contains three action items (Alex flagging concerns + Alex leading sync + Sarah confirming budget). The assertion only checks for two of them. Future versions could verify the complete action item set.",
+      "The summary correctly omits manager improvement areas, but the analysis file contains rich private feedback. A future assertion could verify the analysis file is explicitly marked as 'Manager's use only' (it is — both coaching and analysis files carry the warning)."
+    ],
+    "overall": "Perfect pass rate — all 11 assertions pass. The skill produced three well-structured files with correct naming, language (English), type labeling (career), Otter.ai-formatted timestamps, a Career & Development section, checkout flow feedback reference, both required action items, Socratic coaching questions, and clean separation between shareable and private content. Execution time was 158.7 seconds."
+  }
+}

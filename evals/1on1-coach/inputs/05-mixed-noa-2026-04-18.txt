@@ -1,0 +1,54 @@
+Fathom Notetaker | 2026-04-18 | 1on1 David & Noa
+
+0:00 - David: Noa, ¿cómo estás? ¿Cómo va llevando todo?
+0:04 - Noa: Bien, bien. Ajetreado como siempre. Estamos peleando con la integración de pagos que tiene más chicha de lo que parecía, pero vamos avanzando.
+0:15 - David: ¿Qué tipo de chicha?
+0:18 - Noa: Pues que el proveedor tiene dos versiones de API y no está claro cuál tenemos que usar. Yo le pregunté a Paloma y me dijo que lo consultara contigo. Y tú el martes me dijiste que era decisión técnica. Entonces llevamos desde el lunes con esto un poco en el aire.
+0:34 - David: ¿Y qué piensas tú?
+0:36 - Noa: Yo creo que deberíamos usar la v2, es la más reciente y tiene mejor soporte. Pero no quería tomar la decisión sin confirmación porque si luego hay algo que no hemos visto...
+0:48 - David: ¿Qué podría haber que no hayáis visto?
+0:51 - Noa: Pues no sé, que haya algún requisito de compliance que no conozco, o que Paloma haya hablado con el proveedor y sepa algo que yo no sé.
+1:01 - David: ¿Le has preguntado a Paloma si habló con el proveedor?
+1:04 - Noa: No, no le pregunté eso específicamente.
+1:07 - David: Vale. ¿Y si te digo que puedes tomar esa decisión tú? Con la información que tienes.
+1:13 - Noa: Sí, o sea, podría. Pero si me equivoco y hay que rehacer algo...
+1:19 - David: ¿Cuánto costaría rehacer si os equivocáis?
+1:22 - Noa: Pues... medio sprint, quizás. Una semana.
+1:26 - David: ¿Y cuánto lleva bloqueado el equipo esperando esta decisión?
+1:30 - Noa: Desde el lunes. Cuatro días.
+1:32 - David: O sea que ya habéis perdido casi una semana esperando a que alguien os dijera algo que vosotros ya sabíais.
+1:39 - Noa: Hm. Sí. Dicho así...
+1:43 - David: ¿Esto pasa mucho? ¿El equipo esperando a que llegue la decisión de fuera?
+1:48 - Noa: A ver, no siempre es tan largo. Pero sí que... hay cosas que... es que me cuesta distinguir qué es decisión mía y qué no. Antes, cuando estaba Marcos, él tomaba esas decisiones y yo ejecutaba. Y ahora que soy yo la que tiene que decidir, no sé, me pesa más.
+2:08 - David: ¿Qué es lo que te pesa?
+2:11 - Noa: Equivocarme, supongo. O que el equipo luego diga, mira cómo decidió. Es que Alba y Felipe llevan más tiempo en la empresa que yo, aunque yo tenga el rol de tech lead.
+2:24 - David: ¿Te han dado alguna señal de que cuestionen tus decisiones?
+2:28 - Noa: No directamente. Pero a veces en las discusiones técnicas Alba propone algo diferente y yo digo, bueno, vamos a consultar, y creo que preferiría que yo dijera, no, hacemos esto.
+2:41 - David: ¿Y en ese momento qué haces tú normalmente?
+2:45 - Noa: Pues abro para debate. Que el equipo llegue a consenso.
+2:49 - David: ¿Siempre?
+2:51 - Noa: Casi siempre. Es que... no quiero ser jerárquica, ¿sabes? Me gusta el trabajo en equipo.
+2:58 - David: Sí, lo entiendo. Pero hay una diferencia entre ser colaborativa y no tomar decisiones. ¿Cómo de rápido llegan al consenso normalmente?
+3:08 - Noa: Depende. A veces rápido, pero a veces la discusión se alarga y queda un poco en el aire. O me lo llevan a mí para que yo desempate, pero llegados ahí ya hemos perdido tiempo.
+3:22 - David: O sea que al final tomas la decisión igualmente, pero después de más tiempo.
+3:27 - Noa: Sí. Sí, supongo que sí.
+3:30 - David: Noa, ¿puedo decirte algo que estoy observando?
+3:33 - Noa: Claro.
+3:34 - David: Creo que eres muy capaz técnicamente y el equipo te respeta. Pero hay un patrón que veo, y me lo llevas contando sin darte cuenta: la API, el consenso, traerme cosas que podrías decidir tú. Creo que estás evitando apropiarte de las decisiones. Y el equipo lo nota. No porque seas mala tech lead, sino porque está esperando que alguien lidere y esa persona eres tú.
+3:58 - Noa: Uf. Sí. O sea, sí que lo veo mientras lo dices. Es que la palabra decidir me da... no sé. Responsabilidad en solitario, supongo.
+4:10 - David: ¿Y de qué tienes miedo exactamente cuando decides sola?
+4:14 - Noa: De equivocarme delante del equipo. Y de que luego digan, ¿ves? Y que pierda la credibilidad que tengo.
+4:22 - David: ¿Y si te equivocas y lo reconoces? ¿Qué pasaría?
+4:26 - Noa: Hm. Pues supongo que... nada, ¿no? O sea, todo el mundo se equivoca. Pero se me hace raro decirlo.
+4:34 - David: Los líderes que más respeto generan son los que deciden rápido, se equivocan, lo reconocen y corrigen. Lo que sí erosiona la credibilidad es la indecisión. El equipo se queda sin dirección y empieza a tomar las riendas por su cuenta, que es lo que estás viendo con Alba.
+4:54 - Noa: Sí. Creo que lo estoy haciendo un poco con ella, que va un poco por libre porque yo no marco bien el rumbo.
+5:03 - David: ¿Qué podrías cambiar esta semana?
+5:07 - Noa: Pues lo de la API, decidirlo hoy. Y... intentar en las discusiones técnicas ser yo quien cierre, en vez de siempre abrir.
+5:17 - David: Me parece bien. Y cuando te venga el impulso de consultarme algo, párate un segundo y pregúntate: ¿tengo suficiente información para decidir esto yo? Si la respuesta es sí, decide. Si realmente necesitas algo de mí, me lo traes, pero junto con tu recomendación, no como pregunta abierta.
+5:35 - Noa: O sea, que te diga lo que haría yo, no solo el problema.
+5:39 - David: Exacto. Y así yo también puedo ayudarte mejor, porque te doy feedback sobre tu razonamiento, no te doy la respuesta.
+5:46 - Noa: Tiene mucho sentido. ¿Y con Paloma cómo lo manejo? Porque ella también me da cosas técnicas preguntándomelas a mí.
+5:56 - David: Con Paloma igual. Si ella te pregunta algo técnico, es tu terreno. Respóndele directamente, no me metas en el loop a no ser que escale a decisión de negocio o de producto.
+6:08 - Noa: Vale. Lo voy a intentar. Y si me equivoco, te lo cuento.
+6:14 - David: Para eso estamos. ¿Algo más?
+6:17 - Noa: No, creo que ya. Gracias.

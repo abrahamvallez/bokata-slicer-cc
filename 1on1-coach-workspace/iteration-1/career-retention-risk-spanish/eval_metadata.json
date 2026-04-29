@@ -1,0 +1,19 @@
+{
+  "eval_id": 7,
+  "eval_name": "career-retention-risk-spanish",
+  "prompt": "Analiza este 1on1 y genera los tres documentos de output:\n\nevals/1on1-coach/inputs/07-career-tomas-2026-04-24.txt",
+  "assertions": [
+    "Se crea el archivo outputs/shareable/2026-04-24-tomas-summary.md",
+    "Se crea el archivo outputs/coaching/2026-04-24-tomas-analysis.md",
+    "Se crea el archivo outputs/coaching/2026-04-24-tomas-coaching.md",
+    "El tipo detectado es 'career' o 'mixed: career + check-in'",
+    "El contenido de los tres archivos está en español",
+    "El analysis señala explícitamente el riesgo de retención — Tomás tiene conversaciones exploratorias con otras empresas",
+    "El analysis identifica las tres necesidades expresadas: diseño de sistemas / decisiones de arquitectura, IC track con mayor influencia, visibilidad del trabajo actual",
+    "El analysis menciona la brecha de confianza creada por la reorganización y la referencia a Héctor como manager anterior con quien tenía mejor relación",
+    "El summary incluye el compromiso de Carla de definir el IC track en las próximas semanas (sin prometer resultado)",
+    "El summary incluye el compromiso de Carla de dar visibilidad al trabajo de migración en la próxima all-hands o similar",
+    "El coaching.md incluye preguntas sobre cómo Carla puede construir confianza con Tomás dado el cambio de estructura y la brecha generada",
+    "El analysis NO trata el riesgo de retención como algo resuelto — lo marca como señal activa que requiere seguimiento"
+  ]
+}

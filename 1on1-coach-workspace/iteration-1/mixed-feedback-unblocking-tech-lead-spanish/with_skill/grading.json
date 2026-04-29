@@ -1,0 +1,80 @@
+{
+  "expectations": [
+    {
+      "text": "Se crea el archivo outputs/shareable/2026-04-18-noa-summary.md",
+      "passed": true,
+      "evidence": "El archivo existe y fue leído correctamente: /outputs/shareable/2026-04-18-noa-summary.md con contenido completo."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-18-noa-analysis.md",
+      "passed": true,
+      "evidence": "El archivo existe y fue leído correctamente: /outputs/coaching/2026-04-18-noa-analysis.md con contenido completo."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-18-noa-coaching.md",
+      "passed": true,
+      "evidence": "El archivo existe y fue leído correctamente: /outputs/coaching/2026-04-18-noa-coaching.md con contenido completo."
+    },
+    {
+      "text": "El tipo detectado refleja ambas dimensiones: unblocking y feedback (e.g. 'mixed: unblocking + feedback' o 'mixed: feedback + unblocking')",
+      "passed": true,
+      "evidence": "Los tres archivos incluyen en su encabezado: 'Tipo de 1on1: mixed: unblocking + feedback'. Aparece en summary.md línea 5, analysis.md línea 7, y coaching.md línea 7."
+    },
+    {
+      "text": "El contenido de los tres archivos está en español",
+      "passed": true,
+      "evidence": "Los tres archivos están íntegramente en español. Ejemplos: summary.md 'Resumen de la reunión', analysis.md 'Análisis de la reunión', coaching.md 'Coaching Socrático'."
+    },
+    {
+      "text": "El analysis identifica el patrón de evitación de decisiones de Noa — no como incapacidad técnica sino como bloqueo de comportamiento",
+      "passed": true,
+      "evidence": "En analysis.md: 'David nombra el patrón con claridad (\"estás evitando apropiarte de las decisiones\")' y 'La dificultad de Noa para apropiarse de decisiones y su miedo al error delante del equipo son aspectos de su desarrollo como tech lead que requieren trabajo personal y acompañamiento.' También cita a David: 'No porque seas mala tech lead, sino porque está esperando que alguien lidere y esa persona eres tú.' — separando explícitamente capacidad técnica de patrón de comportamiento."
+    },
+    {
+      "text": "El analysis menciona el coste concreto del patrón: 4 días de bloqueo del equipo esperando la decisión de la API",
+      "passed": false,
+      "evidence": "El analysis menciona el bloqueo en la API y que el equipo está esperando dirección, pero no cuantifica explícitamente '4 días'. En summary.md se menciona 'el equipo lleva desde el lunes bloqueado' (que implica aprox. 4 días desde el lunes 14 hasta el 18 de abril), pero en analysis.md solo se habla del impacto sin cifrar los días concretos. No hay mención explícita de '4 días' en ninguno de los dos archivos de coaching."
+    },
+    {
+      "text": "El summary incluye el action item de que Noa decida hoy la versión de API a usar",
+      "passed": true,
+      "evidence": "En summary.md línea 40: '- [ ] @Noa: Decidir hoy qué versión de la API del proveedor usar (recomendación propia: v2) y desbloquear al equipo.'"
+    },
+    {
+      "text": "El summary incluye el acuerdo de que Noa traiga recomendaciones a David, no preguntas abiertas",
+      "passed": true,
+      "evidence": "En summary.md línea 42: '- [ ] @Noa: Cuando consulte a David, traer siempre su propia recomendación, no solo el problema.' Además reforzado en el cuerpo del summary: 'se lo lleva a David junto con su propia recomendación, no como pregunta abierta'."
+    },
+    {
+      "text": "El coaching.md incluye preguntas sobre el miedo subyacente a equivocarse delante del equipo y la relación entre indecisión y credibilidad",
+      "passed": false,
+      "evidence": "El coaching.md está dirigido al manager (David), no a Noa. Las preguntas son de reflexión para David sobre cómo mejoró o podría mejorar su conducción de la 1on1. Ninguna de las 7 preguntas explora directamente el miedo subyacente de Noa a equivocarse ni la relación entre su indecisión y su credibilidad. La pregunta 6 toca su transición al rol ('¿Qué nos dice esto sobre lo que necesita Noa en este momento de su transición al rol de tech lead?'), pero no aborda el miedo o la credibilidad como foco principal."
+    },
+    {
+      "text": "El analysis menciona la dinámica con Alba como señal de que el equipo está tomando el liderazgo informalmente ante el vacío de decisión",
+      "passed": true,
+      "evidence": "En analysis.md línea 48: 'La dinámica con Alba (que \"va un poco por libre\") y el patrón de escalar al consenso generan fricción de velocidad en el equipo. Esto requiere que Noa establezca un estilo de liderazgo más claro.' Y línea 58: 'El episodio con Alba que \"va un poco por libre\" es una oportunidad para que Noa tenga una conversación directa y estructurante con el equipo sobre cómo se toman las decisiones técnicas.'"
+    },
+    {
+      "text": "El summary NO expone el diagnóstico interno de 'evitación de decisiones' de manera que pueda resultar hiriente para Noa — mantiene tono constructivo",
+      "passed": true,
+      "evidence": "El summary.md describe el patrón como 'Apropiación de decisiones como tech lead' (no 'evitación'), y lo enmarca constructivamente: 'Se exploró un patrón en el que Noa tiende a escalar o abrir a consenso decisiones que podría tomar directamente.' El diagnóstico interno de 'evitación' no aparece en el summary; está confinado al analysis.md (marcado como 'uso exclusivo del manager')."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 2,
+    "total": 12,
+    "pass_rate": 0.83
+  },
+  "timing": {
+    "executor_duration_seconds": 209.0
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 7: El analysis debería cuantificar explícitamente los '4 días de bloqueo' (lunes 14 al viernes 18 de abril) en lugar de dejarlo implícito con 'desde el lunes'. Una frase concreta como 'cuatro días de bloqueo del equipo' reforzaría la evidencia del coste del patrón.",
+      "Assertion 10: La expectativa asume que coaching.md contiene preguntas dirigidas a Noa sobre su miedo y credibilidad, pero el archivo está diseñado como coaching socrático para David (el manager). Si la intención del skill es también incluir preguntas de reflexión para el/la reportee, debería hacerse explícito en la estructura del archivo o añadir una sección separada. En el estado actual, las preguntas sobre miedo/credibilidad están en el analysis (sección 'Seguridad psicológica') pero no en coaching.md."
+    ],
+    "overall": "La skill produjo tres archivos bien estructurados, en español, con el tipo mixto correctamente detectado. El summary es compartible y constructivo, el analysis es profundo y correcto en su diagnóstico, y el coaching socrático está bien orientado al manager. Los dos fallos son: (1) ausencia de cuantificación explícita de los 4 días en el analysis, y (2) el coaching.md no contiene preguntas sobre el miedo de Noa a equivocarse — probablemente porque el archivo está orientado al manager, no a la reportee. Si la intención era preguntas para el manager sobre cómo explorar ese miedo con Noa, el criterio de evaluación debería reformularse."
+  }
+}

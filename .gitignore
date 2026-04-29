@@ -1,5 +1,5 @@
-# Eval workspaces — resultados efímeros de runs, no se commitean
-*-workspace/
+# Eval workspaces — se commitean métricas (benchmark, grading, timing) pero no los outputs generados
+*-workspace/**/outputs/
 
 # Python
 __pycache__/

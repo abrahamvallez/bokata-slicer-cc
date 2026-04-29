@@ -1,0 +1,42 @@
+Fathom Notetaker | 2026-04-15 | 1on1 Sofía & Marta
+
+0:00 - Sofía: Marta, venga, cuéntame. ¿Cómo va todo? ¿Cómo llevas el sprint?
+0:05 - Marta: Pues... a ver, el diseño en sí va bien, tengo ya todo el flujo de onboarding terminado, que eso me llevaba tiempo, y he empezado con el dashboard nuevo. Pero luego la implementación... es que eso es otra historia.
+0:20 - Sofía: ¿Qué está pasando con la implementación?
+0:23 - Marta: Que no lo están haciendo como está en Figma. O sea, no es que se estén saltando cosas por gusto, supongo, pero hay detalles que... mira, te pongo un ejemplo, el spacing del formulario de registro. Lo tengo especificado, lo tengo anotado en el componente, y Lucas lo ha implementado con el doble de margen. Claro, luego lo pruebo y digo, esto no es lo que diseñé. Y lo tengo que reportar, y Lucas dice que no lo vio, y vuelta a empezar.
+0:52 - Sofía: ¿Y eso está pasando solo con ese flujo o en general?
+0:56 - Marta: En general. Es que... no es una cosa puntual. El mes pasado fue con los estados vacíos, que los implementaron sin las ilustraciones, sin nada, texto plano. Y antes de eso fue con el modal de confirmación, que pusieron otro botón que yo no había diseñado. O sea, hay un patrón ahí.
+1:15 - Sofía: ¿Y cuando ves estas diferencias, cómo lo estáis gestionando? ¿Abrís un ticket, lo habláis directamente...?
+1:22 - Marta: Yo lo comento en el ticket de Jira, pongo una captura, comparo con Figma. A veces lo arreglan, a veces dicen que es así por algo técnico y ya. Y Rubén a veces dice que sí, que lo corregirán en el siguiente sprint, y luego no pasa.
+1:38 - Sofía: ¿Y Rubén está en el loop desde el principio, cuando diseñas?
+1:43 - Marta: En teoría sí, tenemos una design review los jueves. Pero es que... en las últimas cuatro semanas ha venido una vez. Una. El resto o no aparece o manda a Lucas, que no tiene mucho contexto de por qué las cosas están así. Entonces yo explico el diseño a Lucas, Lucas lo pasa a código, y si hay algo que no entiende toma una decisión solo.
+2:05 - Sofía: ¿Y tú has hablado con Rubén directamente de esto? No en el ticket, sino en una conversación.
+2:11 - Marta: Le mandé un mensaje hace dos semanas, algo tipo, oye, ¿puedes venir a la review que hay cosas que quiero alinear? Y me dijo que sí, y luego ese jueves no vino. Y no le di más vueltas porque... no sé, tampoco quiero parecer que estoy encima.
+2:28 - Sofía: Entiendo. ¿Y Jaime sabe que está pasando esto?
+2:32 - Marta: Jaime sabe que hay fricciones, le comenté algo por encima en la daily. Pero en plan muy de pasada, no le di el detalle. Es que tampoco sé si es mi sitio decirle a Jaime, oye, el equipo de desarrollo no está siguiendo los diseños. No sé si eso me corresponde a mí.
+2:50 - Sofía: Sí que te corresponde, Marta. No estás denunciando a nadie, estás dando visibilidad de que hay un problema de calidad que te afecta directamente. ¿Cuánto tiempo te está comiendo esto? Lo de revisar y reportar desviaciones.
+3:02 - Marta: Uff. Mucho más de lo que debería. Porque a veces lo cojo yo casi en QA, voy probando y apuntando. Hay semanas que me lleva casi un día entre revisar, documentar, hacer el seguimiento...
+3:15 - Sofía: Un día a la semana.
+3:17 - Marta: Sí, más o menos. Que es tiempo que podría estar diseñando el siguiente flujo, claro.
+3:22 - Sofía: Claro. Marta, ¿tú sabes por qué está pasando? O sea, si tuvieras que apostar, ¿qué crees que está fallando?
+3:30 - Marta: Creo que hay dos cosas. Una, que el handoff es un desastre. No hay un proceso. Yo termino en Figma, lo anoto lo que puedo, pero luego no hay una reunión de handoff donde yo explique, esto va así por esto, ojo con este edge case. Simplemente cogen el Figma y a correr. Y dos, que Rubén no está gestionando bien las prioridades de su equipo, pero eso no sé si es algo que yo puedo decir.
+4:00 - Sofía: Lo puedes decir. ¿Y si hubiera una sesión de handoff, cómo la imaginarías?
+4:06 - Marta: Pues media hora cuando termino un flujo. Me siento con Lucas o con quien lo vaya a implementar, repaso el Figma, explico las decisiones de diseño, los estados, los casos raros. Y así él puede preguntar en ese momento en vez de decidir solo a las dos de la tarde.
+4:22 - Sofía: Me parece muy razonable. ¿Se lo has propuesto?
+4:25 - Marta: No. No formalmente. O sea, en alguna daily he dicho, oye, podríamos alinear antes, pero no lo he propuesto como proceso.
+4:35 - Sofía: ¿Y si lo propones tú? No como queja, sino como, tengo una idea para mejorar cómo trabajamos juntos.
+4:42 - Marta: Sí, podría. Supongo que lo que me frena es que... ¿a quién se lo propongo? ¿A Lucas directamente, a Rubén, a Jaime?
+4:52 - Sofía: Yo lo llevaría a Rubén primero. Es el tech lead, es quien tiene que avalarlo. Y si en esa conversación ves que no hay voluntad de cambiar nada, me lo dices y lo hablamos.
+5:05 - Marta: ¿Y lo de las design reviews, le digo también que necesito que venga él?
+5:11 - Sofía: Sí, díselo claramente. No, oye, estaría bien que vinieras. Sino, Rubén, necesito que estés en las reviews porque las decisiones que se toman ahí afectan a la implementación y luego estamos corrigiendo. Así de directo.
+5:28 - Marta: Vale. Lo haré. Es que a veces me cuesta porque no quiero que parezca que le estoy echando la bronca.
+5:35 - Sofía: No le estás echando la bronca, le estás dando información que necesita para hacer bien su trabajo. Y una cosa más, ¿llevas registro de estas desviaciones en algún sitio?
+5:45 - Marta: En los tickets de Jira cuando las comento, pero no de manera centralizada.
+5:52 - Sofía: Empieza a llevar un registro. No para montar un caso contra nadie, sino para que cuando hables con Rubén o con Jaime tengas datos concretos. No es que me parece que, es que en estas cuatro semanas ha habido X casos así. Eso cambia la conversación.
+6:05 - Marta: Sí, tiene sentido. Un doc sencillo con fecha, qué se desvirtuó y si se corrigió o no.
+6:12 - Sofía: Exacto. ¿Y aparte de esto, cómo estás? ¿El trabajo en sí te está gustando?
+6:18 - Marta: Sí, el producto es interesante. Es solo esta parte que me frustra porque siento que hago el trabajo dos veces.
+6:26 - Sofía: Lo entiendo. Y tiene solución, pero hay que atacarla. ¿Algo más esta semana?
+6:31 - Marta: No, creo que con esto ya tenemos bastante. Voy a hablar con Rubén.
+6:37 - Sofía: Perfecto. Y me cuentas qué tal, ¿eh?
+6:40 - Marta: Sí, claro. Gracias.

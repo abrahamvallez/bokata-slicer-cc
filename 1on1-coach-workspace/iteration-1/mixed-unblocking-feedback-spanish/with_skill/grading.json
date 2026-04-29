@@ -1,0 +1,76 @@
+{
+  "expectations": [
+    {
+      "text": "Se crea el archivo outputs/shareable/2026-04-22-laura-summary.md",
+      "passed": true,
+      "evidence": "File exists at outputs/shareable/2026-04-22-laura-summary.md and was read successfully. Contains '# Resumen de la Reunión' header."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-22-laura-analysis.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-22-laura-analysis.md and was read successfully. Contains '# Análisis de la Reunión' header."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-22-laura-coaching.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-22-laura-coaching.md and was read successfully. Contains '# Coaching Socrático' header."
+    },
+    {
+      "text": "El tipo detectado refleja ambas dimensiones del mixed: unblocking y feedback (e.g. 'mixed: unblocking + feedback')",
+      "passed": true,
+      "evidence": "All three files contain the exact string 'Tipo de 1on1: mixed: unblocking + feedback'. E.g. in summary.md line 5: '**Tipo de 1on1:** mixed: unblocking + feedback'."
+    },
+    {
+      "text": "El contenido de los tres archivos está en español",
+      "passed": true,
+      "evidence": "All three files are written entirely in Spanish. Sample headings: 'Resumen de la Reunión', 'Análisis de la Reunión', 'Coaching Socrático'. No English prose found in the body of any file."
+    },
+    {
+      "text": "Los timestamps usan el formato original del transcript: (MM:SS) → referenciados como [MM:SS] en los outputs (e.g. [0:28], [2:05])",
+      "passed": true,
+      "evidence": "summary.md uses [0:28], [1:30], [2:05], [3:52]. analysis.md uses [1:45], [3:32], [1:30], [2:52], [3:52]. All timestamps use square-bracket format [M:SS]."
+    },
+    {
+      "text": "El analysis incluye una sección de Psychological Safety dado el incidente de feedback público de Javier",
+      "passed": true,
+      "evidence": "analysis.md contains the section '## Seguridad Psicológica' (lines 37-43) which directly addresses the Javier public-feedback incident: 'el hecho de que Laura no dijera nada en el momento del incidente... sugiere que la seguridad psicológica dentro del equipo... es más baja.'"
+    },
+    {
+      "text": "El summary cubre los dos temas principales: el bloqueo técnico con SendGrid y el incidente de feedback con Javier",
+      "passed": true,
+      "evidence": "summary.md has two dedicated sections: '## Bloqueo técnico con el módulo de notificaciones' (covering SendGrid webhooks) and '## Feedback recibido en la revisión del sprint' (covering Javier's public comment)."
+    },
+    {
+      "text": "El summary incluye los action items: que Marcos conecte a Laura con Andrés, y que Laura hable con Javier",
+      "passed": true,
+      "evidence": "summary.md '## Tareas' section includes: '- [ ] @Marcos: Conectar a Laura con Andrés mañana por la mañana para validar el mecanismo de confirmación sin romper el contrato de la API.' and '- [ ] @Laura: Hablar con Javier esta semana para cerrar el tema del comentario en el sprint review.'"
+    },
+    {
+      "text": "El analysis contiene Problem Classification con al menos una entrada en la categoría Team o Individual",
+      "passed": true,
+      "evidence": "analysis.md section '## Clasificación de Problemas' contains '🧑 **Individual:** La dificultad de Laura para responder en el momento...' and '👥 **Equipo:** Las formas en que Javier da feedback en sesiones colectivas...' — two entries covering both Individual and Team categories."
+    },
+    {
+      "text": "El summary mantiene un tono neutral y constructivo — no incluye la calificación 'Javier se equivocó' ni valoraciones del manager",
+      "passed": true,
+      "evidence": "The phrase 'Javier se equivocó' does NOT appear in summary.md. The summary describes the incident factually: 'un comentario de Javier durante la revisión del sprint la incomodó: fue directo y público, sin contexto previo.' The phrase 'Javier se equivocó en las formas' appears only in analysis.md (a manager-only document), not in the shareable summary."
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 160.8
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "The analysis.md quotes Marcos saying 'creo que Javier se equivocó en las formas' with timestamp [3:32], which is a manager judgment that correctly stays out of the shareable summary — the boundary between coaching-only and shareable files is well enforced.",
+      "Timestamp format is consistent and correct across all files using [M:SS] bracket notation.",
+      "The Psychological Safety section is substantive and directly tied to the public feedback incident, going beyond a generic mention."
+    ],
+    "overall": "All 11 assertions passed. The skill produced well-structured outputs: correct file naming, consistent Spanish language, proper timestamp formatting, full topic coverage of both the SendGrid technical block and the Javier feedback incident, complete action items, a Problem Classification section with Individual and Team entries, a dedicated Psychological Safety section, and a shareable summary that remains neutral and constructive without leaking manager-only judgments."
+  }
+}

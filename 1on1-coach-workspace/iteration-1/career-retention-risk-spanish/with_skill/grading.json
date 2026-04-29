@@ -1,0 +1,81 @@
+{
+  "expectations": [
+    {
+      "text": "Se crea el archivo outputs/shareable/2026-04-24-tomas-summary.md",
+      "passed": true,
+      "evidence": "File exists at outputs/shareable/2026-04-24-tomas-summary.md and was successfully read. It contains a full meeting summary titled '# Resumen de la reunión'."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-24-tomas-analysis.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-24-tomas-analysis.md and was successfully read. It contains a full analysis titled '# Análisis de la reunión'."
+    },
+    {
+      "text": "Se crea el archivo outputs/coaching/2026-04-24-tomas-coaching.md",
+      "passed": true,
+      "evidence": "File exists at outputs/coaching/2026-04-24-tomas-coaching.md and was successfully read. It contains a Socratic coaching document titled '# Coaching Socrático'."
+    },
+    {
+      "text": "El tipo detectado es 'career' o 'mixed: career + check-in'",
+      "passed": true,
+      "evidence": "All three files show 'Tipo de 1on1: career'. summary.md: '**Tipo de 1on1:** career', analysis.md: '**Tipo de 1on1:** `career`', coaching.md: '**Tipo de 1on1:** career'."
+    },
+    {
+      "text": "El contenido de los tres archivos está en español",
+      "passed": true,
+      "evidence": "All three files are written entirely in Spanish. Examples: summary.md opens with '# Resumen de la reunión'; analysis.md with '# Análisis de la reunión'; coaching.md with '# Coaching Socrático'. All body text, section headers, and quotes are in Spanish."
+    },
+    {
+      "text": "El analysis señala explícitamente el riesgo de retención — Tomás tiene conversaciones exploratorias con otras empresas",
+      "passed": true,
+      "evidence": "analysis.md under 'Riesgos y Oportunidades': '🔴 Riesgo de fuga a corto plazo: Tomás tiene conversaciones activas con otras empresas.' Quotes Tomás: '\"Tengo alguna conversación abierta. Exploratoria, tampoco nada concreto.\" — Tomás [2:53]'. Also in 'Carrera y Desarrollo': 'Riesgo de retención real: Tomás tiene conversaciones exploratorias abiertas con otras empresas.'"
+    },
+    {
+      "text": "El analysis identifica las tres necesidades expresadas: diseño de sistemas / decisiones de arquitectura, IC track con mayor influencia, visibilidad del trabajo actual",
+      "passed": true,
+      "evidence": "analysis.md under 'Carrera y Desarrollo': 'Tomás tiene una imagen clara de lo que quiere (diseño de sistemas, decisiones de arquitectura, influencia en qué se construye, IC track)'. Under 'Riesgos y Oportunidades': '🔴 IC track indefinido' and '🔴 Invisibilidad sostenida como factor de desmotivación'. All three needs — design/architecture, IC track with influence, and visibility of current work — are explicitly identified."
+    },
+    {
+      "text": "El analysis menciona la brecha de confianza creada por la reorganización y la referencia a Héctor como manager anterior con quien tenía mejor relación",
+      "passed": true,
+      "evidence": "analysis.md under 'Efectividad de la reunión': 'Dado que es una transición de manager (Tomás menciona a Héctor como manager anterior), es comprensible'. Under 'Seguridad Psicológica': 'Tomás no había dicho ninguna de estas cosas en voz alta antes, a pesar de llevar tiempo pensándolas. Eso indica que el canal de comunicación con la manager nueva no estaba todavía abierto para temas de fondo.' Under 'Riesgos y Oportunidades': 'Esta fue probablemente la primera conversación de fondo entre Carla y Tomás.' The trust gap from the reorg and Héctor reference is captured."
+    },
+    {
+      "text": "El summary incluye el compromiso de Carla de definir el IC track en las próximas semanas (sin prometer resultado)",
+      "passed": true,
+      "evidence": "summary.md under 'Acuerdos clave y próximos pasos': 'Carla se compromete a trabajar en definir el IC track junto con Tomás en las próximas semanas.' And in 'Elementos de acción': '[ ] @Carla: preparar una propuesta o conversación más concreta sobre el IC track en las próximas semanas.' No specific outcome is promised — it frames it as working toward a conversation, not a guaranteed promotion or title change."
+    },
+    {
+      "text": "El summary incluye el compromiso de Carla de dar visibilidad al trabajo de migración en la próxima all-hands o similar",
+      "passed": true,
+      "evidence": "summary.md under 'Acuerdos clave y próximos pasos': 'Carla se compromete a mencionar el trabajo de migración en espacios como la all-hands para dar visibilidad.' And in 'Elementos de acción': '[ ] @Carla: mencionar el trabajo de migración de base de datos de Tomás en la próxima all-hands u otro espacio organizativo relevante.'"
+    },
+    {
+      "text": "El coaching.md incluye preguntas sobre cómo Carla puede construir confianza con Tomás dado el cambio de estructura y la brecha generada",
+      "passed": true,
+      "evidence": "coaching.md, question 2: 'Tomás no había articulado ninguna de sus inquietudes de carrera contigo antes de esta conversación, a pesar de llevar tiempo pensándolas. ¿Qué condiciones crees que necesita alguien para atreverse a traer estos temas a un manager nuevo, y cuáles de esas condiciones estás creando activamente?' This directly addresses trust-building with a new manager after a structural change. The Reflexión Final also states: 'Tomás necesita ver que los compromisos que escuchó se traducen en movimiento real'."
+    },
+    {
+      "text": "El analysis NO trata el riesgo de retención como algo resuelto — lo marca como señal activa que requiere seguimiento",
+      "passed": true,
+      "evidence": "analysis.md under 'Riesgos y Oportunidades': '🔴 Riesgo de fuga a corto plazo: Tomás tiene conversaciones activas con otras empresas [...] el estancamiento percibido y la falta de un plan concreto son factores de riesgo real. El compromiso de Carla de \"hablar con más concreción en las próximas semanas\" necesita materializarse rápidamente.' Under 'Carrera y Desarrollo': 'el tiempo es un factor: compromisos vagos con plazos indefinidos pueden no ser suficientes.' Under 'Sugerencias para próximas reuniones': 'La semana siguiente debe ser concreta: Carla prometió \"más concreción\" en la próxima sesión [...] Llegar sin avances podría dañar la confianza recién construida.' The retention risk is consistently framed as active and unresolved."
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "failed": 0,
+    "total": 12,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 152.9
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Assertion 8 about the trust gap from the reorg and Héctor reference is met, but the analysis spreads this across multiple sections rather than consolidating it — a dedicated section on 'manager transition dynamics' would make it easier to evaluate systematically.",
+      "Assertion 11 is met by coaching question 2, but the connection to 'the structural change' (reorg) could be made more explicit in the coaching file itself — the question refers to 'manager nuevo' without naming the reorg explicitly.",
+      "The timing of 152.9 seconds is relatively high for a single 1on1 session analysis; this may be worth monitoring across runs to assess consistency."
+    ],
+    "overall": "Perfect pass rate (12/12). All three output files were created with correct naming, entirely in Spanish, with the correct type detection ('career'). The analysis file is particularly strong: it explicitly identifies retention risk as active and unresolved, names all three stated needs, references Héctor and the trust gap, and frames the IC track and visibility gaps as systemic risks requiring follow-up. The summary correctly records Carla's commitments without overpromising outcomes. The coaching file addresses trust-building with a new manager through Socratic questioning. No assertions failed."
+  }
+}

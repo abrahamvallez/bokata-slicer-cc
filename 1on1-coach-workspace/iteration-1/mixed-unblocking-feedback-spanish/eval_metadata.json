@@ -1,0 +1,18 @@
+{
+  "eval_id": 3,
+  "eval_name": "mixed-unblocking-feedback-spanish",
+  "prompt": "Analiza el siguiente 1on1 de Laura con Marcos y genera los documentos:\n\nevals/1on1-coach/inputs/03-mixed-laura-2026-04-22.txt",
+  "assertions": [
+    "Se crea el archivo outputs/shareable/2026-04-22-laura-summary.md",
+    "Se crea el archivo outputs/coaching/2026-04-22-laura-analysis.md",
+    "Se crea el archivo outputs/coaching/2026-04-22-laura-coaching.md",
+    "El tipo detectado refleja ambas dimensiones del mixed: unblocking y feedback (e.g. 'mixed: unblocking + feedback')",
+    "El contenido de los tres archivos está en español",
+    "Los timestamps usan el formato original del transcript: (MM:SS) → referenciados como [MM:SS] en los outputs (e.g. [0:28], [2:05])",
+    "El analysis incluye una sección de Psychological Safety dado el incidente de feedback público de Javier",
+    "El summary cubre los dos temas principales: el bloqueo técnico con SendGrid y el incidente de feedback con Javier",
+    "El summary incluye los action items: que Marcos conecte a Laura con Andrés, y que Laura hable con Javier",
+    "El analysis contiene Problem Classification con al menos una entrada en la categoría Team o Individual",
+    "El summary mantiene un tono neutral y constructivo — no incluye la calificación 'Javier se equivocó' ni valoraciones del manager"
+  ]
+}
