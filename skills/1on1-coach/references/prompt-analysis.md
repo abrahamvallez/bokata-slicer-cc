@@ -10,7 +10,7 @@
 
 - Full transcript content
 - `date`: YYYY-MM-DD
-- `dev-name`: team member's name in lowercase with no spaces
+- `member-name`: team member's name in lowercase with no spaces
 - `manager-name`: manager's name
 - `language`: output language
 - `1on1-type`: detected meeting type from the taxonomy in base-rules.md
@@ -21,9 +21,9 @@
 
 Before writing, internally analyze the transcript:
 - Assess whether the meeting had clear structure, whether difficult topics were addressed, whether the manager listened actively.
-- Estimate talk ratio (manager vs developer speaking time).
+- Estimate talk ratio (manager vs team member speaking time).
 - Identify the manager's Radical Candor quadrant for key feedback/challenge moments.
-- Assess whether the manager was solving problems (dependency) or coaching the developer toward their own solutions (agency).
+- Assess whether the manager was solving problems (dependency) or coaching the team member toward their own solutions (agency).
 - Look for psychological safety signals: self-censorship, normalization of problems, discomfort, avoidance.
 - Check whether previous action items were reviewed at the start.
 - Classify each significant problem as individual, team, or organizational.
@@ -51,7 +51,7 @@ This analysis is **only for your internal reasoning** and must NOT appear in the
 
 ## Output
 
-Generate the output file at `outputs/coaching/{date}-{dev-name}-analysis.md`.
+Generate the output file at `outputs/coaching/{date}-{member-name}-analysis.md`.
 
 The file must contain the sections below. **Conditional sections** (marked with ⚙️) should only be included if there is substantive content for them — omit the section entirely if it does not apply.
 
@@ -84,10 +84,10 @@ Use the `1on1-type` to determine which sections to emphasise (see type-specific 
 - [Pattern observed across the meeting — e.g. recurring Ruinous Empathy]
 
 ## ⚙️ Feedback Quality
-<!-- Include only if the manager gave explicit feedback to the developer -->
+<!-- Include only if the manager gave explicit feedback to the team member -->
 - [SBI assessment: what was present and what was missing]
   > "verbatim quote of the feedback moment" — Speaker Name [MM:SS]
-- [Whether the developer had space to give feedback upward]
+- [Whether the team member had space to give feedback upward]
 
 ## ⚙️ Career & Development
 <!-- Include only for check-in, career, or onboarding types, or if career topics surfaced -->
@@ -108,7 +108,7 @@ Use the `1on1-type` to determine which sections to emphasise (see type-specific 
 - [Recommended approach based on conflict type]
 
 ## Problem Classification
-- 🧑 **Individual:** [problems that are specific to the developer — their skills, behaviours, or decisions]
+- 🧑 **Individual:** [problems that are specific to the team member — their skills, behaviours, or decisions]
 - 👥 **Team:** [problems that require team-level intervention]
 - 🏢 **Organisational/Systemic:** [problems that are outside the manager's direct control — require escalation or structural change]
 

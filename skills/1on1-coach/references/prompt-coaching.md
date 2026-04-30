@@ -10,7 +10,7 @@
 
 - Full transcript content
 - `date`: YYYY-MM-DD
-- `dev-name`: team member's name in lowercase with no spaces
+- `member-name`: team member's name in lowercase with no spaces
 - `manager-name`: manager's name
 - `language`: output language
 - `1on1-type`: detected meeting type from base-rules.md
@@ -44,19 +44,19 @@ For every meeting, always cover **dimensions 1 and 7**. Cover the others when th
 
 1. **Conversation management** — how did the manager handle the flow, pacing, and choice of topics? [always include]
 2. **Radical Candor** — in moments of feedback or challenge, where did the manager land on the RC quadrant, and what would Radical Candor have looked like?
-3. **Coaching vs. solving** — when the developer described a problem, did the manager explore or fix? What would have happened if they had asked one more question instead?
+3. **Coaching vs. solving** — when the team member described a problem, did the manager explore or fix? What would have happened if they had asked one more question instead?
 4. **Psychological safety** — what signals did the team member send about how safe they feel in this space? What might they not be saying?
 5. **Career & development** — what does this meeting reveal about how the manager thinks about the team member's growth beyond current delivery?
 6. **Conflict or tension** — how did the manager approach avoidance, conflict, or a difficult person/situation? What style did they use, and was it the right one?
 7. **Leadership pattern** — stepping back from this single meeting, what does it reveal about the manager's dominant style and where they could grow? [always include]
-8. **Follow-through** — what does the handling of commitments and previous action items say about the manager's credibility with this developer?
+8. **Follow-through** — what does the handling of commitments and previous action items say about the manager's credibility with this team member?
 9. **Problem scope** — did the manager respond to problems at the right level (individual, team, systemic), or did they take on something that isn't theirs to solve?
 
 ---
 
 ## Output
 
-Generate the output file at `outputs/coaching/{date}-{dev-name}-coaching.md`.
+Generate the output file at `outputs/coaching/{date}-{member-name}-coaching.md`.
 
 The file must contain **exactly** this structure (translated into the resolved output language):
 

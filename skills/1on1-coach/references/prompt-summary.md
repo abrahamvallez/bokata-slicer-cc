@@ -10,7 +10,7 @@
 
 - Full transcript content
 - `date`: YYYY-MM-DD
-- `dev-name`: team member's name in lowercase with no spaces
+- `member-name`: team member's name in lowercase with no spaces
 - `manager-name`: manager's name
 - `language`: output language
 - `1on1-type`: detected meeting type from base-rules.md
@@ -31,7 +31,7 @@ This analysis is **only for your internal reasoning** and must NOT appear in the
 
 ## Output
 
-Generate the output file at `outputs/shareable/{date}-{dev-name}-summary.md`.
+Generate the output file at `outputs/shareable/{date}-{member-name}-summary.md`.
 
 The file must contain **exactly** this structure (section headings and content translated into the resolved output language):
 
@@ -68,7 +68,7 @@ The file must contain **exactly** this structure (section headings and content t
 
 - Quotes must be **identical** to the transcript text (do not paraphrase, do not correct spelling or grammar, even for informal spoken language).
 - Each quote carries the timestamp from the **speaker turn header** in brackets `[M:SS]` or `[HH:MM:SS]` exactly as it appears. Never convert to seconds.
-- The summary will be shared with the developer: neutral, constructive tone, no judgements.
+- The summary will be shared with the team member: neutral, constructive tone, no judgements.
 - If there are no clear quotes for a point, omit the `>` block and explain the point without a quote.
 - Do NOT include risk analysis, manager improvement areas, or coaching questions in this file.
 - Write entirely in the language specified by the orchestrator.

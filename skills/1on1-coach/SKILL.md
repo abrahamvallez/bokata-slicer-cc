@@ -27,7 +27,7 @@ From the transcript content, extract:
 - **Meeting date**: look for an explicit date in the text or filename. If not found, use today's date in `YYYY-MM-DD` format.
 - **Team member name**: the participant who is NOT the manager.
 - **Manager name**: the other participant (the one conducting the 1on1).
-- **Base filename**: `{date}-{dev-name-lowercase-no-spaces}` (e.g. `2026-04-28-carlos`)
+- **Base filename**: `{date}-{member-name-lowercase-no-spaces}` (e.g. `2026-04-28-carlos`)
 - **Output language**: if the user specified a language (e.g. `lang=fr`, "en español"), use that. Otherwise detect the transcript language automatically.
 - **1on1 type**: classify the meeting using the type taxonomy in [base-rules.md](./references/base-rules.md). Examples: `check-in`, `career`, `unblocking`, `feedback`, `conflict`, `onboarding`, or `mixed: [type1] + [type2]`.
 
@@ -53,7 +53,7 @@ Apply shared formatting and language rules from [base-rules.md](./references/bas
 
 Pass to each prompt:
 - Full transcript content
-- Extracted metadata (date, developer name, manager name, base filename)
+- Extracted metadata (date, team member name, manager name, base filename)
 - Resolved output language
 - Detected `1on1-type`
 
@@ -62,7 +62,7 @@ Pass to each prompt:
 Report to the user:
 
 ```
-✅ Analysis complete for the meeting on {date} with {dev-name}. [Language: {language}]
+✅ Analysis complete for the meeting on {date} with {member-name}. [Language: {language}]
 
 Generated files:
 
